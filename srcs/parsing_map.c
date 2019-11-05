@@ -6,13 +6,14 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/10/30 19:27:24 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/05 15:29:16 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		parsing_map(void)
+int		parsing_map(t_data *env)
 {
+	printf("nb ants = %d", env->nb_ants);
 	return (0);
 }

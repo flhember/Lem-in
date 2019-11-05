@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/05 16:29:40 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/05 15:43:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		lem_in(void)
+void		init_struct(t_data *env)
 {
-	t_data		env;
-	t_room		map;
-
-	init_struct(&env);
-	init_lst(&map);
-	if (parsing_map(&env, &map) == 1)	
-		return (1);
-	return (0);
+	env->nb_ants = 0;
 }
