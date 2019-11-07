@@ -6,17 +6,137 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/05 18:23:05 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/07 13:27:12 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int check_line(char *line, t_room *map)
+int add_flag(t_data *env, int flag)
 {
-	(void)line;
-	(void)map;
+	return (env->flags & flag);
+}
+
+int check_nb_ants(char *str, t_data *env)
+{
+	int i;
+
+	i = 0;
+	if (add_flag(env, ANTS) == 0)
+		env->flags |= ANTS;
+	else
+		return (0);
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) == 1)
+			i++;
+		else
+			return (0);
+	}
 	return (1);
+}
+
+int check_start_end(char *str, t_data *env)
+{
+	//printf("|| [%s] ||\n", str);
+	//printf("strcmp = [%d], flag START = [%d]\n", ft_strcmp(str + 2, "start"), add_flag(env, START));
+	//printf("strcmp = [%d], flag END = [%d]\n", ft_strcmp(str + 2, "end"), add_flag(env, END));
+	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0)
+	{
+		env->flags |= START;
+		env->flags |= RSTART;
+		return (1);
+	}
+	else if (ft_strcmp(str + 2, "end") == 0 && add_flag(env, END) == 0)
+	{
+		env->flags |= END;
+		env->flags |= REND;
+		return (1);
+	}
+	else
+		return (0);
+}
+
+int check_valid_room(char *str)
+{
+	char **split;
+
+	split = NULL;
+	if (ft_count_c(str, ' ') != 2)
+		return (0);
+	else
+	{
+		split = ft_strsplit(str, ' ');
+		if (split[0][0] == 'L' || split[0][0] == '#')
+		{
+			ft_free_tab_char(split);
+			return (0);
+		}
+		// room = split[0];
+		// x = split[1];
+		// y = split[2];
+		ft_free_tab_char(split);
+		free(split);
+	}
+	return (1);
+}
+
+int check_room(char *str, t_data *env)
+{
+	if (str[0] == '#' && str[1] == '#')
+	{
+		if (check_start_end(str, env) == 1)
+			return (1);
+	}
+	else if (str[0] == '#')
+	{
+		if (check_valid_room(str) != 1)
+			return (0);
+	}
+	else
+	{
+		if (check_valid_room(str) == 1)
+			return (1);
+		else
+			return (0);
+	}
+	return (0);
+}
+
+int check_tube(char *str, t_data *env)
+{
+	(void)env;
+
+	if (ft_count_c(str, '-') == 1)
+		return (1);
+	else
+		return (0);
+}
+
+int check_line(char *str, t_data *env)
+{
+	if (str[0] == '#')
+	{
+		if (check_room(str, env) == 1)
+			return (1);
+	}
+	else if (ft_strisdigit(str) == 1
+	|| (str[0] == '-'&& ft_strisdigit(str + 1) ==1))
+	{
+		if (check_nb_ants(str, env) == 1)
+			return (1);
+	}
+	else if (ft_is_c(str, '-'))
+	{
+		if (check_tube(str, env) == 1)
+			return (1);
+	}
+	else
+	{
+		if (((add_flag(env, RSTART) || add_flag(env, REND)) && check_room(str, env) == 1) || check_room(str, env))
+			return (1);
+	}
+	return (0);
 }
 
 int		parsing_map(t_data *env, t_room *map)
@@ -25,18 +145,18 @@ int		parsing_map(t_data *env, t_room *map)
 
 	while ((line = ft_get_fd(0)))
 	{
-		if (check_line(line, map) != 1)
+		//printf("[%s]\n", line);
+		if (check_line(line, env) == 0)
 		{
 			free(line);
+			printf("MAP KO\n");
 			return (0);
 		}
-		printf("[%s]\n", line);
 		free(line);
 	}
+	add_flag(env, START) && add_flag(env, END) ? printf("MAP OK\n") : printf("MAP KO\n");
 	(void)map;
-	printf("nb ants = %d", env->nb_ants);
-	while (1)
-		;
+	(void)env;
 	return (0);
 }
 
