@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/05 16:29:37 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/07 13:32:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,26 @@ typedef struct			s_room
 	struct s_room		*prev;
 }						t_room;
 
+typedef struct			s_mark
+{
+	int					size;
+	t_room				*first;
+	t_room				*last;
+}						t_mark;
+
 typedef struct			s_data
 {
 	int					nb_ants;
 }						t_data;
 
 int						lem_in(void);
-int						parsing_map(t_data *env, t_room *map);
+int						parsing_map(t_data *env, t_room *map, t_mark *lst);
 void					init_struct(t_data *env);
-void					init_lst(t_room *map);
+void					init_lst(t_t_mark *lst);
+void					add_link_empty(t_room *new, t_mark *lst);
+void					add_link_first(t_room *new, t_mark *lst);
+void					add_link_last(t_room *new, t_mark *lst);
+void					creat_maillon(char *name, char *x, char *y, int flag);
+
 
 #endif
