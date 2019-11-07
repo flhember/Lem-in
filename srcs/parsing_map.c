@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/07 13:27:12 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/07 17:24:22 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int check_nb_ants(char *str, t_data *env)
 	return (1);
 }
 
-int check_start_end(char *str, t_data *env)
+int check_start_end(char *str, t_data *env, int *s, int *e)
 {
 	//printf("|| [%s] ||\n", str);
 	//printf("strcmp = [%d], flag START = [%d]\n", ft_strcmp(str + 2, "start"), add_flag(env, START));
@@ -45,22 +45,25 @@ int check_start_end(char *str, t_data *env)
 	{
 		env->flags |= START;
 		env->flags |= RSTART;
+		*s = 1;
 		return (1);
 	}
 	else if (ft_strcmp(str + 2, "end") == 0 && add_flag(env, END) == 0)
 	{
 		env->flags |= END;
 		env->flags |= REND;
+		*e = 1;
 		return (1);
 	}
 	else
 		return (0);
 }
 
-int check_valid_room(char *str)
+int check_valid_room(char *str, t_data *env, int *s, int *e)
 {
 	char **split;
 
+	(void)env;
 	split = NULL;
 	if (ft_count_c(str, ' ') != 2)
 		return (0);
@@ -78,26 +81,29 @@ int check_valid_room(char *str)
 		ft_free_tab_char(split);
 		free(split);
 	}
+	if (*s == 0 && *e == 0)
+		return (0);
+	if (*s == 1 || *e == 1 )
+	{
+		printf("[%d] [%d]\n", *s, *e);
+		*s = 0;
+		*e = 0;
+		/*env->flags = env->flags &= 0b110111;
+		env->flags = env->flags &= 0b101111*/;
+	}
 	return (1);
 }
 
-int check_room(char *str, t_data *env)
+int check_room(char *str, t_data *env, int *s, int *e)
 {
 	if (str[0] == '#' && str[1] == '#')
 	{
-		if (check_start_end(str, env) == 1)
+		if (check_start_end(str, env, s, e) == 1)
 			return (1);
 	}
 	else if (str[0] == '#')
 	{
-		if (check_valid_room(str) != 1)
-			return (0);
-	}
-	else
-	{
-		if (check_valid_room(str) == 1)
-			return (1);
-		else
+		if (check_valid_room(str, env, s, e) != 1)
 			return (0);
 	}
 	return (0);
@@ -113,15 +119,18 @@ int check_tube(char *str, t_data *env)
 		return (0);
 }
 
-int check_line(char *str, t_data *env)
+int check_line(char *str, t_data *env, int *s, int *e)
 {
 	if (str[0] == '#')
 	{
-		if (check_room(str, env) == 1)
+		if (check_room(str, env, s , e) == 1)
+		{
+			printf("[%d] [%d]\n", *s, *e);
 			return (1);
+		}
 	}
 	else if (ft_strisdigit(str) == 1
-	|| (str[0] == '-'&& ft_strisdigit(str + 1) ==1))
+	|| (str[0] == '-' && ft_strisdigit(str + 1) ==1))
 	{
 		if (check_nb_ants(str, env) == 1)
 			return (1);
@@ -133,8 +142,10 @@ int check_line(char *str, t_data *env)
 	}
 	else
 	{
-		if (((add_flag(env, RSTART) || add_flag(env, REND)) && check_room(str, env) == 1) || check_room(str, env))
+		if (check_valid_room(str, env, s, e) == 1)
 			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }
@@ -142,11 +153,15 @@ int check_line(char *str, t_data *env)
 int		parsing_map(t_data *env, t_room *map)
 {
 	char *line;
+	int s;
+	int e;
 
+	s = 0;
+	e = 0;
 	while ((line = ft_get_fd(0)))
 	{
 		//printf("[%s]\n", line);
-		if (check_line(line, env) == 0)
+		if (check_line(line, env, &s , &e) == 0)
 		{
 			free(line);
 			printf("MAP KO\n");
