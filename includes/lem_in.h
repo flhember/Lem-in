@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/07 15:48:03 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:15:18 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 #include "../libft/includes/libft.h"
 
-# define ANTS		0b000001
-# define START		0b000010
-# define END		0b000100
-# define RSTART		0b001000
-# define REND		0b010000
+# define ANTS		0b00001
+# define START		0b00010
+# define END		0b00100
+
+# define ASTART		0b00001
+# define AEND		0b00010
+# define PSTART		0b00100
+# define PEND		0b01000
 
 typedef struct			s_room
 {
@@ -35,6 +38,7 @@ typedef struct			s_room
 typedef struct			s_data
 {
 	int					flags;
+	int					se;
 	int					nb_ants;
 }						t_data;
 
