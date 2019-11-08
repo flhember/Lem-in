@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 18:09:39 by flhember          #+#    #+#              #
-#    Updated: 2019/10/28 15:44:06 by flhember         ###   ########.fr        #
+#    Updated: 2019/11/07 11:08:30 by chcoutur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ LIBFT=  ft_strlen ft_strcpy ft_strdup ft_strncpy ft_strcat ft_strncat ft_strlcat
  		ft_strsub ft_strjoin ft_strtrim ft_putendl ft_putnbr ft_putnbr_fd ft_itoa \
  		ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_strsplit ft_lstnew ft_lstdel  \
  		get_next_line ft_lstdelone ft_lstadd ft_lstiter ft_lstmap ft_print_list   \
-		ft_str_is_lowercase ft_str_is_uppercase ft_strjoinfree
+		ft_str_is_lowercase ft_str_is_uppercase ft_strjoinfree ft_get_fd ft_rec_c \
+		ft_free_tab_char ft_count_c ft_strisdigit ft_is_c
 
 PRINTF= ft_intlen ft_lltoa ft_strnewspace ft_ultoa_base ft_ultoa_base_big ft_pow  \
 		ft_free_tab_int ft_str_rev ft_strnewnull ft_clean_str ft_set_tab ft_free  \

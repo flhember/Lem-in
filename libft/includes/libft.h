@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:13:18 by flhember          #+#    #+#             */
-/*   Updated: 2019/10/28 15:11:15 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/07 11:08:17 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,11 @@ char				*ft_strnewnull(char *str, size_t size);
 char				*ft_clean_str(char *str);
 void				ft_free_tab_int(int ***tab, int size);
 int					get_next_line(const int fd, char **line);
+char				*ft_get_fd(int fd);
+int					ft_rec_c(char *str, char c);
+void				ft_free_tab_char(char **tab);
+int					ft_count_c(char *str, char c);
+int					ft_strisdigit(char *str);
+int					ft_is_c(char *str, char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/07 13:32:26 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:24:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define LEM_IN_H
 
 #include "../libft/includes/libft.h"
+
+# define ANTS		0b00001
+# define START		0b00010
+# define END		0b00100
+# define RSTART		0b01000
+# define REND		0b10000
 
 typedef struct			s_room
 {
@@ -23,29 +29,34 @@ typedef struct			s_room
 	int					start;
 	int					end;
 	struct s_room		*next;
-	struct s_room		*prev;
 }						t_room;
 
-typedef struct			s_mark
+typedef struct			s_lst
 {
-	int					size;
-	t_room				*first;
-	t_room				*last;
-}						t_mark;
+	t_room				*tab;
+	int					i_r;
+}						t_lst;
+
+typedef struct			s_stock
+{
+	char				*str;
+	s_stock				*next;
+}						t_stock;
 
 typedef struct			s_data
 {
+	int					flags;
 	int					nb_ants;
+	int					nb_room;
 }						t_data;
 
 int						lem_in(void);
-int						parsing_map(t_data *env, t_room *map, t_mark *lst);
+int						parsing_map(t_data *env, t_mark *lst);
+t_stock					*creat_maillon_stock(void);
+void					add_maillon_end(t_stock *room, t_stock *new);
+void					free_lst_stock(t_stock *room);
 void					init_struct(t_data *env);
-void					init_lst(t_t_mark *lst);
-void					add_link_empty(t_room *new, t_mark *lst);
-void					add_link_first(t_room *new, t_mark *lst);
-void					add_link_last(t_room *new, t_mark *lst);
-void					creat_maillon(char *name, char *x, char *y, int flag);
+void					init_lst(t_mark *lst);
 
 
 #endif

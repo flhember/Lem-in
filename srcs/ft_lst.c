@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_lst.c                                         :+:      :+:    :+:   */
+/*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 15:04:55 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/07 13:32:22 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/07 15:59:03 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/08 16:16:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		printf_lst(t_mark *lst)
+void		print_lst(t_mark *lst)
 {
-	t_room	*courrent;
+	t_room	*current;
 
-	courrent = lst->first;
-	while (courrent != NULL)
+	current = lst->first;
+	//printf("test = %s\n", lst->first->name);
+	while (current != NULL)
 	{
-		printf("[ %s ] -> ", courrent->next);
-		courrent = courrent->next;
+		printf("[ %s, x = %d, y = %d ] -> ", current->name, current->x, current->y);
+		current = current->next;
 	}
 	printf("NULL");
 }
@@ -51,24 +52,21 @@ void		add_link_last(t_room *new, t_mark *lst)
 	lst->size++;
 }
 
-t_room		*creat_maillon(char *name, int x, int y, int flag)
+int			creat_maillon(t_mark *lst, char *name, char *x, char *y, int flag)
 {
 	t_room	*new;
 
 	new = NULL;
 	if (!(new = (t_room*)ft_memalloc(sizeof(t_room))))
-		return (NULL);
-	new->name = name;
-	new->x = x;
-	new->y = y;
-	comment == 1 ? new->start = 1 : new->start;
-	comment == 2 ? new->end = 1 : new->start;
-	return (new);
-}
-
-void		init_lst(t_mark *lst)
-{
-	lst->first = NULL;
-	lst->last = NULL;
-	lst->size = 0;
+		return (-1);
+	new->name = ft_strdup(name);
+	new->x = ft_atoi(x);
+	new->y = ft_atoi(y);
+	flag == 1 ? new->start = 1 : new->start;
+	flag == 2 ? new->end = 1 : new->start;
+	if (lst->first == NULL && lst->last == NULL)
+		add_link_empty(new, lst);
+	else
+		add_link_last(new, lst);
+	return (0);
 }
