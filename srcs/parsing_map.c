@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/07 17:24:22 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:46:48 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int check_nb_ants(char *str, t_data *env)
 	int i;
 
 	i = 0;
-	if (add_flag(env, ANTS) == 0)
+	if (add_flag(env, ANTS) == 0 && (env->se & ASTART) == 0 && (env->se & AEND) == 0)
+	{
 		env->flags |= ANTS;
-	else
-		return (0);
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]) == 1)
@@ -34,32 +33,11 @@ int check_nb_ants(char *str, t_data *env)
 			return (0);
 	}
 	return (1);
+	}
+	return (0);
 }
 
-int check_start_end(char *str, t_data *env, int *s, int *e)
-{
-	//printf("|| [%s] ||\n", str);
-	//printf("strcmp = [%d], flag START = [%d]\n", ft_strcmp(str + 2, "start"), add_flag(env, START));
-	//printf("strcmp = [%d], flag END = [%d]\n", ft_strcmp(str + 2, "end"), add_flag(env, END));
-	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0)
-	{
-		env->flags |= START;
-		env->flags |= RSTART;
-		*s = 1;
-		return (1);
-	}
-	else if (ft_strcmp(str + 2, "end") == 0 && add_flag(env, END) == 0)
-	{
-		env->flags |= END;
-		env->flags |= REND;
-		*e = 1;
-		return (1);
-	}
-	else
-		return (0);
-}
-
-int check_valid_room(char *str, t_data *env, int *s, int *e)
+int check_valid_room(char *str, t_data *env)
 {
 	char **split;
 
@@ -81,53 +59,69 @@ int check_valid_room(char *str, t_data *env, int *s, int *e)
 		ft_free_tab_char(split);
 		free(split);
 	}
-	if (*s == 0 && *e == 0)
-		return (0);
-	if (*s == 1 || *e == 1 )
+	if ((env->se & ASTART) != 0)
 	{
-		printf("[%d] [%d]\n", *s, *e);
-		*s = 0;
-		*e = 0;
-		/*env->flags = env->flags &= 0b110111;
-		env->flags = env->flags &= 0b101111*/;
+		env->se |= PSTART;
+		env->se ^= ASTART;
+	}
+	if ((env->se & AEND) != 0)
+	{
+		env->se |= PEND;
+		env->se ^= AEND;
 	}
 	return (1);
 }
 
-int check_room(char *str, t_data *env, int *s, int *e)
+int check_start_end(char *str, t_data *env)
+{
+	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0 && (env->se & AEND) == 0)
+	{
+		env->flags |= START;
+		env->se |= ASTART;
+		return (1);
+	}
+	else if (ft_strcmp(str + 2, "end") == 0 && add_flag(env, END) == 0 && (env->se & ASTART) == 0)
+	{
+		env->flags |= END;
+		env->se |= AEND;
+		return (1);
+	}
+	else
+	{
+		check_valid_room(str, env);
+		return (1);
+	}
+	return (0);
+}
+
+int check_room(char *str, t_data *env)
 {
 	if (str[0] == '#' && str[1] == '#')
 	{
-		if (check_start_end(str, env, s, e) == 1)
+		if (check_start_end(str, env) == 1)
 			return (1);
 	}
 	else if (str[0] == '#')
-	{
-		if (check_valid_room(str, env, s, e) != 1)
-			return (0);
-	}
+		return (1);
 	return (0);
 }
 
 int check_tube(char *str, t_data *env)
 {
-	(void)env;
-
+	if ((env->se & PSTART) == 0 || (env->se & PEND) == 0)
+		return (0);
 	if (ft_count_c(str, '-') == 1)
 		return (1);
 	else
 		return (0);
 }
 
-int check_line(char *str, t_data *env, int *s, int *e)
+int check_line(char *str, t_data *env)
 {
 	if (str[0] == '#')
 	{
-		if (check_room(str, env, s , e) == 1)
-		{
-			printf("[%d] [%d]\n", *s, *e);
+		if (check_room(str, env) == 1 && add_flag(env, ANTS) != 0)
 			return (1);
-		}
 	}
 	else if (ft_strisdigit(str) == 1
 	|| (str[0] == '-' && ft_strisdigit(str + 1) ==1))
@@ -142,10 +136,8 @@ int check_line(char *str, t_data *env, int *s, int *e)
 	}
 	else
 	{
-		if (check_valid_room(str, env, s, e) == 1)
+		if (check_valid_room(str, env) == 1)
 			return (1);
-		else
-			return (0);
 	}
 	return (0);
 }
@@ -153,15 +145,10 @@ int check_line(char *str, t_data *env, int *s, int *e)
 int		parsing_map(t_data *env, t_room *map)
 {
 	char *line;
-	int s;
-	int e;
 
-	s = 0;
-	e = 0;
 	while ((line = ft_get_fd(0)))
 	{
-		//printf("[%s]\n", line);
-		if (check_line(line, env, &s , &e) == 0)
+		if (check_line(line, env) == 0)
 		{
 			free(line);
 			printf("MAP KO\n");
