@@ -15,5 +15,6 @@
 void		init_struct(t_data *env)
 {
 	env->flags = 0;
+	env->se = 0;
 	env->nb_ants = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/11 13:15:39 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/11 16:54:43 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 # define ANTS		0b00001
 # define START		0b00010
 # define END		0b00100
-# define RSTART		0b01000
-# define REND		0b10000
+
+# define ASTART		0b00001
+# define AEND		0b00010
+# define PSTART		0b00100
+# define PEND		0b01000
 
 typedef struct			s_room
 {
@@ -39,24 +42,30 @@ typedef struct			s_lst
 
 typedef struct			s_stock
 {
-	char				*str;
-	s_stock				*next;
+	char				*room;
+	int					x;
+	int					y;
+	int					flag;
+	struct s_stock		*next;
 }						t_stock;
 
 typedef struct			s_data
 {
 	int					flags;
+	int					se;
 	int					nb_ants;
 	int					nb_room;
 }						t_data;
 
 int						lem_in(void);
-int						parsing_map(t_data *env, t_mark *lst);
+int						parsing_map(t_data *env, t_stock **lst);
 t_stock					*creat_maillon_stock(void);
-void					add_maillon_end(t_stock *room, t_stock *new);
+int						creat_maillon(t_stock **lst, char *name, char *x,
+		char *y, int flag);
+void					add_maillon_end(t_stock *room, t_stock *nw);
 void					free_lst_stock(t_stock *room);
 void					init_struct(t_data *env);
-void					init_lst(t_mark *lst);
+void					print_lst(t_stock **lst);
 
 
 #endif
