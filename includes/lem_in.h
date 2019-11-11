@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/11 16:54:43 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/11 18:27:16 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct			s_room
 
 typedef struct			s_lst
 {
-	t_room				*tab;
+	t_room				**tab;
 	int					i_r;
 }						t_lst;
 
@@ -66,6 +66,6 @@ void					add_maillon_end(t_stock *room, t_stock *nw);
 void					free_lst_stock(t_stock *room);
 void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
-
+t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 
 #endif

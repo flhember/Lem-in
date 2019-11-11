@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/11 17:21:14 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/11 17:41:35 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int check_valid_room(char *str, t_data *env, t_stock **lst)
 			return (0);
 		}
 		creat_maillon(lst, split[0], split[1], split[2], 0);
-		//print_lst(lst);
+		env->nb_room++;
 		ft_free_tab_char(split);
 		free(split);
 	}
