@@ -134,7 +134,7 @@ int check_line(char *str, t_data *env, t_stock *lst)
 	}
 	else
 	{
-		if (check_valid_room(str, env, lst) == 1)
+		//if (((add_flag(env, RSTART) || add_flag(env, REND)) && check_room(str, env, lst) == 1) || check_room(str, env, lst))
 			return (1);
 	}
 	return (0);
@@ -146,6 +146,7 @@ int		parsing_map(t_data *env, t_stock *lst)
 
 	while ((line = ft_get_fd(0)))
 	{
+		//printf("[%s]\n", line);
 		if (check_line(line, env, lst) == 0)
 		{
 			free(line);

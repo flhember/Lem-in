@@ -43,7 +43,7 @@ typedef struct			s_lst
 typedef struct			s_stock
 {
 	char				*str;
-	s_stock				*next;
+	t_stock				*next;
 }						t_stock;
 
 typedef struct			s_data
