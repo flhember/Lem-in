@@ -108,4 +108,5 @@ void				ft_free_tab_char(char **tab);
 int					ft_count_c(char *str, char c);
 int					ft_strisdigit(char *str);
 int					ft_is_c(char *str, char c);
+
 #endif

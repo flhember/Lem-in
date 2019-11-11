@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/08 17:46:48 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/11 11:42:46 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ int check_valid_room(char *str, t_data *env)
 			ft_free_tab_char(split);
 			return (0);
 		}
-		// room = split[0];
-		// x = split[1];
-		// y = split[2];
+		creat_maillon(lst, split[0], split[1], split[2], 0); //
 		ft_free_tab_char(split);
 		free(split);
 	}
@@ -72,7 +70,7 @@ int check_valid_room(char *str, t_data *env)
 	return (1);
 }
 
-int check_start_end(char *str, t_data *env)
+int check_room(char *str, t_data *env, t_mark *lst)
 {
 	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0 && (env->se & AEND) == 0)
 	{
@@ -116,7 +114,7 @@ int check_tube(char *str, t_data *env)
 		return (0);
 }
 
-int check_line(char *str, t_data *env)
+int check_line(char *str, t_data *env, t_mark *lst)
 {
 	if (str[0] == '#')
 	{
@@ -142,7 +140,7 @@ int check_line(char *str, t_data *env)
 	return (0);
 }
 
-int		parsing_map(t_data *env, t_room *map)
+int		parsing_map(t_data *env, t_mark *lst)
 {
 	char *line;
 
@@ -157,8 +155,7 @@ int		parsing_map(t_data *env, t_room *map)
 		free(line);
 	}
 	add_flag(env, START) && add_flag(env, END) ? printf("MAP OK\n") : printf("MAP KO\n");
-	(void)map;
-	(void)env;
+	print_lst(lst);
 	return (0);
 }
 

@@ -1,20 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lst_stock.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/06 17:39:03 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/08 16:17:24 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/08 17:24:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		main(void)
+t_stock		*creat_maillon_stock(void)
 {
-	if (lem_in() == -1)
-		return (-1);
+	t_stock		*new;
+
+	new = NULL;
+	if (!(new = (t_stock*)ft_memalloc(sizeof(t_stock))))
+		return (NULL);
+	new->name = NULL;
+	return (new);
+}
+
+void		add_maillon_end(t_stock *room, t_stock *new)
+	while (room->next != NULL)
+		room = room->next;
+	room->next = new;
+	new->next = NULL;
 	return (0);
+}
+
+void		free_lst_stock(t_stock *room)
+{
+	t_stock		*tmp;
+
+	tmp = NULL;
+	while (room)
+	{
+		tmp = room->next;
+		free(*room);
+		room = tmp;
+	}
 }

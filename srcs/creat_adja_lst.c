@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_lst.c                                         :+:      :+:    :+:   */
+/*   creat_adja_lst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 15:04:55 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/05 17:49:00 by chcoutur         ###   ########.fr       */
+/*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/08 17:24:55 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	add_link(t_room *map, t_room *new)
+t_lst		creat_adja_lst(t_stock *room, t_data *env)
 {
-	new->next = NULL;
-	new->prev = map;
-	//map->next = 
-}
+	t_lst	lst;
 
 
-void	init_lst(t_room *map)
-{
-	map->name = NULL;
-	map->next = NULL;
-	map->prev = NULL;
+	if (!(lst->tab = ft_memalloc(sizeof(t_room * env->nb_room))))
+		return (NULL);
+	
+	
+	return (lst);
 }

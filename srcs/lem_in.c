@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/05 16:29:40 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/08 17:09:55 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int		lem_in(void)
 {
 	t_data		env;
-	t_room		map;
+	t_mark		lst;
 
 	init_struct(&env);
-	init_lst(&map);
-	if (parsing_map(&env, &map) == 1)	
-		return (1);
+	init_lst(&lst);
+	if (parsing_map(&env, &lst) == -1)
+		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/08 17:15:18 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/11 11:42:44 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,35 @@ typedef struct			s_room
 	int					start;
 	int					end;
 	struct s_room		*next;
-	struct s_room		*prev;
 }						t_room;
+
+typedef struct			s_lst
+{
+	t_room				*tab;
+	int					i_r;
+}						t_lst;
+
+typedef struct			s_stock
+{
+	char				*str;
+	s_stock				*next;
+}						t_stock;
 
 typedef struct			s_data
 {
 	int					flags;
 	int					se;
 	int					nb_ants;
+	int					nb_room;
 }						t_data;
 
 int						lem_in(void);
-int						parsing_map(t_data *env, t_room *map);
+int						parsing_map(t_data *env, t_mark *lst);
+t_stock					*creat_maillon_stock(void);
+void					add_maillon_end(t_stock *room, t_stock *new);
+void					free_lst_stock(t_stock *room);
 void					init_struct(t_data *env);
-void					init_lst(t_room *map);
+void					init_lst(t_mark *lst);
+
 
 #endif
