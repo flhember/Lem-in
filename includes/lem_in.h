@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/11 11:53:37 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/11 14:42:26 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ typedef struct			s_lst
 
 typedef struct			s_stock
 {
-	char				*str;
-	t_stock				*next;
+	char				*room;
+	int					x;
+	int					y;
+	int					flag;
+	struct s_stock		*next;
 }						t_stock;
 
 typedef struct			s_data
@@ -62,7 +65,8 @@ int						creat_maillon(t_stock *lst, char *name, char *x,
 void					add_maillon_end(t_stock *room, t_stock *nw);
 void					free_lst_stock(t_stock *room);
 void					init_struct(t_data *env);
-void					init_lst(t_stock *lst);
+void					print_lst(t_stock *lst);
+//void					init_lst(t_stock *lst);
 
 
 #endif

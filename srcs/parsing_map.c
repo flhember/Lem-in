@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/11 11:52:25 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/11 14:53:12 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ int check_valid_room(char *str, t_data *env, t_stock *lst)
 			ft_free_tab_char(split);
 			return (0);
 		}
-		creat_maillon(lst, split[0], split[1], split[2], 0); //
+		creat_maillon(&lst, split[0], split[1], split[2], 0); //
+		//print_lst(lst);
 		ft_free_tab_char(split);
 		free(split);
 	}
+	//printf("-> [%s]\n", str);
 	if ((env->se & ASTART) != 0)
 	{
 		env->se |= PSTART;
@@ -134,7 +136,7 @@ int check_line(char *str, t_data *env, t_stock *lst)
 	}
 	else
 	{
-		//if (((add_flag(env, RSTART) || add_flag(env, REND)) && check_room(str, env, lst) == 1) || check_room(str, env, lst))
+		if (check_valid_room(str, env, lst) == 1)
 			return (1);
 	}
 	return (0);
@@ -143,7 +145,7 @@ int check_line(char *str, t_data *env, t_stock *lst)
 int		parsing_map(t_data *env, t_stock *lst)
 {
 	char *line;
-
+	lst = NULL;
 	while ((line = ft_get_fd(0)))
 	{
 		//printf("[%s]\n", line);
