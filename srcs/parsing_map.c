@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/12 16:27:38 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:41:29 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int check_maillon(char **tab)
 	return (1);
 }
 
-int check_valid_room(char *str, t_data *env, t_stock **lst, int flag)
+int check_valid_room(char *str, t_data *env, t_stock **lst)
 {
 	char **tab;
 
@@ -71,19 +71,19 @@ int check_valid_room(char *str, t_data *env, t_stock **lst, int flag)
 		return (-1);
 	if (tab[0][0] == 'L' || tab[0][0] == '#' || check_maillon(tab) != 1)
 		return (-1);
+	creat_maillon(lst, tab[0], tab[1], tab[2]);
 	if ((env->se & ASTART) != 0)
 	{
-		flag = 1;
+		(*lst)->start = 1;
 		env->se |= PSTART;
 		env->se ^= ASTART;
 	}
 	if ((env->se & AEND) != 0)
 	{
-		flag = 2;
+		(*lst)->end = 1;
 		env->se |= PEND;
 		env->se ^= AEND;
 	}
-	creat_maillon(lst, tab[0], tab[1], tab[2], flag);
 	env->nb_room++;
 	ft_free_tab_char(tab);
 	return (1);
@@ -108,7 +108,7 @@ int check_start_end(char *str, t_data *env, t_stock **lst)
 	else
 	{
 		printf("toto\n");
-		check_valid_room(str, env, lst, 1);
+		check_valid_room(str, env, lst);
 		return (1);
 	}
 	return (-1);
@@ -148,7 +148,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 			return (1);
 	}
 	else if (ft_strisdigit(str) == 1
-	|| (str[0] == '-' && ft_strisdigit(str + 1) ==1))
+	|| (str[0] == '-' && ft_strisdigit(str + 1) == 1))
 	{
 		if (check_nb_ants(str, env) == 1)
 			return (1);
@@ -161,7 +161,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 	}
 	else
 	{
-		if (check_valid_room(str, env, lst, 0) == 1)
+		if (check_valid_room(str, env, lst) == 1)
 			return (1);
 	}
 	return (-1);
