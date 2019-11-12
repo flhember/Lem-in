@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/12 14:57:05 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:24:39 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct			s_stock
 	char				*room;
 	int					x;
 	int					y;
-	int					flag;
+	int					start;
+	int					end;
 	struct s_stock		*next;
 }						t_stock;
 

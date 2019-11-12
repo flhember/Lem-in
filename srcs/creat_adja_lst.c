@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/12 14:58:44 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:21:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void		fill_tab_room(t_stock **room_ptr, t_lst **lst, int i)
 	}
 	(void)lst;
 	(*lst)->tab[i]->name = room->room;
-	printf("test %s -> [%d]\n", (*lst)->tab[i]->name, i);
+	printf("test %s -> [%d] s ->[%d] e-> [%d]\n", (*lst)->tab[i]->name, i, room->start, room->end);
 	(*lst)->tab[i]->x = room->x;
 	(*lst)->tab[i]->y = room->y;
-	(*lst)->tab[i]->start = 0;
-	(*lst)->tab[i]->end = 0;
+	(*lst)->tab[i]->start = room->start;
+	(*lst)->tab[i]->end = room->end;
 }
 
 t_lst		*creat_adja_lst(t_stock **room, t_data *env)
@@ -62,6 +62,10 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	while (i < env->nb_room)
 	{
 		printf("----tab[%d]----\n", i);
+		if ((*lst).tab[i]->start == 1)
+			printf("\tSTART\n");
+		if ((*lst).tab[i]->end == 1)
+			printf("\tEND\n");
 		printf("name %s\n", (*lst).tab[i]->name);
 		printf("x %d\n", (*lst).tab[i]->x);
 		printf("y %d\n\n", (*lst).tab[i]->y);

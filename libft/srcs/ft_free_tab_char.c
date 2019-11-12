@@ -6,7 +6,7 @@
 /*   By: chcoutur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:53:48 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/07 09:53:22 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:10:33 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ void	ft_free_tab_char(char **str)
 		ft_strdel(&str[i]);
 		i++;
 	}
-	free(*str);
-	str = NULL;
+	free(str);
 }
