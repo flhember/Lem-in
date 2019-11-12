@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/11 18:27:16 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/12 14:57:05 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ t_stock					*creat_maillon_stock(void);
 int						creat_maillon(t_stock **lst, char *name, char *x,
 		char *y, int flag);
 void					add_maillon_end(t_stock *room, t_stock *nw);
-void					free_lst_stock(t_stock *room);
 void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
+void					free_stock(t_stock **lst);
+void					free_lst_adja(t_lst **lst, t_data *env);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 
 #endif
