@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2019/11/11 17:30:23 by flhember         ###   ########.fr        #
+#    Updated: 2019/11/12 14:34:06 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FLAGS = -Wall -Wextra -Werror
 
 #-----------------------------------------SRC/INC-------------------------------#
 
-SRC_FILES = main.c lem_in.c parsing_map.c init_struct.c ft_lst.c creat_adja_lst.c
+SRC_FILES = main.c lem_in.c parsing_map.c init_struct.c ft_lst_stock.c \
+			creat_adja_lst.c ft_free.c
 INC = lem_in.h
 
 #---------------------------------------PATH/FILES-------------------------------#

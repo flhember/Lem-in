@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/12 15:38:25 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/12 14:58:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		lem_in(void)
+void		free_stock(t_stock **lst)
 {
-	t_data		env;
-	t_stock		*lst_tmp;
-	t_lst		*lst;
+	if ((*lst)->next)
+		free_stock(&(*lst)->next);
+	ft_strdel(&(*lst)->room);
+	free(*lst);
+}
 
-	init_struct(&env);
-	if (!(lst_tmp = (t_stock*)ft_memalloc(sizeof(t_stock))))
-		return (-1);
-	if (parsing_map(&env, &lst_tmp) == -1)
+void		free_lst_adja(t_lst **lst, t_data *env)
+{
+	int		i;
+
+/*	i = 0;
+	while (i < env->nb_room)
 	{
-		printf("test\n");
-		free_stock(&lst_tmp);
-		return (-1);
+		if ((*lst)->tab[i])
+
+		i++;
+	}*/
+	i = 0;
+	while (i < env->nb_room)
+	{
+		free((*lst)->tab[i]);
+		i++;
 	}
-	lst = creat_adja_lst(&lst_tmp, &env);
-	free_lst_adja(&lst, &env);
-	free_stock(&lst_tmp);
-	return (0);
+	free((*lst)->tab);
+	free(*lst);
 }
