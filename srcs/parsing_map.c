@@ -55,7 +55,10 @@ int check_maillon(char **tab)
 {
 	if (nb_split(tab) != 3
 			|| (ft_strisdigit(tab[1]) != 1 || ft_strisdigit(tab[2]) != 1))
+	{
+		ft_free_tab_char(tab);
 		return (-1);
+	}
 	return (1);
 }
 
@@ -67,24 +70,22 @@ int check_valid_room(char *str, t_data *env, t_stock **lst)
 	if (!(tab = ft_strsplit(str, ' ')))
 		return (-1);
 	if (tab[0][0] == 'L' || tab[0][0] == '#' || check_maillon(tab) != 1)
-	{
-		ft_free_tab_char(tab);
 		return (-1);
-	}
-	creat_maillon(lst, tab[0], tab[1], tab[2], 0);
-	env->nb_room++;
-	ft_free_tab_char(tab);
-	free(tab);
+	creat_maillon(lst, tab[0], tab[1], tab[2]);
 	if ((env->se & ASTART) != 0)
 	{
+		(*lst)->start = 1;
 		env->se |= PSTART;
 		env->se ^= ASTART;
 	}
 	if ((env->se & AEND) != 0)
 	{
+		(*lst)->end = 1;
 		env->se |= PEND;
 		env->se ^= AEND;
 	}
+	env->nb_room++;
+	ft_free_tab_char(tab);
 	return (1);
 }
 
@@ -106,6 +107,7 @@ int check_start_end(char *str, t_data *env, t_stock **lst)
 	}
 	else
 	{
+		printf("toto\n");
 		check_valid_room(str, env, lst);
 		return (1);
 	}
@@ -146,7 +148,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 			return (1);
 	}
 	else if (ft_strisdigit(str) == 1
-	|| (str[0] == '-' && ft_strisdigit(str + 1) ==1))
+	|| (str[0] == '-' && ft_strisdigit(str + 1) == 1))
 	{
 		if (check_nb_ants(str, env) == 1)
 			return (1);

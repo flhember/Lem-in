@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 18:09:39 by flhember          #+#    #+#              #
-#    Updated: 2019/11/07 11:08:30 by chcoutur         ###   ########.fr        #
+#    Updated: 2019/11/12 15:54:30 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,25 +60,26 @@ DEPS=$(OBJ_FILES:%.o=%.d)
 all: $(NAME)
 
 $(OBJ_PATH):
-	@mkdir $(OBJ_PATH)
+	mkdir $(OBJ_PATH)
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
-	@$(CC) $< -o $@
-	@echo "\033[40mCompilation of \033[1m$(notdir $<)\033[0m \033[32mdone.\033[0m"
+	$(PROG)
+	$(CC) $< -o $@
 
 $(NAME): $(INC_FILES) $(OBJ_PATH) $(OBJ_EXEC)
-	@ar rc $(NAME) $(OBJ_EXEC)
-	@ranlib $(NAME)
-	@echo "\033[1m$(notdir $(NAME))\033[0m \033[32mdone.\033[0m"
+	ar rc $(NAME) $(OBJ_EXEC)
+	ranlib $(NAME)
+	echo "\033[1m$(notdir $(NAME))\033[0m \033[32mdone.\033[0m"
 
 clean:
-	@/bin/rm -rf $(OBJ_PATH) $(DEPS)
-	@echo "\033[31mObjects files of \033[1;31m$(notdir $(NAME))\033[1;0m\033[31m removed.\033[0m"
+	/bin/rm -rf $(OBJ_PATH) $(DEPS)
+	echo "\033[31mObjects files of \033[1;31m$(notdir $(NAME))\033[1;0m\033[31m removed.\033[0m"
 
 fclean: clean
-	@/bin/rm -rf $(NAME)
-	@echo "\033[1;31m$(notdir $(NAME))\033[1;0m\033[31m removed.\033[0m"
+	/bin/rm -rf $(NAME)
+	echo "\033[1;31m$(notdir $(NAME))\033[1;0m\033[31m removed.\033[0m"
 
 re: fclean all
 
 .PHONY: all, clean, fclean, re
+.SILENT:

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/12 14:57:05 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:39:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct			s_stock
 	char				*room;
 	int					x;
 	int					y;
-	int					flag;
+	int					start;
+	int					end;
 	struct s_stock		*next;
 }						t_stock;
 
@@ -61,7 +62,7 @@ int						lem_in(void);
 int						parsing_map(t_data *env, t_stock **lst);
 t_stock					*creat_maillon_stock(void);
 int						creat_maillon(t_stock **lst, char *name, char *x,
-		char *y, int flag);
+		char *y);
 void					add_maillon_end(t_stock *room, t_stock *nw);
 void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
