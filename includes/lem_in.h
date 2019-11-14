@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 11:43:03 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/14 11:52:59 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef struct			s_data
 
 int						lem_in(void);
 int						parsing_map(t_data *env, t_stock **lst);
+int						check_valid_room(char *str, t_data *env,
+		t_stock **lst);
+int						check_nb_ants(char *str, t_data *env);
+int						nb_split(char **tab);
+int						add_flag(t_data *env, int flag);
+int						check_maillon(char **tab);
 t_stock					*creat_maillon_stock(void);
 int						creat_maillon(t_stock **lst, char *name, char *x,
 		char *y);
