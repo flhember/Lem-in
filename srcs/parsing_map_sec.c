@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/14 14:11:18 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/14 18:00:38 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int check_valid_room(char *str, t_data *env, t_stock **lst)
 	tab = NULL;
 	if (!(tab = ft_strsplit(str, ' ')))
 		return (-1);
-	if (tab[0][0] == 'L' || tab[0][0] == '#' || check_maillon(tab) != 1)
+	if (tab[0][0] == 'L' || tab[0][0] == '#'
+			|| check_maillon(tab) != 1 || add_flag(env, ANTS) == 0)
 		return (-1);
 	creat_maillon(lst, tab[0], tab[1], tab[2]);
 	if ((env->se & ASTART) != 0)
