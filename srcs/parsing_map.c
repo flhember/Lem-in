@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 11:53:20 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:51:29 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int check_room(char *str, t_data *env, t_stock **lst)
 	return (-1);
 }
 
-int check_tube(char *str, t_data *env)
+int check_tube(char *str, t_data *env, t_stock **lst)
 {
 	(void)env;
 	//stockage connexion
@@ -58,7 +58,11 @@ int check_tube(char *str, t_data *env)
 	//if ((env->se & PSTART) == 0 || (env->se & PEND) == 0)
 	//	return (0);
 	if (ft_count_c(str, '-') == 1)
+	{
+		creat_maillon(lst, str, "0", "0");
+		(*lst)->pipe = 1;
 		return (1);
+	}
 	else
 		return (-1);
 }
@@ -79,7 +83,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 	else if (ft_is_c(str, '-')
 			&& (env->se & PSTART) != 0 && (env->se & PEND) != 0)
 	{
-		if (check_tube(str, env) == 1)
+		if (check_tube(str, env, lst) == 1)
 			return (1);
 	}
 	else
@@ -93,7 +97,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 int		parsing_map(t_data *env, t_stock **lst)
 {
 	char *line;
-
+	(*lst)->pipe = 0;
 	while ((line = ft_get_fd(0)))
 	{
 		if (check_line(line, env, lst) != 1)

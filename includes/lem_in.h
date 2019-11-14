@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 11:52:59 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:20:23 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct			s_stock
 	int					y;
 	int					start;
 	int					end;
+	int					pipe;
 	struct s_stock		*next;
 }						t_stock;
 
@@ -54,28 +55,31 @@ typedef struct			s_data
 {
 	int					flags;
 	int					se;
-	int					nb_ants;
-	int					nb_room;
+	size_t				nb_ants;
+	size_t				nb_room;
 }						t_data;
 
 int						lem_in(void);
 int						parsing_map(t_data *env, t_stock **lst);
-int						check_valid_room(char *str, t_data *env,
-		t_stock **lst);
-int						check_nb_ants(char *str, t_data *env);
-int						nb_split(char **tab);
-int						add_flag(t_data *env, int flag);
-int						check_maillon(char **tab);
-t_stock					*creat_maillon_stock(void);
 int						creat_maillon(t_stock **lst, char *name, char *x,
 		char *y);
+int						stock_pipe(t_data *env, t_lst **lst, t_stock *pipe);
 void					add_maillon_end(t_stock *room, t_stock *nw);
+int						add_flag(t_data *env, int flag);
+int						check_nb_ants(char *str, t_data *env);
+int						nb_split(char **tab);
+int						check_maillon(char **tab);
+int						check_valid_room(char *str, t_data *env,
+		t_stock(**lst));
 void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
+t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 t_lst					*parsing_main(t_data *env);
-void					print_adja(t_lst **lst, t_data *env);
+size_t					ft_lstsize(t_stock **room);
+void					print_adja(t_lst **lst, t_data *env); // a tej
+
 
 #endif

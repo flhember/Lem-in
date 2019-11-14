@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 12:02:08 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/14 14:29:41 by chcoutur          #+#    #+#             */
+/*   Updated: 2019/11/14 14:38:30 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		init_struct(t_data *env)
+size_t	ft_lstsize(t_stock **room)
 {
-	env->flags = 0;
-	env->se = 0;
-	env->nb_ants = 0;
-	env->nb_room = 0;
+	t_stock *cpy;
+	size_t	i;
+
+	i = 0;
+	cpy = *room;
+	if (cpy == NULL)
+		return (0);
+	while (cpy)
+	{
+		i++;
+		cpy = cpy->next;
+	}
+	return (i);
 }
