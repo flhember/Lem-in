@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 11:30:07 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:43:13 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		free_stock(t_stock **lst)
 
 void		free_lst_adja(t_lst **lst, t_data *env)
 {
-	int		i;
+	size_t	i;
 
 /*	i = 0;
 	while (i < env->nb_room)

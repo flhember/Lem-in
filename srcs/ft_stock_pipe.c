@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 13:41:17 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:19:16 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int			find_good_first_room(t_data *env, t_lst **lst, t_stock *pipe)
 {
-	int		i;
-	int		j;
-	int		k;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	i = 0;
 	k = 0;
@@ -29,7 +29,7 @@ int			find_good_first_room(t_data *env, t_lst **lst, t_stock *pipe)
 	{
 		while (k < j + 1)
 		{
-			*pipe->room++;
+			pipe->room++;
 			k++;
 		}
 	}
@@ -41,9 +41,9 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	int		fst_pe;
 	int		sec_pe;
 
-	if ((fst_pe = find_good_first_room(env, &lst, pipe)) == -1)
+	if ((fst_pe = find_good_first_room(env, lst, pipe)) == -1)
 			return (-1);
-	if ((sec_pe = find_good_first_room(env, &lst, pipe)) == -1);
+	if ((sec_pe = find_good_first_room(env, lst, pipe)) == -1)
 			return (-1);
 	printf("first room = %s\nSeconde room = %s\n", (*lst)->tab[fst_pe]->name, (*lst)->tab[sec_pe]->name);
 	return (0);

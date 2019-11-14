@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:31:10 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/12 16:38:24 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:18:01 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_lst(t_stock **lst)
 	tmp = *lst;
 	while (tmp->next)
 	{
-		printf("[ %s, x = %d, y = %d ] -> ", tmp->room, tmp->x, tmp->y);
+		printf("[ %s, x = %d, y = %d pipe = %d] -> ", tmp->room, tmp->x, tmp->y, tmp->pipe);
 		tmp = tmp->next;
 	}
 	printf("NULL ");
