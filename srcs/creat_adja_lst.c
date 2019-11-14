@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 11:34:16 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/14 12:29:30 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		fill_tab_room(t_stock **room_ptr, t_lst **lst, int i)
 		j++;
 	}
 	(void)lst;
-	(*lst)->tab[i]->name = room->room;
+	(*lst)->tab[i]->name = ft_strdup(room->room);
 	printf("test %s -> [%d] s ->[%d] e-> [%d]\n", (*lst)->tab[i]->name, i, room->start, room->end);
 	(*lst)->tab[i]->x = room->x;
 	(*lst)->tab[i]->y = room->y;
