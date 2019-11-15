@@ -6,13 +6,67 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 12:59:17 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:41:35 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
-int			find_good_first_room(t_data *env, t_lst **lst, t_stock **pipe)
+void		print_lst_adja(t_lst **lst, t_data *env)
+{
+	size_t		i;
+	t_lst		*cpy;
+
+	i = 0;
+	cpy = *lst;
+	printf("\n\n");
+	while (i < env->nb_room)
+	{
+		printf("\ttab[%zu]:\n-name:%s", i, cpy->tab[i]->name);
+		while (cpy->tab[i]->next)
+		{
+			if (cpy->tab[i]->next)
+				printf("-> %s ", cpy->tab[i]->next->name);
+			cpy->tab[i] = cpy->tab[i]->next;
+		}
+		printf("-> NULL \n\n");
+		i++;
+	}
+	printf("\n\n");
+}
+
+t_room		*creat_cpy(t_lst **lst, int sec_pe)
+{
+	t_room	*cpy;
+
+	cpy = NULL;
+	if (!(cpy = ft_memalloc(sizeof(t_room))))
+		return (NULL);
+	cpy->name = ft_strdup((*lst)->tab[sec_pe]->name);
+	cpy->pos = (*lst)->tab[sec_pe]->pos;
+	cpy->x = (*lst)->tab[sec_pe]->x;
+	cpy->y = (*lst)->tab[sec_pe]->y;
+	cpy->start = (*lst)->tab[sec_pe]->start;
+	cpy->end = (*lst)->tab[sec_pe]->end;
+	cpy->next = NULL;
+	return (cpy);
+}
+
+int			add_link_lst(t_lst **lst, int fst_pe, int sec_pe)
+{
+	t_room	*cpy;
+	t_room	*lst_cpy;
+
+	lst_cpy = (*lst)->tab[fst_pe];
+	if (!(cpy = creat_cpy(lst, sec_pe)))
+		return (-1);
+	while (lst_cpy->next)
+		lst_cpy = lst_cpy->next;
+	lst_cpy->next = cpy;
+	return (0);
+}
+
+int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe)
 {
 	size_t	i;
 	size_t	j;
@@ -20,7 +74,8 @@ int			find_good_first_room(t_data *env, t_lst **lst, t_stock **pipe)
 
 	i = 0;
 	k = 0;
-	while (i < env->nb_room && ft_strncmp((*lst)->tab[i]->name, (*pipe)->room, ft_strlen((*lst)->tab[i]->name)))
+	while (i < env->nb_room && ft_strncmp((*lst)->tab[i]->name, (*pipe)->room,
+				ft_strlen((*lst)->tab[i]->name)))
 		i++;
 	if (i == env->nb_room)
 		return (-1);
@@ -29,33 +84,27 @@ int			find_good_first_room(t_data *env, t_lst **lst, t_stock **pipe)
 	{
 		while (k < j + 1)
 		{
-			(*pipe)->room+=1;
+			(*pipe)->room++;
 			k++;
 		}
 	}
-	return (i);
+	return ((*lst)->tab[i]->pos);
 }
 
 int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 {
 	int		fst_pe;
 	int		sec_pe;
-	char *str;
+	char	*str;
 
-	//str = ft_strdup((*pipe)->room)
-	str = (*pipe).room;
-	if ((fst_pe = find_good_first_room(env, lst, &pipe)) == -1)
-	{
-		ft_printf("fst_pe failed\n");
+	str = pipe->room;
+	if ((fst_pe = find_good_room(env, lst, &pipe)) == -1)
 		return (-1);
-	}
-	if ((sec_pe = find_good_first_room(env, lst, &pipe)) == -1)
-	{
-		ft_printf("sec_pe failed\n");
+	if ((sec_pe = find_good_room(env, lst, &pipe)) == -1)
 		return (-1);
-	}
-	(*pipe).room = str;
-	printf("first room = [%s] ->\tSeconde room = [%s]\n", (*lst)->tab[fst_pe]->name, (*lst)->tab[sec_pe]->name);
+	pipe->room = str;
+	if (add_link_lst(lst, fst_pe, sec_pe) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -70,6 +119,6 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 		}
 		pipe = pipe->next;
 	}
-			ft_printf("\n");
+	print_lst_adja(lst, env);
 	return (0);
 }

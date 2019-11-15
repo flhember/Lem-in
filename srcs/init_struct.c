@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 12:02:08 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:41:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
 void		init_struct(t_data *env)
 {

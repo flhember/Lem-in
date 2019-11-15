@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 14:43:13 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:40:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
 void		free_stock(t_stock **lst)
 {
@@ -28,7 +28,6 @@ void		free_lst_adja(t_lst **lst, t_data *env)
 	while (i < env->nb_room)
 	{
 		if ((*lst)->tab[i])
-
 		i++;
 	}*/
 	i = 0;

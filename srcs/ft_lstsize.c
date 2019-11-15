@@ -6,11 +6,11 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:29:41 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/15 20:24:27 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:41:21 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
 size_t	ft_lstsize(t_stock **room)
 {

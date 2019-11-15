@@ -6,14 +6,14 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 20:25:00 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:44:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-#include "../libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 # define ANTS		0b00001
 # define START		0b00010
@@ -81,6 +81,5 @@ t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 t_lst					*parsing_main(t_data *env);
 size_t					ft_lstsize(t_stock **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
-
 
 #endif

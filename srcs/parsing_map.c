@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 12:34:29 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:42:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
-int check_start_end(char *str, t_data *env)
+int		check_start_end(char *str, t_data *env)
 {
 	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0 && (env->se & AEND) == 0)
 	{
@@ -30,7 +30,7 @@ int check_start_end(char *str, t_data *env)
 	return (1);
 }
 
-int check_room(char *str, t_data *env)
+int		check_room(char *str, t_data *env)
 {
 	if (str[0] == '#' && str[1] == '#' && (check_start_end(str, env) == 1))
 		return (1);
@@ -39,7 +39,7 @@ int check_room(char *str, t_data *env)
 	return (-1);
 }
 
-int check_tube(char *str, t_stock **lst)
+int		check_tube(char *str, t_stock **lst)
 {
 	if (ft_count_c(str, '-') == 1)
 	{
@@ -51,7 +51,7 @@ int check_tube(char *str, t_stock **lst)
 		return (-1);
 }
 
-int check_line(char *str, t_data *env, t_stock **lst)
+int		check_line(char *str, t_data *env, t_stock **lst)
 {
 	if (str[0] == '#')
 	{
@@ -90,6 +90,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 int		parsing_map(t_data *env, t_stock **lst)
 {
 	char *line;
+
 	(*lst)->pipe = 0;
 	while ((line = ft_get_fd(0)))
 	{

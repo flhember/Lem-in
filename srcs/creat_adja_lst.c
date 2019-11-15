@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 14:48:25 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:43:12 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
-void	print_adja(t_lst **lst, t_data *env)
+void		print_adja(t_lst **lst, t_data *env)
 {
 	size_t	i;
 
@@ -32,10 +32,10 @@ void	print_adja(t_lst **lst, t_data *env)
 	}
 }
 
-void		fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
+static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 {
 	size_t	j;
-	int	k;
+	int		k;
 	t_stock	*room;
 
 	j = 0;
@@ -51,7 +51,6 @@ void		fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 		return ;
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);
-//	ft_printf("test %s -> [%lu] s ->[%d] e-> [%d]\n", (*lst)->tab[k]->name, i, room->start, room->end);
 	(*lst)->tab[k]->x = room->x;
 	(*lst)->tab[k]->y = room->y;
 	(*lst)->tab[k]->start = room->start;
@@ -67,7 +66,6 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	i = 0;
 	size_lst = ft_lstsize(room);
 	lst = NULL;
-	printf("nb room = %lu\n", env->nb_room);
 	if (!(lst = (t_lst*)ft_memalloc(sizeof(t_lst))))
 		return (NULL);
 	if (!(lst->tab = ft_memalloc(sizeof(t_room) * (env->nb_room + 1))))
@@ -80,7 +78,6 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	}
 	lst->tab[env->nb_room] = 0;
 	i = 0;
-	printf("sizelst = [%lu] | pipe = [%d]\n", size_lst, (*room)->pipe);
 	while (i < size_lst - 1)
 	{
 		fill_tab_room(room, &lst, i);

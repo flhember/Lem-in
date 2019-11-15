@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 11:43:17 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:42:08 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
 int		main(void)
 {

@@ -6,18 +6,18 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/15 20:24:38 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:42:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
-int add_flag(t_data *env, int flag)
+int		add_flag(t_data *env, int flag)
 {
 	return (env->flags & flag);
 }
 
-int check_nb_ants(char *str, t_data *env)
+int		check_nb_ants(char *str, t_data *env)
 {
 	int i;
 
@@ -41,7 +41,7 @@ int check_nb_ants(char *str, t_data *env)
 	return (0);
 }
 
-int nb_split(char **tab)
+int		nb_split(char **tab)
 {
 	int i;
 
@@ -51,7 +51,7 @@ int nb_split(char **tab)
 	return (i);
 }
 
-int check_maillon(char **tab)
+int		check_maillon(char **tab)
 {
 	if (nb_split(tab) != 3
 			|| (ft_strisdigit(tab[1]) != 1 || ft_strisdigit(tab[2]) != 1))
@@ -61,7 +61,8 @@ int check_maillon(char **tab)
 	}
 	return (1);
 }
-int check_valid_room(char *str, t_data *env, t_stock **lst)
+
+int		check_valid_room(char *str, t_data *env, t_stock **lst)
 {
 	char **tab;
 
