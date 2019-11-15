@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 15:44:18 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/15 18:09:46 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include <lem_in.h>
 
 t_lst		*parsing_main(t_data *env)
 {
@@ -19,7 +19,7 @@ t_lst		*parsing_main(t_data *env)
 	
 	if (!(lst_tmp = (t_stock*)ft_memalloc(sizeof(t_stock))))
 		return (NULL);
-	if (parsing_map(env, &lst_tmp) == -1)
+	if ((parsing_map(env, &lst_tmp) == -1) || check_name(env, &lst_tmp) == -1)
 	{
 		free_stock(&lst_tmp);
 		return (NULL);
