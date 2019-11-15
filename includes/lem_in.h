@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 18:00:40 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/15 14:47:36 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef struct			s_room
 {
+	int					pos;
 	char				*name;
 	int					x;
 	int					y;
