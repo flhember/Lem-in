@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 18:00:36 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/15 12:34:29 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ int check_start_end(char *str, t_data *env)
 {
 	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0 && (env->se & AEND) == 0)
 	{
-		/*if (add_flag(env, START) != 0)
-		{*/
-			env->flags |= START;
-		//}
+		env->flags |= START;
 		env->se |= ASTART;
 		return (1);
 	}
@@ -61,7 +58,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 		if (check_room(str, env) == 1)// && add_flag(env, ANTS) != 0)
 			return (1);
 		else
-			ft_printf("fail room\n");
+			ft_printf("fail start/end/comment\n");
 	}
 	else if (ft_strisdigit(str) == 1
 	|| (str[0] == '-' && ft_strisdigit(str + 1) == 1))
@@ -69,7 +66,7 @@ int check_line(char *str, t_data *env, t_stock **lst)
 		if (check_nb_ants(str, env) == 1)
 			return (1);
 		else
-			ft_printf("fail 2\n");
+			ft_printf("fail ants\n");
 	}
 	else if (ft_is_c(str, '-')
 			&& (env->se & PSTART) != 0 && (env->se & PEND) != 0)
@@ -77,14 +74,14 @@ int check_line(char *str, t_data *env, t_stock **lst)
 		if (check_tube(str, lst) == 1)
 			return (1);
 		else
-			ft_printf("fail 3\n");
+			ft_printf("fail tube\n");
 	}
 	else
 	{
 		if (check_valid_room(str, env, lst) == 1)
 			return (1);
 		else
-			ft_printf("fail 4 [%s]\n", str);
+			ft_printf("fail room [%s]\n", str);
 	}
 	ft_printf("no check\n");
 	return (-1);

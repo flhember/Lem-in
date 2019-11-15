@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/14 17:31:24 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/15 12:59:17 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int			find_good_first_room(t_data *env, t_lst **lst, t_stock *pipe)
+int			find_good_first_room(t_data *env, t_lst **lst, t_stock **pipe)
 {
 	size_t	i;
 	size_t	j;
@@ -20,17 +20,16 @@ int			find_good_first_room(t_data *env, t_lst **lst, t_stock *pipe)
 
 	i = 0;
 	k = 0;
-	while (i < env->nb_room && ft_strncmp((*lst)->tab[i]->name, pipe->room, ft_strlen((*lst)->tab[i]->name)))
+	while (i < env->nb_room && ft_strncmp((*lst)->tab[i]->name, (*pipe)->room, ft_strlen((*lst)->tab[i]->name)))
 		i++;
 	if (i == env->nb_room)
 		return (-1);
 	j = ft_strlen((*lst)->tab[i]->name);
-	ft_printf("room = [%s]\n", pipe->room);
-	if (j > ft_strlen(pipe->room))
+	if (j < ft_strlen((*pipe)->room))
 	{
 		while (k < j + 1)
 		{
-			pipe->room++;
+			(*pipe)->room+=1;
 			k++;
 		}
 	}
@@ -41,16 +40,21 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 {
 	int		fst_pe;
 	int		sec_pe;
-	if ((fst_pe = find_good_first_room(env, lst, pipe)) == -1)
+	char *str;
+
+	//str = ft_strdup((*pipe)->room)
+	str = (*pipe).room;
+	if ((fst_pe = find_good_first_room(env, lst, &pipe)) == -1)
 	{
 		ft_printf("fst_pe failed\n");
 		return (-1);
 	}
-	if ((sec_pe = find_good_first_room(env, lst, pipe)) == -1)
+	if ((sec_pe = find_good_first_room(env, lst, &pipe)) == -1)
 	{
 		ft_printf("sec_pe failed\n");
 		return (-1);
 	}
+	(*pipe).room = str;
 	printf("first room = [%s] ->\tSeconde room = [%s]\n", (*lst)->tab[fst_pe]->name, (*lst)->tab[sec_pe]->name);
 	return (0);
 }
