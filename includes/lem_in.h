@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 20:44:02 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/16 19:10:28 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,8 @@ t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 t_lst					*parsing_main(t_data *env);
 size_t					ft_lstsize(t_stock **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
+void					print_lst_adja(t_lst **lst, t_data *env); // a tej
+int						check_name(t_data *env, t_stock **room);
+int						verif_pos(t_stock **lst);
 
 #endif

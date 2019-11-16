@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2019/11/14 14:30:50 by chcoutur         ###   ########.fr        #
+#    Updated: 2019/11/16 17:05:22 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SRC_FILES = main.c lem_in.c parsing_map.c init_struct.c ft_lst_stock.c 	\
 			creat_adja_lst.c ft_free.c parsing_main.c parsing_map_sec.c \
-			ft_stock_pipe.c ft_lstsize.c
+			ft_stock_pipe.c ft_lstsize.c check_name.c verif_pos.c
 INC = lem_in.h
 
 #---------------------------------------PATH/FILES-------------------------------#

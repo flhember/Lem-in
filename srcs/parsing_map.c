@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 20:42:22 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/16 19:16:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		parsing_map(t_data *env, t_stock **lst)
 	char *line;
 
 	(*lst)->pipe = 0;
+	line = NULL;
 	while ((line = ft_get_fd(0)))
 	{
 		if (check_line(line, env, lst) != 1)

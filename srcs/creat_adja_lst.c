@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 20:45:35 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/16 19:12:06 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	lst = NULL;
 	if (!(lst = (t_lst*)ft_memalloc(sizeof(t_lst))))
 		return (NULL);
-	if (!(lst->tab = ft_memalloc(sizeof(t_room) * (env->nb_room + 1))))
+	if (!(lst->tab = ft_memalloc(sizeof(t_room) * (env->nb_room))))
 		return (NULL);
 	while (i < env->nb_room)
 	{

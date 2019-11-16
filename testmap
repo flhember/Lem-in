@@ -1,11 +1,12 @@
 42
+troi 3 0
 yo 1 0
 ##end
 zer 13 0
 ##start
-troi 3 0
-dos 2 0
+dos 7 0
+dos 7 0
 yo-dos
-dos-troi
+troi-troi
 troi-yo
 troi-zer

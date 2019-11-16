@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 20:41:35 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/16 19:19:18 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void		print_lst_adja(t_lst **lst, t_data *env)
 {
-	size_t		i;
-	t_lst		*cpy;
+	size_t	i;
+	t_room	*cpy;
 
 	i = 0;
-	cpy = *lst;
 	printf("\n\n");
 	while (i < env->nb_room)
 	{
-		printf("\ttab[%zu]:\n-name:%s", i, cpy->tab[i]->name);
-		while (cpy->tab[i]->next)
+		cpy = (*lst)->tab[i];
+		printf("\ttab[%zu]:\n-name:%s", i, cpy->name);
+		while (cpy->next)
 		{
-			if (cpy->tab[i]->next)
-				printf("-> %s ", cpy->tab[i]->next->name);
-			cpy->tab[i] = cpy->tab[i]->next;
+			if (cpy->next)
+				printf("-> %s ", cpy->next->name);
+			cpy = cpy->next;
 		}
 		printf("-> NULL \n\n");
 		i++;
@@ -119,6 +119,6 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 		}
 		pipe = pipe->next;
 	}
-	print_lst_adja(lst, env);
+//	print_lst_adja(lst, env);
 	return (0);
 }

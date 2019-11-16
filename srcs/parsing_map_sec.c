@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/15 20:42:26 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/16 19:19:58 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		check_maillon(char **tab)
 	if (nb_split(tab) != 3
 			|| (ft_strisdigit(tab[1]) != 1 || ft_strisdigit(tab[2]) != 1))
 	{
-		ft_free_tab_char(tab);
+	//	ft_free_tab_char(tab);
 		return (-1);
 	}
 	return (1);
@@ -70,8 +70,11 @@ int		check_valid_room(char *str, t_data *env, t_stock **lst)
 	if (!(tab = ft_strsplit(str, ' ')))
 		return (-1);
 	if (tab[0][0] == 'L' || tab[0][0] == '#'
-			|| check_maillon(tab) != 1 || add_flag(env, ANTS) == 0)
+			|| check_maillon(tab) != 1 || add_flag(env, ANTS) == 0) //SI L ou # leaks?
+	{
+		ft_free_tab_char(tab); //Charle t'en pense quoi?
 		return (-1);
+	}
 	creat_maillon(lst, tab[0], tab[1], tab[2]);
 	if ((env->se & ASTART) != 0)
 	{
