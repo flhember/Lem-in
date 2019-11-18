@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/16 19:19:58 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 15:37:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		check_nb_ants(char *str, t_data *env)
 			else
 				return (-1);
 		}
-		if (ft_atoi(str) > 0)
+		if ((env->nb_ants = ft_atoi(str)) > 0)	
 			return (1);
 		else
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/16 19:10:28 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 15:28:17 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct			s_stock
 	int					start;
 	int					end;
 	int					pipe;
+	int					com;
 	struct s_stock		*next;
 }						t_stock;
 

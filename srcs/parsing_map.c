@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/16 19:16:57 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 16:04:13 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,17 @@ int		check_start_end(char *str, t_data *env)
 	return (1);
 }
 
-int		check_room(char *str, t_data *env)
+int		check_room(t_stock **lst, char *str, t_data *env)
 {
 	if (str[0] == '#' && str[1] == '#' && (check_start_end(str, env) == 1))
 		return (1);
 	else if (str[0] == '#')
+	{
+//		(void)lst;
+	//	printf("str check room = %s\n", str);
+		creat_maillon(lst, str, "0", "0");
 		return (1);
+	}
 	return (-1);
 }
 
@@ -55,7 +60,7 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 {
 	if (str[0] == '#')
 	{
-		if (check_room(str, env) == 1)// && add_flag(env, ANTS) != 0)
+		if (check_room(lst, str, env) == 1)// && add_flag(env, ANTS) != 0)
 			return (1);
 		else
 			ft_printf("fail start/end/comment\n");
