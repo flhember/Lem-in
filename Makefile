@@ -6,13 +6,13 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2019/11/16 17:05:22 by flhember         ###   ########.fr        #
+#    Updated: 2019/11/18 11:45:40 by chcoutur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 COMP = clang
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g3 -Wall -Wextra -Werror
 
 #-----------------------------------------SRC/INC-------------------------------#
 
