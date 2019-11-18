@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 12:34:49 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 11:54:05 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 14:07:55 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ char		*ft_convert_u(va_list ap, char *str)
 	str = ft_malloc_good_size(var, &list);
 	str = ft_filling(str, var, &list);
 	ft_free_option(&list);
+	ft_strdel(&var);
 	return (str);
 }
