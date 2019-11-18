@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:49 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/16 19:05:45 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 15:23:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int			check_name(t_data *env, t_stock **room)
 	cpy = *room;
 	while (cpy->next)
 	{
-		if (cpy->pipe == 0)
+		if (cpy->pipe == 0 && cpy->com == 0)
 		{
 			hash(cpy->room, tab, i);
 			i++;
