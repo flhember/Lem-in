@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/16 19:12:06 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 17:57:51 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	(*lst)->tab[k]->y = room->y;
 	(*lst)->tab[k]->start = room->start;
 	(*lst)->tab[k]->end = room->end;
+	ft_printf("k = [%d] | name = [%s] | x = [%d] | y = [%d]\n", k, room->room, room->x, room->y);
 }
 
 t_lst		*creat_adja_lst(t_stock **room, t_data *env)
@@ -62,6 +63,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	size_t	i;
 	size_t	size_lst;
 	t_lst	*lst;
+
 
 	i = 0;
 	size_lst = ft_lstsize(room);
@@ -83,6 +85,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 		fill_tab_room(room, &lst, i);
 		i++;
 	}
+
 //	print_adja(&lst, env);
 	return (lst);
 }

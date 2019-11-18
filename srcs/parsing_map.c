@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 16:04:13 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/18 17:57:53 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		check_room(t_stock **lst, char *str, t_data *env)
 //		(void)lst;
 	//	printf("str check room = %s\n", str);
 		creat_maillon(lst, str, "0", "0");
+		env->nb_room++;
 		return (1);
 	}
 	return (-1);
