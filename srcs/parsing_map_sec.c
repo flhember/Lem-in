@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/19 16:33:52 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:24:02 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int		check_valid_room(char *str, t_data *env, t_stock **lst)
 		env->se ^= AEND;
 	}
 	env->nb_room++;
-	//ft_printf("roon++ = [%s]\n", str);
 	ft_free_tab_char(tab);
 	return (1);
 }

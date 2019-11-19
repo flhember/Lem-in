@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 16:25:04 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:19:23 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		check_room(t_stock **lst, char *str, t_data *env)
 
 int		check_tube(char *str, t_stock **lst, t_data *env)
 {
-	ft_printf("tube = [%s] | tiret = %d | space = %d\n", str, ft_count_c(str, '-'), ft_count_c(str, ' '));
 	if (ft_count_c(str, '-') == 1 && ft_count_c(str, ' ') == 0)
 	{
 		creat_maillon(lst, str, "0", "0");
@@ -106,8 +105,7 @@ int		parsing_map(t_data *env, t_stock **lst)
 			line != NULL ? free(line) : line;
 			if ((env->se & PIPE) != 0)
 				break ;
-			ft_printf("fail bitch\n");
-			printf("MAP KO\n");
+			ft_printf("MAP KO\n");
 			return (-1);
 		}
 		free(line);
@@ -116,12 +114,12 @@ int		parsing_map(t_data *env, t_stock **lst)
 	printf("\n");
 	if (add_flag(env, START) && add_flag(env, END))
 	{
-		printf("MAP OK\n");
+		ft_printf("MAP OK\n");
 		return (1);
 	}
 	else
 	{
-		printf("MAP KO\n");
+		ft_printf("MAP KO\n");
 		return (-1);
 	}
 }

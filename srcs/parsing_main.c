@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 14:53:16 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:23:37 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ t_lst		*parsing_main(t_data *env)
 		free_stock(&lst_tmp);
 		return (NULL);
 	}
-	ft_printf("lst_size = [%lu]\n", ft_lstsize(&lst_tmp));
-	ft_printf("nb_room = [%lu]\n", env->nb_room);
-	ft_printf("toto\n");
 	if ((!(lst = creat_adja_lst(&lst_tmp, env))
 			|| (stock_pipe(env, &lst, lst_tmp)) == -1))
 	{

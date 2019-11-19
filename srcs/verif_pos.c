@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 17:04:30 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 16:02:18 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:24:29 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,7 @@ int			verif_pos(t_stock **lst)
 		if (cpy->pipe == 0 && cpy->com == 0)
 		{
 			if (check_this(lst, cpy->x, cpy->y, i) == -1)
-			{
-				printf("i = %d error x/y, x = %d, y = %d, maillon name = [%s]\n",
-						i ,cpy->x, cpy->y, cpy->room);
 				return (-1);
-			}
 		}
 		i++;
 		cpy = cpy->next;
