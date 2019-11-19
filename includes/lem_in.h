@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 15:28:17 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:05:48 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define AEND		0b00010
 # define PSTART		0b00100
 # define PEND		0b01000
+# define PIPE		0b10000
 
 typedef struct			s_room
 {

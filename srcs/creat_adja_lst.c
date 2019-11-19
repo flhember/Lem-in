@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 17:57:51 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:21:20 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	room = *room_ptr;
 	while (j < i && room->next)
 	{
+		ft_printf("%lu\n",j );
 		room = room->next;
 		room->pipe == 0 ? k++ : k;
 		j++;
 	}
-	if (room->pipe == 1)
+	ft_printf("room->room = %s\n", room->room);
+	ft_printf("\n\n");
+	//ft_printf("k = [%d] | name = [%s] | x = [%d] | y = [%d]\n", k, room->room, room->x, room->y);
+	ft_printf("k = [%d]\n", k);
+	if (room->pipe == 1 || room->com == 1)
 		return ;
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);
@@ -55,7 +60,7 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	(*lst)->tab[k]->y = room->y;
 	(*lst)->tab[k]->start = room->start;
 	(*lst)->tab[k]->end = room->end;
-	ft_printf("k = [%d] | name = [%s] | x = [%d] | y = [%d]\n", k, room->room, room->x, room->y);
+
 }
 
 t_lst		*creat_adja_lst(t_stock **room, t_data *env)
@@ -63,8 +68,19 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	size_t	i;
 	size_t	size_lst;
 	t_lst	*lst;
+	/*t_stock *cpy;
 
-
+	cpy = *room;
+	i = 0;
+	while (cpy)
+	{
+		if (cpy->next == NULL)
+			ft_printf("NULL\n");
+		else
+			ft_printf("[%s][%lu]\n", cpy->room,  i);
+		cpy = cpy->next;
+		i++;
+	}*/
 	i = 0;
 	size_lst = ft_lstsize(room);
 	lst = NULL;
@@ -78,6 +94,9 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 			return (NULL);
 		i++;
 	}
+	ft_printf("size lst = [%lu]\n", size_lst);
+	ft_printf("size room = [%lu]\n", env->nb_room);
+	ft_printf("i  = [%lu]\n", i);
 	lst->tab[env->nb_room] = 0;
 	i = 0;
 	while (i < size_lst - 1)

@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/18 15:37:14 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 12:42:38 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ int		check_maillon(char **tab)
 {
 	if (nb_split(tab) != 3
 			|| (ft_strisdigit(tab[1]) != 1 || ft_strisdigit(tab[2]) != 1))
-	{
-	//	ft_free_tab_char(tab);
 		return (-1);
-	}
 	return (1);
 }
 
@@ -89,6 +86,7 @@ int		check_valid_room(char *str, t_data *env, t_stock **lst)
 		env->se ^= AEND;
 	}
 	env->nb_room++;
+	//ft_printf("roon++ = [%s]\n", str);
 	ft_free_tab_char(tab);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 17:57:47 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:05:10 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ t_lst		*parsing_main(t_data *env)
 	lst = NULL;
 	if (!(lst_tmp = (t_stock*)ft_memalloc(sizeof(t_stock))))
 		return (NULL);
-	if ((parsing_map(env, &lst_tmp) == -1) //|| (check_name(env, &lst_tmp) == -1 )
+	if ((parsing_map(env, &lst_tmp) == -1) || (check_name(env, &lst_tmp) == -1 )
 			|| (verif_pos(&lst_tmp) == -1))
 	{
 		free_stock(&lst_tmp);
 		return (NULL);
 	}
+	ft_printf("lst_size = [%lu]\n", ft_lstsize(&lst_tmp));
+	ft_printf("nb_room = [%lu]\n", env->nb_room);
 	ft_printf("toto\n");
-	if (!(lst = creat_adja_lst(&lst_tmp, env))
-			|| (stock_pipe(env, &lst, lst_tmp)) == -1)
+	if (!(lst = creat_adja_lst(&lst_tmp, env)))
+	//		|| (stock_pipe(env, &lst, lst_tmp)) == -1)
 	{
 		if (lst)
 			free_lst_adja(&lst, env);

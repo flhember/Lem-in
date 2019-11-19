@@ -1,7 +1,6 @@
 42
 troi 3 0
 yo 1 0
-#AH MES MORT
 ##end
 zer 13 0
 ##start
@@ -9,4 +8,5 @@ dos 7 0
 yo-dos
 troi-troi
 troi-yo
+#commentaire
 troi-zer

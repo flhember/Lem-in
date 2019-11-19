@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 17:57:53 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:05:23 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,18 @@ int		check_room(t_stock **lst, char *str, t_data *env)
 		return (1);
 	else if (str[0] == '#')
 	{
-//		(void)lst;
-	//	printf("str check room = %s\n", str);
 		creat_maillon(lst, str, "0", "0");
-		env->nb_room++;
+		(*lst)->com = 1;
 		return (1);
 	}
 	return (-1);
 }
 
-int		check_tube(char *str, t_stock **lst)
+int		check_tube(char *str, t_stock **lst, t_data *env)
 {
 	if (ft_count_c(str, '-') == 1)
 	{
+		env->se |= PIPE;
 		creat_maillon(lst, str, "0", "0");
 		(*lst)->pipe = 1;
 		return (1);
@@ -77,14 +76,14 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 	else if (ft_is_c(str, '-')
 			&& (env->se & PSTART) != 0 && (env->se & PEND) != 0)
 	{
-		if (check_tube(str, lst) == 1)
+		if (check_tube(str, lst, env) == 1)
 			return (1);
 		else
 			ft_printf("fail tube\n");
 	}
 	else
 	{
-		if (check_valid_room(str, env, lst) == 1)
+		if (check_valid_room(str, env, lst) == 1 && (env->se & PIPE) == 0)
 			return (1);
 		else
 			ft_printf("fail room [%s]\n", str);
