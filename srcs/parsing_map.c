@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 14:05:23 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 15:12:23 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 	}
 	else
 	{
+		ft_printf("str fail = [%s]\n", str);
+		ft_printf("[%d]\n", env->se & PIPE);
 		if (check_valid_room(str, env, lst) == 1 && (env->se & PIPE) == 0)
 			return (1);
 		else
@@ -102,7 +104,10 @@ int		parsing_map(t_data *env, t_stock **lst)
 	{
 		if (check_line(line, env, lst) != 1)
 		{
-			free(line);
+			line != NULL ? free(line) : line;
+			if ((env->se & PIPE) != 0)
+				break ;
+			ft_printf("fail bitch\n");
 			printf("MAP KO\n");
 			return (-1);
 		}

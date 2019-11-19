@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/19 12:42:38 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 15:05:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		check_valid_room(char *str, t_data *env, t_stock **lst)
 	if (!(tab = ft_strsplit(str, ' ')))
 		return (-1);
 	if (tab[0][0] == 'L' || tab[0][0] == '#'
-			|| check_maillon(tab) != 1 || add_flag(env, ANTS) == 0) //SI L ou # leaks?
+			|| check_maillon(tab) != 1 || add_flag(env, ANTS) == 0 || (env->se & PIPE) != 0) //SI L ou # leaks?
 	{
 		ft_free_tab_char(tab); //Charle t'en pense quoi?
 		return (-1);

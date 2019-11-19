@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 14:05:10 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:53:16 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-/*void		print_map_room(t_stock *cpy)
+void		print_map_room(t_stock *cpy)
 {
 	if (cpy->next)
 		print_map_room(cpy->next);
@@ -35,7 +35,7 @@ void		print_map(t_stock *lst, int nb_ant)
 	ft_printf("\nprint map:\n");
 	ft_printf("%d\n", nb_ant);
 	print_map_room(cpy);
-}*/
+}
 
 
 t_lst		*parsing_main(t_data *env)
@@ -55,15 +55,15 @@ t_lst		*parsing_main(t_data *env)
 	ft_printf("lst_size = [%lu]\n", ft_lstsize(&lst_tmp));
 	ft_printf("nb_room = [%lu]\n", env->nb_room);
 	ft_printf("toto\n");
-	if (!(lst = creat_adja_lst(&lst_tmp, env)))
-	//		|| (stock_pipe(env, &lst, lst_tmp)) == -1)
+	if ((!(lst = creat_adja_lst(&lst_tmp, env))
+			|| (stock_pipe(env, &lst, lst_tmp)) == -1))
 	{
 		if (lst)
 			free_lst_adja(&lst, env);
 		free_stock(&lst_tmp);
 		return (NULL);
 	}
-//	print_map(lst_tmp, env->nb_ants);
+	print_map(lst_tmp, env->nb_ants);
 	free_stock(&lst_tmp);
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 14:21:20 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:47:24 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,18 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	j = 0;
 	k = -1;
 	room = *room_ptr;
-	while (j < i && room->next)
+	while (j < i && room)
 	{
-		ft_printf("%lu\n",j );
 		room = room->next;
-		room->pipe == 0 ? k++ : k;
+		room->pipe == 0 && room->com == 0 ? k++ : k;
 		j++;
 	}
 	ft_printf("room->room = %s\n", room->room);
 	ft_printf("\n\n");
-	//ft_printf("k = [%d] | name = [%s] | x = [%d] | y = [%d]\n", k, room->room, room->x, room->y);
-	ft_printf("k = [%d]\n", k);
+	ft_printf("k = [%d] | name = [%s] | x = [%d] | y = [%d]\n", k, room->room, room->x, room->y);
 	if (room->pipe == 1 || room->com == 1)
 		return ;
+	ft_printf("k = [%d]\n", k);
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);
 	(*lst)->tab[k]->x = room->x;
