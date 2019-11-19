@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 15:12:23 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:25:04 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int		check_room(t_stock **lst, char *str, t_data *env)
 
 int		check_tube(char *str, t_stock **lst, t_data *env)
 {
-	if (ft_count_c(str, '-') == 1)
+	ft_printf("tube = [%s] | tiret = %d | space = %d\n", str, ft_count_c(str, '-'), ft_count_c(str, ' '));
+	if (ft_count_c(str, '-') == 1 && ft_count_c(str, ' ') == 0)
 	{
-		env->se |= PIPE;
 		creat_maillon(lst, str, "0", "0");
 		(*lst)->pipe = 1;
+		env->se |= PIPE;
 		return (1);
 	}
 	else
@@ -71,7 +72,7 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 		if (check_nb_ants(str, env) == 1)
 			return (1);
 		else
-			ft_printf("fail ants\n");
+			ft_printf("fail ants [%s]\n", str);
 	}
 	else if (ft_is_c(str, '-')
 			&& (env->se & PSTART) != 0 && (env->se & PEND) != 0)
@@ -83,8 +84,6 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 	}
 	else
 	{
-		ft_printf("str fail = [%s]\n", str);
-		ft_printf("[%d]\n", env->se & PIPE);
 		if (check_valid_room(str, env, lst) == 1 && (env->se & PIPE) == 0)
 			return (1);
 		else

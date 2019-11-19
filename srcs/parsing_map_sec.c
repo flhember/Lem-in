@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/19 15:05:57 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:33:52 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ int		check_nb_ants(char *str, t_data *env)
 			else
 				return (-1);
 		}
-		if ((env->nb_ants = ft_atoi(str)) > 0)	
+		if (ft_atoi(str) > 0 && ft_atoi(str) <= 2147483647)
+		{
+			env->nb_ants = ft_atoi(str);
 			return (1);
+		}
 		else
 			return (-1);
 	}
@@ -51,10 +54,15 @@ int		nb_split(char **tab)
 	return (i);
 }
 
-int		check_maillon(char **tab)
+int		check_maillon(char **tab, char *str)
 {
+	size_t size;
+
 	if (nb_split(tab) != 3
 			|| (ft_strisdigit(tab[1]) != 1 || ft_strisdigit(tab[2]) != 1))
+		return (-1);
+	size = ft_strlen(tab[0]) + ft_strlen(tab[1]) + ft_strlen(tab[2]);
+	if (size != (ft_strlen(str) - 2))
 		return (-1);
 	return (1);
 }
@@ -67,7 +75,7 @@ int		check_valid_room(char *str, t_data *env, t_stock **lst)
 	if (!(tab = ft_strsplit(str, ' ')))
 		return (-1);
 	if (tab[0][0] == 'L' || tab[0][0] == '#'
-			|| check_maillon(tab) != 1 || add_flag(env, ANTS) == 0 || (env->se & PIPE) != 0) //SI L ou # leaks?
+			|| add_flag(env, ANTS) == 0 || (env->se & PIPE) != 0 || check_maillon(tab, str) != 1) //SI L ou # leaks?
 	{
 		ft_free_tab_char(tab); //Charle t'en pense quoi?
 		return (-1);

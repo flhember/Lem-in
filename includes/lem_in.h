@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 15:12:46 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:10:09 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void					add_maillon_end(t_stock *room, t_stock *nw);
 int						add_flag(t_data *env, int flag);
 int						check_nb_ants(char *str, t_data *env);
 int						nb_split(char **tab);
-int						check_maillon(char **tab);
 int						check_valid_room(char *str, t_data *env,
 		t_stock(**lst));
 void					init_struct(t_data *env);
