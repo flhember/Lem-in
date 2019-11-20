@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 16:50:58 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/20 19:00:33 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@
 # define PEND		0b01000
 # define PIPE		0b10000
 
+typedef struct			s_file
+{
+	int					value;
+	struct s_file		*next;
+}						t_file;
+
 typedef struct			s_room
 {
 	int					pos;
 	char				*name;
+	int					dist;
+	int					status;
 	int					x;
 	int					y;
 	int					start;
