@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 16:10:09 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:50:58 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct			s_data
 {
 	int					flags;
 	int					se;
+	int					start;
 	size_t				nb_ants;
 	size_t				nb_room;
 }						t_data;
@@ -85,5 +86,6 @@ void					print_adja(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_stock **room);
 int						verif_pos(t_stock **lst);
+int						algo_main(t_lst **lst, t_data *env);
 
 #endif

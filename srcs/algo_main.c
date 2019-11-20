@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   algo_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 16:46:48 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/20 16:52:12 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		lem_in(void)
+void		find_start(t_lst **lst, t_data *env)
 {
-	t_data		env;
-	t_lst		*lst;
+	int		i;
+	
+	i = 0;
+	while ((*lst)->tab[i]->start == 0)
+	{
+		i++;
+		if ((*lst)->tab[i]->start == 1)
+			env->start = i;
+	}
+}
 
-	lst = NULL;
-	init_struct(&env);
-	if (!(lst = parsing_main(&env)))
-		return (-1);
-	print_lst_adja(&lst, &env);
-	if (!(algo_main(&lst, &env)))
-		return (-1);
-	free_lst_adja(&lst, &env);
+int			algo_main(t_lst **lst, t_data *env)
+{
+	find_start(lst, env);
+	printf("start est au maillon = %d\n", env->start);
 	return (0);
 }

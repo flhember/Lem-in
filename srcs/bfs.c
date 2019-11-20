@@ -1,29 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 16:46:48 by flhember         ###   ########.fr       */
+/*   Created: 2019/11/20 16:37:37 by flhember          #+#    #+#             */
+/*   Updated: 2019/11/20 16:42:39 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include <lem_in.c>
 
-int		lem_in(void)
-{
-	t_data		env;
-	t_lst		*lst;
-
-	lst = NULL;
-	init_struct(&env);
-	if (!(lst = parsing_main(&env)))
-		return (-1);
-	print_lst_adja(&lst, &env);
-	if (!(algo_main(&lst, &env)))
-		return (-1);
-	free_lst_adja(&lst, &env);
-	return (0);
-}
