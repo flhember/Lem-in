@@ -21,9 +21,9 @@ int		lem_in(void)
 	init_struct(&env);
 	if (!(lst = parsing_main(&env)))
 		return (-1);
-	print_lst_adja(&lst, &env);
 	if (!(algo_main(&lst, &env)))
 		return (-1);
+	print_lst_adja(&lst, &env);
 	free_lst_adja(&lst, &env);
 	return (0);
 }

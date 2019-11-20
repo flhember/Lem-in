@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 16:47:09 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:58:15 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,8 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 		room->pipe == 0 && room->com == 0 ? k++ : k;
 		j++;
 	}
-	ft_printf("room->room = %s\n", room->room);
-	ft_printf("\n\n");
-	ft_printf("k = [%d] | name = [%s] | x = [%d] | y = [%d]\n", k, room->room, room->x, room->y);
 	if (room->pipe == 1 || room->com == 1)
 		return ;
-	ft_printf("k = [%d]\n", k);
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);
 	(*lst)->tab[k]->x = room->x;
@@ -67,19 +63,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	size_t	i;
 	size_t	size_lst;
 	t_lst	*lst;
-	/*t_stock *cpy;
-
-	cpy = *room;
-	i = 0;
-	while (cpy)
-	{
-		if (cpy->next == NULL)
-			ft_printf("NULL\n");
-		else
-			ft_printf("[%s][%lu]\n", cpy->room,  i);
-		cpy = cpy->next;
-		i++;
-	}*/
+	
 	i = 0;
 	size_lst = ft_lstsize(room);
 	lst = NULL;
@@ -93,9 +77,6 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 			return (NULL);
 		i++;
 	}
-	ft_printf("size lst = [%lu]\n", size_lst);
-	ft_printf("size room = [%lu]\n", env->nb_room);
-	ft_printf("i  = [%lu]\n", i);
 	lst->tab[env->nb_room] = 0;
 	i = 0;
 	while (i < size_lst - 1)
@@ -103,7 +84,6 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 		fill_tab_room(room, &lst, i);
 		i++;
 	}
-
-//	print_adja(&lst, env);
+	print_adja(&lst, env);
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:31:10 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 16:05:21 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/19 17:22:49 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int			creat_maillon(t_stock **lst, char *name, char *x, char *y)
 	if (!(new->room = ft_strdup(name)))
 		return (-1);
 	if (new->room[0] == '#')
-	{
-		printf("# = %s\n", new->room);
 		new->com = 1;
-	}
 	new->x = ft_atoi(x);
 	new->y = ft_atoi(y);
 	new->next = NULL;
