@@ -1,5 +1,5 @@
 1
-troi 3 0
+troi -3 -2147483648
 yo 1 0
 ##end
 zer 13 0
@@ -8,6 +8,6 @@ dos 7 0
 yo-dos
 troi-troi
 troi-yo
-#commentaire
+##commentaire
 troi-zer
 dos-yo
