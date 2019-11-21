@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/19 17:19:23 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/21 11:27:15 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		check_start_end(char *str, t_data *env)
+int		check_start_end(char *str, t_data *env, t_stock **lst)
 {
 	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0 && (env->se & AEND) == 0)
 	{
@@ -27,12 +27,14 @@ int		check_start_end(char *str, t_data *env)
 		env->se |= AEND;
 		return (1);
 	}
+	creat_maillon(lst, str, "0", "0");
+	(*lst)->com = 1;
 	return (1);
 }
 
 int		check_room(t_stock **lst, char *str, t_data *env)
 {
-	if (str[0] == '#' && str[1] == '#' && (check_start_end(str, env) == 1))
+	if (str[0] == '#' && str[1] == '#' && (check_start_end(str, env, lst) == 1))
 		return (1);
 	else if (str[0] == '#')
 	{

@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/19 17:24:02 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/21 12:00:51 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,31 @@ int		check_maillon(char **tab, char *str)
 {
 	size_t size;
 
-	if (nb_split(tab) != 3
-			|| (ft_strisdigit(tab[1]) != 1 || ft_strisdigit(tab[2]) != 1))
-		return (-1);
+	if (nb_split(tab) == 3)
+	{
+		if (tab[1][0] == '-' || ft_isdigit(tab[1][0]) == 1)
+		{
+			if (tab[1][0] == '-')
+			{
+				if (ft_atoi(tab[1] + 1) < -2147483647 || ft_strisdigit(tab[1] + 1) != 1)
+					return (-1);
+			}
+			else if ((ft_strisdigit(tab[1]) != 1) || (ft_atoi(tab[1]) > 2147483647))
+				return (-1);
+		}
+		if (tab[2][0] == '-' || ft_isdigit(tab[2][0]) == 1)
+		{
+			if (tab[2][0] == '-')
+			{
+				if (ft_atoi(tab[2] + 1) < -2147483647 || ft_strisdigit(tab[2] + 1) != 1)
+					return (-1);
+			}
+			else if ((ft_strisdigit(tab[2]) == 0) || (ft_atoi(tab[2]) > 2147483647))
+				return (-1);
+		}
+		else
+			return (-1);
+	}
 	size = ft_strlen(tab[0]) + ft_strlen(tab[1]) + ft_strlen(tab[2]);
 	if (size != (ft_strlen(str) - 2))
 		return (-1);
