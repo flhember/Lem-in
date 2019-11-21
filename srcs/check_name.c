@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:49 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/20 16:58:08 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/21 14:35:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	print_room(size_t i, size_t j, t_stock **room)
 	cpy2 = *room;
 	if (i == j)
 		return (1);
-	while (cpy->pipe == 1)
+	while (cpy->pipe == 1 || cpy->com == 1)
 		cpy = cpy->next;
-	while (cpy2->pipe == 1)
+	while (cpy2->pipe == 1 || cpy2->com == 1)
 		cpy2 = cpy2->next;
 	while (limit < i)
 	{
@@ -71,6 +71,7 @@ static int	check_tab(int *tab, t_data *env, t_stock **room)
 			tmp = tab[i];
 			if (tmp == tab[j])
 			{
+				//ft_printf("tab[%lu] = [%d] tab[%lu] = [%d]\n",i,tab[i], j,tab[j]);
 				if (print_room(i, j, room) == -1)
 					return (-1);
 			}
