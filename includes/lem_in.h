@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/21 10:42:47 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/21 18:45:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct			s_file
 {
 	int					value;
+	int					dist;
 	struct s_file		*next;
 }						t_file;
 
@@ -95,5 +96,8 @@ void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_stock **room);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
+void					bfs(t_file **file, t_lst **lst);
+int						find_start(t_lst **lst, t_data *env, t_file **file);
+void					free_file(t_file **file);
 
 #endif

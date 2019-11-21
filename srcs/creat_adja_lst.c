@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/21 09:39:41 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/21 17:28:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		print_adja(t_lst **lst, t_data *env)
 		if ((*lst)->tab[i]->end == 1)
 			ft_printf("\tEND\n");
 		ft_printf("name %s\n", (*lst)->tab[i]->name);
+		ft_printf("distance =  %d\n", (*lst)->tab[i]->dist);
 		ft_printf("x %d\n", (*lst)->tab[i]->x);
 		ft_printf("y %d\n\n", (*lst)->tab[i]->y);
 		i++;
