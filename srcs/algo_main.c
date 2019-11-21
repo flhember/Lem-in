@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/21 18:52:29 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/21 18:57:39 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			good_road(t_lst **lst, t_data *env)
 //-corriger
 //Ouai ouai ez lem_in bonne journee chef !
 
-
+//ps: en vrais l'algo est nul je crois il boucle sur la map du sujet t(-.-t)
 int			algo_main(t_lst **lst, t_data *env)
 {
 	t_file	*file;
