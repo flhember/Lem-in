@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 16:50:58 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/21 18:45:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@
 # define PEND		0b01000
 # define PIPE		0b10000
 
+typedef struct			s_file
+{
+	int					value;
+	int					dist;
+	struct s_file		*next;
+}						t_file;
+
 typedef struct			s_room
 {
 	int					pos;
 	char				*name;
+	int					dist;
+	int					status;
 	int					x;
 	int					y;
 	int					start;
@@ -87,5 +96,8 @@ void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_stock **room);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
+void					bfs(t_file **file, t_lst **lst);
+int						find_start(t_lst **lst, t_data *env, t_file **file);
+void					free_file(t_file **file);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 16:46:48 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/23 18:44:43 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		lem_in(void)
 	init_struct(&env);
 	if (!(lst = parsing_main(&env)))
 		return (-1);
-	if (!(algo_main(&lst, &env)))
+	if ((algo_main(&lst, &env) == -1))
 		return (-1);
-	print_lst_adja(&lst, &env);
+	print_adja(&lst, &env);
 	free_lst_adja(&lst, &env);
 	return (0);
 }
