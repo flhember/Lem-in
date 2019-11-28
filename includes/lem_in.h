@@ -93,7 +93,8 @@ t_lst					*parsing_main(t_data *env);
 size_t					ft_lstsize(t_stock **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
-int						check_name(t_data *env, t_stock **room);
+//int						check_name(t_data *env, t_stock **room);
+int						check_name(t_data *env, t_lst ** lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
 void					bfs(t_file **file, t_lst **lst);

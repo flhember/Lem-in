@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   algo_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
 /*   Updated: 2019/11/28 17:00:22 by flhember         ###   ########.fr       */
@@ -53,7 +53,8 @@ int			good_road(t_lst **lst, t_data *env)
 	ds = (*lst)->tab[i]->dist;
 	while (ds >= 0)
 	{
-		printf("\n %s -> %d", (*lst)->tab[i]->name, ds);
+		ft_printf("boucle\n");
+		printf("\n %s -> %d ", (*lst)->tab[i]->name, ds);
 		ds--;
 		j = 0;
 		while (j < env->nb_room)
@@ -74,7 +75,11 @@ int			good_road(t_lst **lst, t_data *env)
 			j++;
 		}
 	}
+<<<<<<< HEAD
 	printf("\n %s - %d", (*lst)->tab[i]->name, ds);
+=======
+	printf("\n %s -> %d ->", (*lst)->tab[i]->name, ds);
+>>>>>>> chcoutur
 	return (0);
 }
 
@@ -88,7 +93,11 @@ int			algo_main(t_lst **lst, t_data *env)
 		return (-1);
 	bfs(&file, lst);
 	good_road(lst, env);
+<<<<<<< HEAD
 	//print_file(&file, lst);
+=======
+	print_file(&file, lst);
+>>>>>>> chcoutur
 	free_file(&file);
 	return (0);
 }

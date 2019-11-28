@@ -121,6 +121,6 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 		}
 		pipe = pipe->next;
 	}
-	print_lst_adja(lst, env);
+	//print_lst_adja(lst, env);
 	return (0);
 }

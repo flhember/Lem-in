@@ -20,9 +20,12 @@ int		lem_in(void)
 	lst = NULL;
 	init_struct(&env);
 	if (!(lst = parsing_main(&env)))
+	{
+		ft_printf("oh shit, here we go again\n");
 		return (-1);
-	if ((algo_main(&lst, &env) == -1))
-		return (-1);
+	}
+//	if ((algo_main(&lst, &env) == -1))
+//		return (-1);
 //	print_adja(&lst, &env);
 	free_lst_adja(&lst, &env);
 	return (0);
