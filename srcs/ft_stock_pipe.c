@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/20 18:31:26 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:44:46 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 		return (-1);
 	pipe->room = str;
 	if (add_link_lst(lst, fst_pe, sec_pe) == -1)
+		return (-1);
+	if (add_link_lst(lst, sec_pe, fst_pe) == -1)
 		return (-1);
 	return (0);
 }

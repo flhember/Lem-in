@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/21 18:57:39 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/28 17:00:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void		print_file(t_file **file, t_lst **lst)
 	t_file *tmp;
 
 	tmp = *file;
+	printf("\n");
 	while (tmp)
 	{
-		printf("[%d -> %s] -> ", tmp->value, (*lst)->tab[tmp->value]->name);
+		printf("[%d - %s] -> ", tmp->dist, (*lst)->tab[tmp->value]->name);
 		tmp = tmp->next;
 	}
 	printf("NULL\n");
@@ -73,22 +74,10 @@ int			good_road(t_lst **lst, t_data *env)
 			j++;
 		}
 	}
-	printf("\n %s -> %d", (*lst)->tab[i]->name, ds);
+	printf("\n %s - %d", (*lst)->tab[i]->name, ds);
 	return (0);
 }
 
-//Yo, le bfs marche (On a la distance de chaque room au start)
-//La ft good road retrace le meilleur chemin(d'apres mes test ca marche), tu print ont rend lundi?
-//Non je deconne, en vrais je pense c'est trop simple il vas forcement y avoir un probleme,
-//To do list:
-//-stocker le chemin (list chainee?)
-//-retrouver la formule ou demander a yohann (formie 1 ou plusieur chemin?)
-//-(La j'ai peur de cette etape) trouver d'autre chemin si besoin
-//-Faire les print final
-//-corriger
-//Ouai ouai ez lem_in bonne journee chef !
-
-//ps: en vrais l'algo est nul je crois il boucle sur la map du sujet t(-.-t)
 int			algo_main(t_lst **lst, t_data *env)
 {
 	t_file	*file;
@@ -98,8 +87,8 @@ int			algo_main(t_lst **lst, t_data *env)
 	if ((find_start(lst, env, &file)) == -1)
 		return (-1);
 	bfs(&file, lst);
-	free_file(&file);
 	good_road(lst, env);
-//	print_file(&file, lst);
+	//print_file(&file, lst);
+	free_file(&file);
 	return (0);
 }
