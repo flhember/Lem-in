@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/25 16:01:27 by charles          ###   ########.fr       */
+/*   Updated: 2019/11/28 10:21:41 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void		print_file(t_file **file, t_lst **lst)
 	t_file *tmp;
 
 	tmp = *file;
-	ft_printf("[%d -> %s] -> ", tmp->value, (*lst)->tab[tmp->value]->name);
+
 	while (tmp->next)
 	{
-		//printf("[%d -> %s] -> ", tmp->value, (*lst)->tab[tmp->value]->name);
-		printf("[%d -> ] -> ", tmp->value);
+		ft_printf("[%d -> %s] -> ", tmp->value, (*lst)->tab[tmp->value]->name);
+		//ft_printf("[%d -> ] -> ", tmp->value);
 		tmp = tmp->next;
 	}
 	printf("NULL\n");
@@ -54,7 +54,7 @@ int			good_road(t_lst **lst, t_data *env)
 	ds = (*lst)->tab[i]->dist;
 	while (ds >= 0)
 	{
-		printf("\n %s -> %d", (*lst)->tab[i]->name, ds);
+		printf("\n %s -> %d ", (*lst)->tab[i]->name, ds);
 		ds--;
 		j = 0;
 		while (j < env->nb_room)
@@ -75,7 +75,7 @@ int			good_road(t_lst **lst, t_data *env)
 			j++;
 		}
 	}
-	printf("\n %s -> %d", (*lst)->tab[i]->name, ds);
+	printf("\n %s -> %d ->", (*lst)->tab[i]->name, ds);
 	return (0);
 }
 
@@ -100,8 +100,8 @@ int			algo_main(t_lst **lst, t_data *env)
 	if ((find_start(lst, env, &file)) == -1)
 		return (-1);
 	bfs(&file, lst);
-	free_file(&file);
 	good_road(lst, env);
 	print_file(&file, lst);
+	free_file(&file);
 	return (0);
 }
