@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 10:21:41 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/28 10:41:36 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			good_road(t_lst **lst, t_data *env)
 	ds = (*lst)->tab[i]->dist;
 	while (ds >= 0)
 	{
+		ft_printf("boucle\n");
 		printf("\n %s -> %d ", (*lst)->tab[i]->name, ds);
 		ds--;
 		j = 0;
