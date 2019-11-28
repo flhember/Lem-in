@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 15:03:59 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/21 17:39:29 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void		free_stock(t_stock **lst)
 		free_stock(&(*lst)->next);
 	ft_strdel(&(*lst)->room);
 	free(*lst);
+}
+
+void		free_file(t_file **file)
+{
+	if ((*file)->next)
+		free_file(&(*file)->next);
+	free(*file);
 }
 
 void		free_lst_tab(t_room **lst)

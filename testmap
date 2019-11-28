@@ -1,13 +1,15 @@
 1
-troi -3 -4
-yo 1 0
-##end
-zer 13 0
 ##start
-dos 7 0
-yo-dos
-troi-troi
-troi-yo
-##commentaire
-troi-zer
-dos-yo
+A 1 0
+B 2 0
+C 3 0
+D 4 0
+E 5 0
+##end
+F 6 0
+A-B
+A-E
+B-C
+B-D
+C-F
+D-F

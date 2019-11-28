@@ -112,7 +112,7 @@ int		parsing_map(t_data *env, t_stock **lst)
 		}
 		free(line);
 	}
-	print_lst(lst);
+//	print_lst(lst);
 	printf("\n");
 	if (add_flag(env, START) && add_flag(env, END))
 	{
