@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 11:07:54 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/28 17:09:19 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		lem_in(void)
 		ft_printf("oh shit, here we go again\n");
 		return (-1);
 	}
-//	if ((algo_main(&lst, &env) == -1))
-//		return (-1);
+	if ((algo_main(&lst, &env) == -1))
+		return (-1);
 //	print_adja(&lst, &env);
 	free_lst_adja(&lst, &env);
 	return (0);

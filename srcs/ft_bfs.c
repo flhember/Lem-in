@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 16:40:55 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/28 17:13:11 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			add_file(t_lst **lst, t_file **file, int val, int dis)
 	if (!(new = (t_file*)ft_memalloc(sizeof(t_file))))
 		return (-1);
 	new->value = val;
-	printf("ADD = %s\n", (*lst)->tab[val]->name);
+//	printf("ADD = %s\n", (*lst)->tab[val]->name);
 	new->dist = dis;
 	new->next = NULL;
 	while (tmp->next)
@@ -36,17 +36,19 @@ int			add_file(t_lst **lst, t_file **file, int val, int dis)
 int			fill_file(t_file **file, t_lst **lst, int i)
 {
 	t_room *tmp;
+	int o;
 
+	o = 0;
 	tmp = (*lst)->tab[i];
-	printf("name check = %s\n", (*lst)->tab[i]->name);
+//	printf("name check = %s\n", (*lst)->tab[i]->name);
 	while (tmp)
 	{
 	//	printf("status = %d de %s\n", (*lst)->tab[i]->status, (*lst)->tab[i]->name);
 		if (tmp->pos != i)
 		{
-			printf("%d %s\n", tmp->pos, tmp->name);
+//			printf("%d %s\n", tmp->pos, tmp->name);
 			if ((*lst)->tab[tmp->pos]->status == 2 || (*lst)->tab[tmp->pos]->status == 1)
-				printf("la, name == %s, status = %d\n", (*lst)->tab[i]->name, (*lst)->tab[i]->status);
+				o = 1;
 			else if ((add_file(lst, file, tmp->pos, (*lst)->tab[i]->dist + 1)) == -1)
 				return (-1);
 		}
@@ -72,14 +74,14 @@ void		bfs(t_file **file, t_lst **lst)
 	while (tmp)
 	{
 		(*lst)->tab[tmp->value]->dist = tmp->dist;
-		printf("termine %s\n", (*lst)->tab[tmp->value]->name);
-		printf("vql = %d\n", tmp->value);
+//		printf("termine %s\n", (*lst)->tab[tmp->value]->name);
+//		printf("vql = %d\n", tmp->value);
 		fill_file(file, lst, tmp->value);
 		(*lst)->tab[tmp->value]->status = 2;
 //		del_first_file(file);
 		tmp = tmp->next;
 	}
-	printf("ca sort\n");
+//	printf("ca sort\n");
 }
 
 int			find_start(t_lst **lst, t_data *env, t_file **file)
