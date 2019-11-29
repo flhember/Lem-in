@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 17:13:11 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:20:33 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,4 @@ void		bfs(t_file **file, t_lst **lst)
 		tmp = tmp->next;
 	}
 //	printf("ca sort\n");
-}
-
-int			find_start(t_lst **lst, t_data *env, t_file **file)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < env->nb_room)
-	{
-		if ((*lst)->tab[i]->start == 1)
-		{
-			env->start = i;
-			break ;
-		}
-		i++;
-	}
-	if (i >= env->nb_room)
-		return (-1);
-	if ((fill_file(file, lst, i)) == -1)
-		return (-1);
-	del_first_file(file);
-	(*lst)->tab[i]->dist = 0;
-	(*lst)->tab[i]->status = 2;
-	return (0);
 }

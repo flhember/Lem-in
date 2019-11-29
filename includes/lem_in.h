@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 16:38:58 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:21:54 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct			s_room
 	int					y;
 	int					start;
 	int					end;
+	int					use;
 	struct s_room		*next;
 }						t_room;
 
@@ -68,6 +69,8 @@ typedef struct			s_data
 	int					flags;
 	int					se;
 	int					start;
+	int					end;
+	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
 }						t_data;
@@ -90,7 +93,8 @@ void					free_lst_adja(t_lst **lst, t_data *env);
 t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 t_lst					*parsing_main(t_data *env);
-size_t					ft_lstsize(t_stock **room);
+size_t					ft_lstsize_stock(t_stock **room);
+size_t					ft_lstsize_room(t_room **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 //int						check_name(t_data *env, t_stock **room);
@@ -98,7 +102,8 @@ int						check_name(t_data *env, t_lst ** lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
 void					bfs(t_file **file, t_lst **lst);
-int						find_start(t_lst **lst, t_data *env, t_file **file);
 void					free_file(t_file **file);
+int						fill_file(t_file **file, t_lst **lst, int i);
+void					del_first_file(t_file **file);
 
 #endif

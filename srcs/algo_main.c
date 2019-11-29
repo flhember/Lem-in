@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 17:11:23 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:31:13 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,9 @@ int			find_end(t_lst **lst, t_data *env)
 	return (-1);
 }
 
-int			good_road(t_lst **lst, t_data *env)
-{
-	int		i;
-	size_t	j;
-	int		ds;
-	t_room 	*tmp;
 
-	tmp = NULL;
-	if (((i = find_end(lst, env)) == -1))
-		return (-1);
-	ds = (*lst)->tab[i]->dist;
+void	good_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_room *tmp)
+{
 	while (ds >= 0)
 	{
 		printf("\n %s -> %d ", (*lst)->tab[i]->name, ds);
@@ -74,7 +66,69 @@ int			good_road(t_lst **lst, t_data *env)
 			j++;
 		}
 	}
-//	printf("\n %s - %d", (*lst)->tab[i]->name, ds);
+}
+
+int			good_road(t_lst **lst, t_data *env)
+{
+	int		i;
+	size_t	j;
+	int		ds;
+	t_room 	*tmp;
+
+	j = 0;
+	tmp = NULL;
+	i = env->end;
+	ds = (*lst)->tab[i]->dist;
+	printf("\n %s - %d", (*lst)->tab[i]->name, ds);
+	good_road_bis(env, lst, ds, i, j, tmp);
+	return (0);
+}
+
+int			find_start(t_lst **lst, t_data *env, t_file **file)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < env->nb_room)
+	{
+		if ((*lst)->tab[i]->start == 1)
+		{
+			env->start = i;
+			break ;
+		}
+		i++;
+	}
+	if (i >= env->nb_room)
+		return (-1);
+	if ((fill_file(file, lst, i)) == -1)
+		return (-1);
+	del_first_file(file);
+	(*lst)->tab[i]->dist = 0;
+	(*lst)->tab[i]->status = 2;
+	return (0);
+}
+
+int			find_nb_pos(t_lst **lst, t_data *env, t_file **file)
+{
+	int		e;
+	int		s;
+
+	e = 0;
+	s = 0;
+	printf("find nb pos\n");
+	if ((find_start(lst, env, file)) == -1)
+	{
+		free_file(file);
+		return (-1);
+	}
+	if (((env->end = find_end(lst, env)) == -1))
+		return (-1);
+	e = ft_lstsize_room(&(*lst)->tab[env->end]);
+	s = ft_lstsize_room(&(*lst)->tab[env->start]);
+	if (e <= s)
+		env->nb_pos = e;
+	else
+		env->nb_pos = s;
 	return (0);
 }
 
@@ -84,8 +138,9 @@ int			algo_main(t_lst **lst, t_data *env)
 
 	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
 		return (-1);
-	if ((find_start(lst, env, &file)) == -1)
+	if ((find_nb_pos(lst, env, &file)) == -1)
 		return (-1);
+	printf("chemins possible %d\n", env->nb_pos);
 	bfs(&file, lst);
 	good_road(lst, env);
 	//print_file(&file, lst);
