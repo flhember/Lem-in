@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/21 13:39:11 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/12/02 14:57:09 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		check_maillon(char **tab, char *str)
 
 	if (nb_split(tab) == 3)
 	{
-		if (tab[1][0] == '-' || ft_isdigit(tab[1][0]) == 1)
+		if (tab[1][0] == '-' || ft_strisdigit(tab[1]) == 1)
 		{
 			if (tab[1][0] == '-')
 			{
@@ -70,23 +70,26 @@ int		check_maillon(char **tab, char *str)
 			else if ((ft_strisdigit(tab[1]) != 1) || (ft_atoi(tab[1]) > 2147483647))
 				return (-1);
 		}
-		if (tab[2][0] == '-' || ft_isdigit(tab[2][0]) == 1)
+		if (tab[2][0] == '-' || ft_strisdigit(tab[2]) == 1)
 		{
+			//ft_printf("strisdigit(tab[2]) = %d\n", ft_strisdigit(tab[2]));
 			if (tab[2][0] == '-')
 			{
 				if (ft_atoi(tab[2] + 1) < -2147483647 || ft_strisdigit(tab[2] + 1) != 1)
 					return (-1);
 			}
-			else if ((ft_strisdigit(tab[2]) == 0) || (ft_atoi(tab[2]) > 2147483647))
+			else if ((ft_strisdigit(tab[2]) != 1) || (ft_atoi(tab[2]) > 2147483647))
 				return (-1);
 		}
 		else
 			return (-1);
+		size = ft_strlen(tab[0]) + ft_strlen(tab[1]) + ft_strlen(tab[2]);
+		if (size != (ft_strlen(str) - 2))
+			return (-1);
+		else
+			return (1);
 	}
-	size = ft_strlen(tab[0]) + ft_strlen(tab[1]) + ft_strlen(tab[2]);
-	if (size != (ft_strlen(str) - 2))
-		return (-1);
-	return (1);
+	return (-1);
 }
 
 int		check_valid_room(char *str, t_data *env, t_stock **lst)
@@ -96,6 +99,7 @@ int		check_valid_room(char *str, t_data *env, t_stock **lst)
 	tab = NULL;
 	if (!(tab = ft_strsplit(str, ' ')))
 		return (-1);
+	ft_printf("%s\n", str);
 	if (tab[0][0] == 'L' || tab[0][0] == '#'
 			|| add_flag(env, ANTS) == 0 || (env->se & PIPE) != 0 || check_maillon(tab, str) != 1) //SI L ou # leaks?
 	{
