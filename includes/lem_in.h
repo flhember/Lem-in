@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/29 14:21:54 by flhember         ###   ########.fr       */
+/*   Updated: 2019/11/30 17:56:35 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ typedef struct			s_room
 	int					y;
 	int					start;
 	int					end;
-	int					use;
+	int					road;
 	struct s_room		*next;
 }						t_room;
 
 typedef struct			s_lst
 {
 	t_room				**tab;
+	int					nb_road;
 	int					i_r;
 }						t_lst;
 

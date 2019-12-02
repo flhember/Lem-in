@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/29 14:31:13 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/02 14:57:33 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,22 @@ int			find_end(t_lst **lst, t_data *env)
 	return (-1);
 }
 
+int			pars_pipe(t_lst **lst, t_room *tmp, int i, size_t j)
+{
+	while (tmp)
+	{
+		if (tmp->pos == (*lst)->tab[i]->pos)
+		{
+			if ((*lst)->tab[j]->start == 0)
+				(*lst)->tab[j]->road = (*lst)->nb_road;
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
 
-void	good_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_room *tmp)
+int			good_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_room *tmp)
 {
 	while (ds >= 0)
 	{
@@ -50,37 +64,44 @@ void	good_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_room *tm
 		j = 0;
 		while (j < env->nb_room)
 		{
-			if ((*lst)->tab[j]->dist == ds)
+			if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 			{
 				tmp = (*lst)->tab[j];
-				while (tmp)
+				if ((pars_pipe(lst, tmp, i, j)))
 				{
-					if (tmp->pos == (*lst)->tab[i]->pos)
-					{
-						i = j;
-						j = env->nb_room + 2;
-					}
-					tmp = tmp->next;
+					i = j;
+					j = env->nb_room + 2;
 				}
 			}
 			j++;
+			if (j == env->nb_room && ds == (*lst)->tab[env->end]->dist - 1)
+			{
+				ft_printf("c'est casse pour le chemin %d\n", (*lst)->nb_road);
+				return (-1);
+			}
 		}
 	}
+	return (0);
 }
 
 int			good_road(t_lst **lst, t_data *env)
 {
 	int		i;
-	size_t	j;
 	int		ds;
-	t_room 	*tmp;
 
-	j = 0;
-	tmp = NULL;
-	i = env->end;
-	ds = (*lst)->tab[i]->dist;
-	printf("\n %s - %d", (*lst)->tab[i]->name, ds);
-	good_road_bis(env, lst, ds, i, j, tmp);
+	while ((*lst)->nb_road < env->nb_pos)
+	{
+		i = env->end;
+		ds = (*lst)->tab[i]->dist;
+		printf("\nLa end %s - %d\n", (*lst)->tab[i]->name, ds);
+		if ((good_road_bis(env, lst, ds, i, 0, NULL)) == -1)
+			(*lst)->tab[env->end]->dist++;
+		else
+			(*lst)->nb_road++;
+		if ((*lst)->tab[env->end]->dist > (int)env->nb_room)
+			break;
+	}
+
 	return (0);
 }
 
