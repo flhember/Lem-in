@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strisalpha.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 20:12:20 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 12:36:29 by chcoutur         ###   ########.fr       */
+/*   Created: 2019/12/02 12:11:42 by chcoutur          #+#    #+#             */
+/*   Updated: 2019/12/02 12:38:04 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+#include "../includes/libft.h"
+
+int ft_strisalpha(char *str)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]) == 1)
+			i++;
+		else 
+			return (-1);
+	}
+	return (1);
 }

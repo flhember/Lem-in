@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:13:18 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/29 13:25:58 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/02 12:38:26 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void				ft_free_tab_char(char **tab);
 int					ft_count_c(char *str, char c);
 int					ft_strisdigit(char *str);
 int					ft_is_c(char *str, char c);
-
+int					ft_strisalpha(char *str);
+int					ft_strnalpha(char *str);
 #endif
