@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strisalpha.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 15:10:23 by flhember         ###   ########.fr       */
+/*   Created: 2019/12/02 12:11:42 by chcoutur          #+#    #+#             */
+/*   Updated: 2019/12/02 12:38:04 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "../includes/libft.h"
 
-int		main(void)
+int ft_strisalpha(char *str)
 {
-	if (lem_in() == -1)
-		return (-1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]) == 1)
+			i++;
+		else 
+			return (-1);
+	}
+	return (1);
 }

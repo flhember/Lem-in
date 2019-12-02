@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnalpha.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 15:10:23 by flhember         ###   ########.fr       */
+/*   Created: 2019/12/02 12:36:44 by chcoutur          #+#    #+#             */
+/*   Updated: 2019/12/02 12:38:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "../includes/libft.h"
 
-int		main(void)
+int ft_strnalpha(char *str)
 {
-	if (lem_in() == -1)
-		return (-1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]) == 1)
+			return (-1);
+		else
+			i++;
+	}
+	return (1);
 }

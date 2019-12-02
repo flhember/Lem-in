@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 15:03:41 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/02 17:19:24 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 # include "../libft/includes/libft.h"
 
-# define ANTS		0b00001
-# define START		0b00010
-# define END		0b00100
+# define ANTS		1
+# define START		2
+# define END		4
 
-# define ASTART		0b00001
-# define AEND		0b00010
-# define PSTART		0b00100
-# define PEND		0b01000
-# define PIPE		0b10000
+# define ASTART		1
+# define AEND		2
+# define PSTART		4
+# define PEND		8
+# define PIPE		16
 
 typedef struct			s_file
 {
@@ -99,12 +99,14 @@ size_t					ft_lstsize_room(t_room **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 //int						check_name(t_data *env, t_stock **room);
-int						check_name(t_data *env, t_lst ** lst);
+int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
 void					bfs(t_file **file, t_lst **lst);
 void					free_file(t_file **file);
 int						fill_file(t_file **file, t_lst **lst, int i);
 void					del_first_file(t_file **file);
+int						best_road(t_lst **lst, t_data *env);
+int						pars_pipe(t_lst **lst, t_room *tmp, int i, size_t j);
 
 #endif

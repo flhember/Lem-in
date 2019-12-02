@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/29 13:39:52 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/02 18:01:46 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ int			add_link_lst(t_lst **lst, int fst_pe, int sec_pe)
 	return (0);
 }
 
+size_t 	ft_strnlen(char *str, char c)
+{
+	size_t i;
+
+	i = 0;
+	printf("strnlen = %s\n", str);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe)
 {
 	size_t	i;
@@ -75,14 +90,17 @@ int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe)
 	i = 0;
 	k = 0;
 	while (i < env->nb_room && ft_strncmp((*lst)->tab[i]->name, (*pipe)->room,
-				ft_strlen((*lst)->tab[i]->name)))
+				ft_strnlen((*pipe)->room, '-')))
+	{
 		i++;
+	}
 	if (i == env->nb_room)
 		return (-1);
 	j = ft_strlen((*lst)->tab[i]->name);
 	if (j < ft_strlen((*pipe)->room))
 	{
-		while (k < j + 1)
+		ft_printf("strlen(pipe->room) = %lu\n", ft_strlen((*pipe)->room));
+		while (k < (j + 1))
 		{
 			(*pipe)->room++;
 			k++;
@@ -99,14 +117,27 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 
 	str = pipe->room;
 	if ((fst_pe = find_good_room(env, lst, &pipe)) == -1)
+	{
+		printf("1\n");
 		return (-1);
+	}
 	if ((sec_pe = find_good_room(env, lst, &pipe)) == -1)
+	{
+		printf("fst = %s, %s\n", (*lst)->tab[fst_pe]->name, pipe->room);
+		printf("2\n");
 		return (-1);
+	}
 	pipe->room = str;
 	if (add_link_lst(lst, fst_pe, sec_pe) == -1)
+	{
+		printf("3\n");
 		return (-1);
+	}
 	if (add_link_lst(lst, sec_pe, fst_pe) == -1)
+	{
+		printf("4\n");
 		return (-1);
+	}
 	return (0);
 }
 
@@ -117,10 +148,14 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 		if (pipe->pipe == 1)
 		{
 			if ((find_stock_pipe(env, lst, pipe)) == -1)
+			{
+				ft_printf("salut !\n");
 				return (-1);
+			}
 		}
 		pipe = pipe->next;
 	}
-	//print_lst_adja(lst, env);
+	ft_printf("\n________________STOCK PIPE___________________\n");
+	print_lst_adja(lst, env);
 	return (0);
 }

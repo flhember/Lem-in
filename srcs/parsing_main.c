@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 16:56:37 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/12/02 17:36:43 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_lst		*parsing_main(t_data *env)
 	lst = NULL;
 	if (!(lst_tmp = (t_stock*)ft_memalloc(sizeof(t_stock))))
 		return (NULL);
-	if ((parsing_map(env, &lst_tmp) == -1) )
-//			|| (verif_pos(&lst_tmp) == -1))
+	if ((parsing_map(env, &lst_tmp) == -1)
+			|| (verif_pos(&lst_tmp) == -1))
 	{
 		ft_printf("fail parsing_map\n");
 		free_stock(&lst_tmp);
@@ -59,6 +59,7 @@ t_lst		*parsing_main(t_data *env)
 		if (lst)
 			free_lst_adja(&lst, env);
 		free_stock(&lst_tmp);
+		ft_printf("error ici\n");
 		return (NULL);
 	}
 	print_map(lst_tmp, env->nb_ants);
