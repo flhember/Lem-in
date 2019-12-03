@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 17:36:43 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/03 15:55:37 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_lst		*parsing_main(t_data *env)
 		if (lst)
 			free_lst_adja(&lst, env);
 		free_stock(&lst_tmp);
-		ft_printf("error ici\n");
 		return (NULL);
 	}
 	print_map(lst_tmp, env->nb_ants);

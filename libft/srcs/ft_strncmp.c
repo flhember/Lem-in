@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 18:59:11 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 17:39:12 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/03 15:52:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
-	ft_printf("s1 = %s | s2 = %s -> n = %lu\n", s1, s2, n);
 	i = 0;
 	if (n == 0)
 		return (0);

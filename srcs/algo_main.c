@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/02 17:54:14 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/03 17:32:47 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ int			algo_main(t_lst **lst, t_data *env)
 	printf("chemins possible %d\n", env->nb_pos);
 	bfs(&file, lst);
 	best_road(lst, env);
+	if (env->nb_pos > 1 || (int)env->nb_ants > (*lst)->nb_best_move)
+	{
+		printf("nb ants = %lu, nb->move = %d\n",env->nb_ants, (*lst)->nb_best_move);
+		other_road(lst, env);
+	}
 	//print_file(&file, lst);
 	free_file(&file);
 	return (0);
