@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/03 17:10:40 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/06 17:30:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,23 @@ void		del_first_file(t_file **file)
 	free(tmp);
 }
 
-void		bfs(t_file **file, t_lst **lst)
+int			bfs(t_file **file, t_lst **lst)
 {
 	t_file	*tmp;
+	int		end;
 
-	tmp = *file;
+	end = -1;
+	tmp = *file; //refaire bfs(tout avoir ici, creation de file etc)
 	while (tmp)
 	{
+		if ((*lst)->tab[tmp->value]->end == 1)
+			end = 0;
 		(*lst)->tab[tmp->value]->dist = tmp->dist;
-//		printf("termine %s\n", (*lst)->tab[tmp->value]->name);
-//		printf("vql = %d\n", tmp->value);
-		fill_file(file, lst, tmp->value);
+		if ((fill_file(file, lst, tmp->value)) == -1) // traite seulement les room a 0 (pas les chemin)
+			return (-1); 
 		(*lst)->tab[tmp->value]->status = 2;
-//		del_first_file(file);
 		tmp = tmp->next;
 	}
-//	printf("ca sort\n");
+	free_file(&file); //return (-1) si pas de end
+	return (end);
 }

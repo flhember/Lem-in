@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/03 15:55:44 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:40:53 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,5 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 		fill_tab_room(room, &lst, i);
 		i++;
 	}
-	//print_lst(room);
 	return (lst);
 }

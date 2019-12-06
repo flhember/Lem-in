@@ -6,19 +6,21 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 13:52:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/03 16:10:03 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/06 17:30:51 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int			pars_pipe_end(t_lst **lst, t_room *tmp, int i, size_t j)
+int			pars_pipe_end(t_lst **lst, t_room *tmp, int i, int j)
 {
+	tmp = (*lst)->tab[j];
 	while (tmp)
 	{
 		if (tmp->pos == (*lst)->tab[i]->pos && (*lst)->tab[j]->road == 0)
 		{
 			(*lst)->tab[j]->road = (*lst)->nb_road;
+			printf("nbroad %d, %s -> ", (*lst)->nb_road, (*lst)->tab[j]->name);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -26,48 +28,47 @@ int			pars_pipe_end(t_lst **lst, t_room *tmp, int i, size_t j)
 	return (0);
 }
 
-static int		other_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_room *tmp)
+static int		other_road_bis(t_lst **lst, int ds, int i, int j)
 {
-	while ((*lst)->tab[i]->end == 0)
+//	printf("ds = %d, tab[j]->dist = %d\n", ds, (*lst)->tab[j]->dist);
+	if (j == (*lst)->nb_room)
+		return (0); // faire une ft check, soit intersiection avec un chemin donc remonter celui la, soit revenir en arriere jusqu'a un autre chemin. le rest ok
+	if ((*lst)->tab[j]->dist != ds || (*lst)->tab[j]->road != 0)
+		other_road_bis(lst, ds, i, ++j);
+	if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 	{
-		printf("\no. %s -> %d ", (*lst)->tab[i]->name, ds);
-		ds++;
-		j = 0;
-		while (j < env->nb_room)
+		if ((pars_pipe_end(lst, NULL, i, j)) != 0)
 		{
-			if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
-			{
-				tmp = (*lst)->tab[j];
-				if ((pars_pipe_end(lst, tmp, i, j)) )
-				{
-					i = j;
-					j = env->nb_room + 2;
-				}
-			}
-			j++;
-			if (j == env->nb_room)
-			{
-				ds -= 2;
-				if (ds == -1)
-					return (-1);
-			}
+			if ((*lst)->tab[j]->end == 1)
+				return (1);
+			else
+				other_road_bis(lst, ++ds, j, 0);
 		}
 	}
 	return (0);
 }
 
-int			other_road(t_lst **lst, t_data *env)
+//algo compris plus qu'a taper.
+//A faire:
+//	la condition du while avec le bfs, donc refaire bfs plus propre.
+//	la fonction back up chemin/changer meilleur chemin si croisement.
+//	ft a la con pour changer "nb road".
+//	print chemin comme sujet.
+
+int			other_road(t_lst **lst, t_data *env, t_file **file)
 {
 	int		i;
 	int		ds;
 
 	i = env->start;
-	ds = (*lst)->tab[i]->dist;
-	while ((*lst)->nb_road < env->nb_pos)
+	ds = 1;
+	(*lst)->nb_road++;
+	while () //tant que le bfs trouve des chemins
 	{
-		(*lst)->nb_road++;
-		if ((other_road_bis(env, lst, ds, i, 0, NULL)) == -1)
+		if ((other_road_bis(lst, ds, i, 0)) == -1)
 			return (-1);
+		(*lst)->nb_road++;
+		printf("\n");
 	}
 	return (0);
 }

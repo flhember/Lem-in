@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/03 17:32:47 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/06 17:26:54 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,16 @@ int			algo_main(t_lst **lst, t_data *env)
 {
 	t_file	*file;
 
+	(*lst)->nb_room = env->nb_room;
 	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
 		return (-1);
 	if ((find_nb_pos(lst, env, &file)) == -1)
 		return (-1);
-	printf("chemins possible %d\n", env->nb_pos);
-	bfs(&file, lst);
-	best_road(lst, env);
+	if (bfs(&file, lst) == -1 || best_road(lst, env) == -1)
+	{
+		free_file(&file);
+		return (-1);
+	}
 	if (env->nb_pos > 1 || (int)env->nb_ants > (*lst)->nb_best_move)
 	{
 		printf("nb ants = %lu, nb->move = %d\n",env->nb_ants, (*lst)->nb_best_move);
