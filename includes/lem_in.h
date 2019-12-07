@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/06 15:26:54 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/07 18:00:00 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct			s_lst
 	int					nb_road;
 	int					nb_best_move;
 	int					nb_room;
+	int					ret_bfs;
+	int					cross;
 }						t_lst;
 
 typedef struct			s_stock
@@ -104,10 +106,8 @@ void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
-int						bfs(t_file **file, t_lst **lst);
+int						bfs(t_data *env, t_lst **lst);
 void					free_file(t_file **file);
-int						fill_file(t_file **file, t_lst **lst, int i);
-void					del_first_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
 

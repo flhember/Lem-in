@@ -6,25 +6,11 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/06 17:26:54 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/07 17:00:21 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-void		print_file(t_file **file, t_lst **lst)
-{
-	t_file *tmp;
-
-	tmp = *file;
-	printf("\n");
-	while (tmp)
-	{
-		printf("[%d - %s] -> ", tmp->dist, (*lst)->tab[tmp->value]->name);
-		tmp = tmp->next;
-	}
-	printf("NULL\n");
-}
 
 int			find_end(t_lst **lst, t_data *env)
 {
@@ -34,13 +20,18 @@ int			find_end(t_lst **lst, t_data *env)
 	while (i < env->nb_room)
 	{
 		if ((*lst)->tab[i]->end == 1)
-			return (i);
+		{
+			env->end = i;
+			return (0);
+		}
 		i++;
 	}
+	if (i >= env->nb_room)
+		return (-1);
 	return (-1);
 }
 
-int			find_start(t_lst **lst, t_data *env, t_file **file)
+int			find_start(t_lst **lst, t_data *env)
 {
 	size_t	i;
 
@@ -50,37 +41,26 @@ int			find_start(t_lst **lst, t_data *env, t_file **file)
 		if ((*lst)->tab[i]->start == 1)
 		{
 			env->start = i;
-			break ;
+			return (0);
 		}
 		i++;
 	}
 	if (i >= env->nb_room)
 		return (-1);
-	if ((fill_file(file, lst, i)) == -1)
-		return (-1);
-	del_first_file(file);
-	(*lst)->tab[i]->dist = 0;
-	(*lst)->tab[i]->status = 2;
-	return (0);
+	return (-1);
 }
 
-int			find_nb_pos(t_lst **lst, t_data *env, t_file **file)
+int			find_nb_pos(t_lst **lst, t_data *env)
 {
 	int		e;
 	int		s;
 
 	e = 0;
 	s = 0;
-	if ((find_start(lst, env, file)) == -1)
-	{
-		free_file(file);
-		return (-1);
-	}
-	if (((env->end = find_end(lst, env)) == -1))
+	if ((find_start(lst, env) == -1) || (find_end(lst, env) == -1))
 		return (-1);
 	e = ft_lstsize_room(&(*lst)->tab[env->end]);
 	s = ft_lstsize_room(&(*lst)->tab[env->start]);
-	printf("e = %d, s = %d\n", e, s);
 	if (e <= s)
 		env->nb_pos = e;
 	else
@@ -90,24 +70,15 @@ int			find_nb_pos(t_lst **lst, t_data *env, t_file **file)
 
 int			algo_main(t_lst **lst, t_data *env)
 {
-	t_file	*file;
-
 	(*lst)->nb_room = env->nb_room;
-	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	if ((find_nb_pos(lst, env)) == -1)
 		return (-1);
-	if ((find_nb_pos(lst, env, &file)) == -1)
+	if (best_road(lst, env) == -1)
 		return (-1);
-	if (bfs(&file, lst) == -1 || best_road(lst, env) == -1)
-	{
-		free_file(&file);
-		return (-1);
-	}
 	if (env->nb_pos > 1 || (int)env->nb_ants > (*lst)->nb_best_move)
 	{
 		printf("nb ants = %lu, nb->move = %d\n",env->nb_ants, (*lst)->nb_best_move);
 		other_road(lst, env);
 	}
-	//print_file(&file, lst);
-	free_file(&file);
 	return (0);
 }
