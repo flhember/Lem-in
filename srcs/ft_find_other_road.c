@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 13:52:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/07 18:57:44 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:04:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			verif_cross(t_lst **lst, int i)
 	{
 		if (tmp->pos != i)
 		{
-			if ((*lst)->tab[tmp->pos]->road == 1)
+			if ((*lst)->tab[tmp->pos]->road != (*lst)->tab[i]->road)
 			{
 				cross = 1;
 				(*lst)->cross = tmp->pos;
@@ -66,7 +66,7 @@ int			pars_pipe_end(t_lst **lst, t_room *tmp, int i, int j)
 		if (tmp->pos == (*lst)->tab[i]->pos && (*lst)->tab[j]->road == 0)
 		{
 			(*lst)->tab[j]->road = (*lst)->nb_road;
-			printf("nbroad %d, %s -> ", (*lst)->nb_road, (*lst)->tab[j]->name);
+			ft_printf("nbroad %d, %s -> ", (*lst)->nb_road, (*lst)->tab[j]->name);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -78,14 +78,19 @@ static int		other_road_bis(t_lst **lst, int ds, int i, int j)
 {
 	if (j == (*lst)->nb_room)
 	{
+		printf("j = %d\n", j);
 		if (verif_cross(lst, i) == -1)
 			return (-1);
 		change_road(lst, (*lst)->nb_road, (*lst)->tab[(*lst)->cross]->road);
-		j = 0;
 		return (0);
 	}
 	else if ((*lst)->tab[j]->dist != ds || (*lst)->tab[j]->road != 0 || (*lst)->tab[j]->start == 1)
-		other_road_bis(lst, ds, i, ++j);		// regler les retours
+	{
+		if (other_road_bis(lst, ds, i, ++j) == -1)
+		{
+			return (-1);		// regler les retours
+		}
+	}
 	else if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 	{
 		if ((pars_pipe_end(lst, NULL, i, j)) != 0)
@@ -93,11 +98,20 @@ static int		other_road_bis(t_lst **lst, int ds, int i, int j)
 			if ((*lst)->tab[j]->end == 1)
 				return (1);
 			else
-				other_road_bis(lst, ++ds, j, 0); // regler les retours
-		//			other_road_bis(lst, --ds, i, ++j);
+			{
+				if (other_road_bis(lst, ++ds, j, 0) == -1) // regler les retours
+				{
+					printf("back\n");
+					//other_road_bis(lst, --ds, i, ++j);
+					other_road_bis(lst, --ds, i, 0);
+				}
+			}
 		}
 		else
-			other_road_bis(lst, ds, i, ++j);
+		{
+			if (other_road_bis(lst, ds, i, ++j) == -1)
+				return (-1);
+		}
 	}
 	return (0);
 }
@@ -107,36 +121,62 @@ static int		other_road_bis(t_lst **lst, int ds, int i, int j)
 //	la condition du while avec le bfs, donc refaire bfs plus propre. OK
 //	la fonction back up chemin/changer meilleur chemin si croisement. OK
 //	regler les retour de la fonction recursif
-//	faire une ft check road (si pas de end ->del) + si la maillon du end et marque par la road la mettre a 0
-//	ft a la con pour changer "nb road".
+//	faire une ft check road (si pas de end ->del) + si la maillon du end et marque par la road la mettre a 0 (peux etre pas )
+//	ft a la con pour changer "nb road". OK
+//	stockage chemins avec nb coup
 //	print chemin comme sujet.
 
-void		print_road(t_lst **lst)
+int			print_road(t_lst **lst, t_data *env, t_room *tmp)
 {
 	int		i;
-	int		j;
+	int		pos;
+	int		flag;
 
 	i = 1;
+	pos = 0;
+	flag = 0;
 	while (i < (*lst)->nb_road)
 	{
-		j = 0;
-		ft_printf("ROAD %d :\n", i);
-		while (j < (*lst)->nb_room)
+		ft_printf("\nROAD %d: \n", i);
+		pos = env->start;
+		tmp = (*lst)->tab[pos];
+		ft_printf("%s -> ", (*lst)->tab[pos]->name);
+		while ((*lst)->tab[pos]->end == 0)
 		{
-			if ((*lst)->tab[j]->road == i)
-				ft_printf("%s -> ", (*lst)->tab[j]->name);
-			j++;
+			flag = 0;
+			while (flag == 0)
+			{
+				if (tmp->pos != pos && (*lst)->tab[tmp->pos]->print == 0 && ((*lst)->tab[tmp->pos]->road == i || (*lst)->tab[tmp->pos]->end == 1))
+				{
+					flag = 1;
+					pos = tmp->pos;
+					if ((*lst)->tab[tmp->pos]->end == 0)
+					{
+						(*lst)->tab[pos]->print = 1;
+						ft_printf("%s -> ", (*lst)->tab[pos]->name);
+					}
+					else if ((*lst)->tab[tmp->pos]->end == 1)
+						ft_printf("%s", (*lst)->tab[pos]->name);
+				}
+				else
+				{
+					tmp = tmp->next;
+					if (!tmp)
+						return (0);
+				}
+			}
+			tmp = (*lst)->tab[pos];
 		}
-		printf("\n");
 		i++;
 	}
+	printf("\n");
+	return (0);
 }
 
 int			other_road(t_lst **lst, t_data *env)
 {
 	int		i;
 	int		ds;
-	int c = 0;
 
 	i = env->start;
 	ds = 1;
@@ -146,12 +186,12 @@ int			other_road(t_lst **lst, t_data *env)
 		if ((other_road_bis(lst, ds, i, 0)) == 0)
 		{
 			printf("ah oui oui\n");
-			print_adja(lst, env);
+	//		print_adja(lst, env);
 		}
 		(*lst)->nb_road++;
 		printf("\n");
-		c++;
 	}
-	print_road(lst);
+	//print_lst_adja(lst, env);
+	print_road(lst, env, NULL);
 	return (0);
 }

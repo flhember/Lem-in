@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/07 18:57:41 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:03:36 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,13 @@ static void	check_cross(t_lst **lst, int i)
 	tmp = (*lst)->tab[i];
 	while (tmp)
 	{
-//		if (tmp->pos != i)
-//		{
-			if ((*lst)->tab[tmp->pos]->road == 1)
-				cross = 1;
-			else if ((*lst)->tab[tmp->pos]->status == 0 && tmp->pos != i)
-			{
-				printf("touch %s\n", (*lst)->tab[tmp->pos]->name);
-				cmp++;
-			}
-//		}
+		if (tmp->pos != i && (*lst)->tab[tmp->pos]->road == 1)
+			cross = 1;
+		else if ((*lst)->tab[tmp->pos]->status == 0 && tmp->pos != i)
+		{
+			printf("touch %s\n", (*lst)->tab[tmp->pos]->name);
+			cmp++;
+		}
 		tmp = tmp->next;
 	}
 	printf("pour = %s, cmp = %d, cross = %d\n", (*lst)->tab[i]->name, cmp, cross);
