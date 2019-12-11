@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/09 17:16:27 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/10 18:48:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct			s_lst
 	int					nb_room;
 	int					ret_bfs;
 	int					cross;
+	int					end;
 }						t_lst;
 
 typedef struct			s_stock
@@ -111,5 +112,6 @@ int						bfs(t_data *env, t_lst **lst);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
+int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
 
 #endif

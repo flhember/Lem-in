@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/07 17:00:21 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/10 17:15:49 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int			algo_main(t_lst **lst, t_data *env)
 		return (-1);
 	if (best_road(lst, env) == -1)
 		return (-1);
-	if (env->nb_pos > 1 || (int)env->nb_ants > (*lst)->nb_best_move)
-	{
-		printf("nb ants = %lu, nb->move = %d\n",env->nb_ants, (*lst)->nb_best_move);
-		other_road(lst, env);
-	}
+//	if (env->nb_pos > 1 || (int)env->nb_ants > (*lst)->nb_best_move)
+//	{
+//		printf("nb ants = %lu, nb->move = %d\n",env->nb_ants, (*lst)->nb_best_move);
+//		other_road(lst, env);
+//	}
 	return (0);
 }
