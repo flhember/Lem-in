@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/10 18:48:40 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/16 17:59:58 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # define PSTART		4
 # define PEND		8
 # define PIPE		16
+
+typedef struct			s_road
+{
+	char				*name;
+	int					nb_road;
+	int					nb_cost;
+	struct s_road		*next;
+}						t_road;
 
 typedef struct			s_file
 {
@@ -56,6 +64,7 @@ typedef struct			s_lst
 	int					ret_bfs;
 	int					cross;
 	int					end;
+	int					size_file;
 }						t_lst;
 
 typedef struct			s_stock
@@ -80,6 +89,7 @@ typedef struct			s_data
 	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
+	t_road				**road;
 }						t_data;
 
 int						lem_in(void);
@@ -102,6 +112,7 @@ t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 t_lst					*parsing_main(t_data *env);
 size_t					ft_lstsize_stock(t_stock **room);
 size_t					ft_lstsize_room(t_room **room);
+int						ft_lstsize_road(t_road **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 //int						check_name(t_data *env, t_stock **room);
@@ -109,9 +120,17 @@ int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
 int						bfs(t_data *env, t_lst **lst);
+int						bfs_best(t_data *env, t_lst **lst);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
 int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
+void					del_first_file(t_file **file);
+void					clean_status(t_lst **lst);
+void					clean_dist(t_lst **lst);
+void					change_road_bfs(t_lst **lst, int road);
+void					reboot_nb_road(t_lst **lst);
+int						stock_road(t_lst **lst, t_data *env);
+void					free_road(t_road **lst);
 
 #endif

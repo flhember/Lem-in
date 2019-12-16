@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_best_road.c                                :+:      :+:    :+:   */
+/*   ft_other_road.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/02 15:59:57 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/11 19:15:04 by flhember         ###   ########.fr       */
+/*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
+/*   Updated: 2019/12/16 18:42:19 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,18 @@ static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 	return (0);
 }
 
-static int	best_road_bis(t_lst **lst, int ds, int i, int j)
+static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
+	printf("j = %d, ds = %d\n",j, ds);
+	if (ds > (*lst)->tab[(*lst)->end]->dist || ds < 0) 	//pas sur
+		return (-1);							//
 	if (j > (*lst)->nb_room)
 	{
-//		if (verif_cross(lst, i) == -1)
-			return (-1);
-//		change_road(lst, (*lst)->nb_road, (*lst)->tab[(*lst)->cross]->road);
-//		return (1);
+		if (other_road_bis(lst, ds++, i, 0) == -1)	//pas sur
+			return (-1);							//
 	}
 	else if ((*lst)->tab[j]->dist != ds || (*lst)->tab[j]->road != 0 || (*lst)->tab[j]->end == 1)
-		best_road_bis(lst, ds, i, ++j);
+		other_road_bis(lst, ds, i, ++j);
 	else if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 	{
 		if ((pars_pipe_best(lst, NULL, i, j)) == 1)
@@ -112,40 +113,36 @@ static int	best_road_bis(t_lst **lst, int ds, int i, int j)
 			if ((*lst)->tab[j]->start == 1)
 				return (1);
 			else
-				best_road_bis(lst, --ds, j, 0);
+				other_road_bis(lst, --ds, j, 0);
 		}
 		else
-			best_road_bis(lst, ds, i, ++j);
+			other_road_bis(lst, ds, i, ++j);
 	}
 	return (0);
 }
 
-int			best_road(t_lst **lst, t_data *env)
+int			other_road(t_lst **lst, t_data *env)
 {
 	int		i;
 	int		ds;
-	int		t = 0;
 
 	ds = 0;
 	i = env->end;
 	(*lst)->end = i;
 	(*lst)->nb_road++;
 	printf("nb room = %d\n", (*lst)->nb_room);
-//	while (bfs(env, lst) == 0)
-	while (t < 2)
+	while (bfs(env, lst) == 0)
 	{
-		bfs(env, lst);
+		//print_adja(lst, env);
+		ft_printf("nb_road = %d\n", (*lst)->nb_road);
 		check_nb_road(lst);
 		ds = (*lst)->tab[(*lst)->end]->dist;
-		if ((best_road_bis(lst, --ds, (*lst)->end, 0)) == -1)
-		{
-			ft_printf("\n\nPROBLEME\n\n");
-			print_adja(lst, env);
-		}
+		if ((other_road_bis(lst, --ds, (*lst)->end, 0)) == -1)
+			return (-1);
+		ft_printf("nb_road = %d\n", (*lst)->nb_road);
 		(*lst)->nb_road++;
-		//print_adja(lst, env);
-		t++;
 	}
-	print_road(lst, env, NULL);
+	printf("nb road possible = %d\nnb road find= %d\n", env->nb_pos, (*lst)->nb_road);
+	//print_road(lst, env, NULL);
 	return (0);
 }

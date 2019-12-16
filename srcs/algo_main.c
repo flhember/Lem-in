@@ -6,11 +6,26 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/10 17:15:49 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/16 18:42:21 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
+
+void		ft_reboot_for_oter(t_lst **lst)
+{
+	int		i;
+
+	i = 0;
+	(*lst)->nb_road = 0;
+	while (i < (*lst)->nb_room)
+	{
+		(*lst)->tab[i]->road = 0;
+		(*lst)->tab[i]->dist = 0;
+		i++;
+	}
+
+}
 
 int			find_end(t_lst **lst, t_data *env)
 {
@@ -70,15 +85,25 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 
 int			algo_main(t_lst **lst, t_data *env)
 {
+	t_road	*road;
+
+	road = NULL;
 	(*lst)->nb_room = env->nb_room;
 	if ((find_nb_pos(lst, env)) == -1)
 		return (-1);
 	if (best_road(lst, env) == -1)
 		return (-1);
-//	if (env->nb_pos > 1 || (int)env->nb_ants > (*lst)->nb_best_move)
-//	{
-//		printf("nb ants = %lu, nb->move = %d\n",env->nb_ants, (*lst)->nb_best_move);
-//		other_road(lst, env);
-//	}
+	//printf("nb ant = %zu, nb best move = %d\n", env->nb_ants, (*lst)->nb_best_move);
+	if ((int)env->nb_ants > (*lst)->nb_best_move)
+	{
+		ft_reboot_for_oter(lst);
+		if (other_road(lst, env) == -1)
+			return (-1);
+	printf("wowowowo\n");
+	}
+	printf("nb ants = %zu\n", env->nb_ants);
+//	if (stock_road(lst, env) == -1)
+//		return (-1);
+
 	return (0);
 }

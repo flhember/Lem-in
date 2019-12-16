@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bfs.c                                           :+:      :+:    :+:   */
+/*   bfs_for_best.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/16 17:44:18 by flhember         ###   ########.fr       */
+/*   Created: 2019/12/16 17:05:49 by flhember          #+#    #+#             */
+/*   Updated: 2019/12/16 17:47:53 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-/*static void	print_file(t_file **file, t_lst **lst)
-{
-	t_file *cpy;
-
-	cpy = *file;
-	while (cpy)
-	{
-		printf("%s , %d-> ", (*lst)->tab[cpy->value]->name,
-			(*lst)->tab[cpy->value]->road);
-		cpy = cpy->next;
-	}
-	printf("\n");
-}*/
 
 static int	add_file(t_lst **lst, t_file **file, int val, int dis)
 {
@@ -46,33 +32,6 @@ static int	add_file(t_lst **lst, t_file **file, int val, int dis)
 	return (0);
 }
 
-static void	check_cross(t_lst **lst, t_file **file, int i)
-{
-	int		cmp;
-	t_room	*tmp;
-
-	cmp = 0;
-	tmp = (*lst)->tab[i];
-	(*lst)->cross = -1;
-	while (tmp)
-	{
-		if ((*lst)->tab[tmp->pos]->road == -1)
-			;
-		else if (tmp->pos != i && (*lst)->tab[tmp->pos]->road != 0)
-			(*lst)->cross = tmp->pos;
-		else if (tmp->pos != i && (*lst)->tab[tmp->pos]->end == 0
-				&& (*lst)->tab[tmp->pos]->dist == 0)
-			cmp++;
-		tmp = tmp->next;
-	}
-	if (cmp == 0 && (*lst)->cross != -1 && (*lst)->size_file == 1)
-	{
-		change_road_bfs(lst, (*lst)->tab[(*lst)->cross]->road);
-		add_file(lst, file, (*lst)->cross, (*lst)->tab[i]->dist + 1);
-		(*lst)->cross = 0;
-	}
-}
-
 static int	fill_file(t_file **file, t_lst **lst, int i)
 {
 	t_room	*tmp;
@@ -88,10 +47,7 @@ static int	fill_file(t_file **file, t_lst **lst, int i)
 		{
 			if (tmp->pos != i)
 			{
-				if ((*lst)->tab[tmp->pos]->road != 0
-						&& (*lst)->tab[i]->end == 0)
-					check_cross(lst, file, i);
-				else if ((*lst)->tab[tmp->pos]->status != 0)
+				if ((*lst)->tab[tmp->pos]->status != 0)
 					o = 1;
 				else if ((add_file(lst, file, tmp->pos,
 						(*lst)->tab[i]->dist + 1)) == -1)
@@ -131,7 +87,7 @@ static int	creat_file(t_data *env, t_lst **lst, t_file **file)
 	return (1);
 }
 
-int			bfs(t_data *env, t_lst **lst)
+int			bfs_best(t_data *env, t_lst **lst)
 {
 	t_file	*file;
 	t_file	*tmp;
@@ -139,8 +95,6 @@ int			bfs(t_data *env, t_lst **lst)
 	(*lst)->ret_bfs = -1;
 	tmp = NULL;
 	file = NULL;
-	reboot_nb_road(lst);
-	clean_dist(lst);
 	if (creat_file(env, lst, &file) == -1)
 		return (-1);
 	tmp = file;
