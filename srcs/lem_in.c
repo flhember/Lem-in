@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/13 15:38:31 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/09 11:04:59 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		lem_in(void)
 	if (!(lst = parsing_main(&env)))
 	{
 		ft_printf("oh shit, here we go again\n");
+//		while (1)
+//			;
 		return (-1);
 	}
 	if ((algo_main(&lst, &env) == -1))
