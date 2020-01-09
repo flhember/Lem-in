@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/04 15:39:36 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/07 10:47:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ t_lst		*parsing_main(t_data *env)
 			|| (stock_pipe(env, &lst, lst_tmp)) == -1))
 	{
 		if (lst)
+		{
+			printf("lst existe -> free\n");
 			free_lst_adja(&lst, env);
+		}
 		free_stock(&lst_tmp);
 		return (NULL);
 	}

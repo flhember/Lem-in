@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/16 18:42:19 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/07 11:26:46 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 
 static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
-	printf("j = %d, ds = %d\n",j, ds);
+	printf("j = %d, ds = %d | lst->nb_room = %d\n",j, ds, (*lst)->nb_room);
 	if (ds > (*lst)->tab[(*lst)->end]->dist || ds < 0) 	//pas sur
 		return (-1);							//
 	if (j > (*lst)->nb_room)
@@ -118,6 +118,7 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 		else
 			other_road_bis(lst, ds, i, ++j);
 	}
+//	printf("end other_road_bis\n");
 	return (0);
 }
 
