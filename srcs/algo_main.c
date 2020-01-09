@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/09 15:01:50 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:48:29 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,38 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 	return (0);
 }
 
+int		fill_tab(int **tab, size_t nb_ants)
+{
+	int i;
+
+	i = 0;
+	while (nb_ants > 0)
+	{
+		tab[i][0] +
+	}
+}
+
+int		ant_treat(t_lst **lst, t_data *env)
+{
+	int **tab;
+	int i;
+	(void)env;
+	tab = NULL;
+	i = 0;
+	printf("nb_road = %d\n", (*lst)->nb_road);
+	if (!(tab = ft_memalloc(sizeof(int*) * ((*lst)->nb_road))))
+		return (-1);
+	while (i < (*lst)->nb_road)
+	{
+		if (!(tab[i] = ft_memalloc(sizeof(int) * 1)))
+			return (0);
+		tab[i][0] = 0;
+		i++;
+	}
+	fill_tab(tab, env->nb_ants);
+	return (1);
+}
+
 int			algo_main(t_lst **lst, t_data *env)
 {
 	t_road	*road;
@@ -105,6 +137,6 @@ int			algo_main(t_lst **lst, t_data *env)
 		printf("non\n");
 	if (stock_road(lst, env) == -1)
 		return (-1);
-
+	ant_treat(lst, env);
 	return (0);
 }
