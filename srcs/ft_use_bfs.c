@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/16 18:00:12 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/07 15:47:56 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,25 @@ void		reboot_nb_road(t_lst **lst)
 		i++;
 	}
 }
+
+/*void		delete_this(t_file **file, t_lst **lst, int i)
+{
+	int		i;
+	t_file	*tmp;
+
+	i = 0;
+	tmp = *file;
+	while (file)
+	{
+		if (ft_strcmp((*lst)->tab[file->value]->name, (*lst)->tab[i]->name))
+		{
+			
+			
+		}	
+		i++;
+		tmp = tmp->next;
+	}
+}*/
 
 void		change_road_bfs(t_lst **lst, int road)
 {
