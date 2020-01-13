@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/07 15:47:56 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/13 18:25:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void		change_road_bfs(t_lst **lst, int road)
 	{
 		if ((*lst)->tab[i]->road == road)
 		{
-			printf("%s -> -1\n", (*lst)->tab[i]->name);
+			ft_printf("%s -> -1\n", (*lst)->tab[i]->name);
 			(*lst)->tab[i]->road = -1;
 		}
 		i++;
 	}
 	(*lst)->tab[(*lst)->cross]->road = 0;
-	printf("change = %s to 0\n", (*lst)->tab[(*lst)->cross]->name);
+	ft_printf("change = %s to 0\n", (*lst)->tab[(*lst)->cross]->name);
 }
 
 void		clean_dist(t_lst **lst)
