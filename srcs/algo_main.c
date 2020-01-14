@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/09 15:01:50 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/14 14:00:01 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,20 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 
 int			algo_main(t_lst **lst, t_data *env)
 {
-	t_road	*road;
-
-	road = NULL;		//LOUCHE!!
 	(*lst)->nb_room = env->nb_room;
 	if ((find_nb_pos(lst, env)) == -1)
 		return (-1);
-	if (best_road(lst, env) == -1)
-		return (-1);
+//	if (best_road(lst, env) == -1)
+//		return (-1);
 	printf("nb ant = %zu, nb best move = %d, pos possible = %d\n", env->nb_ants, (*lst)->nb_best_move
 			, env->nb_pos);
-	if ((int)env->nb_ants > (*lst)->nb_best_move)
-	{
+//	if ((int)env->nb_ants > 1)
+//	{
 		printf("oui\n");
-		ft_reboot_for_oter(lst);
+//		ft_reboot_for_oter(lst);
 		if (other_road(lst, env) == -1)
 			return (-1);
-	}
+//	}
 		printf("non\n");
 	if (stock_road(lst, env) == -1)
 		return (-1);
