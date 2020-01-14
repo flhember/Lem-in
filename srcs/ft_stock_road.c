@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/09 15:00:57 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:42:34 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int			parse_road(t_lst **lst, t_data *env, t_room *tmp)
 		if (find_road(lst, env, i, tmp) == -1)
 		{
 			env->road[i - 1]->name = NULL;
+			(*lst)->nb_road--;
 			printf("road %d eclate\n", i - 1);
 		}
 		i++;
