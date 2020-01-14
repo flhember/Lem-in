@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/07 16:09:08 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/13 18:22:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,45 @@ static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 
 static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
-//	printf("j = %d, ds = %d\n",j, ds);
-	if (ds > (*lst)->tab[(*lst)->end]->dist || ds < 0) 	//pas su
-		return (-1);							//
+	//ft_printf("EEEEAAAAASYYYYY Lem-in\n");
+	while ((*lst)->tab[j]->start == 0)
+	{
+		if (j > (*lst)->nb_room || ds < 0)
+			return (-1);
+		if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
+		{
+	//		ft_printf("je rentre\n");
+			if ((pars_pipe_best(lst, NULL, i, j)) == 0)
+				j++;
+			else
+			{
+				i = j;
+				j = 0;
+				ds--;
+			}
+		}
+		else
+		{
+	//		ft_printf("i = %d\n", i);
+			//ft_printf("j = %d | nb_room = %d\n", j, (*lst)->nb_room);
+			j++;
+		}
+	}
+	return (0);
+}
+
+/*
+static int	other_road_bis(t_lst **lst, int ds, int i, int j)
+{
+	if (ds > (*lst)->tab[(*lst)->end]->dist || ds < 0)
+		return (-1);
 	if (j > (*lst)->nb_room)
 	{
-		if (other_road_bis(lst, ds++, i, 0) == -1)	//pas sur
-			return (-1);							//
+		if (other_road_bis(lst, ds++, i, 0) == -1)
+			return (-1);
 	}
 	else if ((*lst)->tab[j]->dist != ds || (*lst)->tab[j]->road != 0 || (*lst)->tab[j]->end == 1)
-	{
 		other_road_bis(lst, ds, i, ++j);
-	}
 	else if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 	{
 		if ((pars_pipe_best(lst, NULL, i, j)) == 1)
@@ -122,7 +149,7 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 	}
 	return (0);
 }
-
+*/
 int			other_road(t_lst **lst, t_data *env)
 {
 	int		i;
@@ -133,12 +160,11 @@ int			other_road(t_lst **lst, t_data *env)
 	(*lst)->end = i;
 	printf("nb room = %d\n", (*lst)->nb_room);
 	(*lst)->nb_road++;
-	//printf("name room 973 = %s\n", (*lst)->tab[973]->name);
 	int	t = 0;
-	while (bfs(env, lst) == 0)
-//	while (t < 4)
+//	while (bfs(env, lst) == 0)
+	while (t < 40)
 	{
-//		bfs(env, lst);
+		bfs(env, lst);
 //		print_adja(lst, env);
 		ft_printf("nb_road = %d\n", (*lst)->nb_road);
 		check_nb_road(lst);
