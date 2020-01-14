@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/13 18:22:50 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:53:00 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 	return (0);
 }
 */
+
+
 int			other_road(t_lst **lst, t_data *env)
 {
 	int		i;
@@ -161,10 +163,10 @@ int			other_road(t_lst **lst, t_data *env)
 	printf("nb room = %d\n", (*lst)->nb_room);
 	(*lst)->nb_road++;
 	int	t = 0;
-//	while (bfs(env, lst) == 0)
-	while (t < 40)
+	while (bfs(env, lst) == 0)
+//	while (t < 40)
 	{
-		bfs(env, lst);
+//		bfs(env, lst);
 //		print_adja(lst, env);
 		ft_printf("nb_road = %d\n", (*lst)->nb_road);
 		check_nb_road(lst);
