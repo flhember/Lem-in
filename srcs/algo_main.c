@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/14 14:00:01 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 17:13:30 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		ft_reboot_for_oter(t_lst **lst)
 		(*lst)->tab[i]->dist = 0;
 		i++;
 	}
-
 }
 
 int			find_end(t_lst **lst, t_data *env)
@@ -88,20 +87,22 @@ int			algo_main(t_lst **lst, t_data *env)
 	(*lst)->nb_room = env->nb_room;
 	if ((find_nb_pos(lst, env)) == -1)
 		return (-1);
-//	if (best_road(lst, env) == -1)
-//		return (-1);
-	printf("nb ant = %zu, nb best move = %d, pos possible = %d\n", env->nb_ants, (*lst)->nb_best_move
-			, env->nb_pos);
-//	if ((int)env->nb_ants > 1)
-//	{
-		printf("oui\n");
-//		ft_reboot_for_oter(lst);
+	if ((*lst)->nb_room == 2)
+	{
+		(*lst)->nb_road = 1;
+		if (stock_start_end(lst, env) == -1)
+			return (-1);
+		return (0);
+	}
+	if (best_road(lst, env) == -1)
+		return (-1);
+	if ((int)env->nb_ants > 1)
+	{
+		ft_reboot_for_oter(lst);
 		if (other_road(lst, env) == -1)
 			return (-1);
-//	}
-		printf("non\n");
+	}
 	if (stock_road(lst, env) == -1)
 		return (-1);
-
 	return (0);
 }

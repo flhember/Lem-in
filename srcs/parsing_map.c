@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/04 15:47:38 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:34:41 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		check_tube(char *str, t_stock **lst, t_data *env)
 {
 	if (ft_count_c(str, '-') == 1 && ft_count_c(str, ' ') == 0)
 	{
-	//	ft_printf("tube %s\n", str);
 		creat_maillon(lst, str, "0", "0");
 		(*lst)->pipe = 1;
 		env->se |= PIPE;
@@ -63,7 +62,7 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 {
 	if (str[0] == '#')
 	{
-		if (check_room(lst, str, env) == 1)// && add_flag(env, ANTS) != 0)
+		if (check_room(lst, str, env) == 1)
 			return (1);
 		else
 			ft_printf("fail start/end/comment\n");

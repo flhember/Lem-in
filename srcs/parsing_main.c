@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/04 15:39:36 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:34:13 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		print_map_room(t_stock *cpy)
 		ft_printf("%s\n", cpy->room);
 	if (cpy->pipe == 0 && cpy->com == 0 && cpy->room)
 		ft_printf("%s %d %d\n", cpy->room, cpy->x, cpy->y);
-
 }
 
 void		print_map(t_stock *lst, int nb_ant)
@@ -36,7 +35,6 @@ void		print_map(t_stock *lst, int nb_ant)
 	ft_printf("%d\n", nb_ant);
 	print_map_room(cpy);
 }
-
 
 t_lst		*parsing_main(t_data *env)
 {
@@ -53,8 +51,9 @@ t_lst		*parsing_main(t_data *env)
 		free_stock(&lst_tmp);
 		return (NULL);
 	}
-	if ((!(lst = creat_adja_lst(&lst_tmp, env)) || (check_name(env, &lst) == -1)
-			|| (stock_pipe(env, &lst, lst_tmp)) == -1))
+	if ((!(lst = creat_adja_lst(&lst_tmp, env, 0))
+				|| (check_name(env, &lst) == -1)
+				|| (stock_pipe(env, &lst, lst_tmp)) == -1))
 	{
 		if (lst)
 			free_lst_adja(&lst, env);
@@ -63,6 +62,5 @@ t_lst		*parsing_main(t_data *env)
 	}
 	print_map(lst_tmp, env->nb_ants);
 	free_stock(&lst_tmp);
-	ft_printf("ok\n");
 	return (lst);
 }

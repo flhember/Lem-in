@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:05:49 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/07 14:11:19 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:16:36 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ static int	creat_file(t_data *env, t_lst **lst, t_file **file)
 	return (1);
 }
 
-int			bfs_best(t_data *env, t_lst **lst)
+int			bfs_best(t_data *env, t_lst **lst, t_file *tmp)
 {
 	t_file	*file;
-	t_file	*tmp;
 
 	(*lst)->ret_bfs = -1;
 	tmp = NULL;

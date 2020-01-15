@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/16 15:13:27 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:07:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,15 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	(*lst)->tab[k]->y = room->y;
 	(*lst)->tab[k]->start = room->start;
 	(*lst)->tab[k]->end = room->end;
-
 }
 
-t_lst		*creat_adja_lst(t_stock **room, t_data *env)
+t_lst		*creat_adja_lst(t_stock **room, t_data *env, size_t i)
 {
-	size_t	i;
 	size_t	size_lst;
 	t_lst	*lst;
 	t_stock *test;
 
-	test = *room;	
-	i = 0;
+	test = *room;
 	size_lst = ft_lstsize_stock(room);
 	lst = NULL;
 	if (!(lst = (t_lst*)ft_memalloc(sizeof(t_lst))))
