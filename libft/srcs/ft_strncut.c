@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strncut.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:33:05 by flhember         ###   ########.fr       */
+/*   Created: 2020/01/15 16:28:50 by flhember          #+#    #+#             */
+/*   Updated: 2020/01/15 16:29:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "libft.h"
 
-int		lem_in(void)
+char		*ft_strncut(char *str, int n)
 {
-	t_data		env;
-	t_lst		*lst;
+	int		i;
+	char	*new_str;
 
-	lst = NULL;
-	init_struct(&env);
-	if (!(lst = parsing_main(&env)))
+	i = 0;
+	if (!(new_str = ft_memalloc(sizeof(char) * (n + 1))))
+		return (NULL);
+	while (i < n)
 	{
-		ft_printf("oh shit, here we go again\n");
-		return (-1);
+		new_str[i] = str[i];
+		i++;
 	}
-	if ((algo_main(&lst, &env) == -1))
-		return (-1);
-	free_lst_adja(&lst, &env);
-	return (0);
+	return (new_str);
 }

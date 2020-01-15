@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 17:04:30 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/13 14:04:00 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:35:51 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ static int	check_this(t_stock **lst, int x, int y, int i)
 	cpy = *lst;
 	while (cpy->next)
 	{
-		if (cpy->pipe == 0 && cpy->com == 0 && j != i && cpy->x == x && cpy->y == y)
-		{
-			ft_printf("ROOM = %s\n\ncpy->pipe = %d\ncpy->com = %d\nj = %d i = %d\ncpy->x = %d x = %d\ncpy->y = %d y = %d\n\n",cpy->room, cpy->pipe, cpy->com, j, i, cpy->x, x, cpy->y, y);
+		if (cpy->pipe == 0 && cpy->com == 0 && j != i && cpy->x == x
+				&& cpy->y == y)
 			return (-1);
-		}
 		cpy = cpy->next;
 		j++;
 	}
@@ -44,10 +42,7 @@ int			verif_pos(t_stock **lst)
 		if (cpy->pipe == 0 && cpy->com == 0)
 		{
 			if (check_this(lst, cpy->x, cpy->y, i) == -1)
-			{
-				ft_printf("oops [%s]\n", cpy->room);
 				return (-1);
-			}
 		}
 		i++;
 		cpy = cpy->next;

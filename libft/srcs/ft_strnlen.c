@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   ft_strnlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:33:05 by flhember         ###   ########.fr       */
+/*   Created: 2020/01/15 16:24:20 by flhember          #+#    #+#             */
+/*   Updated: 2020/01/15 16:25:51 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "libft.h"
 
-int		lem_in(void)
+size_t		ft_strnlen(char *str, char c)
 {
-	t_data		env;
-	t_lst		*lst;
+	size_t	i;
 
-	lst = NULL;
-	init_struct(&env);
-	if (!(lst = parsing_main(&env)))
+	i = 0;
+	while (str[i])
 	{
-		ft_printf("oh shit, here we go again\n");
-		return (-1);
+		if (str[i] == c)
+			return (i);
+		i++;
 	}
-	if ((algo_main(&lst, &env) == -1))
-		return (-1);
-	free_lst_adja(&lst, &env);
-	return (0);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:02:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/13 17:24:54 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:16:18 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ int			pars_pipe(t_lst **lst, t_room *tmp, int i, size_t j)
 	return (0);
 }
 
-static int		best_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_room *tmp)
+static int	best_road_bis(t_data *env, t_lst **lst, int ds, t_room *tmp)
 {
+	int		i;
+	size_t	j;
+
+	i = env->end;
 	while (ds >= 0)
 	{
 		ds--;
@@ -57,18 +61,15 @@ static int		best_road_bis(t_data *env, t_lst **lst, int ds, int i, size_t j, t_r
 
 int			best_road(t_lst **lst, t_data *env)
 {
-	int		i;
 	int		ds;
 
 	ds = 0;
-	i = env->end;
-	if (bfs_best(env, lst) == -1)
+	if (bfs_best(env, lst, NULL) == -1)
 		return (-1);
-	ds = (*lst)->tab[i]->dist;
+	ds = (*lst)->tab[env->end]->dist;
 	(*lst)->nb_road++;
-	if ((best_road_bis(env, lst, ds, i, 0, NULL)) == -1)
+	if ((best_road_bis(env, lst, ds, NULL)) == -1)
 		return (-1);
-//	print_adja(lst, env);
 	(*lst)->nb_road++;
 	return (0);
 }
