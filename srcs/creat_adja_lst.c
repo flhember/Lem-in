@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 16:57:06 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/12/16 15:13:27 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void		print_adja(t_lst **lst, t_data *env)
 			ft_printf("\tEND\n");
 		ft_printf("name %s\n", (*lst)->tab[i]->name);
 		ft_printf("distance =  %d\n", (*lst)->tab[i]->dist);
+		ft_printf("nb road = %d\n", (*lst)->tab[i]->road);
+		ft_printf("status = %d\n", (*lst)->tab[i]->status);
 		ft_printf("x %d\n", (*lst)->tab[i]->x);
 		ft_printf("y %d\n\n", (*lst)->tab[i]->y);
 		i++;
@@ -64,9 +66,11 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	size_t	i;
 	size_t	size_lst;
 	t_lst	*lst;
-	
+	t_stock *test;
+
+	test = *room;	
 	i = 0;
-	size_lst = ft_lstsize(room);
+	size_lst = ft_lstsize_stock(room);
 	lst = NULL;
 	if (!(lst = (t_lst*)ft_memalloc(sizeof(t_lst))))
 		return (NULL);
@@ -80,7 +84,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env)
 	}
 	lst->tab[env->nb_room] = 0;
 	i = 0;
-	while (i < size_lst - 1)
+	while (i < size_lst)
 	{
 		fill_tab_room(room, &lst, i);
 		i++;

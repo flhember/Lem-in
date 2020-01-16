@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 16:58:49 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/12/16 15:37:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,36 @@ int			add_link_lst(t_lst **lst, int fst_pe, int sec_pe)
 	return (0);
 }
 
+char		*ft_strncut(char *str, int n)
+{
+	int		i;
+	char	*new_str;
+	
+	i = 0;
+	if (!(new_str = ft_memalloc(sizeof(char) * (n + 1))))
+		return (NULL);
+	while (i < n)
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	return (new_str);
+}
+
+size_t 	ft_strnlen(char *str, char c)
+{
+	size_t i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe)
 {
 	size_t	i;
@@ -74,20 +104,26 @@ int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe)
 
 	i = 0;
 	k = 0;
-	while (i < env->nb_room && ft_strncmp((*lst)->tab[i]->name, (*pipe)->room,
-				ft_strlen((*lst)->tab[i]->name)))
+	if (ft_is_c((*pipe)->room, '-') == 1)
+		(*pipe)->room1 = ft_strncut((*pipe)->room, ft_strnlen((*pipe)->room, '-'));
+	else
+		(*pipe)->room1 = ft_strdup((*pipe)->room);
+	while (i < env->nb_room && ft_strcmp((*lst)->tab[i]->name, (*pipe)->room1) != 0)
+	{
 		i++;
+	}
 	if (i == env->nb_room)
 		return (-1);
 	j = ft_strlen((*lst)->tab[i]->name);
 	if (j < ft_strlen((*pipe)->room))
 	{
-		while (k < j + 1)
+		while (k < (j + 1))
 		{
 			(*pipe)->room++;
 			k++;
 		}
 	}
+	ft_strdel(&(*pipe)->room1);
 	return ((*lst)->tab[i]->pos);
 }
 
@@ -105,6 +141,8 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	pipe->room = str;
 	if (add_link_lst(lst, fst_pe, sec_pe) == -1)
 		return (-1);
+	if (add_link_lst(lst, sec_pe, fst_pe) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -119,6 +157,5 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 		}
 		pipe = pipe->next;
 	}
-	//print_lst_adja(lst, env);
 	return (0);
 }

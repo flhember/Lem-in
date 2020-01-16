@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 16:40:14 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:53:01 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,24 @@
 
 # include "../libft/includes/libft.h"
 
-# define ANTS		0b00001
-# define START		0b00010
-# define END		0b00100
+# define ANTS		1
+# define START		2
+# define END		4
 
-# define ASTART		0b00001
-# define AEND		0b00010
-# define PSTART		0b00100
-# define PEND		0b01000
-# define PIPE		0b10000
+# define ASTART		1
+# define AEND		2
+# define PSTART		4
+# define PEND		8
+# define PIPE		16
+
+typedef struct			s_road
+{
+	char				*name;
+	int					nb_road;
+	int					nb_cost;
+	int					size;
+	struct s_road		*next;
+}						t_road;
 
 typedef struct			s_file
 {
@@ -42,18 +51,27 @@ typedef struct			s_room
 	int					y;
 	int					start;
 	int					end;
+	int					road;
+	int					print;
 	struct s_room		*next;
 }						t_room;
 
 typedef struct			s_lst
 {
 	t_room				**tab;
-	int					i_r;
+	int					nb_road;
+	int					nb_best_move;
+	int					nb_room;
+	int					ret_bfs;
+	int					cross;
+	int					end;
+	int					size_file;
 }						t_lst;
 
 typedef struct			s_stock
 {
 	char				*room;
+	char				*room1;
 	int					x;
 	int					y;
 	int					start;
@@ -68,8 +86,12 @@ typedef struct			s_data
 	int					flags;
 	int					se;
 	int					start;
+	int					end;
+	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
+	int					nb_road_f;
+	t_road				**road;
 }						t_data;
 
 int						lem_in(void);
@@ -90,15 +112,27 @@ void					free_lst_adja(t_lst **lst, t_data *env);
 t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env);
 t_lst					*parsing_main(t_data *env);
-size_t					ft_lstsize(t_stock **room);
+size_t					ft_lstsize_stock(t_stock **room);
+size_t					ft_lstsize_room(t_room **room);
+int						ft_lstsize_road(t_road **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 //int						check_name(t_data *env, t_stock **room);
-int						check_name(t_data *env, t_lst ** lst);
+int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
-void					bfs(t_file **file, t_lst **lst);
-int						find_start(t_lst **lst, t_data *env, t_file **file);
+int						bfs(t_data *env, t_lst **lst);
+int						bfs_best(t_data *env, t_lst **lst);
 void					free_file(t_file **file);
+int						best_road(t_lst **lst, t_data *env);
+int						other_road(t_lst **lst, t_data *env);
+int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
+void					del_first_file(t_file **file);
+void					clean_status(t_lst **lst);
+void					clean_dist(t_lst **lst);
+void					change_road_bfs(t_lst **lst, int road);
+void					reboot_nb_road(t_lst **lst);
+int						stock_road(t_lst **lst, t_data *env);
+void					free_road(t_road **lst);
 
 #endif

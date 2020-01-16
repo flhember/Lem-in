@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/28 15:33:56 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:47:38 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		check_tube(char *str, t_stock **lst, t_data *env)
 {
 	if (ft_count_c(str, '-') == 1 && ft_count_c(str, ' ') == 0)
 	{
+	//	ft_printf("tube %s\n", str);
 		creat_maillon(lst, str, "0", "0");
 		(*lst)->pipe = 1;
 		env->se |= PIPE;
@@ -102,6 +103,7 @@ int		parsing_map(t_data *env, t_stock **lst)
 	line = NULL;
 	while ((line = ft_get_fd(0)))
 	{
+		//ft_printf("parsing_map [%s]\n", line);
 		if (check_line(line, env, lst) != 1)
 		{
 			line != NULL ? free(line) : line;
@@ -112,7 +114,6 @@ int		parsing_map(t_data *env, t_stock **lst)
 		}
 		free(line);
 	}
-//	print_lst(lst);
 	printf("\n");
 	if (add_flag(env, START) && add_flag(env, END))
 	{

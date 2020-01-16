@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:49 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/28 16:56:43 by chcoutur         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:41:03 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ static void	hash(char *str, int *tab, size_t i)
 {
 	int		hash;
 	int		c;
-	char	*strb;
 
-	strb = str;
 	hash = 0;
 	c = 0;
 	while ((c = *str++))

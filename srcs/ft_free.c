@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/21 17:39:29 by flhember         ###   ########.fr       */
+/*   Updated: 2019/12/16 16:04:08 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void		free_lst_tab(t_room **lst)
 {
 	if ((*lst)->next)
 		free_lst_tab(&(*lst)->next);
+	ft_strdel(&(*lst)->name);
+	free(*lst);
+}
+
+void		free_road(t_road **lst) // surement a tej
+{
+	if ((*lst)->next)
+		free_road(&(*lst)->next);
 	ft_strdel(&(*lst)->name);
 	free(*lst);
 }
