@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:34:41 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:46:35 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		check_start_end(char *str, t_data *env, t_stock **lst)
 {
-	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START) == 0 && (env->se & AEND) == 0)
+	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START)
+			== 0 && (env->se & AEND) == 0)
 	{
 		env->flags |= START;
 		env->se |= ASTART;
@@ -102,7 +103,6 @@ int		parsing_map(t_data *env, t_stock **lst)
 	line = NULL;
 	while ((line = ft_get_fd(0)))
 	{
-		//ft_printf("parsing_map [%s]\n", line);
 		if (check_line(line, env, lst) != 1)
 		{
 			line != NULL ? free(line) : line;
