@@ -6,13 +6,20 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:05:49 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:16:36 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:51:35 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-static int	add_file(t_lst **lst, t_file **file, int val, int dis)
+void		free_file(t_file **file)
+{
+	if ((*file)->next)
+		free_file(&(*file)->next);
+	free(*file);
+}
+
+static int	add_file_best(t_lst **lst, t_file **file, int val, int dis)
 {
 	t_file	*new;
 	t_file	*tmp;
@@ -40,7 +47,7 @@ static int	fill_file(t_file **file, t_lst **lst, int i)
 	o = 0;
 	tmp = (*lst)->tab[i];
 	if ((*lst)->tab[i]->end == 1)
-		add_file(lst, file, i, (*lst)->tab[i]->dist + 1);
+		add_file_best(lst, file, i, (*lst)->tab[i]->dist + 1);
 	else
 	{
 		while (tmp)
@@ -49,7 +56,7 @@ static int	fill_file(t_file **file, t_lst **lst, int i)
 			{
 				if ((*lst)->tab[tmp->pos]->status != 0)
 					o = 1;
-				else if ((add_file(lst, file, tmp->pos,
+				else if ((add_file_best(lst, file, tmp->pos,
 						(*lst)->tab[i]->dist + 1)) == -1)
 					return (-1);
 			}

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 17:13:32 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/16 15:57:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,19 @@ int			stock_it(t_lst **lst, t_data *env, int pos, int i)
 
 int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 {
-	int		pos;
-
-	pos = env->start;
-	while ((*lst)->tab[pos]->end == 0)
+	env->tmp_pos = env->start;
+	while ((*lst)->tab[env->tmp_pos]->end == 0)
 	{
 		while (tmp)
 		{
-			if (tmp->pos != pos && (*lst)->tab[tmp->pos]->print == 0
+			if (tmp->pos != env->tmp_pos && (*lst)->tab[tmp->pos]->print == 0
 					&& ((*lst)->tab[tmp->pos]->road == i
 						|| (*lst)->tab[tmp->pos]->end == 1))
 			{
-				pos = tmp->pos;
-				stock_it(lst, env, pos, i);
+				env->tmp_pos = tmp->pos;
+				stock_it(lst, env, env->tmp_pos, i);
 				if ((*lst)->tab[tmp->pos]->end == 0)
-					(*lst)->tab[pos]->print = 1;
+					(*lst)->tab[env->tmp_pos]->print = 1;
 				tmp = NULL;
 			}
 			else
@@ -83,7 +81,7 @@ int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 					return (-1);
 			}
 		}
-		tmp = (*lst)->tab[pos];
+		tmp = (*lst)->tab[env->tmp_pos];
 	}
 	return (0);
 }
@@ -119,6 +117,7 @@ int			stock_start_end(t_lst **lst, t_data *env)
 	env->road[0]->nb_road = 0;
 	env->road[0]->name = ft_strdup((*lst)->tab[env->start]->name);
 	stock_it(lst, env, env->end, 1);
+	env->nb_road_f = 1;
 	print_adja_road(lst, env);
 	return (0);
 }
@@ -201,7 +200,12 @@ int			stock_road(t_lst **lst, t_data *env)
 	env->road[(*lst)->nb_road] = 0;
 	parse_road(lst, env, NULL);
 	print_adja_road(lst, env);
+<<<<<<< HEAD
 	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
 	ants_treat(lst, env);
+=======
+	env->nb_road_f = (*lst)->nb_road;
+	ft_printf("nb env %d | nb lst %d\n", env->nb_road_f, (*lst)->nb_road);
+>>>>>>> ed4cc7cfa9e9b8a6e9d67a9e0bd544f89c669164
 	return (0);
 }

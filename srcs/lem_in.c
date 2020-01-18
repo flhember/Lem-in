@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:33:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/16 15:42:33 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int		lem_in(void)
 		return (-1);
 	}
 	if ((algo_main(&lst, &env) == -1))
+	{
+		free_lst_adja(&lst, &env);
 		return (-1);
+	}
 	free_lst_adja(&lst, &env);
+	free_road_adja(&env);
 	return (0);
 }

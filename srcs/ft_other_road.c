@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:02:34 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/16 16:06:43 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ int			other_road(t_lst **lst, t_data *env)
 	i = env->end;
 	(*lst)->end = i;
 	(*lst)->nb_road++;
-	while (bfs(env, lst) == 0)
+	(*lst)->ret_bfs = -1;
+	while (bfs(env, lst, NULL) == 0)
 	{
+		(*lst)->ret_bfs = -1;
 		check_nb_road(lst);
 		ds = (*lst)->tab[(*lst)->end]->dist;
 		if ((other_road_bis(lst, --ds, (*lst)->end, 0)) == -1)

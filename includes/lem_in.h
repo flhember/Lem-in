@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:55:50 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:50:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct			s_road
 	char				*name;
 	int					nb_road;
 	int					nb_cost;
+	int					size;
 	struct s_road		*next;
 }						t_road;
 
@@ -58,6 +59,9 @@ typedef struct			s_room
 typedef struct			s_lst
 {
 	t_room				**tab;
+	int					tmp_pos;
+	int					cmp;
+	int					pos_blk;
 	int					nb_road;
 	int					total_room;
 	int					nb_best_move;
@@ -83,6 +87,7 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					tmp_pos;
 	int					flags;
 	int					se;
 	int					start;
@@ -90,6 +95,7 @@ typedef struct			s_data
 	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
+	int					nb_road_f;
 	t_road				**road;
 }						t_data;
 
@@ -108,6 +114,7 @@ void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
+void					free_road_adja(t_data *env);
 t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env, size_t i);
 t_lst					*parsing_main(t_data *env);
@@ -119,7 +126,7 @@ void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
-int						bfs(t_data *env, t_lst **lst);
+int						bfs(t_data *env, t_lst **lst, t_file *tmp);
 int						bfs_best(t_data *env, t_lst **lst, t_file *tmp);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
@@ -131,7 +138,15 @@ void					clean_dist(t_lst **lst);
 void					change_road_bfs(t_lst **lst, int road);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
-void					free_road(t_road **lst);
 int						stock_start_end(t_lst **lst, t_data *env);
+int						block_bad_road(t_lst **lst, int i);
+int						verif_back(t_lst **lst, int pos_blk, int i, int flag);
+int						ant_rep(t_data *env);
+int						check_cross(t_lst **lst, t_file **file, int i,
+		int pos_blk);
+int						check_cross_bis(t_lst **lst, t_file **file,
+		int i, int pos_blk);
+int						add_file(t_lst **lst, t_file **file, int val,
+		int dis);
 
 #endif
