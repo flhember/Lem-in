@@ -23,6 +23,7 @@ void		print_adja_road(t_lst **lst, t_data *env)
 	{
 		cpy = env->road[i];
 		printf("\tROAD = %d, %d room: \n-name:%s", i, cpy->nb_cost, cpy->name);
+		(*lst)->total_room += cpy->nb_cost;
 		while (cpy->next)
 		{
 			if (cpy->next)
@@ -32,6 +33,7 @@ void		print_adja_road(t_lst **lst, t_data *env)
 		printf("-> NULL \n\n");
 		i++;
 	}
+	ft_printf("[cost = %d] [total = %d]\n", cpy->nb_cost, (*lst)->total_room);
 	printf("\n\n");
 }
 
@@ -120,6 +122,68 @@ int			stock_start_end(t_lst **lst, t_data *env)
 	print_adja_road(lst, env);
 	return (0);
 }
+int get_limit(t_lst **lst, t_data *env)
+{
+	int i;
+
+	i = 0;
+	while (i < (*lst)->nb_road)
+	{
+		cpy = env->road[i];
+		if (cpy->nb_cost <= mid)
+			limit++;
+		i++;
+	}
+}
+int ants_treat(t_lst **lst, t_data *env)
+{
+	(*lst)->nb_road--;
+	int *tab;
+	int i;
+	int mid;
+	int limit;
+	int total_cost;
+	t_road *cpy;
+
+	mid = (*lst)->total_room / (*lst)->nb_road;
+	i = 0;
+	total_cost = 0;
+	limit = 0;
+	while (i < (*lst)->nb_road)
+	{
+		cpy = env->road[i];
+		if (cpy->nb_cost <= mid)
+			limit++;
+		i++;
+	}
+	if (limit > (*lst)->nb_road)
+	{
+		ft_printf("ca va pas etre possible mon pote, on fait pas de la magie ici\n");
+		return (-1);
+	}
+	i = 0;
+	if (!(tab =ft_memalloc(sizeof(int) * limit)))
+		return (-1);
+	while (i < limit)
+	{
+		cpy = env->road[i];
+		tab[i] = (env->nb_ants / limit) + cpy->nb_cost;
+		total_cost += tab[i];
+		i++;
+	}
+	total_cost = total_cost / limit;
+	ft_printf("\n\n____________________________________________\n\n");
+	ft_printf("Taille tableau = [ %d ]\n", limit);
+	i = 0;
+	while (i < limit)
+	{
+		ft_printf("Tab[%d] = %d\n", i, tab[i]);
+		i++;
+	}
+	ft_printf("Nombres de coups en passant par %d chemins = %d\n\n", limit, total_cost);
+	ft_printf("Resultat basic %d coups en moyenne sur %d chemins\n", mid, limit);
+	return (1);
+}
 
 int			stock_road(t_lst **lst, t_data *env)
 {
@@ -137,5 +201,7 @@ int			stock_road(t_lst **lst, t_data *env)
 	env->road[(*lst)->nb_road] = 0;
 	parse_road(lst, env, NULL);
 	print_adja_road(lst, env);
+	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
+	ants_treat(lst, env);
 	return (0);
 }

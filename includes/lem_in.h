@@ -59,6 +59,7 @@ typedef struct			s_lst
 {
 	t_room				**tab;
 	int					nb_road;
+	int					total_room;
 	int					nb_best_move;
 	int					nb_room;
 	int					ret_bfs;
