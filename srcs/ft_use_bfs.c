@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/13 18:25:22 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:19:37 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,10 @@ void		reboot_nb_road(t_lst **lst)
 	while (i < (*lst)->nb_room)
 	{
 		if ((*lst)->tab[i]->road == -1)
-		{
-			printf("lst -1 to 0 = %s\n", (*lst)->tab[i]->name);
 			(*lst)->tab[i]->road = 0;
-		}
 		i++;
 	}
 }
-
-/*void		delete_this(t_file **file, t_lst **lst, int i)
-{
-	int		i;
-	t_file	*tmp;
-
-	i = 0;
-	tmp = *file;
-	while (file)
-	{
-		if (ft_strcmp((*lst)->tab[file->value]->name, (*lst)->tab[i]->name))
-		{
-			
-			
-		}	
-		i++;
-		tmp = tmp->next;
-	}
-}*/
 
 void		change_road_bfs(t_lst **lst, int road)
 {
@@ -57,14 +35,10 @@ void		change_road_bfs(t_lst **lst, int road)
 	while (i < (*lst)->nb_room)
 	{
 		if ((*lst)->tab[i]->road == road)
-		{
-			ft_printf("%s -> -1\n", (*lst)->tab[i]->name);
 			(*lst)->tab[i]->road = -1;
-		}
 		i++;
 	}
 	(*lst)->tab[(*lst)->cross]->road = 0;
-	ft_printf("change = %s to 0\n", (*lst)->tab[(*lst)->cross]->name);
 }
 
 void		clean_dist(t_lst **lst)

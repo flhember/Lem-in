@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:29:41 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/12/16 16:18:15 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:18:09 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-size_t	ft_lstsize_stock(t_stock **room)
+size_t		ft_lstsize_stock(t_stock **room)
 {
 	t_stock *cpy;
 	size_t	i;
@@ -29,9 +29,9 @@ size_t	ft_lstsize_stock(t_stock **room)
 	return (i - 1);
 }
 
-size_t	ft_lstsize_room(t_room **room)
+size_t		ft_lstsize_room(t_room **room)
 {
-	t_room *cpy;
+	t_room	*cpy;
 	size_t	i;
 
 	i = 0;
@@ -46,9 +46,9 @@ size_t	ft_lstsize_room(t_room **room)
 	return (i - 1);
 }
 
-int		ft_lstsize_road(t_road **room)
+int			ft_lstsize_road(t_road **room)
 {
-	t_road *cpy;
+	t_road	*cpy;
 	int		i;
 
 	i = 0;

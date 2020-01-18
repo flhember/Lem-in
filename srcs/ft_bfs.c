@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/13 18:24:57 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:38:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-/*static void	print_file(t_file **file, t_lst **lst)
+static void	print_file(t_file **file, t_lst **lst)
 {
 	t_file *cpy;
 
@@ -24,7 +24,7 @@
 		cpy = cpy->next;
 	}
 	printf("\n");
-}*/
+}
 
 static int	add_file(t_lst **lst, t_file **file, int val, int dis)
 {
@@ -46,25 +46,23 @@ static int	add_file(t_lst **lst, t_file **file, int val, int dis)
 	return (0);
 }
 
-int			block_bad_road(t_lst **lst, int i/*, t_file **file*/)
+int			block_bad_road(t_lst **lst, int i)
 {
 	int		flag;
-	t_room *tmp;
+	t_room	*tmp;
 
 	flag = 0;
 	tmp = (*lst)->tab[i];
 	(*lst)->tab[i]->road = -2;
-	printf("rentre pour %s\n", (*lst)->tab[i]->name);
 	while (flag == 0)
 	{
 		while (tmp)
 		{
 			if ((*lst)->tab[tmp->pos]->road == 0
-				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[i]->dist -1 && (*lst)->tab[tmp->pos]->start == 0)
+				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[i]->dist - 1
+				&& (*lst)->tab[tmp->pos]->start == 0)
 			{
-				ft_printf("ban le %s t'sais mort\n", (*lst)->tab[i]->name);
 				(*lst)->tab[tmp->pos]->road = -2;
-	//			delete_this(file, lst, i);
 				i = tmp->pos;
 			}
 			if ((*lst)->tab[tmp->pos]->start == 1)
@@ -76,49 +74,42 @@ int			block_bad_road(t_lst **lst, int i/*, t_file **file*/)
 	return (0);
 }
 
-int			verif_back(t_lst **lst, int pos_blk, int i)
+int			verif_back(t_lst **lst, int pos_blk, int i, int flag)
 {
 	int		nb;
 	int		cmp;
 	int		pos;
 	t_room	*tmp;
-	int		flag;
 
-	flag = 0;
 	tmp = (*lst)->tab[pos_blk];
 	nb = (*lst)->tab[pos_blk]->road;
-	printf("check pour = %s\n", (*lst)->tab[i]->name);
-	while (flag == 0)
+	pos = 0;
+	cmp = 0;
+	while (flag != -1)
 	{
-		pos = 0;
-		cmp = 0;
 		while (tmp)
 		{
-			//ft_printf("flag = %d\n", flag);
+			flag = -1;
 			if ((*lst)->tab[tmp->pos]->start == 1)
-			{
-				ft_printf("J'ai vu un start\n");
-				flag = -1;
-			}
-			else if (tmp->pos != i && (*lst)->tab[tmp->pos]->road == 0 && (*lst)->tab[tmp->pos]->start == 0
+				flag = 1;
+			else if (tmp->pos != i && (*lst)->tab[tmp->pos]->road == 0
+					&& (*lst)->tab[tmp->pos]->start == 0
 					&& (*lst)->tab[tmp->pos]->end == 0)
-			{
-			//	ft_printf("cmp ++ mec!\n");
 				cmp++;
-			}
-			else if (((*lst)->tab[tmp->pos]->road == nb || (*lst)->tab[tmp->pos]->road == -1)
-					&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[pos_blk]->dist -1)
+			else if (((*lst)->tab[tmp->pos]->road == nb)
+				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[pos_blk]->dist -1)
 			{
-			//	ft_printf("On remmonte les gars, nb = %d\n", nb);
+				flag = 0;
 				pos = tmp->pos;
 			}
 			tmp = tmp->next;
 		}
-		if (cmp >= 1)
+		if (cmp >= 1 && flag == 1)
 			return (1);
-		else if (flag == 0 && pos)
+		else if (flag == 0)
 			tmp = (*lst)->tab[pos];
-		ft_printf("ftft\n");
+		else if (flag == -1 || flag == 1)
+			return (-1);
 	}
 	return (-1);
 }
@@ -144,16 +135,15 @@ static int	check_cross(t_lst **lst, t_file **file, int i, int pos_blk)
 	}
 	if (cmp == 0 && (*lst)->cross != -1 && (*lst)->size_file == 1)
 	{
-		if (verif_back(lst, pos_blk, i) == -1)
+		if (verif_back(lst, pos_blk, i, 0) == -1)
 		{
-			ft_printf("\n\nCa passe!\n\n");
-			block_bad_road(lst, i /*file*/);
+			block_bad_road(lst, i);
 			return (-1);
 		}
-		ft_printf("\n\nC'EST LA MERDE\n\n");
 		change_road_bfs(lst, (*lst)->tab[(*lst)->cross]->road);
 		add_file(lst, file, (*lst)->cross, (*lst)->tab[i]->dist + 1);
 		(*lst)->cross = 0;
+		print_file(file, lst);
 	}
 	return (0);
 }
@@ -213,7 +203,6 @@ static int	creat_file(t_data *env, t_lst **lst, t_file **file)
 	del_first_file(file);
 	(*lst)->tab[env->start]->dist = 0;
 	(*lst)->tab[env->start]->status = 2;
-	//print_file(file, lst);
 	return (1);
 }
 
@@ -225,7 +214,6 @@ int			bfs(t_data *env, t_lst **lst)
 	(*lst)->ret_bfs = -1;
 	tmp = NULL;
 	file = NULL;
-	ft_printf("ouai ouai \n");
 	reboot_nb_road(lst);
 	clean_dist(lst);
 	if (creat_file(env, lst, &file) == -1)
@@ -247,6 +235,5 @@ int			bfs(t_data *env, t_lst **lst)
 	}
 	clean_status(lst);
 	free_file(&file);
-	ft_printf("non non \n");
 	return ((*lst)->ret_bfs);
 }

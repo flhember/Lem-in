@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:13:18 by flhember          #+#    #+#             */
-/*   Updated: 2019/12/03 15:41:02 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:29:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,7 @@ int					ft_strisdigit(char *str);
 int					ft_is_c(char *str, char c);
 int					ft_strisalpha(char *str);
 int					ft_strnalpha(char *str);
+size_t				ft_strnlen(char *str, char c);
+char				*ft_strncut(char *str, int n);
+
 #endif

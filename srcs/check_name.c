@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:49 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/12/04 15:41:03 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:03:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_tab(int *tab, t_data *env, t_lst **lst)
 {
 	size_t	i;
 	size_t	j;
-	int 	tmp;
+	int		tmp;
 
 	i = 0;
 	j = 0;
@@ -62,7 +62,7 @@ static void	hash(char *str, int *tab, size_t i)
 
 int			check_name(t_data *env, t_lst **lst)
 {
-	int 	*tab;
+	int		*tab;
 	size_t	i;
 
 	i = 0;
