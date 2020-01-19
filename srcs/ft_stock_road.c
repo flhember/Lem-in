@@ -123,32 +123,68 @@ int			stock_start_end(t_lst **lst, t_data *env)
 	return (0);
 }
 
-int ants_treat(t_lst **lst, t_data *env)
+int		treat_better(int limit, t_data *env)
 {
-	(*lst)->nb_road--;
 	int *tab;
 	int i;
-	int mid;
-	int limit;
-	int total_cost;
 	t_road *cpy;
+	int total;
+
+	total = 0;
+	i = 0;
+	if (!(tab = ft_memalloc(sizeof(int) * limit)))
+		return (-1);
+	while (i < limit)
+	{
+		cpy = env->road[i];
+		tab[i] = (env->nb_ants / limit) + cpy->nb_cost;
+		total += tab[i];
+		i++;
+	}
+	free(tab);
+	total = total / limit;
+	return (total);
+}
+
+int		ants_treat(t_lst **lst, t_data *env)
+{
+	(*lst)->nb_road--;
+	int limit;
+	int i;
+	int mid;
+	int total_cost;
+	int cmp;
+	//t_road *cpy;
 
 	mid = (*lst)->total_room / (*lst)->nb_road;
 	i = 0;
-	total_cost = 0;
-	limit = 0;
-	while (i < (*lst)->nb_road)
+	cmp = 0;
+	limit = 1;
+	//while (i < (*lst)->nb_road)
+	//{
+	//	cpy = env->road[i];
+	//	if (cpy->nb_cost <= mid)
+	//		limit++;
+	//	i++;
+	//}
+	total_cost = treat_better(limit, env);
+		ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, (*lst)->nb_road);
+	while (limit < (*lst)->nb_road)
 	{
-		cpy = env->road[i];
-		if (cpy->nb_cost <= mid)
-			limit++;
-		i++;
+		ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, (*lst)->nb_road);
+		limit++;
+		cmp = total_cost;
+		total_cost = treat_better(limit, env);
+		if (total_cost > cmp)
+			total_cost = cmp;
 	}
 	if (limit > (*lst)->nb_road)
 	{
 		ft_printf("ca va pas etre possible mon pote, on fait pas de la magie ici\n");
 		return (-1);
 	}
+	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, (*lst)->nb_road);
+	/*
 	i = 0;
 	if (!(tab =ft_memalloc(sizeof(int) * limit)))
 		return (-1);
@@ -160,14 +196,15 @@ int ants_treat(t_lst **lst, t_data *env)
 		i++;
 	}
 	total_cost = total_cost / limit;
+	i*/
 	ft_printf("\n\n____________________________________________\n\n");
 	ft_printf("Taille tableau = [ %d ]\n", limit);
 	i = 0;
-	while (i < limit)
-	{
-		ft_printf("Tab[%d] = %d\n", i, tab[i]);
-		i++;
-	}
+	//while (i < limit)
+	//{
+	//	ft_printf("Tab[%d] = %d\n", i, tab[i]);
+	//	i++;
+	//}
 	ft_printf("Nombres de coups en passant par %d chemins = %d\n\n", limit, total_cost);
 	ft_printf("Resultat basic %d coups en moyenne sur %d chemins\n", mid, limit);
 	return (1);
