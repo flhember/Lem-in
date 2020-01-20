@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 17:13:32 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:00:03 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,67 +146,99 @@ int		treat_better(int limit, t_data *env)
 	return (total);
 }
 
+int		final_rep(int limit, int total_cost, t_data *env)
+{
+	int *tab_f;
+	int i;
+	int final_ants;
+	t_road *cpy;
+
+	i = 0;
+	final_ants =0;
+	if (!(tab_f = ft_memalloc(sizeof(int) * limit)))
+		return (-1);
+	while (i < limit)
+	{
+		cpy = env->road[i];
+	//	ft_printf("total_cost = %d | cpy->nb_cost = %d\n", total_cost, cpy->nb_cost);
+		tab_f[i] = total_cost - cpy->nb_cost;
+		tab_f[i] = tab_f[i] < 0 ? tab_f[i] * (-1) : tab_f[i];
+		i++;
+	}
+	i = 0;
+	ft_printf("\n\n____________________________________________\n\n");
+	while (i < limit)
+	{
+		final_ants += tab_f[i];
+//		ft_printf("tab[%d] = %d fourmis\n", i, tab_f[i]);
+		i++;
+	}
+	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
+	i = 0;
+	final_ants = env->nb_ants - final_ants;
+	while (i < limit && final_ants > 0)
+	{
+		tab_f[i] = tab_f[i] + 1;
+		final_ants--;
+	//	ft_printf("tab[%d] = %d fourmis\n", i, tab_f[i]);
+		i++;
+		if (i == limit && final_ants > 0)
+			i = 0;
+	}
+	i = 0;
+	final_ants = 0;
+	while (i < limit)
+	{
+		final_ants += tab_f[i];
+		ft_printf("tab[%d] = %d fourmis\n", i, tab_f[i]);
+		i++;
+	}
+	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
+	return (1);
+}
+
 int		ants_treat(t_lst **lst, t_data *env)
 {
 	(*lst)->nb_road--;
 	int limit;
 	int i;
-	int mid;
 	int total_cost;
 	int cmp;
-	//t_road *cpy;
 
-	mid = (*lst)->total_room / (*lst)->nb_road;
 	i = 0;
 	cmp = 0;
 	limit = 1;
-	//while (i < (*lst)->nb_road)
-	//{
-	//	cpy = env->road[i];
-	//	if (cpy->nb_cost <= mid)
-	//		limit++;
-	//	i++;
-	//}
 	total_cost = treat_better(limit, env);
-		ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, (*lst)->nb_road);
+	ft_printf("Pour %d fourmis\n", env->nb_ants);
+//	ft_printf("total_cost = %5d | limit = %5d | nb_road = %5d\n\n", total_cost, limit, (*lst)->nb_road);
 	while (limit < (*lst)->nb_road)
 	{
-		ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, (*lst)->nb_road);
 		limit++;
 		cmp = total_cost;
 		total_cost = treat_better(limit, env);
-		if (total_cost > cmp)
-			total_cost = cmp;
+		ft_printf("[ total_cost = %5d | limit = %5d | nb_road = %5d ]\n", total_cost, limit, (*lst)->nb_road);
+	//	ft_printf("total_cost = %d | tmp = %d\n", total_cost, cmp);
+	//		ft_printf("i++ %d\n\n", i);
+		if (total_cost >= cmp)
+		{
+			i++;
+			//if (total_cost > cmp)
+				total_cost = cmp;
+		}
 	}
 	if (limit > (*lst)->nb_road)
 	{
 		ft_printf("ca va pas etre possible mon pote, on fait pas de la magie ici\n");
 		return (-1);
 	}
-	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, (*lst)->nb_road);
-	/*
-	i = 0;
-	if (!(tab =ft_memalloc(sizeof(int) * limit)))
-		return (-1);
-	while (i < limit)
-	{
-		cpy = env->road[i];
-		tab[i] = (env->nb_ants / limit) + cpy->nb_cost;
-		total_cost += tab[i];
-		i++;
-	}
-	total_cost = total_cost / limit;
-	i*/
+//	ft_printf("\nCHECK total_cost = %5d | limit = %5d | nb_road = %5d | i = %5d\n", total_cost, limit, (*lst)->nb_road, i);
+	limit -= i;
+	ft_printf("\ntotal_cost = %5d | limit = %5d | nb_road = %5d\n", total_cost, limit, (*lst)->nb_road);
 	ft_printf("\n\n____________________________________________\n\n");
 	ft_printf("Taille tableau = [ %d ]\n", limit);
 	i = 0;
-	//while (i < limit)
-	//{
-	//	ft_printf("Tab[%d] = %d\n", i, tab[i]);
-	//	i++;
-	//}
-	ft_printf("Nombres de coups en passant par %d chemins = %d\n\n", limit, total_cost);
-	ft_printf("Resultat basic %d coups en moyenne sur %d chemins\n", mid, limit);
+	ft_printf("Nombres de coups en passant par %d chemins = %d\n", limit, total_cost);
+	final_rep(limit, total_cost, env);
 	return (1);
 }
 
@@ -226,6 +258,7 @@ int			stock_road(t_lst **lst, t_data *env)
 	env->road[(*lst)->nb_road] = 0;
 	parse_road(lst, env, NULL);
 	print_adja_road(lst, env);
+	ft_printf("______________________________________________\n\n\n");
 	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
 	ants_treat(lst, env);
 	return (0);

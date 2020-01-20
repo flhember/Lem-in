@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:02:34 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/20 16:15:22 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 
 static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
-	while ((*lst)->tab[j]->start == 0)
+	//while ((*lst)->tab[j]->start == 0)
+	while (ds >= 0)
 	{
 		if (j > (*lst)->nb_room || ds < 0)
 			return (-1);
