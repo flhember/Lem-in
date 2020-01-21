@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:55:50 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/21 15:51:36 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct			s_road
 	char				*name;
 	int					nb_road;
 	int					nb_cost;
+	int					ants;
+	int					pos_ants;
 	struct s_road		*next;
 }						t_road;
 
