@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 13:00:33 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:37:21 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,32 +123,6 @@ int			stock_start_end(t_lst **lst, t_data *env)
 	return (0);
 }
 
-void	display(t_data *env, int limit)
-{
-	size_t i;
-	int j;
-	t_road *cpy;
-
-	i = 0;
-	j = 0;
-	while (i < env->nb_ants)
-	{
-		while (j < limit)
-		{
-			cpy = env->road[j]->next;
-			while (cpy)
-			{
-				ft_printf("L%lu-%s ", i + 1, cpy->name);
-				cpy = cpy->next;
-			}
-			ft_putchar('\n');
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}
-
 int		treat_better(int limit, t_data *env)
 {
 	int *tab;
@@ -215,6 +189,36 @@ int		final_rep(int limit, int total_cost, t_data *env)
 	return (1);
 }
 
+void	display(int limit, int total_cost, t_data *env)
+{
+	(void)total_cost;
+
+	int i;
+	int j;
+	int total;
+	
+	i = 0;
+	j = 0;
+	total = 0;
+	while (i < limit)
+	{
+		total += env->road[i]->nb_cost * env->road[i]->ants;
+		i++;
+	}
+	i =0;
+	while (i < total)
+	{
+		while (j < limit)
+		{
+			env->road[j]->count_ants++;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	ft_printf("Total = %d\n", total);
+}
+
 int		ants_treat(t_lst **lst, t_data *env)
 {
 	(*lst)->nb_road--;
@@ -257,7 +261,7 @@ int		ants_treat(t_lst **lst, t_data *env)
 	i = 0;
 	ft_printf("Nombres de coups en passant par %d chemins = %d\n", limit, total_cost);
 	final_rep(limit, total_cost, env);
-	display(env, limit);
+	display(limit, total_cost, env);
 	return (1);
 }
 
