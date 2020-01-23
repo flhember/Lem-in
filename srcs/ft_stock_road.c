@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/21 15:58:56 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:00:33 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,19 +125,23 @@ int			stock_start_end(t_lst **lst, t_data *env)
 
 void	display(t_data *env, int limit)
 {
-	int i;
+	size_t i;
 	int j;
 	t_road *cpy;
 
 	i = 0;
 	j = 0;
-	while (i < limit)
+	while (i < env->nb_ants)
 	{
-		cpy = env->road[i]->next;
-		while (j < env->road[i]->nb_cost)
+		while (j < limit)
 		{
-			ft_printf("L%d-%s\n", i + 1, cpy->name);
-			cpy = cpy->next;
+			cpy = env->road[j]->next;
+			while (cpy)
+			{
+				ft_printf("L%lu-%s ", i + 1, cpy->name);
+				cpy = cpy->next;
+			}
+			ft_putchar('\n');
 			j++;
 		}
 		j = 0;
@@ -182,13 +186,13 @@ int		final_rep(int limit, int total_cost, t_data *env)
 		i++;
 	}
 	i = 0;
-	ft_printf("\n\n____________________________________________\n\n");
+//	ft_printf("\n\n____________________________________________\n\n");
 	while (i < limit)
 	{
 		final_ants += env->road[i]->ants;
 		i++;
 	}
-	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
+//	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
 	i = 0;
 	final_ants = env->nb_ants - final_ants;
 	while (i < limit && final_ants > 0)
@@ -204,10 +208,10 @@ int		final_rep(int limit, int total_cost, t_data *env)
 	while (i < limit)
 	{
 		final_ants += env->road[i]->ants;
-		ft_printf("tab[%d] = %d fourmis\n", i, env->road[i]->ants);
+//		ft_printf("tab[%d] = %d fourmis\n", i, env->road[i]->ants);
 		i++;
 	}
-	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
+//	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
 	return (1);
 }
 
@@ -223,7 +227,7 @@ int		ants_treat(t_lst **lst, t_data *env)
 	cmp = 0;
 	limit = 1;
 	total_cost = treat_better(limit, env);
-	ft_printf("Pour %d fourmis\n", env->nb_ants);
+//	ft_printf("Pour %d fourmis\n", env->nb_ants);
 //	ft_printf("total_cost = %5d | limit = %5d | nb_road = %5d\n\n", total_cost, limit, (*lst)->nb_road);
 	while (limit < (*lst)->nb_road)
 	{
@@ -242,14 +246,14 @@ int		ants_treat(t_lst **lst, t_data *env)
 	}
 	if (limit > (*lst)->nb_road)
 	{
-		ft_printf("ca va pas etre possible mon pote, on fait pas de la magie ici\n");
+//		ft_printf("ca va pas etre possible mon pote, on fait pas de la magie ici\n");
 		return (-1);
 	}
 //	ft_printf("\nCHECK total_cost = %5d | limit = %5d | nb_road = %5d | i = %5d\n", total_cost, limit, (*lst)->nb_road, i);
 	limit -= i;
 	ft_printf("\ntotal_cost = %5d | limit = %5d | nb_road = %5d\n", total_cost, limit, (*lst)->nb_road);
-	ft_printf("\n\n____________________________________________\n\n");
-	ft_printf("Taille tableau = [ %d ]\n", limit);
+//	ft_printf("\n\n____________________________________________\n\n");
+//	ft_printf("Taille tableau = [ %d ]\n", limit);
 	i = 0;
 	ft_printf("Nombres de coups en passant par %d chemins = %d\n", limit, total_cost);
 	final_rep(limit, total_cost, env);
@@ -273,8 +277,8 @@ int			stock_road(t_lst **lst, t_data *env)
 	env->road[(*lst)->nb_road] = 0;
 	parse_road(lst, env, NULL);
 	print_adja_road(lst, env);
-	ft_printf("______________________________________________\n\n\n");
-	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
+//	ft_printf("______________________________________________\n\n\n");
+//	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
 	ants_treat(lst, env);
 	return (0);
 }
