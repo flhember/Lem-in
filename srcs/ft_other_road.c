@@ -1,0 +1,127 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_other_road.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
+/*   Updated: 2020/01/23 18:36:21 by flhember         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <lem_in.h>
+
+void		check_nb_road(t_lst **lst)
+{
+	int		i;
+	int		check;
+
+	i = 0;
+	check = 0;
+	while (i < (*lst)->nb_room)
+	{
+		if ((*lst)->tab[i]->road == -1)
+			check = 1;
+		i++;
+	}
+//	if (check == 1)
+//		(*lst)->nb_road--;
+}
+
+static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
+{
+	tmp = (*lst)->tab[j];
+	//printf("name = %s\n", (*lst)->tab[j]->name);
+	while (tmp)
+	{
+		if (tmp->pos == (*lst)->tab[i]->pos && (*lst)->tab[j]->road == 0)
+		{
+			if ((*lst)->tab[j]->start == 0 && (*lst)->tab[j]->end == 0)
+			{
+				//printf("%s -> nb = %d\n", (*lst)->tab[j]->name, (*lst)->nb_road);
+				(*lst)->tab[j]->road = (*lst)->nb_road;
+			}
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+static int	other_road_bis(t_lst **lst, int ds, int i, int j)
+{
+//	while ((*lst)->tab[j]->start == 0)
+	while (ds >= 0)
+	{
+		if (j > (*lst)->nb_room || ds < 0)
+			return (-1);
+		if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
+		{
+	//		printf("rentre pour %s\n", (*lst)->tab[j]->name);
+			if (ds == 0 && (*lst)->tab[j]->start == 0)
+				j++;
+			else if ((pars_pipe_best(lst, NULL, i, j)) == 0)
+				j++;
+			else
+			{
+				i = j;
+				j = 0;
+				ds--;
+			}
+		}
+		else
+			j++;
+	}
+	return (0);
+}
+
+/*int			check_start(t_lst **lst, t_data *env)
+{
+	int		cmp;
+	t_room *cpy;
+
+	cmp = 0;
+	cpy = (*lst)->tab[env->start];
+	while (cpy->next)
+	{
+		if ((*lst)->tab[cpy->pos]->road == 0)
+			cmp++;
+		cpy = cpy->next;
+	}
+	printf("cm[ = %d\n", cmp);
+	return (cmp);
+}*/
+
+
+int			other_road(t_lst **lst, t_data *env)
+{
+	int		i;
+	int		ds;
+	int 	ret;
+
+	ds = 0;
+	ret = 0;
+	i = env->end;
+	(*lst)->end = i;
+	(*lst)->nb_road++;
+	(*lst)->ret_bfs = -1;
+	while (bfs(env, lst, NULL) >= 0)
+	{
+		check_nb_road(lst);
+		ds = (*lst)->tab[(*lst)->end]->dist;
+		if ((*lst)->ret_bfs == 0)
+		{
+			if ((other_road_bis(lst, --ds, (*lst)->end, 0)) == -1)
+				return (-1);
+			else
+				stock_road_other(lst, env);
+			(*lst)->nb_road++;
+		}
+	print_adja_road(lst, env);
+		(*lst)->ret_bfs = -1;
+	}
+//	print_adja(lst, env);
+	//print_adja2(lst, env);
+	return (0);
+}
