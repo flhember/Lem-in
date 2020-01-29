@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 13:55:07 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:48:39 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		reboot_nb_road(t_lst **lst)
 	}
 }
 
-void		change_road_bfs(t_lst **lst, int road, t_data *env)
+void		change_part_road(t_lst **lst, int road, t_data *env)
 {
 	int		i;
 	t_road 	*tmp;
@@ -51,6 +51,39 @@ void		change_road_bfs(t_lst **lst, int road, t_data *env)
 		(*lst)->tab[tmp->index]->road = 0;
 		tmp = tmp->next;
 	}
+}
+
+void		change_all(t_lst **lst, int road)
+{
+	int		i;
+
+	i = 0;
+	while (i < (*lst)->nb_room)
+	{
+		if ((*lst)->tab[i]->road == road)
+			(*lst)->tab[i]->road = 0;
+		i++;
+	}
+}
+
+void		change_road_bfs(t_lst **lst, int road, t_data *env)
+{
+	int		flg;
+	t_room	*tmp;
+
+	flg = 0;
+	tmp = (*lst)->tab[(*lst)->pos_blk_f];
+	printf("pos_blk = %s, pos last %s\n", (*lst)->tab[env->blk]->name, (*lst)->tab[(*lst)->pos_blk_f]->name);
+	while (tmp)
+	{
+		if ((*lst)->tab[tmp->pos]->start == 1)
+			flg = 1;
+		tmp = tmp->next;
+	}
+	if (flg == 0)
+		change_all(lst, road);
+	else
+		change_part_road(lst, road, env);
 }
 
 void		clean_dist(t_lst **lst)

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 12:04:04 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:48:07 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,11 @@ int			check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
 		else if (tmp->pos != i && (*lst)->tab[tmp->pos]->road == 0
 				&& (*lst)->tab[tmp->pos]->start == 0
 				&& (*lst)->tab[tmp->pos]->end == 0)
+		{
+			printf("\n-> %s\n", (*lst)->tab[tmp->pos]->name);
+			(*lst)->pos_blk_f = tmp->pos;
 			(*lst)->cmp++;
+		}
 		else if (tmp->pos != (*lst)->tmp_pos && ((*lst)->tab[tmp->pos]->road == nb)
 			&& (*lst)->tab[tmp->pos]->dist
 			== (*lst)->tab[(*lst)->tmp_pos]->dist - 1)

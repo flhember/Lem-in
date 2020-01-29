@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 11:56:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:48:37 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			add_file(t_lst **lst, t_file **file, int val, int dis)
 
 	new = NULL;
 	tmp = *file;
-	printf("add %s\n", (*lst)->tab[val]->name);
+//	printf("add %s\n", (*lst)->tab[val]->name);
 	(*lst)->size_file++;
 	(*lst)->tab[val]->status = 1;
 	if (!(new = (t_file*)ft_memalloc(sizeof(t_file))))

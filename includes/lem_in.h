@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 13:14:58 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:07:11 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct			s_lst
 	int					tmp_pos;
 	int					cmp;
 	int					pos_blk;
+	int					pos_blk_f;
 	int					nb_road;
 	int					nb_best_move;
 	int					nb_room;
