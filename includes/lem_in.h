@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 14:07:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:47:00 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct			s_road
 {
 	char				*name;
+	int					state; // 1 -> 0 collision | -1 -> collision
 	int					nb_road;
 	int					nb_cost;
 	int					index;
@@ -151,5 +152,6 @@ int						ants_treat(t_lst **lst, t_data *env);
 int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
+int						sort_road(t_data *env);
 
 #endif
