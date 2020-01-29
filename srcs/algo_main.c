@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 16:48:26 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:03:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ int			algo_main(t_lst **lst, t_data *env)
 	}
 //	if (ants_treat(lst, env) == -1)
 //		return (-1);
+	print_res(env);
 	return (0);
 }
