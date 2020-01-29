@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 16:37:40 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:55:07 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,29 @@ void		reboot_nb_road(t_lst **lst)
 	}
 }
 
-void		change_road_bfs(t_lst **lst, int road) //Plus de -1, verif si ok , si oui effacer la ft
+void		change_road_bfs(t_lst **lst, int road, t_data *env)
 {
 	int		i;
+	t_road 	*tmp;
+	int		size_f;
 
 	i = 0;
-	while (i < (*lst)->nb_room)
+	tmp = env->road[road - 1];
+	size_f = tmp->size;
+	while (i <= size_f)
 	{
-		if ((*lst)->tab[i]->road == road)
-			(*lst)->tab[i]->road = 0;
-		i++;
+		if (ft_strcmp((*lst)->tab[env->blk]->name, tmp->name) == 0)
+			break;
+		else
+		{
+			tmp = tmp->next;
+			i++;
+		}
+	}
+	while (tmp)
+	{
+		(*lst)->tab[tmp->index]->road = 0;
+		tmp = tmp->next;
 	}
 }
 

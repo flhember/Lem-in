@@ -6,28 +6,56 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 18:13:41 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 12:04:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int			check_cross_bis(t_lst **lst, t_file **file, int i, int pos_blk)
+int			block_bad_road(t_lst **lst, int i)
 {
-	if (verif_back(lst, pos_blk, i, 0) == -1)
+	int		flag;
+	t_room	*tmp;
+
+	flag = 0;
+	tmp = (*lst)->tab[i];
+	(*lst)->tab[i]->road = -2;
+	while (flag == 0)
+	{
+		while (tmp)
+		{
+			if ((*lst)->tab[tmp->pos]->road == 0
+				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[i]->dist - 1
+				&& (*lst)->tab[tmp->pos]->start == 0)
+			{
+				(*lst)->tab[tmp->pos]->road = -2;
+				i = tmp->pos;
+			}
+			if ((*lst)->tab[tmp->pos]->start == 1)
+				return (0);
+			tmp = tmp->next;
+		}
+		tmp = (*lst)->tab[i];
+	}
+	return (0);
+}
+
+int			check_cross_bis(t_lst **lst, t_file **file, int i, t_data *env)
+{
+	if (verif_back(lst, env->blk, i, 0) == -1)
 	{
 		block_bad_road(lst, i);
 		(*lst)->ret_bfs = 1;
 		return (-1);
 	}
 	printf("road a goumer= %d\n", (*lst)->tab[(*lst)->cross]->road);
-	change_road_bfs(lst, (*lst)->tab[(*lst)->cross]->road);
+	change_road_bfs(lst, (*lst)->tab[(*lst)->cross]->road, env);
 	add_file(lst, file, (*lst)->cross, (*lst)->tab[i]->dist + 1);
 	(*lst)->cross = 0;
 	return (0);
 }
 
-int			check_cross(t_lst **lst, t_file **file, int i, int pos_blk)
+int			check_cross(t_lst **lst, t_file **file, int i, t_data *env)
 {
 	int		cmp;
 	t_room	*tmp;
@@ -50,37 +78,8 @@ int			check_cross(t_lst **lst, t_file **file, int i, int pos_blk)
 	printf("cmp = %d, size fil = %d\n", cmp, (*lst)->size_file);
 	if (cmp == 0 && (*lst)->cross != -1 && (*lst)->size_file == 1)
 	{
-		if (check_cross_bis(lst, file, i, pos_blk) == -1)
+		if (check_cross_bis(lst, file, i, env) == -1)
 			return (-1);
-	}
-	return (0);
-}
-
-int			block_bad_road(t_lst **lst, int i)
-{
-	int		flag;
-	t_room	*tmp;
-
-	flag = 0;
-	tmp = (*lst)->tab[i];
-	(*lst)->tab[i]->road = -2;
-	while (flag == 0)
-	{
-		while (tmp)
-		{
-			if ((*lst)->tab[tmp->pos]->road == 0
-				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[i]->dist - 1
-				&& (*lst)->tab[tmp->pos]->start == 0)
-			{
-				//ft del la maillon qui bloque
-				(*lst)->tab[tmp->pos]->road = -2;
-				i = tmp->pos;
-			}
-			if ((*lst)->tab[tmp->pos]->start == 1)
-				return (0);
-			tmp = tmp->next;
-		}
-		tmp = (*lst)->tab[i];
 	}
 	return (0);
 }

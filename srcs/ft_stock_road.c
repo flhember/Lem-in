@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 18:36:20 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:55:08 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			stock_it(t_lst **lst, t_data *env, int pos, int i)
 		return (-1);
 	new->name = ft_strdup((*lst)->tab[pos]->name);
 	new->nb_road = i;
+	new->index = (*lst)->tab[pos]->pos;
 	new->next = NULL;
 	if ((*lst)->tab[pos]->end == 1)
 		env->road[i - 1]->nb_cost = ft_lstsize_road(&env->road[i - 1]) + 1;
@@ -139,6 +140,7 @@ int			stock_road_other(t_lst **lst, t_data *env)
 	env->road[(*lst)->nb_road - 1]->nb_road = (*lst)->nb_road;
 	env->road[(*lst)->nb_road - 1]->name = ft_strdup((*lst)->tab[env->start]->name);
 	find_road(lst, env, (*lst)->nb_road, tmp);
+	env->road[(*lst)->nb_road - 1]->size = ft_lstsize_road(&env->road[(*lst)->nb_road - 1]);
 	reboot_print(lst);
 	return (0);
 }

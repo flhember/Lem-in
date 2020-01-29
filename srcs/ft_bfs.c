@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 18:13:24 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 11:56:11 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			add_file(t_lst **lst, t_file **file, int val, int dis)
 	return (0);
 }
 
-static int	fill_file(t_file **file, t_lst **lst, int i, int o)
+static int	fill_file(t_file **file, t_lst **lst, int i, t_data *env)
 {
 	t_room	*tmp;
 
@@ -58,14 +58,15 @@ static int	fill_file(t_file **file, t_lst **lst, int i, int o)
 	{
 		while (tmp)
 		{
+			env->blk = tmp->pos;
 			if (tmp->pos != i)
 			{
 				if ((*lst)->tab[tmp->pos]->road != 0
 			&& (*lst)->tab[tmp->pos]->road != -2 && (*lst)->tab[i]->end == 0)
-					check_cross(lst, file, i, tmp->pos);
+					check_cross(lst, file, i, env);
 				else if ((*lst)->tab[tmp->pos]->status != 0
 						|| (*lst)->tab[tmp->pos]->road == -2)
-					o = 1;
+					;
 				else if ((add_file(lst, file, tmp->pos,
 							(*lst)->tab[i]->dist + 1)) == -1)
 					return (-1);
@@ -93,7 +94,7 @@ static int	creat_file(t_data *env, t_lst **lst, t_file **file)
 		return (-1);
 	if (!(*file = (t_file*)ft_memalloc(sizeof(t_file))))
 		return (-1);
-	if ((fill_file(file, lst, env->start, 0)) == -1)
+	if ((fill_file(file, lst, env->start, env)) == -1)
 	{
 		free_file(file);
 		return (-1);
@@ -120,7 +121,7 @@ int			bfs(t_data *env, t_lst **lst, t_file *tmp)
 		if ((*lst)->tab[tmp->value]->end == 1)
 			(*lst)->ret_bfs = 0;
 		(*lst)->tab[tmp->value]->dist = tmp->dist;
-		if ((fill_file(&tmp, lst, tmp->value, 0)) == -1)
+		if ((fill_file(&tmp, lst, tmp->value, env)) == -1)
 		{
 			free_file(&file);
 			printf("OUINON!\n");

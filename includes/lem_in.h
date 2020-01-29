@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 17:15:30 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:14:58 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct			s_road
 	char				*name;
 	int					nb_road;
 	int					nb_cost;
+	int					index;
 	int					size;
 	struct s_road		*next;
 }						t_road;
@@ -86,6 +87,7 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					blk;
 	int					tmp_pos;
 	int					flags;
 	int					se;
@@ -132,24 +134,20 @@ void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
 int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
-void						print_adja_road(t_lst **lst, t_data *env); // a tej ft test
+void					print_adja_road(t_lst **lst, t_data *env); // a tej ft test
 void					del_first_file(t_file **file);
 void					clean_status(t_lst **lst);
 void					clean_dist(t_lst **lst);
-void					change_road_bfs(t_lst **lst, int road);
+void					change_road_bfs(t_lst **lst, int road, t_data *env);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
 int						stock_road_other(t_lst **lst, t_data *env);
 int						creat_road(t_lst **lst, t_data *env);
 int						stock_start_end(t_lst **lst, t_data *env);
-int						block_bad_road(t_lst **lst, int i);
 int						find_nb_pos(t_lst **lst, t_data *env);
 int						verif_back(t_lst **lst, int pos_blk, int i, int flag);
 int						ants_treat(t_lst **lst, t_data *env);
-int						check_cross(t_lst **lst, t_file **file, int i,
-		int pos_blk);
-int						check_cross_bis(t_lst **lst, t_file **file,
-		int i, int pos_blk);
+int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
 
