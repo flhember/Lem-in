@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/16 15:57:52 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/29 11:18:37 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,9 @@ int			stock_road(t_lst **lst, t_data *env)
 	env->road[(*lst)->nb_road] = 0;
 	parse_road(lst, env, NULL);
 	print_adja_road(lst, env);
-<<<<<<< HEAD
 	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
 	ants_treat(lst, env);
-=======
 	env->nb_road_f = (*lst)->nb_road;
 	ft_printf("nb env %d | nb lst %d\n", env->nb_road_f, (*lst)->nb_road);
->>>>>>> ed4cc7cfa9e9b8a6e9d67a9e0bd544f89c669164
 	return (0);
 }
