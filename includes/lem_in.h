@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 18:47:00 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:35:26 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@
 typedef struct			s_road
 {
 	char				*name;
-	int					state; // 1 -> 0 collision | -1 -> collision
+	int					state;	// 1 -> 0 collision | -1 -> collision
+	int					col;	// nombre de collision sur 1 chemin
 	int					nb_road;
 	int					nb_cost;
 	int					index;
-	int					size;
+	size_t				size;
 	struct s_road		*next;
 }						t_road;
 
