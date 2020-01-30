@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/01/29 18:46:58 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:12:04 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int solve_cross(t_data *env)
 				{
 					//ft_printf("\t\tcolission entre %s et %s au chemin %d et %d\n", act->name, nex->name, i, j);
 					env->road[i]->state = -1;
+					env->road[i]->col++;
 					env->road[j]->state = -1;
+					env->road[j]->col++;
 					col++;
 				}
 			//	if (nex->next != NULL)
@@ -87,7 +89,7 @@ int solve_cross(t_data *env)
 		if (env->road[i]->state == -1)
 		{
 			ft_printf("_____________________");
-			ft_printf("\nChemin [%d] -> KO\n", i);
+			ft_printf("\nChemin [%d] -> KO | %d collisions\n", i, env->road[i]->col);
 			ft_printf("_____________________\n\n");
 		}
 		else
@@ -114,6 +116,7 @@ int sort_road(t_data *env)
 	while (i < env->nb_road_f - 1)
 	{
 		env->road[i]->state = 0;
+		env->road[i]->col = 0;
 		if (env->road[i]->size > env->road[i + 1]->size)
 		{
 			tmp = env->road[i];
