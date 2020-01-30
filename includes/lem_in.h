@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 14:07:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:05:06 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct			s_road
 {
 	char				*name;
 	int					nb_road;
+	int					ant_now;
+	int					ant_move;
+	int					nb_ant;
 	int					nb_cost;
 	int					index;
 	int					size;
@@ -88,10 +91,13 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					nb_ant_go;
+	int					ant_finish;
 	int					blk;
 	int					tmp_pos;
 	int					flags;
 	int					se;
+	int					nb_con;
 	int					start;
 	int					end;
 	int					nb_pos;
@@ -151,5 +157,6 @@ int						ants_treat(t_lst **lst, t_data *env);
 int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
+void					print_res(t_data *env);
 
 #endif

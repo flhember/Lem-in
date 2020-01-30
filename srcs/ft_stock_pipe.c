@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 13:53:44 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:26:46 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	{
 		if (pipe->pipe == 1)
 		{
+			env->nb_con++;
 			if ((find_stock_pipe(env, lst, pipe)) == -1)
 				return (-1);
 		}

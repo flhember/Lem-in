@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 15:48:37 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:59:21 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-static void	print_file(t_file **file, t_lst **lst)
+/*static void	print_file(t_file **file, t_lst **lst)
 {
 	t_file *cpy;
 
@@ -24,7 +24,7 @@ static void	print_file(t_file **file, t_lst **lst)
 		cpy = cpy->next;
 	}
 	printf("\n");
-}
+}*/
 
 int			add_file(t_lst **lst, t_file **file, int val, int dis)
 {
@@ -33,7 +33,6 @@ int			add_file(t_lst **lst, t_file **file, int val, int dis)
 
 	new = NULL;
 	tmp = *file;
-//	printf("add %s\n", (*lst)->tab[val]->name);
 	(*lst)->size_file++;
 	(*lst)->tab[val]->status = 1;
 	if (!(new = (t_file*)ft_memalloc(sizeof(t_file))))
@@ -115,7 +114,6 @@ int			bfs(t_data *env, t_lst **lst, t_file *tmp)
 	if (creat_file(env, lst, &file) == -1)
 		return (-1);
 	tmp = file;
-	print_file(&file, lst);
 	while (tmp && (*lst)->ret_bfs == -1)
 	{
 		if ((*lst)->tab[tmp->value]->end == 1)
@@ -124,7 +122,6 @@ int			bfs(t_data *env, t_lst **lst, t_file *tmp)
 		if ((fill_file(&tmp, lst, tmp->value, env)) == -1)
 		{
 			free_file(&file);
-			printf("OUINON!\n");
 			return (-1);
 		}
 		(*lst)->tab[tmp->value]->status = 2;
@@ -133,6 +130,5 @@ int			bfs(t_data *env, t_lst **lst, t_file *tmp)
 	}
 	clean_status(lst);
 	free_file(&file);
-	ft_printf("fin bfs\n");
 	return ((*lst)->ret_bfs);
 }

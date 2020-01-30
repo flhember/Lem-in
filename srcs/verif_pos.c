@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 17:04:30 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/19 16:13:23 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:45:11 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			verif_pos(t_stock **lst)
 
 	i = 0;
 	cpy = *lst;
+	printf("oui?\n");
 	while (cpy->next)
 	{
 		if (cpy->pipe == 0 && cpy->com == 0)

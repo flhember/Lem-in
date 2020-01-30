@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 14:48:07 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:59:39 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int			check_cross_bis(t_lst **lst, t_file **file, int i, t_data *env)
 		(*lst)->ret_bfs = 1;
 		return (-1);
 	}
-	printf("road a goumer= %d\n", (*lst)->tab[(*lst)->cross]->road);
 	change_road_bfs(lst, (*lst)->tab[(*lst)->cross]->road, env);
 	add_file(lst, file, (*lst)->cross, (*lst)->tab[i]->dist + 1);
 	(*lst)->cross = 0;
@@ -63,7 +62,6 @@ int			check_cross(t_lst **lst, t_file **file, int i, t_data *env)
 	cmp = 0;
 	tmp = (*lst)->tab[i];
 	(*lst)->cross = -1;
-	printf("rentre pour %s\n", (*lst)->tab[i]->name);
 	while (tmp)
 	{
 		if ((*lst)->tab[tmp->pos]->road == -1)
@@ -75,7 +73,6 @@ int			check_cross(t_lst **lst, t_file **file, int i, t_data *env)
 			cmp++;
 		tmp = tmp->next;
 	}
-	printf("cmp = %d, size fil = %d\n", cmp, (*lst)->size_file);
 	if (cmp == 0 && (*lst)->cross != -1 && (*lst)->size_file == 1)
 	{
 		if (check_cross_bis(lst, file, i, env) == -1)
@@ -83,47 +80,6 @@ int			check_cross(t_lst **lst, t_file **file, int i, t_data *env)
 	}
 	return (0);
 }
-
-/*int			verif_back(t_lst **lst, int pos_blk, int i, int flag)
-{
-	int		nb;
-	int		cmp;
-	int		pos;
-	t_room	*tmp;
-	(*lst)->tmp_pos = pos_blk;
-	tmp = (*lst)->tab[pos_blk];
-	nb = (*lst)->tab[pos_blk]->road;
-	pos = 0;
-	cmp = 0;
-	while (flag != -1)
-	{
-		while (tmp)
-		{
-			flag = -1;
-			if ((*lst)->tab[tmp->pos]->start == 1)
-				flag = 1;
-			else if (tmp->pos != i && (*lst)->tab[tmp->pos]->road == 0
-					&& (*lst)->tab[tmp->pos]->start == 0
-					&& (*lst)->tab[tmp->pos]->end == 0)
-				cmp++;
-			else if (((*lst)->tab[tmp->pos]->road == nb)
-				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[(*lst)->tmp_pos]->dist -1)
-			{
-				flag = 0;
-				pos = tmp->pos;
-				(*lst)->tmp_pos = pos;
-			}
-			tmp = tmp->next;
-		}
-		if (cmp >= 1 && flag == 1)
-			return (1);
-		else if (flag == 0)
-			tmp = (*lst)->tab[pos];
-		else if (flag == -1 || flag == 1)
-			return (-1);
-	}
-	return (-1);
-}*/
 
 int			check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
 {
@@ -140,7 +96,6 @@ int			check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
 				&& (*lst)->tab[tmp->pos]->start == 0
 				&& (*lst)->tab[tmp->pos]->end == 0)
 		{
-			printf("\n-> %s\n", (*lst)->tab[tmp->pos]->name);
 			(*lst)->pos_blk_f = tmp->pos;
 			(*lst)->cmp++;
 		}
@@ -167,15 +122,11 @@ int			verif_back(t_lst **lst, int pos_blk, int i, int flag)
 	tmp = (*lst)->tab[pos_blk];
 	nb = (*lst)->tab[pos_blk]->road;
 	(*lst)->pos_blk = pos_blk;
-	printf("name blk = %s\n", (*lst)->tab[pos_blk]->name);
 	while (flag != 1)
 	{
 		flag = check_verif_back(lst, i, nb, tmp);
 		if ((*lst)->cmp >= 1 && flag == 1)
-		{
-			printf("c'est yo?\n");
 			return (1);
-		}
 		else if (flag == 0)
 			tmp = (*lst)->tab[(*lst)->tmp_pos];
 		else if (flag == -1)
@@ -183,43 +134,3 @@ int			verif_back(t_lst **lst, int pos_blk, int i, int flag)
 	}
 	return (-1);
 }
-
-/*int			verif_back(t_lst **lst, int pos_blk, int i, int flag)
-{
-	int		nb;
-	int		cmp;
-	int		pos;
-	t_room	*tmp;
-
-	tmp = (*lst)->tab[pos_blk];
-	nb = (*lst)->tab[pos_blk]->road;
-	pos = 0;
-	cmp = 0;
-	while (flag != -1)
-	{
-		while (tmp)
-		{
-			flag = -1;
-			if ((*lst)->tab[tmp->pos]->start == 1)
-				flag = 1;
-			else if (tmp->pos != i && (*lst)->tab[tmp->pos]->road == 0
-					&& (*lst)->tab[tmp->pos]->start == 0
-					&& (*lst)->tab[tmp->pos]->end == 0)
-				cmp++;
-			else if (((*lst)->tab[tmp->pos]->road == nb)
-				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[(*lst)->tmp_pos]->dist - 1)
-			{
-				flag = 0;
-				pos = tmp->pos;
-			}
-			tmp = tmp->next;
-		}
-		if (cmp >= 1 && flag == 1)
-			return (1);
-		else if (flag == 0)
-			tmp = (*lst)->tab[pos];
-		else if (flag == -1 || flag == 1)
-			return (-1);
-	}
-	return (-1);
-}*/

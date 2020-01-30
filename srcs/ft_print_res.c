@@ -6,8 +6,138 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 16:03:14 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:55:00 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
+
+int			find_nb_max(t_data *env)
+{
+	int		i;
+	int		nb_max;
+
+	i = 0;
+	nb_max = 0;
+	while (i < env->nb_road_f)
+	{
+		if (env->road[i]->nb_ant > nb_max)
+			nb_max = env->road[i]->nb_ant;
+		i++;
+	}
+	return (nb_max);
+}
+
+void		print_start(t_data *env)
+{
+	int		i;
+	t_road	*tmp;
+
+	i = 0;
+	tmp = NULL;
+	while (i < env->nb_road_f)
+	{
+		if (env->road[i]->nb_ant > 0)
+		{
+			tmp = env->road[i];
+			tmp = tmp->next;
+			ft_printf("L%d-%s ", env->nb_ant_go, tmp->name);
+			tmp->ant_now = env->nb_ant_go;
+			env->nb_ant_go++;
+			env->road[i]->nb_ant--;
+		}
+		i++;
+	}
+}
+
+void		print_cont_bis(t_data *env, int search, int flg, int i)
+{
+	t_road	*tmp;
+
+	while (flg == 1 && i < env->nb_road_f)
+	{
+		tmp = env->road[i++];
+		while (tmp)
+		{
+			if (tmp->ant_now == search)
+			{
+				flg = 0;
+				tmp->ant_now = 0;
+				if (tmp->next)
+				{
+					tmp = tmp->next;
+					tmp->ant_move = search;
+					ft_printf("L%d-%s ", search, tmp->name);
+				}
+				else
+					env->ant_finish++;
+			}
+			tmp = tmp->next;
+		}
+	}
+}
+
+void		print_cont(t_data *env)
+{
+	int		start;
+
+	start = 1 + env->ant_finish;
+	while (start < env->nb_ant_go)
+	{
+		print_cont_bis(env, start, 1, 0);
+		start++;
+	}
+}
+
+void		reset_ant(t_data *env)
+{
+	int		i;
+	t_road	*tmp;
+
+	i = 0;
+	while (i < env->nb_road_f)
+	{
+		tmp = env->road[i];
+		while (tmp)
+		{
+			if (tmp->ant_move > 0)
+			{
+				tmp->ant_now = tmp->ant_move;
+				tmp->ant_move = 0;
+			}
+			tmp = tmp->next;
+		}
+		i++;
+	}
+}
+
+void		print_res(t_data *env)
+{
+	int		i;
+	int		nb_max;
+
+	i = 0;
+
+	env->road[1]->nb_ant = 20;
+	env->road[2]->nb_ant = 20;
+	env->nb_road_f = 3;
+
+	nb_max = find_nb_max(env);
+	env->nb_ant_go = 1;
+	env->ant_finish = 0;
+	while (i < nb_max)
+	{
+		if (i > 0)
+			print_cont(env);
+		print_start(env);
+		reset_ant(env);
+		ft_printf("\n");
+		i++;
+	}
+	while (env->ant_finish < env->nb_ant_go - 1)
+	{
+		print_cont(env);
+		reset_ant(env);
+		ft_printf("\n");
+	}
+}

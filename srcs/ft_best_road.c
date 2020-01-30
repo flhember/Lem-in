@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:02:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 17:15:28 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:05:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ int			best_road(t_lst **lst, t_data *env)
 	}
 	if (stock_road(lst, env) == -1)
 		return (-1);
-	ft_printf("tout vas bien\n");
 	return (0);
 }

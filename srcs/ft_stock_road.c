@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/29 14:06:27 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:04:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 			if (tmp->pos != env->tmp_pos && (((*lst)->tab[tmp->pos]->road == i
 						&& (*lst)->tab[tmp->pos]->print == 0) || (*lst)->tab[tmp->pos]->end == 1))
 			{
-				//if ((*lst)->tab[tmp->pos]->end == 0)
 				(*lst)->tab[tmp->pos]->print = 1;
 				env->tmp_pos = tmp->pos;
 				stock_it(lst, env, env->tmp_pos, i);
@@ -135,8 +134,6 @@ int			stock_road_other(t_lst **lst, t_data *env)
 	t_room	*tmp;
 
 	tmp = (*lst)->tab[env->start];
-	ft_printf("la?, nb ro %d\n", (*lst)->nb_road);
-	printf("t = %d\n", (env->nb_pos * 2));
 	env->road[(*lst)->nb_road - 1]->nb_road = (*lst)->nb_road;
 	env->road[(*lst)->nb_road - 1]->name = ft_strdup((*lst)->tab[env->start]->name);
 	find_road(lst, env, (*lst)->nb_road, tmp);
