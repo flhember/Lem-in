@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 16:04:57 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:43:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void		print_adja_road(t_lst **lst, t_data *env)
 	{
 		cpy = env->road[i];
 		printf("\tROAD = %d, %d room: \n-name:%s", i, cpy->nb_cost, cpy->name);
+		(*lst)->total_room += cpy->nb_cost;
 		while (cpy->next)
 		{
 			if (cpy->next)
@@ -32,6 +33,7 @@ void		print_adja_road(t_lst **lst, t_data *env)
 		printf("-> NULL \n\n");
 		i++;
 	}
+	ft_printf("[cost = %d] [total = %d]\n", cpy->nb_cost, (*lst)->total_room);
 	printf("\n\n");
 }
 

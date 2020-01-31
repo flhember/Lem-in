@@ -128,6 +128,8 @@ int			algo_main(t_lst **lst, t_data *env)
 	}
 //	if (ants_treat(lst, env) == -1)
 //		return (-1);
+	env->nb_road_f = (*lst)->nb_road;
+	sort_road(env);
 //	print_res(env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 19:13:26 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:41:19 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,29 @@
 # define PEND		8
 # define PIPE		16
 
+typedef struct			s_fail
+{
+	int					id;
+	struct s_fail		*next;
+}						t_fail;
+
 typedef struct			s_road
 {
 	char				*name;
+	int					state;	// 1 -> 0 collision | -1 -> collision
+	int					col;	// nombre de collision sur 1 chemin
 	int					nb_road;
 	int					ant_now;
 	int					ant_move;
 	int					nb_ant;
 	int					nb_cost;
+	int					ants;
+	int					id_ants;
+	int					count_ants;
 	int					index;
-	int					size;
+	size_t				size;
 	struct s_road		*next;
+	t_fail				*f_road;
 }						t_road;
 
 typedef struct			s_file
@@ -68,6 +80,7 @@ typedef struct			s_lst
 	int					pos_blk;
 	int					pos_blk_f;
 	int					nb_road;
+	int					total_room;
 	int					nb_best_move;
 	int					nb_room;
 	int					ret_bfs;
@@ -94,6 +107,7 @@ typedef struct			s_data
 	int					nb_ant_go;
 	int					ant_finish;
 	int					blk;
+	int					nb_road_f;
 	int					tmp_pos;
 	int					flags;
 	int					se;
@@ -103,7 +117,6 @@ typedef struct			s_data
 	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
-	int					nb_road_f;
 	t_road				**road;
 }						t_data;
 
@@ -149,6 +162,9 @@ void					clean_dist(t_lst **lst);
 void					change_road_bfs(t_lst **lst, int road, t_data *env);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
+void					free_road(t_road **lst);
+int						stock_start_end(t_lst **lst, t_data *env);
+
 int						stock_road_other(t_lst **lst, t_data *env);
 int						creat_road(t_lst **lst, t_data *env);
 int						stock_start_end(t_lst **lst, t_data *env);
@@ -160,4 +176,6 @@ int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
 void					print_res(t_data *env);
 
+int						sort_road(t_data *env);
+int						choose_road(t_data *env);
 #endif

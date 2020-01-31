@@ -130,5 +130,6 @@ int			bfs(t_data *env, t_lst **lst, t_file *tmp)
 	}
 	clean_status(lst);
 	free_file(&file);
+	ft_printf("fin bfs\n");
 	return ((*lst)->ret_bfs);
 }
