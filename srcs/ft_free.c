@@ -20,25 +20,10 @@ void		free_stock(t_stock **lst)
 	free(*lst);
 }
 
-void		free_file(t_file **file)
-{
-	if ((*file)->next)
-		free_file(&(*file)->next);
-	free(*file);
-}
-
 void		free_lst_tab(t_room **lst)
 {
 	if ((*lst)->next)
 		free_lst_tab(&(*lst)->next);
-	ft_strdel(&(*lst)->name);
-	free(*lst);
-}
-
-void		free_road(t_road **lst)
-{
-	if ((*lst)->next)
-		free_road(&(*lst)->next);
 	ft_strdel(&(*lst)->name);
 	free(*lst);
 }
@@ -59,7 +44,33 @@ void		free_lst_adja(t_lst **lst, t_data *env)
 		}
 		i++;
 	}
-	i = 0;
 	free((*lst)->tab);
 	free(*lst);
+}
+
+void		free_road_tab(t_road **lst)
+{
+	if ((*lst)->next)
+		free_road_tab(&(*lst)->next);
+	ft_strdel(&(*lst)->name);
+	free(*lst);
+}
+
+void		free_road_adja(t_data *env)
+{
+	int		i;
+
+	i = 0;
+	while (i < env->nb_road_f)
+	{
+		if (env->road[i]->next)
+			free_road_tab(&env->road[i]);
+		else
+		{
+			ft_strdel(&env->road[i]->name);
+			free(env->road[i]);
+		}
+		i++;
+	}
+	free(env->road);
 }

@@ -65,11 +65,19 @@ int			best_road(t_lst **lst, t_data *env)
 
 	ds = 0;
 	if (bfs_best(env, lst, NULL) == -1)
+	{
+		ft_printf("bfs road best?\n");
 		return (-1);
+	}
 	ds = (*lst)->tab[env->end]->dist;
 	(*lst)->nb_road++;
 	if ((best_road_bis(env, lst, ds, NULL)) == -1)
+	{
+		ft_printf("best road best?\n");
 		return (-1);
-	(*lst)->nb_road++;
+	}
+	if (stock_road(lst, env) == -1)
+		return (-1);
+	ft_printf("tout vas bien\n");
 	return (0);
 }

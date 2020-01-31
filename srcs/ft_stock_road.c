@@ -48,6 +48,7 @@ int			stock_it(t_lst **lst, t_data *env, int pos, int i)
 		return (-1);
 	new->name = ft_strdup((*lst)->tab[pos]->name);
 	new->nb_road = i;
+	new->index = (*lst)->tab[pos]->pos;
 	new->next = NULL;
 	if ((*lst)->tab[pos]->end == 1)
 		env->road[i - 1]->nb_cost = ft_lstsize_road(&env->road[i - 1]) + 1;
@@ -57,23 +58,32 @@ int			stock_it(t_lst **lst, t_data *env, int pos, int i)
 	return (0);
 }
 
+void		reboot_print(t_lst **lst)
+{
+	int		i;
+
+	i = 0;
+	while (i < (*lst)->nb_room)
+	{
+		if ((*lst)->tab[i]->print == 1)
+			(*lst)->tab[i]->print = 0;
+		i++;
+	}
+}
 int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 {
-	int		pos;
-
-	pos = env->start;
-	while ((*lst)->tab[pos]->end == 0)
+	env->tmp_pos = env->start;
+	while ((*lst)->tab[env->tmp_pos]->end == 0)
 	{
 		while (tmp)
 		{
-			if (tmp->pos != pos && (*lst)->tab[tmp->pos]->print == 0
-					&& ((*lst)->tab[tmp->pos]->road == i
-						|| (*lst)->tab[tmp->pos]->end == 1))
+			if (tmp->pos != env->tmp_pos && (((*lst)->tab[tmp->pos]->road == i
+						&& (*lst)->tab[tmp->pos]->print == 0) || (*lst)->tab[tmp->pos]->end == 1))
 			{
-				pos = tmp->pos;
-				stock_it(lst, env, pos, i);
-				if ((*lst)->tab[tmp->pos]->end == 0)
-					(*lst)->tab[pos]->print = 1;
+				//if ((*lst)->tab[tmp->pos]->end == 0)
+				(*lst)->tab[tmp->pos]->print = 1;
+				env->tmp_pos = tmp->pos;
+				stock_it(lst, env, env->tmp_pos, i);
 				tmp = NULL;
 			}
 			else
@@ -83,7 +93,7 @@ int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 					return (-1);
 			}
 		}
-		tmp = (*lst)->tab[pos];
+		tmp = (*lst)->tab[env->tmp_pos];
 	}
 	return (0);
 }
@@ -91,116 +101,9 @@ int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 int			parse_road(t_lst **lst, t_data *env, t_room *tmp)
 {
 	int		i;
-	int		er;
 
 	i = 1;
-	er = 0;
-	while (i < (*lst)->nb_road)
-	{
-		tmp = (*lst)->tab[env->start];
-		env->road[i - 1]->nb_road = i;
-		env->road[i - 1]->name = ft_strdup((*lst)->tab[env->start]->name);
-		if (find_road(lst, env, i, tmp) == -1)
-		{
-			env->road[i - 1]->name = NULL;
-			(*lst)->nb_road--;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int			stock_start_end(t_lst **lst, t_data *env)
-{
-	if (!(env->road = ft_memalloc(sizeof(t_road) * 1)))
-		return (-1);
-	if (!(env->road[0] = ft_memalloc(sizeof(t_road))))
-		return (-1);
-	env->road[0]->nb_road = 0;
-	env->road[0]->name = ft_strdup((*lst)->tab[env->start]->name);
-	stock_it(lst, env, env->end, 1);
-	print_adja_road(lst, env);
-	return (0);
-}
-
-int		treat_better(int limit, t_data *env)
-{
-	int *tab;
-	int i;
-	t_road *cpy;
-	int total;
-
-	total = 0;
-	i = 0;
-	if (!(tab = ft_memalloc(sizeof(int) * limit)))
-		return (-1);
-	while (i < limit)
-	{
-		cpy = env->road[i];
-		tab[i] = (env->nb_ants / limit) + cpy->nb_cost;
-		total += tab[i];
-		i++;
-	}
-	free(tab);
-	total = total / limit;
-	return (total);
-}
-
-int		final_rep(int limit, int total_cost, t_data *env)
-{
-	int i;
-	int final_ants;
-
-	i = 0;
-	final_ants =0;
-	while (i < limit)
-	{
-		env->road[i]->ants = total_cost - env->road[i]->nb_cost;
-		env->road[i]->ants = env->road[i]->ants < 0 ? env->road[i]->ants* (-1) : env->road[i]->ants;
-		i++;
-	}
-	i = 0;
-//	ft_printf("\n\n____________________________________________\n\n");
-	while (i < limit)
-	{
-		final_ants += env->road[i]->ants;
-		i++;
-	}
-//	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
-	i = 0;
-	final_ants = env->nb_ants - final_ants;
-	while (i < limit && final_ants > 0)
-	{
-		env->road[i]->ants = env->road[i]->ants + 1;
-		final_ants--;
-		i++;
-		if (i == limit && final_ants > 0)
-			i = 0;
-	}
-	i = 0;
-	final_ants = 0;
-	while (i < limit)
-	{
-		final_ants += env->road[i]->ants;
-//		ft_printf("tab[%d] = %d fourmis\n", i, env->road[i]->ants);
-		i++;
-	}
-//	ft_printf("TOTAL ANTS = %d | REAL ANTS = %d\n", final_ants, env->nb_ants);
-	return (1);
-}
-
-void	display(int limit, int total_cost, t_data *env)
-{
-	(void)total_cost;
-
-	int i;
-	int j;
-	int total;
-	
-	i = 0;
-	j = 0;
-	total = 0;
-	while (i < limit)
+	while (i <= (*lst)->nb_road)
 	{
 		total += env->road[i]->nb_cost * env->road[i]->ants;
 		i++;
@@ -210,8 +113,8 @@ void	display(int limit, int total_cost, t_data *env)
 	{
 		while (j < limit)
 		{
-			env->road[j]->count_ants++;
-			j++;
+			env->road[i - 1]->nb_road = 0;
+			ft_strdel(&(env->road[i - 1]->name));
 		}
 		j = 0;
 		i++;
@@ -265,24 +168,57 @@ int		ants_treat(t_lst **lst, t_data *env)
 	return (1);
 }
 
+int			stock_start_end(t_lst **lst, t_data *env)
+{
+	if (!(env->road = ft_memalloc(sizeof(t_road) * 1)))
+		return (-1);
+	if (!(env->road[0] = ft_memalloc(sizeof(t_road))))
+		return (-1);
+	env->road[0]->nb_road = 0;
+	env->road[0]->name = ft_strdup((*lst)->tab[env->start]->name);
+	stock_it(lst, env, env->end, 1);
+	env->nb_road_f = 1;
+	print_adja_road(lst, env);
+	return (0);
+}
+
+int			stock_road_other(t_lst **lst, t_data *env)
+{
+	t_room	*tmp;
+
+	tmp = (*lst)->tab[env->start];
+	ft_printf("la?, nb ro %d\n", (*lst)->nb_road);
+	printf("t = %d\n", (env->nb_pos * 2));
+	env->road[(*lst)->nb_road - 1]->nb_road = (*lst)->nb_road;
+	env->road[(*lst)->nb_road - 1]->name = ft_strdup((*lst)->tab[env->start]->name);
+	find_road(lst, env, (*lst)->nb_road, tmp);
+	env->road[(*lst)->nb_road - 1]->size = ft_lstsize_road(&env->road[(*lst)->nb_road - 1]);
+	reboot_print(lst);
+	return (0);
+}
+
 int			stock_road(t_lst **lst, t_data *env)
 {
+	parse_road(lst, env, NULL);
+	print_adja_road(lst, env);
+	env->nb_road_f = (*lst)->nb_road;
+	return (0);
+}
+
+int			creat_road(t_lst **lst, t_data *env)
+{
 	int		i;
+	(void)lst;
 
 	i = 0;
-	if (!(env->road = ft_memalloc(sizeof(t_road) * ((*lst)->nb_road))))
+	if (!(env->road = ft_memalloc(sizeof(t_road) * (env->nb_pos * 2))))
 		return (-1);
-	while (i < (*lst)->nb_road)
+	while (i < (env->nb_pos * 2))
 	{
 		if (!(env->road[i] = ft_memalloc(sizeof(t_road))))
 			return (-1);
 		i++;
 	}
-	env->road[(*lst)->nb_road] = 0;
-	parse_road(lst, env, NULL);
-	print_adja_road(lst, env);
-//	ft_printf("______________________________________________\n\n\n");
-//	ft_printf("[ TOTAL ROOM = %d ]\n", (*lst)->total_room);
-	ants_treat(lst, env);
+	env->road[env->nb_pos * 2] = 0;
 	return (0);
 }

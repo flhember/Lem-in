@@ -25,19 +25,23 @@ void		check_nb_road(t_lst **lst)
 			check = 1;
 		i++;
 	}
-	if (check == 1)
-		(*lst)->nb_road--;
+//	if (check == 1)
+//		(*lst)->nb_road--;
 }
 
 static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 {
 	tmp = (*lst)->tab[j];
+	//printf("name = %s\n", (*lst)->tab[j]->name);
 	while (tmp)
 	{
 		if (tmp->pos == (*lst)->tab[i]->pos && (*lst)->tab[j]->road == 0)
 		{
 			if ((*lst)->tab[j]->start == 0 && (*lst)->tab[j]->end == 0)
+			{
+				//printf("%s -> nb = %d\n", (*lst)->tab[j]->name, (*lst)->nb_road);
 				(*lst)->tab[j]->road = (*lst)->nb_road;
+			}
 			return (1);
 		}
 		tmp = tmp->next;
@@ -54,7 +58,10 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 			return (-1);
 		if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 		{
-			if ((pars_pipe_best(lst, NULL, i, j)) == 0)
+	//		printf("rentre pour %s\n", (*lst)->tab[j]->name);
+			if (ds == 0 && (*lst)->tab[j]->start == 0)
+				j++;
+			else if ((pars_pipe_best(lst, NULL, i, j)) == 0)
 				j++;
 			else
 			{
@@ -73,18 +80,30 @@ int			other_road(t_lst **lst, t_data *env)
 {
 	int		i;
 	int		ds;
+	int 	ret;
 
 	ds = 0;
+	ret = 0;
 	i = env->end;
 	(*lst)->end = i;
 	(*lst)->nb_road++;
-	while (bfs(env, lst) == 0)
+	(*lst)->ret_bfs = -1;
+	while (bfs(env, lst, NULL) >= 0)
 	{
 		check_nb_road(lst);
 		ds = (*lst)->tab[(*lst)->end]->dist;
-		if ((other_road_bis(lst, --ds, (*lst)->end, 0)) == -1)
-			return (-1);
-		(*lst)->nb_road++;
+		if ((*lst)->ret_bfs == 0)
+		{
+			if ((other_road_bis(lst, --ds, (*lst)->end, 0)) == -1)
+				return (-1);
+			else
+				stock_road_other(lst, env);
+			(*lst)->nb_road++;
+		}
+	print_adja_road(lst, env);
+		(*lst)->ret_bfs = -1;
 	}
+//	print_adja(lst, env);
+	//print_adja2(lst, env);
 	return (0);
 }

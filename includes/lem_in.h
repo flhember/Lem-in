@@ -25,15 +25,26 @@
 # define PEND		8
 # define PIPE		16
 
+typedef struct			s_fail
+{
+	int					id;
+	struct s_fail		*next;
+}						t_fail;
+
 typedef struct			s_road
 {
 	char				*name;
+	int					state;	// 1 -> 0 collision | -1 -> collision
+	int					col;	// nombre de collision sur 1 chemin
 	int					nb_road;
 	int					nb_cost;
 	int					ants;
 	int					id_ants;
 	int					count_ants;
+	int					index;
+	size_t				size;
 	struct s_road		*next;
+	t_fail				*f_road;
 }						t_road;
 
 typedef struct			s_file
@@ -61,6 +72,10 @@ typedef struct			s_room
 typedef struct			s_lst
 {
 	t_room				**tab;
+	int					tmp_pos;
+	int					cmp;
+	int					pos_blk;
+	int					pos_blk_f;
 	int					nb_road;
 	int					total_room;
 	int					nb_best_move;
@@ -86,6 +101,8 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					blk;
+	int					tmp_pos;
 	int					flags;
 	int					se;
 	int					start;
@@ -111,6 +128,7 @@ void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
+void					free_road_adja(t_data *env);
 t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env, size_t i);
 t_lst					*parsing_main(t_data *env);
@@ -118,23 +136,36 @@ size_t					ft_lstsize_stock(t_stock **room);
 size_t					ft_lstsize_room(t_room **room);
 int						ft_lstsize_road(t_road **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
+void					print_adja2(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
-int						bfs(t_data *env, t_lst **lst);
+int						bfs(t_data *env, t_lst **lst, t_file *tmp);
 int						bfs_best(t_data *env, t_lst **lst, t_file *tmp);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
 int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
+void					print_adja_road(t_lst **lst, t_data *env); // a tej ft test
 void					del_first_file(t_file **file);
 void					clean_status(t_lst **lst);
 void					clean_dist(t_lst **lst);
-void					change_road_bfs(t_lst **lst, int road);
+void					change_road_bfs(t_lst **lst, int road, t_data *env);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
 void					free_road(t_road **lst);
 int						stock_start_end(t_lst **lst, t_data *env);
 
+int						stock_road_other(t_lst **lst, t_data *env);
+int						creat_road(t_lst **lst, t_data *env);
+int						stock_start_end(t_lst **lst, t_data *env);
+int						find_nb_pos(t_lst **lst, t_data *env);
+int						verif_back(t_lst **lst, int pos_blk, int i, int flag);
+int						ants_treat(t_lst **lst, t_data *env);
+int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
+int						add_file(t_lst **lst, t_file **file, int val,
+		int dis);
+int						sort_road(t_data *env);
+int						choose_road(t_data *env);
 #endif

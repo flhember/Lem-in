@@ -12,7 +12,7 @@
 
 #include <lem_in.h>
 
-void		ft_reboot_for_oter(t_lst **lst)
+static void	ft_reboot_for_oter(t_lst **lst)
 {
 	int		i;
 
@@ -26,7 +26,7 @@ void		ft_reboot_for_oter(t_lst **lst)
 	}
 }
 
-int			find_end(t_lst **lst, t_data *env)
+static int	find_end(t_lst **lst, t_data *env)
 {
 	size_t	i;
 
@@ -45,7 +45,7 @@ int			find_end(t_lst **lst, t_data *env)
 	return (-1);
 }
 
-int			find_start(t_lst **lst, t_data *env)
+static int	find_start(t_lst **lst, t_data *env)
 {
 	size_t	i;
 
@@ -73,8 +73,10 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 	s = 0;
 	if ((find_start(lst, env) == -1) || (find_end(lst, env) == -1))
 		return (-1);
-	e = ft_lstsize_room(&(*lst)->tab[env->end]);
-	s = ft_lstsize_room(&(*lst)->tab[env->start]);
+	if ((e = ft_lstsize_room(&(*lst)->tab[env->end])) == 0)
+		return (-1);
+	if ((s = ft_lstsize_room(&(*lst)->tab[env->start])) == 0)
+		return (-1);
 	if (e <= s)
 		env->nb_pos = e;
 	else
@@ -85,8 +87,6 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 int			algo_main(t_lst **lst, t_data *env)
 {
 	(*lst)->nb_room = env->nb_room;
-	if ((find_nb_pos(lst, env)) == -1)
-		return (-1);
 	if ((*lst)->nb_room == 2)
 	{
 		(*lst)->nb_road = 1;
@@ -94,15 +94,19 @@ int			algo_main(t_lst **lst, t_data *env)
 			return (-1);
 		return (0);
 	}
+	creat_road(lst, env);
 	if (best_road(lst, env) == -1)
 		return (-1);
-	if ((int)env->nb_ants > 1)
+	if ((*lst)->nb_best_move < (int)env->nb_ants)// && (int)env->nb_ants > 1)
 	{
 		ft_reboot_for_oter(lst);
 		if (other_road(lst, env) == -1)
 			return (-1);
 	}
-	if (stock_road(lst, env) == -1)
-		return (-1);
+//	if (ants_treat(lst, env) == -1)
+//		return (-1);
+	env->nb_road_f = (*lst)->nb_road;
+	sort_road(env);
+//	print_res(env);
 	return (0);
 }

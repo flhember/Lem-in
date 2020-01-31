@@ -12,7 +12,7 @@
 
 #include <lem_in.h>
 
-void		print_map_room(t_stock *cpy)
+static void	print_map_room(t_stock *cpy)
 {
 	if (cpy->next)
 		print_map_room(cpy->next);
@@ -26,14 +26,20 @@ void		print_map_room(t_stock *cpy)
 		ft_printf("%s %d %d\n", cpy->room, cpy->x, cpy->y);
 }
 
-void		print_map(t_stock *lst, int nb_ant)
+static int	print_map(t_stock *lst_s, int nb_ant, t_lst **lst, t_data *env)
 {
 	t_stock	*cpy;
 
-	cpy = lst;
+	cpy = lst_s;
+	if ((find_nb_pos(lst, env)) == -1)
+	{
+		free_stock(&lst_s);
+		return (-1);
+	}
 	ft_printf("\nprint map:\n");
 	ft_printf("%d\n", nb_ant);
 	print_map_room(cpy);
+	return (0);
 }
 
 t_lst		*parsing_main(t_data *env)
@@ -47,7 +53,6 @@ t_lst		*parsing_main(t_data *env)
 	if ((parsing_map(env, &lst_tmp) == -1)
 			|| (verif_pos(&lst_tmp) == -1))
 	{
-		ft_printf("fail parsing_map\n");
 		free_stock(&lst_tmp);
 		return (NULL);
 	}
@@ -60,7 +65,8 @@ t_lst		*parsing_main(t_data *env)
 		free_stock(&lst_tmp);
 		return (NULL);
 	}
-	print_map(lst_tmp, env->nb_ants);
+	if (print_map(lst_tmp, env->nb_ants, &lst, env) == -1)
+		return (NULL);
 	free_stock(&lst_tmp);
 	return (lst);
 }

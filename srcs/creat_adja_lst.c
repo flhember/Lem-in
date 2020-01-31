@@ -35,7 +35,7 @@ void		print_adja(t_lst **lst, t_data *env)
 	}
 }
 
-static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
+static int	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 {
 	size_t	j;
 	int		k;
@@ -51,13 +51,14 @@ static void	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 		j++;
 	}
 	if (room->pipe == 1 || room->com == 1)
-		return ;
+		return (-1);
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);
 	(*lst)->tab[k]->x = room->x;
 	(*lst)->tab[k]->y = room->y;
 	(*lst)->tab[k]->start = room->start;
 	(*lst)->tab[k]->end = room->end;
+	return (0);
 }
 
 t_lst		*creat_adja_lst(t_stock **room, t_data *env, size_t i)

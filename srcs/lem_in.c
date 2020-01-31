@@ -25,7 +25,11 @@ int		lem_in(void)
 		return (-1);
 	}
 	if ((algo_main(&lst, &env) == -1))
+	{
+		free_lst_adja(&lst, &env);
 		return (-1);
+	}
 	free_lst_adja(&lst, &env);
+	free_road_adja(&env);
 	return (0);
 }
