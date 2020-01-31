@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 16:35:26 by charles          ###   ########.fr       */
+/*   Updated: 2020/01/31 19:15:25 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define PEND		8
 # define PIPE		16
 
+typedef struct			s_fail
+{
+	int					id;
+	struct s_fail		*next;
+}						t_fail;
+
 typedef struct			s_road
 {
 	char				*name;
@@ -35,6 +41,7 @@ typedef struct			s_road
 	int					index;
 	size_t				size;
 	struct s_road		*next;
+	t_fail				*f_road;
 }						t_road;
 
 typedef struct			s_file
@@ -154,5 +161,5 @@ int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
 int						sort_road(t_data *env);
-
+int						choose_road(t_data *env);
 #endif
