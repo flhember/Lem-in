@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 15:55:00 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 16:20:00 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void		print_start(t_data *env)
 		{
 			tmp = env->road[i];
 			tmp = tmp->next;
-			ft_printf("L%d-%s ", env->nb_ant_go, tmp->name);
+			ft_printf("L%d-%s", env->nb_ant_go, tmp->name);
+			if (i + 1 < env->nb_road_f)
+				ft_printf(" ");
 			tmp->ant_now = env->nb_ant_go;
 			env->nb_ant_go++;
 			env->road[i]->nb_ant--;
@@ -67,7 +69,9 @@ void		print_cont_bis(t_data *env, int search, int flg, int i)
 				{
 					tmp = tmp->next;
 					tmp->ant_move = search;
-					ft_printf("L%d-%s ", search, tmp->name);
+					ft_printf("L%d-%s", search, tmp->name);
+					if (search + 1 < env->nb_ant_go)
+						ft_printf(" ");
 				}
 				else
 					env->ant_finish++;
@@ -118,8 +122,8 @@ void		print_res(t_data *env)
 
 	i = 0;
 
-	env->road[1]->nb_ant = 20;
-	env->road[2]->nb_ant = 20;
+	env->road[1]->nb_ant = 10;
+	env->road[2]->nb_ant = 1;
 	env->nb_road_f = 3;
 
 	nb_max = find_nb_max(env);
@@ -132,12 +136,14 @@ void		print_res(t_data *env)
 		print_start(env);
 		reset_ant(env);
 		ft_printf("\n");
-		i++;
+		i++; 
 	}
+
 	while (env->ant_finish < env->nb_ant_go - 1)
 	{
 		print_cont(env);
 		reset_ant(env);
-		ft_printf("\n");
+		if (env->ant_finish < env->nb_ant_go - 1)
+			ft_printf("\n");
 	}
 }

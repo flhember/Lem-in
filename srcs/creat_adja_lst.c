@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 17:22:26 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 17:59:56 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	j = 0;
 	k = -1;
 	room = *room_ptr;
+	printf("1\n");
 	while (j < i && room)
 	{
 		room = room->next;
@@ -52,6 +53,7 @@ static int	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	}
 	if (room->pipe == 1 || room->com == 1)
 		return (-1);
+	printf("2\n");
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);
 	(*lst)->tab[k]->x = room->x;
@@ -85,6 +87,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env, size_t i)
 	while (i < size_lst)
 	{
 		fill_tab_room(room, &lst, i);
+		printf("oui?\n");
 		i++;
 	}
 	return (lst);

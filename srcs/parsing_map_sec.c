@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/01/19 16:43:09 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:13:23 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		check_nb_ants(char *str, t_data *env)
 			else
 				return (-1);
 		}
-		if (ft_atoi(str) > 0 && ft_atoi(str) <= 2147483647)
+		if (verif_size_ant(str) == 0)
 		{
 			env->nb_ants = ft_atoi(str);
 			return (1);

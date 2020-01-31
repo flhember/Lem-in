@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 17:26:46 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 18:00:07 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	char	*str;
 
 	str = pipe->room;
+	printf("str = %s\n", str);
 	if ((fst_pe = find_good_room(env, lst, &pipe, 0)) == -1)
 		return (-1);
 	if ((sec_pe = find_good_room(env, lst, &pipe, 0)) == -1)
@@ -120,9 +121,12 @@ int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	{
 		if (pipe->pipe == 1)
 		{
-			env->nb_con++;
+//			env->nb_con++;
 			if ((find_stock_pipe(env, lst, pipe)) == -1)
+			{
+				pipe->room = NULL;
 				return (-1);
+			}
 		}
 		pipe = pipe->next;
 	}

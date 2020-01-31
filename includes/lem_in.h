@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 17:05:06 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:13:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int						bfs_best(t_data *env, t_lst **lst, t_file *tmp);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
+int						verif_size_ant(char *ants);
 int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
 void					print_adja_road(t_lst **lst, t_data *env); // a tej ft test
 void					del_first_file(t_file **file);
