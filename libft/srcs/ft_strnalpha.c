@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 12:36:44 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/12/02 12:38:56 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:30:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int ft_strnalpha(char *str)
+int		ft_strnalpha(char *str)
 {
 	int i;
 

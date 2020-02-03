@@ -6,27 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 16:20:00 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 12:06:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-int			find_nb_max(t_data *env)
-{
-	int		i;
-	int		nb_max;
-
-	i = 0;
-	nb_max = 0;
-	while (i < env->nb_road_f)
-	{
-		if (env->road[i]->nb_ant > nb_max)
-			nb_max = env->road[i]->nb_ant;
-		i++;
-	}
-	return (nb_max);
-}
 
 void		print_start(t_data *env)
 {
@@ -121,11 +105,6 @@ void		print_res(t_data *env)
 	int		nb_max;
 
 	i = 0;
-
-	env->road[1]->nb_ant = 10;
-	env->road[2]->nb_ant = 1;
-	env->nb_road_f = 3;
-
 	nb_max = find_nb_max(env);
 	env->nb_ant_go = 1;
 	env->ant_finish = 0;
@@ -136,9 +115,8 @@ void		print_res(t_data *env)
 		print_start(env);
 		reset_ant(env);
 		ft_printf("\n");
-		i++; 
+		i++;
 	}
-
 	while (env->ant_finish < env->nb_ant_go - 1)
 	{
 		print_cont(env);

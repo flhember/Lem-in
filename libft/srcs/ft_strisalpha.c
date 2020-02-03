@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 12:11:42 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/12/02 12:38:04 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:31:21 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int ft_strisalpha(char *str)
+int		ft_strisalpha(char *str)
 {
 	int i;
 
@@ -21,7 +21,7 @@ int ft_strisalpha(char *str)
 	{
 		if (ft_isalpha(str[i]) == 1)
 			i++;
-		else 
+		else
 			return (-1);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 15:47:40 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:11:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 	return (0);
 }
 
-int			other_road(t_lst **lst, t_data *env)
+int			other_road(t_lst **lst, t_data *env, int i)
 {
-	int		i;
 	int		ds;
-	int 	ret;
+	int		ret;
 
 	ds = 0;
 	ret = 0;
@@ -95,6 +94,5 @@ int			other_road(t_lst **lst, t_data *env)
 		(*lst)->ret_bfs = -1;
 	}
 	print_adja_road(lst, env);
-//	print_adja(lst, env);
 	return (0);
 }

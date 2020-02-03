@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 10:58:21 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/07 10:59:35 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:30:20 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int ft_strisdigit(char *str)
+int		ft_strisdigit(char *str)
 {
 	int i;
 

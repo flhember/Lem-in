@@ -6,11 +6,11 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 11:07:14 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/12/03 15:52:37 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:31:48 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_is_c(char *str, char c)
+int		ft_is_c(char *str, char c)
 {
 	int i;
 

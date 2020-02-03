@@ -6,25 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:32:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 15:59:21 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 11:55:51 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-/*static void	print_file(t_file **file, t_lst **lst)
-{
-	t_file *cpy;
-
-	cpy = *file;
-	while (cpy)
-	{
-		printf("%s , %d-> ", (*lst)->tab[cpy->value]->name,
-			(*lst)->tab[cpy->value]->road);
-		cpy = cpy->next;
-	}
-	printf("\n");
-}*/
 
 int			add_file(t_lst **lst, t_file **file, int val, int dis)
 {
@@ -58,18 +44,15 @@ static int	fill_file(t_file **file, t_lst **lst, int i, t_data *env)
 		while (tmp)
 		{
 			env->blk = tmp->pos;
-			if (tmp->pos != i)
-			{
-				if ((*lst)->tab[tmp->pos]->road != 0
+			if (tmp->pos != i && (*lst)->tab[tmp->pos]->road != 0
 			&& (*lst)->tab[tmp->pos]->road != -2 && (*lst)->tab[i]->end == 0)
-					check_cross(lst, file, i, env);
-				else if ((*lst)->tab[tmp->pos]->status != 0
-						|| (*lst)->tab[tmp->pos]->road == -2)
-					;
-				else if ((add_file(lst, file, tmp->pos,
-							(*lst)->tab[i]->dist + 1)) == -1)
-					return (-1);
-			}
+				check_cross(lst, file, i, env);
+			else if (tmp->pos != i && ((*lst)->tab[tmp->pos]->status != 0
+					|| (*lst)->tab[tmp->pos]->road == -2))
+				;
+			else if (tmp->pos != i && (add_file(lst, file, tmp->pos,
+						(*lst)->tab[i]->dist + 1)) == -1)
+				return (-1);
 			tmp = tmp->next;
 		}
 	}
@@ -130,6 +113,5 @@ int			bfs(t_data *env, t_lst **lst, t_file *tmp)
 	}
 	clean_status(lst);
 	free_file(&file);
-	ft_printf("fin bfs\n");
 	return ((*lst)->ret_bfs);
 }

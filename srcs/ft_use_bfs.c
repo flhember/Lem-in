@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 15:59:10 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 13:56:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		reboot_nb_road(t_lst **lst)
 void		change_part_road(t_lst **lst, int road, t_data *env)
 {
 	int		i;
-	t_road 	*tmp;
+	t_road	*tmp;
 	int		size_f;
 
 	i = 0;
@@ -39,7 +39,7 @@ void		change_part_road(t_lst **lst, int road, t_data *env)
 	while (i <= size_f)
 	{
 		if (ft_strcmp((*lst)->tab[env->blk]->name, tmp->name) == 0)
-			break;
+			break ;
 		else
 		{
 			tmp = tmp->next;
@@ -97,26 +97,4 @@ void		clean_dist(t_lst **lst)
 			(*lst)->tab[i]->dist = 0;
 		i++;
 	}
-}
-
-void		clean_status(t_lst **lst)
-{
-	int		i;
-
-	i = 0;
-	while (i < (*lst)->nb_room)
-	{
-		if ((*lst)->tab[i]->road == 0)
-			(*lst)->tab[i]->status = 0;
-		i++;
-	}
-}
-
-void		del_first_file(t_file **file)
-{
-	t_file	*tmp;
-
-	tmp = *file;
-	*file = (*file)->next;
-	free(tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 19:41:19 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:43:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct			s_fail
 typedef struct			s_road
 {
 	char				*name;
-	int					state;	// 1 -> 0 collision | -1 -> collision
-	int					col;	// nombre de collision sur 1 chemin
+	int					state;// 1 -> 0 collision | -1 -> collision
+	int					col;// nombre de collision sur 1 chemin
 	int					nb_road;
 	int					ant_now;
 	int					ant_move;
@@ -152,10 +152,10 @@ int						bfs(t_data *env, t_lst **lst, t_file *tmp);
 int						bfs_best(t_data *env, t_lst **lst, t_file *tmp);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
-int						other_road(t_lst **lst, t_data *env);
+int						other_road(t_lst **lst, t_data *env, int i);
 int						verif_size_ant(char *ants);
-int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
-void					print_adja_road(t_lst **lst, t_data *env); // a tej ft test
+int						print_road(t_lst **lst, t_data *env, t_room *tmp);//
+void					print_adja_road(t_lst **lst, t_data *env);//
 void					del_first_file(t_file **file);
 void					clean_status(t_lst **lst);
 void					clean_dist(t_lst **lst);
@@ -164,18 +164,22 @@ void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
 void					free_road(t_road **lst);
 int						stock_start_end(t_lst **lst, t_data *env);
-
 int						stock_road_other(t_lst **lst, t_data *env);
-int						creat_road(t_lst **lst, t_data *env);
+int						creat_road(t_data *env);
 int						stock_start_end(t_lst **lst, t_data *env);
 int						find_nb_pos(t_lst **lst, t_data *env);
 int						verif_back(t_lst **lst, int pos_blk, int i, int flag);
 int						ants_treat(t_lst **lst, t_data *env);
-int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
+int						check_cross(t_lst **lst, t_file **file, int i,
+		t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
 void					print_res(t_data *env);
-
+void					reboot_print(t_lst **lst);
 int						sort_road(t_data *env);
 int						choose_road(t_data *env);
+void					verif_if_one_pipe(t_lst **lst, t_data *env);
+int						find_nb_max(t_data *env);
+int						stock_it(t_lst **lst, t_data *env, int pos, int i);
+
 #endif

@@ -1,43 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ft_use.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 11:44:41 by flhember         ###   ########.fr       */
+/*   Created: 2020/02/03 12:02:54 by flhember          #+#    #+#             */
+/*   Updated: 2020/02/03 14:19:44 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-void		verif_if_one_pipe(t_lst **lst, t_data *env)
+int			find_nb_max(t_data *env)
 {
 	int		i;
-	int		j;
-	t_room	*tmp;
+	int		nb_max;
 
 	i = 0;
-	j = 0;
-	tmp = (*lst)->tab[env->end];
-	while (tmp)
+	nb_max = 0;
+	while (i < env->nb_road_f)
 	{
-		if (tmp->pos != env->end)
-			i++;
-		if (tmp->pos == env->start)
-			j++;
-		tmp = tmp->next;
+		if (env->road[i]->nb_ant > nb_max)
+			nb_max = env->road[i]->nb_ant;
+		i++;
 	}
-	if (i == 1 && j == 1)
-		env->nb_con = 1;
+	return (nb_max);
 }
 
-void		init_struct(t_data *env)
+void		clean_status(t_lst **lst)
 {
-	env->flags = 0;
-	env->se = 0;
-	env->nb_ants = 0;
-	env->nb_room = 0;
-	env->nb_con = 0;
+	int		i;
+
+	i = 0;
+	while (i < (*lst)->nb_room)
+	{
+		if ((*lst)->tab[i]->road == 0)
+			(*lst)->tab[i]->status = 0;
+		i++;
+	}
+}
+
+void		del_first_file(t_file **file)
+{
+	t_file	*tmp;
+
+	tmp = *file;
+	*file = (*file)->next;
+	free(tmp);
 }

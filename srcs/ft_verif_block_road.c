@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 15:59:39 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 14:09:28 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,8 @@ int			check_cross(t_lst **lst, t_file **file, int i, t_data *env)
 
 int			check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
 {
-	int		pos;
 	int		flag;
 
-	pos = 0;
 	flag = -1;
 	while (tmp)
 	{
@@ -99,7 +97,8 @@ int			check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
 			(*lst)->pos_blk_f = tmp->pos;
 			(*lst)->cmp++;
 		}
-		else if (tmp->pos != (*lst)->tmp_pos && ((*lst)->tab[tmp->pos]->road == nb)
+		else if (tmp->pos != (*lst)->tmp_pos
+			&& ((*lst)->tab[tmp->pos]->road == nb)
 			&& (*lst)->tab[tmp->pos]->dist
 			== (*lst)->tab[(*lst)->tmp_pos]->dist - 1)
 		{
