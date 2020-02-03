@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/03 15:10:42 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 15:39:47 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		link_fail(t_data *env, int i, int j)
 		tmp = tmp->next;
 	}
 	tmp->next = road;
-	
 	return (1);
 }
 
@@ -121,7 +120,7 @@ int find_id(t_data *env, int i, int j)
  * Donc solve_cross il prend chaque chemins et check lequel croise
  * avec lequel
  * Si A croise sur B au moins une fois, dans A je vais mettre B et inversement
- * C'est mar_fail qui fait ca, sur une liste t_fail
+ * C'est mark_fail qui fait ca, sur une liste t_fail
  *
 */ 
 
@@ -168,7 +167,7 @@ int solve_cross(t_data *env)
 /*
  *Okok mon pote la on rigole plus.
  *Sort road elle te sert a prendre les chemins que le bfs sort et 
- *tout mettre dans l'ordre rien de ouf juste un tri a bulle
+ *tout mettre dans l'ordre (rien de ouf juste un tri a bulle)
  *
 */
 
