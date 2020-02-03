@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:13:44 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 16:01:23 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void		free_stock(t_stock **lst)
 {
 	if ((*lst)->next)
 		free_stock(&(*lst)->next);
-	ft_strdel(&(*lst)->room);
+	if ((*lst)->room)
+		ft_strdel(&(*lst)->room);
 	free(*lst);
 }
 

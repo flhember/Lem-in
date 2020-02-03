@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/20 16:15:22 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:47:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,17 @@ void		check_nb_road(t_lst **lst)
 			check = 1;
 		i++;
 	}
-//	if (check == 1)
-//		(*lst)->nb_road--;
 }
 
 static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 {
 	tmp = (*lst)->tab[j];
-	//printf("name = %s\n", (*lst)->tab[j]->name);
 	while (tmp)
 	{
 		if (tmp->pos == (*lst)->tab[i]->pos && (*lst)->tab[j]->road == 0)
 		{
 			if ((*lst)->tab[j]->start == 0 && (*lst)->tab[j]->end == 0)
-			{
-				//printf("%s -> nb = %d\n", (*lst)->tab[j]->name, (*lst)->nb_road);
 				(*lst)->tab[j]->road = (*lst)->nb_road;
-			}
 			return (1);
 		}
 		tmp = tmp->next;
@@ -51,14 +45,12 @@ static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 
 static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
-	//while ((*lst)->tab[j]->start == 0)
 	while (ds >= 0)
 	{
 		if (j > (*lst)->nb_room || ds < 0)
 			return (-1);
 		if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 		{
-	//		printf("rentre pour %s\n", (*lst)->tab[j]->name);
 			if (ds == 0 && (*lst)->tab[j]->start == 0)
 				j++;
 			else if ((pars_pipe_best(lst, NULL, i, j)) == 0)
@@ -100,10 +92,9 @@ int			other_road(t_lst **lst, t_data *env)
 				stock_road_other(lst, env);
 			(*lst)->nb_road++;
 		}
-	print_adja_road(lst, env);
 		(*lst)->ret_bfs = -1;
 	}
+	print_adja_road(lst, env);
 //	print_adja(lst, env);
-	//print_adja2(lst, env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 18:37:21 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:43:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 			if (tmp->pos != env->tmp_pos && (((*lst)->tab[tmp->pos]->road == i
 						&& (*lst)->tab[tmp->pos]->print == 0) || (*lst)->tab[tmp->pos]->end == 1))
 			{
-				//if ((*lst)->tab[tmp->pos]->end == 0)
 				(*lst)->tab[tmp->pos]->print = 1;
 				env->tmp_pos = tmp->pos;
 				stock_it(lst, env, env->tmp_pos, i);
@@ -105,67 +104,17 @@ int			parse_road(t_lst **lst, t_data *env, t_room *tmp)
 	i = 1;
 	while (i <= (*lst)->nb_road)
 	{
-		total += env->road[i]->nb_cost * env->road[i]->ants;
-		i++;
-	}
-	i =0;
-	while (i < total)
-	{
-		while (j < limit)
+		tmp = (*lst)->tab[env->start];
+		env->road[i - 1]->nb_road = i;
+		env->road[i - 1]->name = ft_strdup((*lst)->tab[env->start]->name);
+		if (find_road(lst, env, i, tmp) == -1)
 		{
 			env->road[i - 1]->nb_road = 0;
 			ft_strdel(&(env->road[i - 1]->name));
 		}
-		j = 0;
 		i++;
 	}
-	ft_printf("Total = %d\n", total);
-}
-
-int		ants_treat(t_lst **lst, t_data *env)
-{
-	(*lst)->nb_road--;
-	int limit;
-	int i;
-	int total_cost;
-	int cmp;
-
-	i = 0;
-	cmp = 0;
-	limit = 1;
-	total_cost = treat_better(limit, env);
-//	ft_printf("Pour %d fourmis\n", env->nb_ants);
-//	ft_printf("total_cost = %5d | limit = %5d | nb_road = %5d\n\n", total_cost, limit, (*lst)->nb_road);
-	while (limit < (*lst)->nb_road)
-	{
-		limit++;
-		cmp = total_cost;
-		total_cost = treat_better(limit, env);
-		ft_printf("[ total_cost = %5d | limit = %5d | nb_road = %5d ]\n", total_cost, limit, (*lst)->nb_road);
-	//	ft_printf("total_cost = %d | tmp = %d\n", total_cost, cmp);
-	//		ft_printf("i++ %d\n\n", i);
-		if (total_cost >= cmp)
-		{
-			i++;
-			//if (total_cost > cmp)
-				total_cost = cmp;
-		}
-	}
-	if (limit > (*lst)->nb_road)
-	{
-//		ft_printf("ca va pas etre possible mon pote, on fait pas de la magie ici\n");
-		return (-1);
-	}
-//	ft_printf("\nCHECK total_cost = %5d | limit = %5d | nb_road = %5d | i = %5d\n", total_cost, limit, (*lst)->nb_road, i);
-	limit -= i;
-	ft_printf("\ntotal_cost = %5d | limit = %5d | nb_road = %5d\n", total_cost, limit, (*lst)->nb_road);
-//	ft_printf("\n\n____________________________________________\n\n");
-//	ft_printf("Taille tableau = [ %d ]\n", limit);
-	i = 0;
-	ft_printf("Nombres de coups en passant par %d chemins = %d\n", limit, total_cost);
-	final_rep(limit, total_cost, env);
-	display(limit, total_cost, env);
-	return (1);
+	return (0);
 }
 
 int			stock_start_end(t_lst **lst, t_data *env)
@@ -187,8 +136,6 @@ int			stock_road_other(t_lst **lst, t_data *env)
 	t_room	*tmp;
 
 	tmp = (*lst)->tab[env->start];
-	ft_printf("la?, nb ro %d\n", (*lst)->nb_road);
-	printf("t = %d\n", (env->nb_pos * 2));
 	env->road[(*lst)->nb_road - 1]->nb_road = (*lst)->nb_road;
 	env->road[(*lst)->nb_road - 1]->name = ft_strdup((*lst)->tab[env->start]->name);
 	find_road(lst, env, (*lst)->nb_road, tmp);

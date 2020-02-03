@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/15 16:34:41 by flhember         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:45:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		check_tube(char *str, t_stock **lst, t_data *env)
 		if (creat_maillon(lst, str, "0", "0") == -1)
 			return (-1);
 		(*lst)->pipe = 1;
+		env->nb_con++;
 		env->se |= PIPE;
 		return (1);
 	}
@@ -119,7 +120,7 @@ int		parsing_map(t_data *env, t_stock **lst)
 		free(line);
 	}
 	printf("\n");
-	if (add_flag(env, START) && add_flag(env, END))
+	if (env->nb_con > 0 && add_flag(env, START) && add_flag(env, END))
 	{
 		ft_printf("MAP OK\n");
 		return (1);

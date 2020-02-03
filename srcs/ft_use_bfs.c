@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/20 13:15:44 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:59:10 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		change_road_bfs(t_lst **lst, int road, t_data *env)
 
 	flg = 0;
 	tmp = (*lst)->tab[(*lst)->pos_blk_f];
-	printf("pos_blk = %s, pos last %s\n", (*lst)->tab[env->blk]->name, (*lst)->tab[(*lst)->pos_blk_f]->name);
 	while (tmp)
 	{
 		if ((*lst)->tab[tmp->pos]->start == 1)

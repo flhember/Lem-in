@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/23 18:12:53 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:41:19 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct			s_road
 	int					state;	// 1 -> 0 collision | -1 -> collision
 	int					col;	// nombre de collision sur 1 chemin
 	int					nb_road;
+	int					ant_now;
+	int					ant_move;
+	int					nb_ant;
 	int					nb_cost;
 	int					ants;
 	int					id_ants;
@@ -101,10 +104,14 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					nb_ant_go;
+	int					ant_finish;
 	int					blk;
+	int					nb_road_f;
 	int					tmp_pos;
 	int					flags;
 	int					se;
+	int					nb_con;
 	int					start;
 	int					end;
 	int					nb_pos;
@@ -146,6 +153,7 @@ int						bfs_best(t_data *env, t_lst **lst, t_file *tmp);
 void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env);
+int						verif_size_ant(char *ants);
 int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej ft test
 void					print_adja_road(t_lst **lst, t_data *env); // a tej ft test
 void					del_first_file(t_file **file);
@@ -166,6 +174,8 @@ int						ants_treat(t_lst **lst, t_data *env);
 int						check_cross(t_lst **lst, t_file **file, int i, t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
+void					print_res(t_data *env);
+
 int						sort_road(t_data *env);
 int						choose_road(t_data *env);
 #endif
