@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 19:46:26 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 10:47:33 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ int			algo_main(t_lst **lst, t_data *env)
 //		return (-1);
 	env->nb_road_f = (*lst)->nb_road;
 	sort_road(env);
-	print_res(env);
+	//print_res(env);
 	return (0);
 }
