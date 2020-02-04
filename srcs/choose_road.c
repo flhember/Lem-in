@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/03 17:25:37 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 15:54:00 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	del_queue(t_data *env, int to_del)
  * Je chope l'id de celui qui a le plus de croisements et apres l'avoir choper, dans choose_road je 
  * le met en statut -2, comme ca quand je rapelle la fonction je retraite pas le chemin ayant le plus de croisements
  * je prend celui qui en a moins, et ainsi de suite
- * */
+ */
 
 int		get_id_max(t_data *env)
 {
