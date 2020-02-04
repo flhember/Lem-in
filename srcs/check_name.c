@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:49 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/01/31 15:31:54 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:15:48 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ int			check_name(t_data *env, t_lst **lst)
 	}
 	if (check_tab(tab, env, lst) == -1)
 	{
-		ft_printf(" TAB FAILED\n");
 		free(tab);
 		return (-1);
 	}
 	free(tab);
-	ft_printf("TAB OK\n");
 	return (1);
 }

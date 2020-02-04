@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 13:56:42 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:21:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,37 @@ void		change_all(t_lst **lst, int road)
 	}
 }
 
-void		change_road_bfs(t_lst **lst, int road, t_data *env)
+int			verif_pos_blk(t_lst **lst)
+{
+	if (ft_strcmp((*lst)->tab[(*lst)->pos_blk_f]->name, (*lst)->tab[(*lst)->pos_blk_old]->name) == 0)
+	{
+		return (-1);
+	}
+	return (0);
+}
+
+int			change_road_bfs(t_lst **lst, int road, t_data *env)
 {
 	int		flg;
 	t_room	*tmp;
 
 	flg = 0;
 	tmp = (*lst)->tab[(*lst)->pos_blk_f];
+	printf("pos blk f = %s\n", tmp->name);
+	if (verif_pos_blk(lst) == -1)
+		return (-1);
 	while (tmp)
 	{
 		if ((*lst)->tab[tmp->pos]->start == 1)
 			flg = 1;
 		tmp = tmp->next;
 	}
+	(*lst)->pos_blk_old = (*lst)->pos_blk_f;
 	if (flg == 0)
 		change_all(lst, road);
 	else
 		change_part_road(lst, road, env);
+	return (0);
 }
 
 void		clean_dist(t_lst **lst)

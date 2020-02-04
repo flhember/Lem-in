@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 15:18:23 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 16:56:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,33 +71,24 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 	{
 		if (check_room(lst, str, env) == 1)
 			return (1);
-		else
-			ft_printf("fail start/end/comment\n");
 	}
 	else if (ft_strisdigit(str) == 1
 	|| (str[0] == '-' && ft_strisdigit(str + 1) == 1))
 	{
 		if (check_nb_ants(str, env) == 1)
 			return (1);
-		else
-			ft_printf("fail ants [%s]\n", str);
 	}
 	else if (ft_is_c(str, '-')
 			&& (env->se & PSTART) != 0 && (env->se & PEND) != 0)
 	{
 		if (check_tube(str, lst, env) == 1)
 			return (1);
-		else
-			ft_printf("fail tube\n");
 	}
 	else
 	{
 		if (check_valid_room(str, env, lst) == 1 && (env->se & PIPE) == 0)
 			return (1);
-		else
-			ft_printf("fail room [%s]\n", str);
 	}
-	ft_printf("no check\n");
 	return (-1);
 }
 
@@ -114,20 +105,12 @@ int		parsing_map(t_data *env, t_stock **lst)
 			line != NULL ? free(line) : line;
 			if ((env->se & PIPE) != 0)
 				break ;
-			ft_printf("MAP KO\n");
 			return (-1);
 		}
 		free(line);
 	}
-	printf("\n");
 	if (env->nb_con > 0 && add_flag(env, START) && add_flag(env, END))
-	{
-		ft_printf("MAP OK\n");
 		return (1);
-	}
 	else
-	{
-		ft_printf("MAP KO\n");
 		return (-1);
-	}
 }

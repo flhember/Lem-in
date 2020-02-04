@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:38:53 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 15:29:13 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:01:34 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int			verif_size_ant(char *ants)
 	}
 	if (size_ants == 0 || size_ants == 1)
 	{
-		printf("oui\n");
 		if ((ft_strcmp(ants, "") == 0) || ft_strcmp(ants, "0") == 0)
 			return (-1);
 	}
