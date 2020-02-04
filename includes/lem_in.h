@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 14:43:40 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:21:28 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct			s_lst
 	int					cmp;
 	int					pos_blk;
 	int					pos_blk_f;
+	int					pos_blk_old;
 	int					nb_road;
 	int					total_room;
 	int					nb_best_move;
@@ -159,7 +160,7 @@ void					print_adja_road(t_lst **lst, t_data *env);//
 void					del_first_file(t_file **file);
 void					clean_status(t_lst **lst);
 void					clean_dist(t_lst **lst);
-void					change_road_bfs(t_lst **lst, int road, t_data *env);
+int						change_road_bfs(t_lst **lst, int road, t_data *env);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
 void					free_road(t_road **lst);

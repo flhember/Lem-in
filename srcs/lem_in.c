@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 12:02:47 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:00:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		lem_in(void)
 	init_struct(&env);
 	if (!(lst = parsing_main(&env)))
 	{
-		ft_printf("oh shit, here we go again\n");
+		ft_putstr_fd("ERROR\n", 2);
 		return (-1);
 	}
 	if ((algo_main(&lst, &env) == -1))

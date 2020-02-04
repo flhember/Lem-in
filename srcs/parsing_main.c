@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 19:19:23 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:38:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,18 @@ t_lst		*parsing_main(t_data *env)
 				|| (check_name(env, &lst) == -1)
 				|| (stock_pipe(env, &lst, lst_tmp)) == -1))
 	{
+		printf("la?\n");
+		free_stock(&lst_tmp);
 		if (lst)
 			free_lst_adja(&lst, env);
-		free_stock(&lst_tmp);
 		return (NULL);
 	}
 	if (print_map(lst_tmp, env->nb_ants, &lst, env) == -1)
+	{
+		if (lst)
+			free_lst_adja(&lst, env);
 		return (NULL);
+	}
 	free_stock(&lst_tmp);
 	return (lst);
 }
