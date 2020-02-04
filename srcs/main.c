@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 18:04:37 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:05:20 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int		main(void)
 {
 	if (lem_in() == -1)
 	{
-//		while (1);
+		while (1);
 		return (-1);
 	}
-//	while (1);
+	while (1);
 	return (0);
 }

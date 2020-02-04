@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 14:12:12 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:20:54 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,15 @@ int			algo_main(t_lst **lst, t_data *env)
 	if ((*lst)->nb_best_move < (int)env->nb_ants)
 	{
 		ft_reboot_for_oter(lst);
-		if (other_road(lst, env, 0) == -1)
+		if (other_road(lst, env, 0) == -1)////////////////
 			return (-1);
 	}
-//	if (ants_treat(lst, env) == -1)
-//		return (-1);
-	env->nb_road_f = (*lst)->nb_road;
+	if ((*lst)->blk)
+		free_blk_lst(&(*lst)->blk);
+	print_adja_road(lst, env);
+	//if (ants_treat(lst, env) == -1)
+	//	return (-1);
+	//env->nb_road_f = (*lst)->nb_road;
 	//sort_road(env);
 	//print_res(env);
 	return (0);

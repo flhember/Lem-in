@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 17:38:42 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:21:53 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,21 @@ static int	print_map(t_stock *lst_s, int nb_ant, t_lst **lst, t_data *env)
 		free_stock(&lst_s);
 		return (-1);
 	}
-	ft_printf("\nprint map:\n");
 	ft_printf("%d\n", nb_ant);
 	print_map_room(cpy);
 	return (0);
+}
+
+t_lst		*parsing_main_bis(t_data *env, t_lst **lst, t_stock *lst_tmp)
+{
+	if (print_map(lst_tmp, env->nb_ants, lst, env) == -1)
+	{
+		if (lst)
+			free_lst_adja(lst, env);
+		return (NULL);
+	}
+	free_stock(&lst_tmp);
+	return (*lst);
 }
 
 t_lst		*parsing_main(t_data *env)
@@ -60,18 +71,10 @@ t_lst		*parsing_main(t_data *env)
 				|| (check_name(env, &lst) == -1)
 				|| (stock_pipe(env, &lst, lst_tmp)) == -1))
 	{
-		printf("la?\n");
 		free_stock(&lst_tmp);
 		if (lst)
 			free_lst_adja(&lst, env);
 		return (NULL);
 	}
-	if (print_map(lst_tmp, env->nb_ants, &lst, env) == -1)
-	{
-		if (lst)
-			free_lst_adja(&lst, env);
-		return (NULL);
-	}
-	free_stock(&lst_tmp);
-	return (lst);
+	return (parsing_main_bis(env, &lst, lst_tmp));
 }

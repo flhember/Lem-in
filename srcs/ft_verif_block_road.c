@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 18:21:25 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 15:00:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			check_cross_bis(t_lst **lst, t_file **file, int i, t_data *env)
 {
 	if (verif_back(lst, env->blk, i, 0) == -1)
 	{
-//		block_bad_road(lst, i);
+		block_bad_road(lst, i);
 		(*lst)->ret_bfs = 1;
 		return (-1);
 	}

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 18:21:28 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:31:06 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct			s_fail
 	int					id;
 	struct s_fail		*next;
 }						t_fail;
+
+typedef struct			s_blk_lst
+{
+	int					id;
+	struct s_blk_lst	*next;
+}						t_blk_lst;
 
 typedef struct			s_road
 {
@@ -79,7 +85,6 @@ typedef struct			s_lst
 	int					cmp;
 	int					pos_blk;
 	int					pos_blk_f;
-	int					pos_blk_old;
 	int					nb_road;
 	int					total_room;
 	int					nb_best_move;
@@ -88,6 +93,7 @@ typedef struct			s_lst
 	int					cross;
 	int					end;
 	int					size_file;
+	struct s_blk_lst	*blk;
 }						t_lst;
 
 typedef struct			s_stock
@@ -164,6 +170,7 @@ int						change_road_bfs(t_lst **lst, int road, t_data *env);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
 void					free_road(t_road **lst);
+void					free_blk_lst(t_blk_lst **blk);
 int						stock_start_end(t_lst **lst, t_data *env);
 int						stock_road_other(t_lst **lst, t_data *env);
 int						creat_road(t_data *env);

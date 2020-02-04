@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 17:30:25 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:18:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
 	while (ds >= 0)
 	{
-		if (j > (*lst)->nb_room || ds < 0)
+		if (j >= (*lst)->nb_room || ds < 0)
 			return (-1);
 		if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 		{
@@ -86,13 +86,12 @@ int			other_road(t_lst **lst, t_data *env, int i)
 		if ((*lst)->ret_bfs == 0)
 		{
 			if ((other_road_bis(lst, --ds, (*lst)->end, 0)) == -1)
-				return (-1);
+				return (0);
 			else
 				stock_road_other(lst, env);
 			(*lst)->nb_road++;
 		}
 		(*lst)->ret_bfs = -1;
 	}
-	print_adja_road(lst, env);
 	return (0);
 }

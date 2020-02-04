@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 17:40:46 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:30:16 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int			stock_road_other(t_lst **lst, t_data *env)
 	t_room	*tmp;
 
 	tmp = (*lst)->tab[env->start];
-	//printf("nb r %d\n", (*lst)->nb_road);
 	env->road[(*lst)->nb_road - 1]->nb_road = (*lst)->nb_road;
 	env->road[(*lst)->nb_road - 1]->name = ft_strdup(
 			(*lst)->tab[env->start]->name);

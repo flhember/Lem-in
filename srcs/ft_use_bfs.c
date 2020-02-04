@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 18:21:26 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 15:45:06 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,29 @@ void		change_all(t_lst **lst, int road)
 
 int			verif_pos_blk(t_lst **lst)
 {
-	if (ft_strcmp((*lst)->tab[(*lst)->pos_blk_f]->name, (*lst)->tab[(*lst)->pos_blk_old]->name) == 0)
+	t_blk_lst	*tmp;
+	t_blk_lst	*new;
+
+	new = NULL;
+	tmp = (*lst)->blk;
+	while (tmp->next)
 	{
-		return (-1);
+			if (tmp->id == (*lst)->pos_blk)
+				return (-1);
+			tmp = tmp->next;
 	}
+	if (!(new = (t_blk_lst*)ft_memalloc(sizeof(t_blk_lst))))
+		return (-1);
+	new->id = (*lst)->pos_blk;
+	tmp->next = new;
+	return (0);
+}
+
+int			creat_lst_blk(t_lst **lst)
+{
+	if (!((*lst)->blk = (t_blk_lst*)ft_memalloc(sizeof(t_blk_lst))))
+		return (-1);
+	(*lst)->blk->id = (*lst)->pos_blk_f;
 	return (0);
 }
 
@@ -83,6 +102,11 @@ int			change_road_bfs(t_lst **lst, int road, t_data *env)
 	flg = 0;
 	tmp = (*lst)->tab[(*lst)->pos_blk_f];
 	printf("pos blk f = %s\n", tmp->name);
+	if (!(*lst)->blk)
+	{
+		if (creat_lst_blk(lst) == -1)
+			return (-1);
+	}
 	if (verif_pos_blk(lst) == -1)
 		return (-1);
 	while (tmp)
@@ -91,7 +115,6 @@ int			change_road_bfs(t_lst **lst, int road, t_data *env)
 			flg = 1;
 		tmp = tmp->next;
 	}
-	(*lst)->pos_blk_old = (*lst)->pos_blk_f;
 	if (flg == 0)
 		change_all(lst, road);
 	else
