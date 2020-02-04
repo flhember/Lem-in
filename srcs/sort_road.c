@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/03 15:39:47 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:42:55 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,10 @@ int solve_cross(t_data *env)
 				while (nex->next && find_id(env, i, j) == 0)
 				{
 					if (act->index == nex->index && find_id(env, i, j) == 0)
+					{
+						ft_printf("Chemin [%d] croise [%d] sur %s et %s\n",i, j, act->name, nex->name);
 						mark_fail(env, i, j);
+					}
 					else
 						nex = nex->next;
 				}
@@ -185,11 +188,11 @@ int sort_road(t_data *env)
 	i = 0;
 	tmp = NULL;
 	env->nb_road_f--;
-	ft_printf("_____________________________\n\n\n\n\n");
-	ft_printf("nb_road = %d\n", env->nb_road_f);
+//	ft_printf("_____________________________\n\n\n\n\n");
+//	ft_printf("nb_road = %d\n", env->nb_road_f);
 	if (env->nb_road_f == 1)
 		return (1);
-	while (i < env->nb_road_f - 1)
+	while (i < env->nb_road_f -1)
 	{
 		env->road[i]->state = 0;
 		env->road[i]->col = 0;
@@ -228,9 +231,10 @@ int sort_road(t_data *env)
 		i++;
 	}
 	choose_road(env);
-
-	ft_printf("\n\n\n");
-	print_road_f(env);
+//	solve_cross(env);
+	//ants_treat(env);
+	//	ft_printf("\n\n\n");
+//	print_road_f(env);
 	return (1);
 
 }

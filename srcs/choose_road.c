@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/03 15:54:00 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:42:57 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	del_queue(t_data *env, int to_del)
 	i = 0;
 	while (i < env->nb_road_f)
 	{
-		if (env->road[i]->state == -1)
+//		ft_printf("Del %d sur %d state = %d\n", to_del, i, env->road[i]->state);
+		if (i != to_del && env->road[i]->state < -1)
 		{
 			tmp = env->road[i]->f_road->next;
 			back = tmp;
@@ -53,15 +54,19 @@ void	del_queue(t_data *env, int to_del)
 			{
 				if (tmp->id == to_del)
 				{
-//					ft_printf("\t\tCol-- sur chemin [%d]\n", i);
+					ft_printf("\t\tsupression chemin %d sur chemin [%d]\n",to_del, i);
 					env->road[i]->col--;
 					tmp->id = -1;
 				}
 				tmp = tmp->next;
 			}
 			env->road[i]->f_road = back;
-			if ((lstfail_size(env->road[i]->f_road) == 1 && back->id == -1) || lstfail_size(back) == 0)
+			if ((lstfail_size(env->road[i]->f_road) == 1 && back->id == -1) || lstfail_size(env->road[i]->f_road) == 0)
+			{
+//				ft_printf("==> Set chemin %d a etat 0\n", i);
+				env->road[i]->col = 0;
 				env->road[i]->state = 0;
+			}
 		}
 		i++;
 	}
@@ -80,9 +85,11 @@ int		get_id_max(t_data *env)
 
 	i = 0;
 	max = i;
-	while (env->road[i])
+	while (i < env->nb_road_f)
 	{
-		if (env->road[max]->col < env->road[i]->col && env->road[i]->state != -2 && env->road[i]->col > 0)
+	//	ft_printf("Chemin [%d] statut -> [%d] || %d col\n", i, env->road[i]->state, env->road[i]->col);
+		//if (env->road[max]->col < env->road[i]->col && env->road[i]->state != -2 && env->road[i]->col > 0)
+		if (env->road[max]->col < env->road[i]->col && env->road[i]->state == -2)
 			max = i;
 		i++;
 	}
@@ -105,14 +112,31 @@ int		get_col_sup(t_data *env)
 	{
 		if (env->road[i]->col > 1)
 		{
-	//		ft_printf("Ajout col_sup : %d col\n", env->road[i]->col);
+			env->road[i]->state = -2;
+			ft_printf("Chemin %d col : %d col\n", i, env->road[i]->col);
 			col_sup++;
 		}
 		i++;
 	}
 	return (col_sup);
 }
+/*
+void print_road_failed(t_data *env, int id)
+{
+	t_fail *fail;
+	int i;
 
+	i = 0;
+	fail = env->road[id]->f_road;
+	ft_printf("Pour chemin %d :\n", id);
+	while (fail)
+	{
+		ft_printf("%d ", fail->id);
+		fail = fail->next;
+	}
+	ft_printf("\n");
+}
+*/
 /*
  * La ca devient un peu complexe mais tranquille en deux trois lignes ca s' explique
  * Avec choose_road:
@@ -130,8 +154,8 @@ int		choose_road(t_data *env)
 	int i;
 	int col_sup;
 
-	t_fail *fail;
-	t_road *tmp;
+//	t_fail *fail;
+//	t_road *tmp;
 	i = 0;
 	id_max = 0;
 	col_sup = get_col_sup(env);
@@ -140,35 +164,17 @@ int		choose_road(t_data *env)
 	while (i < col_sup)
 	{
 		id_max = get_id_max(env);
-//		ft_printf("\t\t\t\tID_MAX = %d\n", id_max);
+		if (id_max == -1)
+			break ;
+		ft_printf("\t\t\t\tID_MAX = %d\n", id_max);
 		if (env->road[id_max]->col > 1)
 		{
-			env->road[id_max]->state = -2;
+			env->road[id_max]->state = -3;
+//			ft_printf("Suppression du chemin %d\n", id_max);
+//			print_road_failed(env, id_max);
 			del_queue(env, id_max);
+			col_sup--;
 		}
-	i++;
-	}
-	i = 0;
-//	ft_printf("STATE chemin 0 = %d\n", env->road[0]->state);
-//	ft_printf("i %d | total road %d\n", i, env->nb_road_f);
-	while (i < env->nb_road_f)
-	{
-		tmp = env->road[i];
-		if (tmp->state == -2)
-		{
-			fail = tmp->f_road;
-			ft_printf("______________________");
-			ft_printf("\nChemins [%d] -> KO pour %d collisions\n", i, env->road[i]->col);
-			ft_printf("Avec chemins :");
-			while (fail)
-			{
-				ft_printf("%d ", fail->id);
-				fail = fail->next;
-			}
-			ft_printf("\n______________________\n\n");
-		}
-		else
-			ft_printf("Chemin [%d] -> OK\n", i);
 		i++;
 	}
 	return (1);

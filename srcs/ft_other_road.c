@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/31 15:47:40 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/04 13:28:11 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 {
 	while (ds >= 0)
 	{
-		if (j > (*lst)->nb_room || ds < 0)
+		if (j >= (*lst)->nb_room || ds < 0)
 			return (-1);
 		if ((*lst)->tab[j]->dist == ds && (*lst)->tab[j]->road == 0)
 		{
