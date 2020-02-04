@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/03 15:10:42 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:56:20 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,22 @@ void print_road_f(t_data *env)
 	i = 0;
 	while (i < env->nb_road_f)
 	{
-		tmp = env->road[i]->next;
-		ft_printf("Chemin [%d] \n\n", i);
-		while (tmp)
+		if (env->road[i]->state == 0)
 		{
-			ft_printf("%s", tmp->name);
-			if (tmp->next != NULL)
+			tmp = env->road[i]->next;
+			ft_printf("Chemin [%d] \n\n", i);
+			while (tmp)
 			{
-				ft_printf(" ->");
+				ft_printf("%s", tmp->name);
+				if (tmp->next != NULL)
+				{
+					ft_printf(" ->");
+				}
+			tmp = tmp->next;
 			}
-		tmp = tmp->next;
-		}
 		ft_printf("%20s%d\n\n", "| size = ", env->road[i]->size);
 		ft_printf("\n");
+		}
 		i++;
 	}
 }
@@ -226,28 +229,9 @@ int sort_road(t_data *env)
 		i++;
 	}
 	choose_road(env);
-	i = 0;
-	while (i < env->nb_road_f)
-	{
-		tmp = env->road[i];
-		if (tmp->state == -2)
-		{
-			fail = tmp->f_road->next;
-			ft_printf("_____________________");
-			ft_printf("\nChemin [%d] -> KO pour %d collisions\n", i, env->road[i]->col);
-			ft_printf("Avec chemins :");
-			while (fail)
-			{
-				ft_printf("%d ", fail->id);
-				fail = fail->next;
-			}
-			ft_printf("\n_____________________\n\n");
-		}
-		else
-			ft_printf("Chemin [%d] -> OK\n", i);
-		i++;
-	}
-//	ft_printf("go print\n");
-//	print_road_f(env);
+
+	ft_printf("\n\n\n");
+	print_road_f(env);
 	return (1);
+
 }

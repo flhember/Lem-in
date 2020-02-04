@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/03 15:19:35 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:25:37 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	del_queue(t_data *env, int to_del)
 			{
 				if (tmp->id == to_del)
 				{
+//					ft_printf("\t\tCol-- sur chemin [%d]\n", i);
 					env->road[i]->col--;
-	//				ft_printf("Sur chemin [%d] suppresion du croisement avec %d\n", i, to_del);
 					tmp->id = -1;
 				}
 				tmp = tmp->next;
@@ -86,6 +86,8 @@ int		get_id_max(t_data *env)
 			max = i;
 		i++;
 	}
+//	if (max == 0 && env->road[max]->state == -2)
+//		return (-1);
 	return (max);
 }
 
@@ -103,7 +105,7 @@ int		get_col_sup(t_data *env)
 	{
 		if (env->road[i]->col > 1)
 		{
-			ft_printf("Ajout col_sup : %d col\n", env->road[i]->col);
+	//		ft_printf("Ajout col_sup : %d col\n", env->road[i]->col);
 			col_sup++;
 		}
 		i++;
@@ -128,36 +130,45 @@ int		choose_road(t_data *env)
 	int i;
 	int col_sup;
 
-	t_fail *tmp;
+	t_fail *fail;
+	t_road *tmp;
 	i = 0;
 	id_max = 0;
 	col_sup = get_col_sup(env);
 	if (col_sup == 0)
 		return (1);
-	ft_printf("%d chemins a verifier\n", col_sup);
 	while (i < col_sup)
 	{
 		id_max = get_id_max(env);
-		ft_printf("Supp de chemin %d\n", id_max);
+//		ft_printf("\t\t\t\tID_MAX = %d\n", id_max);
 		if (env->road[id_max]->col > 1)
 		{
 			env->road[id_max]->state = -2;
 			del_queue(env, id_max);
 		}
-		i++;
+	i++;
 	}
 	i = 0;
-	ft_printf("i %d | total road %d\n", i, env->nb_road_f);
+//	ft_printf("STATE chemin 0 = %d\n", env->road[0]->state);
+//	ft_printf("i %d | total road %d\n", i, env->nb_road_f);
 	while (i < env->nb_road_f)
 	{
-	//	ft_printf("Chemin %d [%s] size = %d | state = %d:\n", i, env->road[i]->next->name, env->road[i]->size, env->road[i]->state);
-		tmp = env->road[i]->f_road;
-		while (tmp && env->road[i]->state < 0)
+		tmp = env->road[i];
+		if (tmp->state == -2)
 		{
-	//		ft_printf("%d ", tmp->id);
-			tmp = tmp->next;
+			fail = tmp->f_road;
+			ft_printf("______________________");
+			ft_printf("\nChemins [%d] -> KO pour %d collisions\n", i, env->road[i]->col);
+			ft_printf("Avec chemins :");
+			while (fail)
+			{
+				ft_printf("%d ", fail->id);
+				fail = fail->next;
+			}
+			ft_printf("\n______________________\n\n");
 		}
-	//	ft_putchar('\n');
+		else
+			ft_printf("Chemin [%d] -> OK\n", i);
 		i++;
 	}
 	return (1);
