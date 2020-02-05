@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/04 18:42:55 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:49:07 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ int		link_fail(t_data *env, int i, int j)
 	t_fail *tmp;
 
 	tmp = env->road[i]->f_road;
-//	ft_printf("Colission chemin %d et %d\n", i, j);
 	if (!(road = ft_memalloc(sizeof(t_fail))))
 		return (-1);
 	road->id = j;
-//	road->next = NULL;
+	road->next = NULL;
+//	ft_printf("on met %d dans %d\n", j, i);
 	while (tmp->next)
 	{
-	//	ft_printf("ID de %d = %d\n", i, tmp->id);
 		tmp = tmp->next;
 	}
 	tmp->next = road;
@@ -74,22 +73,39 @@ int		link_fail(t_data *env, int i, int j)
  * t_fail sur les deux chemins et ajouter le maillon avec l' ID du chemin
 */
 
+void	print_link(t_data *env, int i, int j)
+{
+	t_fail *fail;
+
+	fail = env->road[i]->f_road;
+	j++;
+	ft_printf("lien de %d :\n", i);
+	while (fail)
+	{
+		ft_printf("%d ", fail->id);
+		fail = fail->next;
+	}
+	ft_printf("\n");
+}
+
 void	mark_fail(t_data *env, int i, int j)
 {
 	if (env->road[i]->f_road == NULL)
 	{
 		if (!(env->road[i]->f_road = ft_memalloc(sizeof(t_fail))))
 			return ;
-		env->road[i]->f_road->id = 0;
+		env->road[i]->f_road->id = j;
 	}
+	else
+		link_fail(env, i, j);
 	if (env->road[j]->f_road == NULL)
 	{
 		if (!(env->road[j]->f_road = ft_memalloc(sizeof(t_fail))))
 			return ;
-		env->road[j]->f_road->id = 0;
+		env->road[j]->f_road->id = i;
 	}
-	link_fail(env, i, j);
-	link_fail(env, j, i);
+	else
+		link_fail(env, j, i);
 	env->road[i]->state = -1;
 	env->road[j]->state = -1;
 	env->road[i]->col++;
@@ -213,9 +229,9 @@ int sort_road(t_data *env)
 	while (i < env->nb_road_f)
 	{
 		tmp = env->road[i];
-		if (tmp->state == -1)
+		if (tmp->state < 0)
 		{
-			fail = tmp->f_road->next;
+			fail = tmp->f_road;
 			ft_printf("_____________________");
 			ft_printf("\nChemin [%d] -> KO pour %d collisions\n", i, env->road[i]->col);
 			ft_printf("Avec chemins :");
@@ -230,9 +246,31 @@ int sort_road(t_data *env)
 			ft_printf("Chemin [%d] -> OK\n", i);
 		i++;
 	}
+
 	choose_road(env);
+	i = 0;
+	while (i < env->nb_road_f)
+	{
+		tmp = env->road[i];
+		if (tmp->state < 0)
+		{
+			fail = tmp->f_road->next;
+			ft_printf("_____________________");
+			ft_printf("\nChemin [%d] -> KO pour %d collisions state -> %d size = %d\n", i, env->road[i]->col, env->road[i]->state, env->road[i]->size);
+			ft_printf("Avec chemins :");
+			while (fail)
+			{
+				ft_printf("%d ", fail->id);
+				fail = fail->next;
+			}
+			ft_printf("\n_____________________\n\n");
+		}
+		else
+			ft_printf("Chemin [%d] -> OK\n", i);
+		i++;
+	}
 //	solve_cross(env);
-	//ants_treat(env);
+ants_treat(env);
 	//	ft_printf("\n\n\n");
 //	print_road_f(env);
 	return (1);

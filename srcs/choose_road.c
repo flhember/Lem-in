@@ -6,25 +6,28 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/04 18:42:57 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:49:09 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		lstfail_size(t_fail *fail)
+int		lstfail_size(t_fail *fail, int id)
 {
 	t_fail *tmp;
 	int i;
-
 	i = 0;
+	id++;
 	tmp = fail;
+	//ft_printf("Liste id pour chemin %d:\n", id);
 	while (tmp)
 	{
+//		ft_printf("%d ", tmp->id);
 		if (tmp->id != -1)
 			i++;
 		tmp = tmp->next;
 	}
+//	ft_printf(" -> %d col\n", i);
 	return (i);
 }
 
@@ -45,25 +48,28 @@ void	del_queue(t_data *env, int to_del)
 	i = 0;
 	while (i < env->nb_road_f)
 	{
-//		ft_printf("Del %d sur %d state = %d\n", to_del, i, env->road[i]->state);
-		if (i != to_del && env->road[i]->state < -1)
+//		ft_printf("Del %d sur %d state = %d | %d a %d col\n", to_del, i, env->road[i]->state, to_del, env->road[to_del]->col);
+		if (i != to_del && env->road[i]->state <= -1 && env->road[i]->state != -3)
 		{
-			tmp = env->road[i]->f_road->next;
+			tmp = env->road[i]->f_road;
 			back = tmp;
 			while (tmp)
 			{
 				if (tmp->id == to_del)
 				{
-					ft_printf("\t\tsupression chemin %d sur chemin [%d]\n",to_del, i);
+					ft_printf("\t\tsupression chemin %d sur chemin [%d]->%d col\n",to_del, i, env->road[i]->col);
 					env->road[i]->col--;
 					tmp->id = -1;
+//					ft_printf("break\n");
+					break ;
 				}
 				tmp = tmp->next;
 			}
 			env->road[i]->f_road = back;
-			if ((lstfail_size(env->road[i]->f_road) == 1 && back->id == -1) || lstfail_size(env->road[i]->f_road) == 0)
+//			ft_printf("retour breakk\n");
+			if (lstfail_size(env->road[i]->f_road, i) == 0)
 			{
-//				ft_printf("==> Set chemin %d a etat 0\n", i);
+//				ft_printf("\t\t==> Set chemin %d a etat 0\n", i);
 				env->road[i]->col = 0;
 				env->road[i]->state = 0;
 			}
@@ -89,18 +95,20 @@ int		get_id_max(t_data *env)
 	{
 	//	ft_printf("Chemin [%d] statut -> [%d] || %d col\n", i, env->road[i]->state, env->road[i]->col);
 		//if (env->road[max]->col < env->road[i]->col && env->road[i]->state != -2 && env->road[i]->col > 0)
-		if (env->road[max]->col < env->road[i]->col && env->road[i]->state == -2)
+		if (env->road[i]->col > env->road[max]->col && env->road[i]->state == -2)
 			max = i;
 		i++;
 	}
 //	if (max == 0 && env->road[max]->state == -2)
 //		return (-1);
+//	ft_printf("\t\t\t\tstatut de %d = [%d] suppose -2\n", max, env->road[max]->state);
 	return (max);
 }
 
 /*
  * Ici je check combien j'ai de chemins avec plus de 1 croisements 
 */
+/*
 int		get_col_sup(t_data *env)
 {
 	int i;
@@ -110,16 +118,16 @@ int		get_col_sup(t_data *env)
 	col_sup = 0;
 	while (i < env->nb_road_f)
 	{
-		if (env->road[i]->col > 1)
+		if (env->road[i]->col > 2)
 		{
-			env->road[i]->state = -2;
-			ft_printf("Chemin %d col : %d col\n", i, env->road[i]->col);
+			env->road[i]->state = -3;
+//			ft_printf("Chemin %d col : %d col\n", i, env->road[i]->col);
 			col_sup++;
 		}
 		i++;
 	}
 	return (col_sup);
-}
+}*/
 /*
 void print_road_failed(t_data *env, int id)
 {
@@ -137,6 +145,36 @@ void print_road_failed(t_data *env, int id)
 	ft_printf("\n");
 }
 */
+
+void	update_state(t_data *env)
+{
+	int i;
+
+	i = 0;
+	while (i < env->nb_road_f && env->road[i]->state != -3)
+	{
+		if (env->road[i]->col == 0)
+			env->road[i]->state = 0;
+		else if (env->road[i]->col == 1)
+			env->road[i]->state = -1;
+		else
+			env->road[i]->state = -2;
+		i++;
+	}
+
+}
+
+int calcul_cost(t_data *env, int limit)
+{
+	int i;
+
+	i = 0;
+	while (i < limit)
+	{
+		if (env->road[i]->
+	}
+}
+
 /*
  * La ca devient un peu complexe mais tranquille en deux trois lignes ca s' explique
  * Avec choose_road:
@@ -150,31 +188,35 @@ void print_road_failed(t_data *env, int id)
 
 int		choose_road(t_data *env)
 {
-	int id_max;
 	int i;
-	int col_sup;
-
+	int tmp;
+	int cost;
 //	t_fail *fail;
 //	t_road *tmp;
-	i = 0;
-	id_max = 0;
-	col_sup = get_col_sup(env);
-	if (col_sup == 0)
-		return (1);
-	while (i < col_sup)
+	i = 1;
+	tmp = 0;
+	cost = 0;
+	//update_state(env);
+//	while (i < col_sup)
+	tmp = calcul_cost(env, i);
+	while (i < env->nb_road_f)
 	{
-		id_max = get_id_max(env);
-		if (id_max == -1)
-			break ;
-		ft_printf("\t\t\t\tID_MAX = %d\n", id_max);
-		if (env->road[id_max]->col > 1)
+	//	id_max = get_id_max(env);
+	//	ft_printf("ID MAX = %d\n", id_max);
+	//	if (env->road[id_max]->col == 0)
+	//		break ;
+		
+		/*
+		if (env->road[i]->state != 0)
 		{
-			env->road[id_max]->state = -3;
-//			ft_printf("Suppression du chemin %d\n", id_max);
+			ft_printf("Suppression du chemin %d\n", i);
 //			print_road_failed(env, id_max);
-			del_queue(env, id_max);
-			col_sup--;
+			del_queue(env, i);
+			env->road[i]->state = -3;
+	//		update_state(env);
+	//		ft_printf("Apres supp chemin %d state = %d\n", i, env->road[i]->state);
 		}
+		*/
 		i++;
 	}
 	return (1);

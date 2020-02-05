@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:20:19 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 18:15:27 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:19:29 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ int		treat_better(t_data *env, int limit)
 {
 	int i;
 	int total;
+	int nb;
 
 	total = 0;
 	i = 0;
+	nb = 0;
 	while (i < limit)
 	{
-		total = total + ((env->nb_ants / limit) + env->road[i]->size);
+		total = total + ((env->nb_ants / limit) + env->road[env->road_sol[i]]->size);
 		i++;
 	}
 	total = total / limit;
@@ -86,7 +88,7 @@ int		ants_treat(t_data *env)
 		tmp = total_cost;
 		total_cost = treat_better(env, limit);
 	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, env->nb_road_f);
-		if (total_cost > tmp)
+		if (total_cost >= tmp)
 		{
 			i++;
 			total_cost = tmp;
@@ -99,7 +101,7 @@ int		ants_treat(t_data *env)
 	ft_printf("Chemins a utiliser = \n");
 	while (i < env->total_road)
 	{
-		ft_printf("Chemin [%d] -> %d room\n", i, env->road[i]->size);
+		ft_printf("Chemin [%d] -> %d room\n", env->road_sol[i], env->road[env->road_sol[i]]->size);
 		i++;
 	}
 	ft_printf("Pour %d coups\n", env->total_cost);
