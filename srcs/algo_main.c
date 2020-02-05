@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 18:20:54 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 13:44:47 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			algo_main(t_lst **lst, t_data *env)
 	if ((*lst)->nb_room == 2 || env->nb_con == 1)
 	{
 		(*lst)->nb_road = 1;
+		(*lst)->malloc_start = 1;
 		if (stock_start_end(lst, env) == -1)
 			return (-1);
 		return (0);

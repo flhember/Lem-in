@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 18:31:06 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 13:48:39 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct			s_room
 
 typedef struct			s_lst
 {
+	int					malloc_start;
 	t_room				**tab;
 	int					tmp_pos;
 	int					cmp;
@@ -142,7 +143,7 @@ void					init_struct(t_data *env);
 void					print_lst(t_stock **lst);
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
-void					free_road_adja(t_data *env);
+void					free_road_adja(t_data *env, int val);
 t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env, size_t i);
 t_lst					*parsing_main(t_data *env);
