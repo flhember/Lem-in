@@ -6,26 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 15:45:06 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:10:26 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-void		reboot_nb_road(t_lst **lst)
-{
-	int		i;
-	int		check;
-
-	i = 0;
-	check = 0;
-	while (i < (*lst)->nb_room)
-	{
-		if ((*lst)->tab[i]->road == -1)
-			(*lst)->tab[i]->road = 0;
-		i++;
-	}
-}
 
 void		change_part_road(t_lst **lst, int road, t_data *env)
 {
@@ -75,9 +60,9 @@ int			verif_pos_blk(t_lst **lst)
 	tmp = (*lst)->blk;
 	while (tmp->next)
 	{
-			if (tmp->id == (*lst)->pos_blk)
-				return (-1);
-			tmp = tmp->next;
+		if (tmp->id == (*lst)->pos_blk)
+			return (-1);
+		tmp = tmp->next;
 	}
 	if (!(new = (t_blk_lst*)ft_memalloc(sizeof(t_blk_lst))))
 		return (-1);
@@ -120,18 +105,4 @@ int			change_road_bfs(t_lst **lst, int road, t_data *env)
 	else
 		change_part_road(lst, road, env);
 	return (0);
-}
-
-void		clean_dist(t_lst **lst)
-{
-	int		i;
-
-	i = 0;
-	(*lst)->size_file = 0;
-	while (i < (*lst)->nb_room)
-	{
-		if ((*lst)->tab[i]->road == 0)
-			(*lst)->tab[i]->dist = 0;
-		i++;
-	}
 }

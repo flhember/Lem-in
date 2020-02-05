@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 12:02:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 12:26:35 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:07:54 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,40 @@ void		del_first_file(t_file **file)
 	tmp = *file;
 	*file = (*file)->next;
 	free(tmp);
+}
+
+void		check_valid_room_bis(t_data *env, t_stock **lst)
+{
+	if ((env->se & ASTART) != 0)
+	{
+		(*lst)->start = 1;
+		env->se |= PSTART;
+		env->se ^= ASTART;
+	}
+	if ((env->se & AEND) != 0)
+	{
+		(*lst)->end = 1;
+		env->se |= PEND;
+		env->se ^= AEND;
+	}
+}
+
+int			check_maillon_bis(char **tab)
+{
+	if (tab[2][0] == '-' || ft_strisdigit(tab[2]) == 1)
+	{
+		if (tab[2][0] == '-')
+		{
+			if (ft_atoi(tab[2] + 1) < -2147483647
+					|| ft_strisdigit(tab[2] + 1) != 1)
+				return (-1);
+		}
+		else if ((ft_strisdigit(tab[2]) != 1)
+				|| (ft_atoi(tab[2]) > 2147483647))
+			return (-1);
+		return (0);
+	}
+	else
+		return (-1);
+	return (0);
 }

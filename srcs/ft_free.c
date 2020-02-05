@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 14:47:02 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:44:50 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,8 @@ void		free_road_adja(t_data *env, int val)
 	}
 	else
 	{
-		printf("ouai\n");
 		if (env->road[0]->next)
 			free_road_tab(&env->road[0]);
-		free(env->road);	
+		free(env->road);
 	}
-}
-
-void		free_blk_lst(t_blk_lst **blk)
-{
-	if ((*blk)->next)
-		free_blk_lst(&(*blk)->next);
-	free(*blk);
 }

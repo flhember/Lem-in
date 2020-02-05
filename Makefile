@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/03 14:25:57 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/05 18:10:20 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC_FILES = main.c lem_in.c parsing_map.c init_struct.c ft_lst_stock.c 		\
 			algo_main.c ft_bfs.c ft_other_road.c ft_best_road.c			 	\
 			ft_use_bfs.c ft_stock_road.c bfs_for_best.c ant_rep.c			\
 			ft_verif_block_road.c ft_print_res.c sort_road.c choose_road.c	\
-			ft_use.c ft_stock_road_bis.c
+			ft_use.c ft_stock_road_bis.c ft_free_bis.c ft_use_bfs_bis.c		\
+
 
 INC = lem_in.h
 

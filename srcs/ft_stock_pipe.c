@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 17:13:35 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:55:48 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,15 @@ int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe, size_t k)
 
 	i = 0;
 	if (ft_is_c((*pipe)->room, '-') == 1)
-		(*pipe)->room1 = ft_strncut((*pipe)->room,
-				ft_strnlen((*pipe)->room, '-'));
+		(*pipe)->room1 =
+			ft_strncut((*pipe)->room, ft_strnlen((*pipe)->room, '-'));
 	else
 		(*pipe)->room1 = ft_strdup((*pipe)->room);
 	while (i < env->nb_room && ft_strcmp((*lst)->tab[i]->name,
 				(*pipe)->room1) != 0)
 		i++;
 	if (i == env->nb_room)
-	{
-		ft_strdel(&(*pipe)->room1);
 		return (-1);
-	}
 	j = ft_strlen((*lst)->tab[i]->name);
 	if (j < ft_strlen((*pipe)->room))
 	{
@@ -107,11 +104,13 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	str = pipe->room;
 	if ((fst_pe = find_good_room(env, lst, &pipe, 0)) == -1)
 	{
+		ft_strdel(&pipe->room1);
 		ft_strdel(&str);
 		return (-1);
 	}
 	if ((sec_pe = find_good_room(env, lst, &pipe, 0)) == -1)
 	{
+		ft_strdel(&pipe->room1);
 		ft_strdel(&str);
 		return (-1);
 	}

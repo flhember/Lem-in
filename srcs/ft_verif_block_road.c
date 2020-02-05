@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 15:00:45 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:13:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int			block_bad_road(t_lst **lst, int i)
 				i = tmp->pos;
 			}
 			if ((*lst)->tab[tmp->pos]->start == 1)
-			{
-				flag = 1;
 				return (0);
-			}
 			tmp = tmp->next;
 		}
 		tmp = (*lst)->tab[i];

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 13:48:39 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:26:21 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,13 @@ int						parsing_map(t_data *env, t_stock **lst);
 int						creat_maillon(t_stock **lst, char *name, char *x,
 		char *y);
 int						stock_pipe(t_data *env, t_lst **lst, t_stock *pipe);
-void					add_maillon_end(t_stock *room, t_stock *nw);
 int						add_flag(t_data *env, int flag);
 int						check_nb_ants(char *str, t_data *env);
 int						nb_split(char **tab);
 int						check_valid_room(char *str, t_data *env,
 		t_stock(**lst));
 void					init_struct(t_data *env);
-void					print_lst(t_stock **lst);
+void					print_lst(t_stock **lst);	//a tej
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
 void					free_road_adja(t_data *env, int val);
@@ -151,7 +150,6 @@ size_t					ft_lstsize_stock(t_stock **room);
 size_t					ft_lstsize_room(t_room **room);
 int						ft_lstsize_road(t_road **room);
 void					print_adja(t_lst **lst, t_data *env); // a tej
-void					print_adja2(t_lst **lst, t_data *env); // a tej
 void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
@@ -162,17 +160,15 @@ void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env, int i);
 int						verif_size_ant(char *ants);
-int						print_road(t_lst **lst, t_data *env, t_room *tmp);//
-void					print_adja_road(t_lst **lst, t_data *env);//
+int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej
+void					print_adja_road(t_lst **lst, t_data *env); // a tej
 void					del_first_file(t_file **file);
 void					clean_status(t_lst **lst);
 void					clean_dist(t_lst **lst);
 int						change_road_bfs(t_lst **lst, int road, t_data *env);
 void					reboot_nb_road(t_lst **lst);
 int						stock_road(t_lst **lst, t_data *env);
-void					free_road(t_road **lst);
 void					free_blk_lst(t_blk_lst **blk);
-int						stock_start_end(t_lst **lst, t_data *env);
 int						stock_road_other(t_lst **lst, t_data *env);
 int						creat_road(t_data *env);
 int						stock_start_end(t_lst **lst, t_data *env);
@@ -190,5 +186,7 @@ int						choose_road(t_data *env);
 void					verif_if_one_pipe(t_lst **lst, t_data *env);
 int						find_nb_max(t_data *env);
 int						stock_it(t_lst **lst, t_data *env, int pos, int i);
+void					check_valid_room_bis(t_data *env, t_stock **lst);
+int						check_maillon_bis(char **tab);
 
 #endif
