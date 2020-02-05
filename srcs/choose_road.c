@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/05 14:49:09 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:05:47 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,15 +164,49 @@ void	update_state(t_data *env)
 
 }
 
-int calcul_cost(t_data *env, int limit)
+int check_fail(t_data *env, int id)
 {
 	int i;
+	t_fail *fail;
 
 	i = 0;
-	while (i < limit)
+	while (i < id)
 	{
-		if (env->road[i]->
+		fail = env->road[i]->f_road;
+		while (fail)
+		{
+			if (fail->id == id)
+			{
+//				ft_printf("Fail : [%d] avec [%d]\n", fail->id, id);
+				return (0);
+			}
+			fail = fail->next;
+		}
+		i++;
 	}
+	return (1);
+}
+
+int		get_ok(t_data *env)
+{
+	int i;
+	int safe;
+
+	i = 0;
+	safe = 0;
+	while (i < env->nb_road_f)
+	{
+		if (check_fail(env, i) == 1)
+		{
+			ft_printf("Chemin %d est OK\n", i);
+			env->road[i]->state = 1;
+			safe++;
+		}
+		else
+			env->road[i]->state = -1;
+		i++;
+	}
+	return (safe);
 }
 
 /*
@@ -189,24 +223,23 @@ int calcul_cost(t_data *env, int limit)
 int		choose_road(t_data *env)
 {
 	int i;
-	int tmp;
-	int cost;
-//	t_fail *fail;
+	int j;
+	int ok;
+	//	t_fail *fail;
 //	t_road *tmp;
-	i = 1;
-	tmp = 0;
-	cost = 0;
 	//update_state(env);
 //	while (i < col_sup)
-	tmp = calcul_cost(env, i);
-	while (i < env->nb_road_f)
+//	tmp = calcul_cost(env, i);
+	ok = get_ok(env);
+	ft_printf("%d chemins OK\n", ok);
+	/*while (i < env->nb_road_f)
 	{
 	//	id_max = get_id_max(env);
 	//	ft_printf("ID MAX = %d\n", id_max);
 	//	if (env->road[id_max]->col == 0)
 	//		break ;
 		
-		/*
+		
 		if (env->road[i]->state != 0)
 		{
 			ft_printf("Suppression du chemin %d\n", i);
@@ -216,8 +249,22 @@ int		choose_road(t_data *env)
 	//		update_state(env);
 	//		ft_printf("Apres supp chemin %d state = %d\n", i, env->road[i]->state);
 		}
-		*/
+		
+		i++;
+	}*/
+	if (!(env->road_sol = ft_memalloc(sizeof(int) * ok)))
+		return (-1);
+	i = 0;
+	j = 0;
+	while (i < env->nb_road_f)
+	{
+		if (env->road[i]->state == 1)
+		{
+			env->road_sol[j] = i;
+			j++;
+		}
 		i++;
 	}
+	env->nb_road_f = j;
 	return (1);
 }

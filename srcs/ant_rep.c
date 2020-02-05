@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:20:19 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 14:19:29 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:54:11 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,6 @@ int new_nb_road(t_data *env)
 		i++;
 	}
 	return (nb);
-}
-
-void	fill_tab_sol(t_data *env)
-{
-	int i;
-	int j;
-	int size;
-
-	i = 0;
-	j = 0;
-	size = new_nb_road(env);
-	if (!(env->road_sol = ft_memalloc(sizeof(int) * size )))
-		return ;
-	while (i < env->nb_road_f)
-	{
-		if (env->road[i]->state >= 0)
-		{
-			env->road_sol[j] = i;
-			j++;
-		}
-		i++;
-	}
-	env->nb_road_f = size;
 }
 
 int		treat_better(t_data *env, int limit)
@@ -79,7 +56,6 @@ int		ants_treat(t_data *env)
 	i = 0;
 	limit = 1;
 	env->total_road = 0;
-	fill_tab_sol(env);
 	total_cost = treat_better(env, limit);
 	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n\n", total_cost, limit, env->nb_road_f);
 	while (limit < env->nb_road_f)

@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/05 14:49:07 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:06:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ int sort_road(t_data *env)
 		{
 			fail = tmp->f_road;
 			ft_printf("_____________________");
-			ft_printf("\nChemin [%d] -> KO pour %d collisions\n", i, env->road[i]->col);
+			ft_printf("\nChemin [%d] -> KO pour %d collisions\n size = %d", i, env->road[i]->col, env->road[i]->size);
 			ft_printf("Avec chemins :");
 			while (fail)
 			{
@@ -243,12 +243,12 @@ int sort_road(t_data *env)
 			ft_printf("\n_____________________\n\n");
 		}
 		else
-			ft_printf("Chemin [%d] -> OK\n", i);
+			ft_printf("Chemin [%d] -> OK size = %d\n", i, env->road[i]->size);
 		i++;
 	}
 
 	choose_road(env);
-	i = 0;
+	/*i = 0;
 	while (i < env->nb_road_f)
 	{
 		tmp = env->road[i];
@@ -268,8 +268,7 @@ int sort_road(t_data *env)
 		else
 			ft_printf("Chemin [%d] -> OK\n", i);
 		i++;
-	}
-//	solve_cross(env);
+	}*/
 ants_treat(env);
 	//	ft_printf("\n\n\n");
 //	print_road_f(env);
