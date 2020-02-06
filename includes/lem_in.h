@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 18:26:21 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:53:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					print_st_ok;
 	int					nb_ant_go;
 	int					ant_finish;
 	int					blk;
@@ -125,6 +126,9 @@ typedef struct			s_data
 	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
+	int					*road_sol;
+	int					total_road;
+	int					total_cost;
 	t_road				**road;
 }						t_data;
 
@@ -139,7 +143,7 @@ int						nb_split(char **tab);
 int						check_valid_room(char *str, t_data *env,
 		t_stock(**lst));
 void					init_struct(t_data *env);
-void					print_lst(t_stock **lst);	//a tej
+void					print_lst(t_stock **lst); //a tej
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
 void					free_road_adja(t_data *env, int val);
@@ -174,7 +178,7 @@ int						creat_road(t_data *env);
 int						stock_start_end(t_lst **lst, t_data *env);
 int						find_nb_pos(t_lst **lst, t_data *env);
 int						verif_back(t_lst **lst, int pos_blk, int i, int flag);
-int						ants_treat(t_lst **lst, t_data *env);
+int						ants_treat(t_data *env);
 int						check_cross(t_lst **lst, t_file **file, int i,
 		t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
@@ -189,4 +193,5 @@ int						stock_it(t_lst **lst, t_data *env, int pos, int i);
 void					check_valid_room_bis(t_data *env, t_stock **lst);
 int						check_maillon_bis(char **tab);
 
+int						rework_for_best(t_data *env);
 #endif

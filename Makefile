@@ -23,7 +23,7 @@ SRC_FILES = main.c lem_in.c parsing_map.c init_struct.c ft_lst_stock.c 		\
 			ft_use_bfs.c ft_stock_road.c bfs_for_best.c ant_rep.c			\
 			ft_verif_block_road.c ft_print_res.c sort_road.c choose_road.c	\
 			ft_use.c ft_stock_road_bis.c ft_free_bis.c ft_use_bfs_bis.c		\
-
+			rework_for_best.c
 
 INC = lem_in.h
 

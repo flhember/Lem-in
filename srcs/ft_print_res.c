@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/03 16:57:31 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:46:32 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		print_cont_bis(t_data *env, int search, int flg, int i)
 					tmp = tmp->next;
 					tmp->ant_move = search;
 					ft_printf("L%d-%s", search, tmp->name);
-					if (search + 1 < env->nb_ant_go)
+					if (search + env->print_st_ok < env->nb_ant_go)
 						ft_printf(" ");
 				}
 				else
@@ -117,6 +117,7 @@ void		print_res(t_data *env)
 		ft_printf("\n");
 		i++;
 	}
+	env->print_st_ok = 1;
 	while (env->ant_finish < env->nb_ant_go - 1)
 	{
 		print_cont(env);
