@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 15:42:03 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:04:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ void		print_adja_road(t_lst **lst, t_data *env)
 	t_road	*cpy;
 
 	i = 0;
-	printf("\n\n");
+	ft_printf("\n\n");
 	while (i < (*lst)->nb_road)
 	{
 		cpy = env->road[i];
-		printf("\tROAD = %d, %d room: \n-name:%s", i, cpy->nb_cost, cpy->name);
+		ft_printf("\tROAD = %d, %d room: \n-name:%s", i,
+				cpy->nb_cost, cpy->name);
 		(*lst)->total_room += cpy->nb_cost;
 		while (cpy->next)
 		{
 			if (cpy->next)
-				printf("-> %s ", cpy->next->name);
+				ft_printf("-> %s ", cpy->next->name);
 			cpy = cpy->next;
 		}
-		printf("-> NULL \n\n");
+		ft_printf("-> NULL \n\n");
 		i++;
 	}
-	ft_printf("[cost = %d] [total = %d]\n", cpy->nb_cost, (*lst)->total_room);
-	printf("\n\n");
+	ft_printf("[cost = %d] [total = %d]\n\n", cpy->nb_cost, (*lst)->total_room);
 }
 
 int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)

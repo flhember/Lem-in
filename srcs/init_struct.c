@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/04 17:07:13 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:36:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void		init_struct(t_data *env)
 	env->nb_ants = 0;
 	env->nb_room = 0;
 	env->nb_con = 0;
+	env->print_st_ok = 0;
 }

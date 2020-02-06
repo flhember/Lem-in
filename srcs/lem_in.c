@@ -6,11 +6,28 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 18:45:46 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:07:48 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
+
+void	start_to_end(t_data *env, t_lst **lst)
+{
+	int	i;
+
+	i = 0;
+	while (i < (int)env->nb_ants)
+	{
+		ft_printf("L%d-%s", i, (*lst)->tab[env->end]->name);
+		if (i + 1 < (int)env->nb_ants)
+			ft_printf(" ");
+		i++;
+	}
+	ft_printf("\n");
+	free_road_adja(env, (*lst)->malloc_start);
+	free_lst_adja(lst, env);
+}
 
 int		lem_in(void)
 {
@@ -29,7 +46,13 @@ int		lem_in(void)
 		free_lst_adja(&lst, &env);
 		return (-1);
 	}
+	if (lst->nb_room == 2 || env.nb_con == 1)
+	{
+		start_to_end(&env, &lst);
+		return (0);
+	}
 	sort_road(&env);
+//	print_res(&env);
 	free_road_adja(&env, lst->malloc_start);
 	free_lst_adja(&lst, &env);
 	return (0);
