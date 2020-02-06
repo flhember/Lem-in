@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/05 18:10:20 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/06 16:21:10 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,12 @@ FLAGS = -g -Wall -Wextra -Werror
 
 #-----------------------------------------SRC/INC-------------------------------#
 
-SRC_FILES = main.c lem_in.c parsing_map.c init_struct.c ft_lst_stock.c 		\
-			creat_adja_lst.c ft_free.c parsing_main.c parsing_map_sec.c 	\
-			ft_stock_pipe.c ft_lstsize.c check_name.c verif_pos.c			\
-			algo_main.c ft_bfs.c ft_other_road.c ft_best_road.c			 	\
-			ft_use_bfs.c ft_stock_road.c bfs_for_best.c ant_rep.c			\
-			ft_verif_block_road.c ft_print_res.c sort_road.c choose_road.c	\
-			ft_use.c ft_stock_road_bis.c ft_free_bis.c ft_use_bfs_bis.c		\
-
+LEM_IN=		main lem_in parsing_map init_struct ft_lst_stock creat_adja_lst		\
+		   	ft_free parsing_main parsing_map_sec ft_stock_pipe ft_lstsize		\
+		   	check_name verif_pos algo_main ft_bfs ft_other_road ft_best_road	\
+			ft_use_bfs ft_stock_road bfs_for_best ant_rep ft_verif_block_road	\
+		   	ft_print_res sort_road choose_road ft_use ft_stock_road_bis			\
+			ft_free_bis ft_use_bfs_bis
 
 INC = lem_in.h
 
@@ -38,6 +36,7 @@ LIB_FILES = libft.a
 LIB = $(addprefix $(LIB_PATH), $(LIB_FILES))
 LIB_HEADER = $(addprefix $(LIB_PATH), $(INC_PATH))
 
+SRC_FILES= $(LEM_IN:%=%.c)
 INC_FILES = $(addprefix $(INC_PATH), $(INC))
 OBJ_FILES = $(SRC_FILES:.c=.o)
 	OBJ_EXEC = $(addprefix $(OBJ_PATH), $(OBJ_FILES))

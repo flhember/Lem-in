@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 15:42:28 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 18:44:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,5 @@ int			algo_main(t_lst **lst, t_data *env)
 	if ((*lst)->blk)
 		free_blk_lst(&(*lst)->blk);
 	print_adja_road(lst, env);
-	//if (ants_treat(lst, env) == -1)
-	//	return (-1);
-	//env->nb_road_f = (*lst)->nb_road;
-	//sort_road(env);
-	//print_res(env);
 	return (0);
 }
