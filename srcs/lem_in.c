@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 12:53:00 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 15:20:47 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		lem_in(void)
 		return (-1);
 	}
 	sort_road(&env);
-	print_res(&env);
+//	print_res(&env);
 	free_road_adja(&env, lst->malloc_start);
 	free_lst_adja(&lst, &env);
 	return (0);

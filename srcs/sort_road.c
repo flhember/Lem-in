@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/06 12:29:06 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:56:28 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,6 @@ int sort_road(t_data *env)
 			ft_printf("Chemin [%d] -> OK\n", i);
 		i++;
 	}*/
-	ants_treat(env);
 	//	ft_printf("\n\n\n");
 //	print_road_f(env);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:20:19 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 12:35:18 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:24:13 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int		ants_treat(t_data *env)
 	limit = 1;
 	env->total_road = 0;
 	total_cost = treat_better(env, limit);
-	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n\n", total_cost, limit, env->nb_road_f);
+//	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n\n", total_cost, limit, env->nb_road_f);
 	while (limit < env->nb_road_f)
 	{
 		limit++;
 		tmp = total_cost;
 		total_cost = treat_better(env, limit);
-		ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, env->nb_road_f);
+	//	ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, env->nb_road_f);
 		if (total_cost >= tmp)
 		{
 			i++;
@@ -82,6 +82,6 @@ int		ants_treat(t_data *env)
 		env->road[i]->nb_ant = env->road[env->road_sol[i]]->size;
 		i++;
 	}
-	ft_printf("Pour %d coups\n", env->total_cost);
+	ft_printf("[[[\tPour %d coups\t]]]\n", env->total_cost);
 	return (1);
 }
