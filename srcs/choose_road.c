@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/06 18:43:20 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:24:18 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,9 @@ int		choose_road(t_data *env)
 	int i;
 	int j;
 	int ok;
-	int tmp_size;
-	int *tab;
-	int size_tab;
+//	int tmp_size;
+//	int *tab;
+//	int size_tab;
 
 	ok = get_ok(env);
 	ft_printf("%d chemins OK\n", ok);
@@ -182,7 +182,7 @@ int		choose_road(t_data *env)
 	env->nb_road_f = j;
 	ants_treat(env);
 	free(env->road_sol);
-	tmp_size = env->nb_road_f;
+/*	tmp_size = env->nb_road_f;
 	env->nb_road_f = ok;
 	size_tab = reset_state(env, tmp_size);
 	ft_printf("%d chemins OK\n", size_tab);
@@ -194,5 +194,7 @@ int		choose_road(t_data *env)
 	env->nb_road_f = size_tab;
 	env->road_sol = tab;
 	ants_treat(env);
+*/	
+	while(1);
 	return (1);
 }

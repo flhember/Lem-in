@@ -6,18 +6,16 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 18:13:14 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/06 20:02:31 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int			block_bad_road(t_lst **lst, int i)
+int			block_bad_road(t_lst **lst, int i, int old, int flag)
 {
-	int		flag;
 	t_room	*tmp;
 
-	flag = 0;
 	tmp = (*lst)->tab[i];
 	(*lst)->tab[i]->road = -2;
 	while (flag == 0)
@@ -28,6 +26,7 @@ int			block_bad_road(t_lst **lst, int i)
 				&& (*lst)->tab[tmp->pos]->dist == (*lst)->tab[i]->dist - 1
 				&& (*lst)->tab[tmp->pos]->start == 0)
 			{
+				old = tmp->pos;
 				(*lst)->tab[tmp->pos]->road = -2;
 				i = tmp->pos;
 			}
@@ -35,6 +34,8 @@ int			block_bad_road(t_lst **lst, int i)
 				return (0);
 			tmp = tmp->next;
 		}
+		if ((*lst)->tab[i]->dist <= (*lst)->tab[old]->dist)
+			return (-1);
 		tmp = (*lst)->tab[i];
 	}
 	return (0);
@@ -44,7 +45,7 @@ int			check_cross_bis(t_lst **lst, t_file **file, int i, t_data *env)
 {
 	if (verif_back(lst, env->blk, i, 0) == -1)
 	{
-		block_bad_road(lst, i);
+		block_bad_road(lst, i, 0, 0);
 		(*lst)->ret_bfs = 1;
 		return (-1);
 	}
