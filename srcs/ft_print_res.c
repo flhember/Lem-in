@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 15:15:45 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/10 18:42:47 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void		print_start(t_data *env)
 
 	i = 0;
 	tmp = NULL;
-	while (i < env->nb_road_f)
+	while (i < env->road_sol[env->tab_choose][0])
 	{
-		if (env->road[i]->nb_ant > 0)
+		if (env->road[env->road_sol[env->tab_choose - 1][i]]->rep_ant > 0)
 		{
-			tmp = env->road[i];
+			tmp = env->road[env->road_sol[env->tab_choose - 1][i]];
 			tmp = tmp->next;
 			ft_printf("L%d-%s", env->nb_ant_go, tmp->name);
-			if (i + 1 < env->nb_road_f)
+			if (i + 1 < env->road_sol[env->tab_choose][0])
 				ft_printf(" ");
 			tmp->ant_now = env->nb_ant_go;
 			env->nb_ant_go++;
-			env->road[i]->nb_ant--;
+			env->road[env->road_sol[env->tab_choose - 1][i]]->rep_ant--;
 		}
 		i++;
 	}
@@ -40,9 +40,9 @@ void		print_cont_bis(t_data *env, int search, int flg, int i)
 {
 	t_road	*tmp;
 
-	while (flg == 1 && i < env->nb_road_f)
+	while (flg == 1 && i < env->road_sol[env->tab_choose][0])
 	{
-		tmp = env->road[i++];
+		tmp = env->road[env->road_sol[env->tab_choose - 1][i++]];
 		while (tmp)
 		{
 			if (tmp->ant_now == search)
@@ -69,7 +69,7 @@ void		print_cont(t_data *env)
 {
 	int		start;
 
-	start = 1 + env->ant_finish;
+	start = 1;
 	while (start < env->nb_ant_go)
 	{
 		print_cont_bis(env, start, 1, 0);
@@ -83,9 +83,9 @@ void		reset_ant(t_data *env)
 	t_road	*tmp;
 
 	i = 0;
-	while (i < env->nb_road_f)
+	while (i < env->road_sol[env->tab_choose][0])
 	{
-		tmp = env->road[i];
+		tmp = env->road[env->road_sol[env->tab_choose - 1][i]];
 		while (tmp)
 		{
 			if (tmp->ant_move > 0)

@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 16:40:49 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:11:38 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int		sort_road(t_data *env, int i)
 			i++;
 	}
 	solve_cross(env, 0, 1, NULL);
-	choose_road(env);
+	if (choose_road(env) == -1)
+		return (-1);
 	return (1);
 }

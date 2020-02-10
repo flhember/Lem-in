@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 12:02:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 12:19:51 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:39:11 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int			find_nb_max(t_data *env)
 
 	i = 0;
 	nb_max = 0;
-	while (i < env->nb_road_f)
+	while (i < env->road_sol[env->tab_choose][0])
 	{
-		if (env->road[i]->nb_ant > nb_max)
-			nb_max = env->road[i]->nb_ant;
+		if (env->road[env->road_sol[env->tab_choose - 1][i]]->rep_ant > nb_max)
+			nb_max = env->road[env->road_sol[env->tab_choose - 1][i]]->rep_ant;
 		i++;
 	}
 	return (nb_max);

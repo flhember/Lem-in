@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/10 16:17:03 by chcoutur         ###   ########.fr        #
+#    Updated: 2020/02/10 18:36:12 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ FLAGS = -g -Wall -Wextra -Werror
 LEM_IN=		main lem_in parsing_map init_struct ft_lst_stock creat_adja_lst	\
 		   	ft_free parsing_main parsing_map_sec ft_stock_pipe ft_lstsize	\
 		   	check_name verif_pos algo_main ft_bfs ft_other_road ft_best_road\
-			ft_use_bfs ft_stock_road bfs_for_best ft_verif_block_road	\
+			ft_use_bfs ft_stock_road bfs_for_best ft_verif_block_road		\
 		   	ft_print_res sort_road choose_road ft_use ft_stock_road_bis		\
-			ft_free_bis ft_use_bfs_bis ant_rep choose_road_use
+			ft_free_bis ft_use_bfs_bis ant_rep choose_road_use nb_ant_road
 
 INC = lem_in.h
 

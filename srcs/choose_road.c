@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 16:24:01 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:11:56 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ int		check_fail_state(t_data *env, int id, int state)
 	return (1);
 }
 
-int		check_road_sol(int id, t_data *env, int size)
+int		check_road_sol(int id, t_data *env)
 {
 	int i;
 
-	size++;
 	i = 0;
 	while (i < env->road_sol[1][0])
 	{
@@ -50,7 +49,7 @@ int		check_road_sol(int id, t_data *env, int size)
 	return (1);
 }
 
-int		reset_state(t_data *env, int size)
+int		reset_state(t_data *env)
 {
 	int i;
 	int j;
@@ -63,7 +62,7 @@ int		reset_state(t_data *env, int size)
 	{
 		if (env->road[i]->state == 1)
 		{
-			if ((check_road_sol(i, env, size) == -1) && env->road[i]->col != 0)
+			if ((check_road_sol(i, env) == -1) && env->road[i]->col != 0)
 			{
 				j++;
 				env->road[i]->state = -2;
@@ -107,23 +106,21 @@ int		new_tab(t_data *env, int fl)
 
 int		choose_road(t_data *env)
 {
-	int i;
-	int j;
 	int ok;
 	int size_tab;
 
 	size_tab = 0;
 	ok = 0;
-	i = 0;
-	j = 0;
 	size_tab = env->nb_road_f;
 	if ((env->nb_road_f = choose_road_use(env)) == -1)
 		return (-1);
 	ants_treat(env, 0);
 	env->nb_road_f = size_tab;
-	size_tab = reset_state(env, env->nb_road_f);
-	if (size_tab == 0)
+	if (size_tab == reset_state(env) == 0)
+	{
+		env->road_sol[3][1] = env->road_sol[1][1] + 1;
 		return (1);
+	}
 	env->road_sol[3][0] = new_tab(env, 0);
 	if (!(env->road_sol[2] =
 				(int*)ft_memalloc(sizeof(int) * env->road_sol[3][0])))
