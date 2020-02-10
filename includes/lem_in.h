@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 14:05:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/10 13:49:06 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct			s_data
 	int					nb_pos;
 	size_t				nb_ants;
 	size_t				nb_room;
-	int					*road_sol;
+	int					**road_sol;
 	int					total_road;
 	int					total_cost;
 	t_road				**road;
@@ -178,7 +178,7 @@ int						creat_road(t_data *env);
 int						stock_start_end(t_lst **lst, t_data *env);
 int						find_nb_pos(t_lst **lst, t_data *env);
 int						verif_back(t_lst **lst, int pos_blk, int i, int flag);
-int						ants_treat(t_data *env);
+int						ants_treat(t_data *env, int id);
 int						check_cross(t_lst **lst, t_file **file, int i,
 		t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
