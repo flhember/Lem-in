@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 14:21:32 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/10 14:55:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		get_ok(t_data *env)
 	return (safe);
 }
 
-int check_road_sol(int id, t_data *env, int size, int ind)
+int check_road_sol(int id, t_data *env, int size)
 {
 	int i;
 
