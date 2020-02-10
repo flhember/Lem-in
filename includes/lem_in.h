@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 14:57:47 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:25:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct			s_road
 	int					ant_move;
 	int					nb_ant;
 	int					nb_cost;
-	int					ants;
+	int					rep_ant;
 	int					id_ants;
 	int					count_ants;
 	int					index;
@@ -112,6 +112,7 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					tab_choose;
 	int					print_st_ok;
 	int					nb_ant_go;
 	int					ant_finish;
@@ -192,6 +193,7 @@ int						find_nb_max(t_data *env);
 int						stock_it(t_lst **lst, t_data *env, int pos, int i);
 void					check_valid_room_bis(t_data *env, t_stock **lst);
 int						check_maillon_bis(char **tab);
-
 int						rework_for_best(t_data *env);
+void					nb_ant_road(t_data *env);
+
 #endif
