@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 19:11:38 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:49:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		link_fail(t_data *env, int i, int j)
 	return (1);
 }
 
-void	mark_fail(t_data *env, int i, int j)
+void	mark_fail(t_data *env, int i, int j) // faire les return + leaks t_fail
 {
 	if (env->road[i]->f_road == NULL)
 	{
