@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 13:49:06 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/10 16:39:14 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
 void					print_res(t_data *env);
 void					reboot_print(t_lst **lst);
-int						sort_road(t_data *env);
+int						sort_road(t_data *env, int i);
 int						choose_road(t_data *env);
 void					verif_if_one_pipe(t_lst **lst, t_data *env);
 int						find_nb_max(t_data *env);
@@ -194,4 +194,5 @@ void					check_valid_room_bis(t_data *env, t_stock **lst);
 int						check_maillon_bis(char **tab);
 
 int						rework_for_best(t_data *env);
+int						choose_road_use(t_data *env);
 #endif
