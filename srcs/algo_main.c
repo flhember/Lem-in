@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 15:50:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 18:40:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 		env->nb_pos = e;
 	else
 		env->nb_pos = s;
-	if (env->nb_pos == 1)
-		verif_if_one_pipe(lst, env);
+	verif_if_one_pipe(lst, env);
 	return (0);
 }
 

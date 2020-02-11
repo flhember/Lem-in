@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 17:50:08 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/11 18:38:47 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void		verif_if_one_pipe(t_lst **lst, t_data *env)
 		if (tmp->pos != env->end)
 			i++;
 		if (tmp->pos == env->start)
+		{
 			j++;
+		}
 		tmp = tmp->next;
 	}
-	if (i == 1 && j == 1)
+	if (j == 1)
 		env->nb_con = 1;
 }
 
