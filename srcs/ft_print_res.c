@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 15:56:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 17:50:09 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,8 @@ void		reset_ant(t_data *env)
 
 void		print_res(t_data *env, int i, int nb_line, int nb_max)
 {
+	ft_putchar('\n');
 	nb_max = find_nb_max(env);
-	env->nb_ant_go = 1;
-	env->ant_finish = 0;
 	while (i < nb_max)
 	{
 		if (i > 0)

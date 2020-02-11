@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 16:00:14 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 17:51:39 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@ void	start_to_end(t_data *env, t_lst **lst)
 {
 	int	i;
 
-	i = 0;
-	while (i < (int)env->nb_ants)
+	i = 1;
+	ft_putchar('\n');
+	while (i <= (int)env->nb_ants)
 	{
 		ft_printf("L%d-%s", i, (*lst)->tab[env->end]->name);
-		if (i + 1 < (int)env->nb_ants)
+		if (i + 1 <= (int)env->nb_ants)
 			ft_printf(" ");
 		i++;
 	}
 	ft_printf("\n");
 	free_road_adja(env, (*lst)->malloc_start);
 	free_lst_adja(lst, env);
+	if (env->line == 1)
+		ft_printf("\n\n[1] line\n");
 }
 
 void	lem_in_next(t_data *env, t_lst **lst)

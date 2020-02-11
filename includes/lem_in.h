@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 15:58:29 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 17:48:23 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,5 +195,8 @@ int						choose_road_use(t_data *env);
 void					nb_ant_road(t_data *env, int i);
 void					free_road_sol(t_data *env);
 void					free_fail_road(t_data *env);
+int						solve_cross(t_data *env, int i, int j, t_road *nex);
+int						find_id(t_data *env, int i, int j);
+int						mark_fail(t_data *env, int i, int j);
 
 #endif
