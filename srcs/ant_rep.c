@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:20:19 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 19:33:23 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:25:50 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int		ants_treat(t_data *env, int id)
 	}
 	limit -= i;
 	env->road_sol[id + 1][1] = total_cost;
+	env->road_sol[id + 1][0] = limit;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 19:11:56 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:27:58 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		choose_road(t_data *env)
 		return (-1);
 	ants_treat(env, 0);
 	env->nb_road_f = size_tab;
-	if (size_tab == reset_state(env) == 0)
+	if ((size_tab = reset_state(env)) == 0)
 	{
 		env->road_sol[3][1] = env->road_sol[1][1] + 1;
 		return (1);
