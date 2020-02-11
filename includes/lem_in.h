@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 14:02:09 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:36:26 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct			s_data
 	int					ant_finish;
 	int					blk;
 	int					nb_road_f;
+	int					size_free;
 	int					tmp_pos;
 	int					flags;
 	int					se;

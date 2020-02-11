@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:44:00 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 14:03:08 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:04:36 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		free_fail_road(t_data *env)
 	int		i;
 
 	i = 0;
-	while (i < env->nb_road_f)
+	while (i < env->size_free)
 	{
 		if (env->road[i]->f_road)
 			free_t_fail(&env->road[i]->f_road);
