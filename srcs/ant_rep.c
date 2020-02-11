@@ -57,5 +57,6 @@ int		ants_treat(t_data *env, int id)
 	limit -= i;
 	env->road_sol[id + 1][0] = limit;
 	env->road_sol[id + 1][1] = total_cost;
+	env->road_sol[id + 1][0] = limit;
 	return (1);
 }
