@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 19:11:56 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:38:09 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,15 @@ int		reset_state(t_data *env)
 			if ((check_road_sol(i, env) == -1) && env->road[i]->col != 0)
 			{
 				j++;
+		//		ft_printf("Chemin %d est KKO\n", i);
 				env->road[i]->state = -2;
 			}
 		}
 		else if (env->road[i]->state == 1 || env->road[i]->state == -1)
+		{
 			state++;
+		//	ft_printf("Chemin %d est OOK\n", i);
+		}
 		i++;
 	}
 	return (state);
@@ -116,9 +120,10 @@ int		choose_road(t_data *env)
 		return (-1);
 	ants_treat(env, 0);
 	env->nb_road_f = size_tab;
-	if (size_tab == reset_state(env) == 0)
+	if ((size_tab = reset_state(env)) == 0)
 	{
-		env->road_sol[3][1] = env->road_sol[1][1] + 1;
+		//ft_printf("Pas mieux\n");
+	env->road_sol[3][1] = env->road_sol[1][1] + 1;
 		return (1);
 	}
 	env->road_sol[3][0] = new_tab(env, 0);

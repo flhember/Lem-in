@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:20:19 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 19:33:23 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:50:32 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		ants_treat(t_data *env, int id)
 		limit++;
 		tmp = total_cost;
 		total_cost = treat_better(env, limit, id);
+		ft_printf("total_cost = %d | limit = %d | nb_road = %d\n", total_cost, limit, env->road_sol[id + 1][0]);
 		if (total_cost >= tmp)
 		{
 			i++;
@@ -54,6 +55,7 @@ int		ants_treat(t_data *env, int id)
 		}
 	}
 	limit -= i;
+	env->road_sol[id + 1][0] = limit;
 	env->road_sol[id + 1][1] = total_cost;
 	return (1);
 }

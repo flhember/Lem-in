@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 19:41:14 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:51:05 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	lem_in_next(t_data *env, t_lst **lst)
 		return ;
 	}
 	env->tab_choose = env->road_sol[1][1] > env->road_sol[3][1] ? 3 : 1;
+	ft_printf("Coup 1 = %d | coup 2 = %d\n", env->road_sol[1][1], env->road_sol[3][1]);
+	ft_printf("nb 1 = %d | nb 2 = %d\n", env->road_sol[1][0], env->road_sol[3][0]);
 	nb_ant_road(env);
 	print_res(env);
 	free_road_sol(env);
@@ -91,6 +93,5 @@ int		lem_in(void)
 		return (0);
 	}
 	lem_in_next(&env, &lst);
-	while (1);
 	return (0);
 }

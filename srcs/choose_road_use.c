@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:14:06 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/10 18:46:41 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:37:57 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ int		get_ok(t_data *env)
 	{
 		if (check_fail(env, i) == 1)
 		{
+		//	ft_printf("Chemin %d OK -> %d col\n", i, env->road[i]->col);
 			env->road[i]->state = 1;
 			safe++;
 		}
 		else
+		{
+		//	ft_printf("Chemin %d KO -> %d col\n", i, env->road[i]->col);
 			env->road[i]->state = -1;
+		}
 		i++;
 	}
 	return (safe);
@@ -73,6 +77,7 @@ int		choose_road_use(t_data *env)
 	{
 		if (env->road[i]->state == 1)
 		{
+		//	ft_printf("Chemin %d est dans 1er tableau\n", i);
 			env->road_sol[0][j] = i;
 			j++;
 		}
