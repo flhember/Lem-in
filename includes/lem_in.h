@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 19:49:25 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:02:09 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,6 @@ int						rework_for_best(t_data *env);
 int						choose_road_use(t_data *env);
 void					nb_ant_road(t_data *env);
 void					free_road_sol(t_data *env);
+void					free_fail_road(t_data *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:44:00 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 12:23:40 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/11 14:03:08 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,35 @@ void		free_blk_lst(t_blk_lst **blk)
 	free(*blk);
 }
 
+void		free_t_fail(t_fail **lst)
+{
+	if ((*lst)->next)
+		free_t_fail(&(*lst)->next);
+	free(*lst);
+}
+
+void		free_fail_road(t_data *env)
+{
+	int		i;
+
+	i = 0;
+	while (i < env->nb_road_f)
+	{
+		if (env->road[i]->f_road)
+			free_t_fail(&env->road[i]->f_road);
+		i++;
+	}
+}
 
 void		free_road_sol(t_data *env)
 {
 	int i;
-	
+
 	i = 0;
-	(void)env;
 	while (i < 4)
 	{
-		//free(&(env->road_sol[i]));
+		free(env->road_sol[i]);
 		i++;
 	}
-	//free(&env->road_sol);
+	free(env->road_sol);
 }
