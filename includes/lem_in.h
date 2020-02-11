@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 14:02:09 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:20:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct			s_blk_lst
 typedef struct			s_road
 {
 	char				*name;
-	int					state;// 1 -> 0 collision | -1 -> collision
-	int					col;// nombre de collision sur 1 chemin
+	int					state;
+	int					col;
 	int					nb_road;
 	int					ant_now;
 	int					ant_move;
@@ -144,7 +144,6 @@ int						nb_split(char **tab);
 int						check_valid_room(char *str, t_data *env,
 		t_stock(**lst));
 void					init_struct(t_data *env);
-void					print_lst(t_stock **lst); //a tej
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
 void					free_road_adja(t_data *env, int val);
@@ -154,8 +153,6 @@ t_lst					*parsing_main(t_data *env);
 size_t					ft_lstsize_stock(t_stock **room);
 size_t					ft_lstsize_room(t_room **room);
 int						ft_lstsize_road(t_road **room);
-void					print_adja(t_lst **lst, t_data *env); // a tej
-void					print_lst_adja(t_lst **lst, t_data *env); // a tej
 int						check_name(t_data *env, t_lst **lst);
 int						verif_pos(t_stock **lst);
 int						algo_main(t_lst **lst, t_data *env);
@@ -165,8 +162,6 @@ void					free_file(t_file **file);
 int						best_road(t_lst **lst, t_data *env);
 int						other_road(t_lst **lst, t_data *env, int i);
 int						verif_size_ant(char *ants);
-int						print_road(t_lst **lst, t_data *env, t_room *tmp); // a tej
-void					print_adja_road(t_lst **lst, t_data *env); // a tej
 void					del_first_file(t_file **file);
 void					clean_status(t_lst **lst);
 void					clean_dist(t_lst **lst);
