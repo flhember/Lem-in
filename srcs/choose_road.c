@@ -65,11 +65,15 @@ int		reset_state(t_data *env)
 			if ((check_road_sol(i, env) == -1) && env->road[i]->col != 0)
 			{
 				j++;
+		//		ft_printf("Chemin %d est KKO\n", i);
 				env->road[i]->state = -2;
 			}
 		}
 		else if (env->road[i]->state == 1 || env->road[i]->state == -1)
+		{
 			state++;
+		//	ft_printf("Chemin %d est OOK\n", i);
+		}
 		i++;
 	}
 	return (state);
@@ -118,7 +122,8 @@ int		choose_road(t_data *env)
 	env->nb_road_f = size_tab;
 	if ((size_tab = reset_state(env)) == 0)
 	{
-		env->road_sol[3][1] = env->road_sol[1][1] + 1;
+		//ft_printf("Pas mieux\n");
+	env->road_sol[3][1] = env->road_sol[1][1] + 1;
 		return (1);
 	}
 	env->road_sol[3][0] = new_tab(env, 0);

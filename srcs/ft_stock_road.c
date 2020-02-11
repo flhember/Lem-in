@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 19:29:01 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 13:45:38 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			stock_road_other(t_lst **lst, t_data *env)
 int			stock_road(t_lst **lst, t_data *env)
 {
 	parse_road(lst, env, NULL);
-	print_adja_road(lst, env);
+//	print_adja_road(lst, env);
 	env->nb_road_f = (*lst)->nb_road;
 	return (0);
 }

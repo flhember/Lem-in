@@ -37,6 +37,7 @@ void	start_to_end(t_data *env, t_lst **lst)
 {
 	int	i;
 
+	
 	i = 0;
 	while (i < (int)env->nb_ants)
 	{
@@ -61,7 +62,10 @@ void	lem_in_next(t_data *env, t_lst **lst)
 		free_lst_adja(lst, env);
 		return ;
 	}
+	ft_printf("ICI\n");
 	env->tab_choose = env->road_sol[1][1] > env->road_sol[3][1] ? 3 : 1;
+	ft_printf("Coup 1 = %d | coup 2 = %d\n", env->road_sol[1][1], env->road_sol[3][1]);
+	ft_printf("nb 1 = %d | nb 2 = %d\n", env->road_sol[1][0], env->road_sol[3][0]);
 	nb_ant_road(env);
 	print_res(env);
 	free_fail_road(env);
