@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:24:12 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 12:36:52 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:41:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		verif_if_one_pipe(t_lst **lst, t_data *env)
 		env->nb_con = 1;
 }
 
-void		init_struct(t_data *env)
+void		init_struct(t_data *env, int ac, char **av)
 {
 	env->flags = 0;
 	env->se = 0;
@@ -41,4 +41,8 @@ void		init_struct(t_data *env)
 	env->nb_room = 0;
 	env->nb_con = 0;
 	env->print_st_ok = 0;
+	if (ac == 2 && ft_strcmp(av[1], "-l") == 0)
+		env->line = 1;
+	else
+		env->line = 0;
 }

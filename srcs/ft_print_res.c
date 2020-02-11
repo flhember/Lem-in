@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/10 18:42:47 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:56:11 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,8 @@ void		reset_ant(t_data *env)
 	}
 }
 
-void		print_res(t_data *env)
+void		print_res(t_data *env, int i, int nb_line, int nb_max)
 {
-	int		i;
-	int		nb_max;
-
-	i = 0;
 	nb_max = find_nb_max(env);
 	env->nb_ant_go = 1;
 	env->ant_finish = 0;
@@ -116,6 +112,7 @@ void		print_res(t_data *env)
 		reset_ant(env);
 		ft_printf("\n");
 		i++;
+		nb_line++;
 	}
 	env->print_st_ok = 1;
 	while (env->ant_finish < env->nb_ant_go - 1)
@@ -123,6 +120,10 @@ void		print_res(t_data *env)
 		print_cont(env);
 		reset_ant(env);
 		if (env->ant_finish < env->nb_ant_go - 1)
+		{
 			ft_printf("\n");
+			nb_line++;
+		}
 	}
+	env->line == 1 ? ft_printf("\n\n[%d] lines\n", nb_line) : env->line;
 }

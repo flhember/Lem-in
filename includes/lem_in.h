@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 15:20:14 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:58:29 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,14 @@ typedef struct			s_stock
 
 typedef struct			s_data
 {
+	int					line;
 	int					tab_choose;
 	int					print_st_ok;
 	int					nb_ant_go;
 	int					ant_finish;
 	int					blk;
 	int					nb_road_f;
+	int					size_free;
 	int					tmp_pos;
 	int					flags;
 	int					se;
@@ -133,7 +135,7 @@ typedef struct			s_data
 	t_road				**road;
 }						t_data;
 
-int						lem_in(void);
+int						lem_in(int ac, char **av);
 int						parsing_map(t_data *env, t_stock **lst);
 int						creat_maillon(t_stock **lst, char *name, char *x,
 		char *y);
@@ -143,7 +145,7 @@ int						check_nb_ants(char *str, t_data *env);
 int						nb_split(char **tab);
 int						check_valid_room(char *str, t_data *env,
 		t_stock(**lst));
-void					init_struct(t_data *env);
+void					init_struct(t_data *env, int ac, char **av);
 void					free_stock(t_stock **lst);
 void					free_lst_adja(t_lst **lst, t_data *env);
 void					free_road_adja(t_data *env, int val);
@@ -179,7 +181,7 @@ int						check_cross(t_lst **lst, t_file **file, int i,
 		t_data *env);
 int						add_file(t_lst **lst, t_file **file, int val,
 		int dis);
-void					print_res(t_data *env);
+void					print_res(t_data *env, int i, int nb_line, int nb_max);
 void					reboot_print(t_lst **lst);
 int						sort_road(t_data *env, int i);
 int						choose_road(t_data *env);
@@ -190,7 +192,7 @@ void					check_valid_room_bis(t_data *env, t_stock **lst);
 int						check_maillon_bis(char **tab);
 int						rework_for_best(t_data *env);
 int						choose_road_use(t_data *env);
-void					nb_ant_road(t_data *env);
+void					nb_ant_road(t_data *env, int i);
 void					free_road_sol(t_data *env);
 void					free_fail_road(t_data *env);
 

@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 19:29:40 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:50:05 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int			algo_main(t_lst **lst, t_data *env)
 	}
 	if ((*lst)->blk)
 		free_blk_lst(&(*lst)->blk);
-	print_adja_road(lst, env);
 	env->nb_road_f = (*lst)->nb_road;
 	return (0);
 }

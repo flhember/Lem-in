@@ -6,36 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 19:29:01 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:57:07 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-void		print_adja_road(t_lst **lst, t_data *env)
-{
-	int		i;
-	t_road	*cpy;
-
-	i = 0;
-	ft_printf("\n\n");
-	while (i < (*lst)->nb_road)
-	{
-		cpy = env->road[i];
-		ft_printf("\tROAD = %d, %d room: \n-name:%s", i,
-				cpy->nb_cost, cpy->name);
-		(*lst)->total_room += cpy->nb_cost;
-		while (cpy->next)
-		{
-			if (cpy->next)
-				ft_printf("-> %s ", cpy->next->name);
-			cpy = cpy->next;
-		}
-		ft_printf("-> NULL \n\n");
-		i++;
-	}
-	ft_printf("[cost = %d] [total = %d]\n\n", cpy->nb_cost, (*lst)->total_room);
-}
 
 int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 {
@@ -103,7 +78,6 @@ int			stock_road_other(t_lst **lst, t_data *env)
 int			stock_road(t_lst **lst, t_data *env)
 {
 	parse_road(lst, env, NULL);
-	print_adja_road(lst, env);
 	env->nb_road_f = (*lst)->nb_road;
 	return (0);
 }

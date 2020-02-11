@@ -31,7 +31,7 @@ void		free_fail_road(t_data *env)
 	int		i;
 
 	i = 0;
-	while (i < )
+	while (i < env->size_free)
 	{
 		if (env->road[i]->f_road)
 			free_t_fail(&env->road[i]->f_road);

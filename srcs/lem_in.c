@@ -6,32 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 14:34:53 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 16:00:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-void	print_debug1(t_data *env)
-{
-	int		i;
-	t_road	*tmp;
-
-	i = 0;
-	while (i < env->road_sol[env->tab_choose][0])
-	{
-		tmp = env->road[env->road_sol[env->tab_choose - 1][i]];
-		while (tmp)
-		{
-			ft_printf("%s ->", tmp->name);
-			if (tmp->index == env->end)
-				ft_printf("tout vas bien ");
-			tmp = tmp->next;
-		}
-		ft_printf("\n\n");
-		i++;
-	}
-}
 
 void	start_to_end(t_data *env, t_lst **lst)
 {
@@ -52,7 +31,6 @@ void	start_to_end(t_data *env, t_lst **lst)
 
 void	lem_in_next(t_data *env, t_lst **lst)
 {
-
 	if (sort_road(env, 0) == -1)
 	{
 		free_fail_road(env);
@@ -62,21 +40,21 @@ void	lem_in_next(t_data *env, t_lst **lst)
 		return ;
 	}
 	env->tab_choose = env->road_sol[1][1] > env->road_sol[3][1] ? 3 : 1;
-	nb_ant_road(env);
-	print_res(env);
+	nb_ant_road(env, 0);
+	print_res(env, 0, 0, 0);
 	free_fail_road(env);
 	free_road_sol(env);
 	free_road_adja(env, (*lst)->malloc_start);
 	free_lst_adja(lst, env);
 }
 
-int		lem_in(void)
+int		lem_in(int ac, char **av)
 {
 	t_data		env;
 	t_lst		*lst;
 
 	lst = NULL;
-	init_struct(&env);
+	init_struct(&env, ac, av);
 	if (!(lst = parsing_main(&env)))
 	{
 		ft_putstr_fd("ERROR\n", 2);

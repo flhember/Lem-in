@@ -6,16 +6,15 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/11 13:42:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:38:00 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		main(void)
+int		main(int ac, char **av)
 {
-	if (lem_in() == -1)
+	if (lem_in(ac, av) == -1)
 		return (-1);
-	while (1);
 	return (0);
 }

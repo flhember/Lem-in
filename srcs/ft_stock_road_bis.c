@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:20:00 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 19:18:31 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:52:31 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			stock_start_end(t_lst **lst, t_data *env)
 	env->road[0]->name = ft_strdup((*lst)->tab[env->start]->name);
 	stock_it(lst, env, env->end, 1);
 	env->nb_road_f = 1;
-	print_adja_road(lst, env);
 	return (0);
 }
 

@@ -6,34 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/05 15:55:48 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:53:23 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-void		print_lst_adja(t_lst **lst, t_data *env)
-{
-	size_t	i;
-	t_room	*cpy;
-
-	i = 0;
-	printf("\n\n");
-	while (i < env->nb_room)
-	{
-		cpy = (*lst)->tab[i];
-		printf("\ttab[%zu]:\n-name:%s", i, cpy->name);
-		while (cpy->next)
-		{
-			if (cpy->next)
-				printf("-> %s ", cpy->next->name);
-			cpy = cpy->next;
-		}
-		printf("-> NULL \n\n");
-		i++;
-	}
-	printf("\n\n");
-}
 
 t_room		*creat_cpy(t_lst **lst, int sec_pe)
 {
