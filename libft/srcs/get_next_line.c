@@ -3,95 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chcoutur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 19:24:05 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/15 19:43:40 by flhember         ###   ########.fr       */
+/*   Created: 2019/08/12 14:05:18 by chcoutur          #+#    #+#             */
+/*   Updated: 2020/02/11 15:16:26 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../includes/libft.h"
 
-static t_list	*checkfd(t_list **list, const int fd, char **line)
+t_list		*ft_lstcheck(t_list **save, int fd)
 {
-	t_list	*tmp;
-	char	buf[BUFF_SIZE + 1];
+	t_list *tmp;
 
-	tmp = *list;
-	if (fd < 0 || line == NULL || BUFF_SIZE < 1 || (read(fd, buf, 0)) < 0)
+	tmp = *save;
+	if (fd < 0)
 		return (NULL);
 	while (tmp)
 	{
-		if (fd == ((int)tmp->content_size))
-		{
-			if (!(tmp->content))
-				return (NULL);
+		if ((int)tmp->content_size == fd)
 			return (tmp);
-		}
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew("\0", fd);
-	ft_lstadd(list, tmp);
+	tmp = ft_lstnew("\0", 1);
+	tmp->content_size = fd;
+	ft_lstadd(save, tmp);
 	return (tmp);
 }
 
-static void		*read_fd(t_list **new, const int fd)
-{
-	int		size;
-	char	buf[BUFF_SIZE + 1];
-	t_list	*tmp;
-
-	tmp = *new;
-	size = 1;
-	while ((ft_strchr(tmp->content, '\n') == 0) && size > 0)
-	{
-		if ((size = read(fd, buf, BUFF_SIZE)) < 0)
-			return (0);
-		buf[size] = '\0';
-		tmp->content = ft_strjoinfree(tmp->content, buf, 1);
-	}
-	return (tmp->content);
-}
-
-static void		get_line(t_list **new, char **line)
+char		*ft_save(char *save, char **line)
 {
 	int		i;
-	t_list	*tmp;
-	char	*swap;
+	char	*tmp;
 
-	tmp = *new;
+	if (!(tmp = ft_strdup(save)))
+		return (NULL);
 	i = 0;
-	while (((char *)tmp->content)[i] != '\n' && ((char *)tmp->content)[i])
+	while (tmp[i] != '\n' && tmp[i])
 		i++;
-	*line = ft_strsub(tmp->content, 0, i);
-	if (((char *)tmp->content)[i] == '\0')
-		ft_strclr(tmp->content);
-	else
+	if (!(*line = ft_strsub(tmp, 0, i)))
+		return (NULL);
+	line++;
+	ft_strdel(&save);
+	if (tmp[i] == '\n')
 	{
-		swap = ft_strsub(tmp->content, i + 1, ft_strlen(tmp->content) - 1 - i);
-		free(tmp->content);
-		tmp->content = swap;
+		if (!(save = ft_strdup(&tmp[i + 1])))
+			return (NULL);
 	}
+	else
+		save = "\0";
+	ft_strdel(&tmp);
+	return (save);
 }
 
-int				get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
-	static t_list	*list = NULL;
-	int				i;
-	t_list			*new;
+	static	t_list	*save;
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
+	t_list			*current;
 
-	i = 0;
-	if (!(new = checkfd(&list, fd, line)))
-		return (-1);
-	*line = 0;
-	if (!(new->content = read_fd(&new, fd)))
-		return (0);
-	if (((char*)(new->content))[i])
+	current = ft_lstcheck(&save, fd);
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0 && BUFF_SIZE > 0 && fd >= 0
+			&& line != NULL)
 	{
-		get_line(&new, line);
+		buf[ret] = '\0';
+		current->content = ft_strjoinfree(current->content, buf, 1);
+		if (ft_strchr(buf, '\n'))
+		{
+			current->content = ft_save(current->content, line);
+			return (1);
+		}
+	}
+	if (ret < 0 || BUFF_SIZE <= 0 || fd < 0 || line == NULL)
+		return (-1);
+	if (((char*)current->content)[0] != '\0')
+	{
+		current->content = ft_save(current->content, line);
 		return (1);
 	}
-	else
-		ft_strclr(*line);
 	return (0);
 }
