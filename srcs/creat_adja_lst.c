@@ -6,34 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 12:36:59 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:45:24 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
-
-void		print_adja(t_lst **lst, t_data *env)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < env->nb_room)
-	{
-		ft_printf("----tab[%lu]----\n", i);
-		ft_printf("pso tab = %d\n", (*lst)->tab[i]->pos);
-		if ((*lst)->tab[i]->start == 1)
-			ft_printf("\tSTART\n");
-		if ((*lst)->tab[i]->end == 1)
-			ft_printf("\tEND\n");
-		ft_printf("name %s\n", (*lst)->tab[i]->name);
-		ft_printf("distance =  %d\n", (*lst)->tab[i]->dist);
-		ft_printf("nb road = %d\n", (*lst)->tab[i]->road);
-		ft_printf("status = %d\n", (*lst)->tab[i]->status);
-		ft_printf("x %d\n", (*lst)->tab[i]->x);
-		ft_printf("y %d\n\n", (*lst)->tab[i]->y);
-		i++;
-	}
-}
 
 static int	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 {

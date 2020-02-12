@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:02:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/01/30 16:05:42 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:45:54 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,11 @@ int			best_road(t_lst **lst, t_data *env)
 
 	ds = 0;
 	if (bfs_best(env, lst, NULL) == -1)
-	{
-		ft_printf("bfs road best?\n");
 		return (-1);
-	}
 	ds = (*lst)->tab[env->end]->dist;
 	(*lst)->nb_road++;
 	if ((best_road_bis(env, lst, ds, NULL)) == -1)
-	{
-		ft_printf("best road best?\n");
 		return (-1);
-	}
 	if (stock_road(lst, env) == -1)
 		return (-1);
 	return (0);

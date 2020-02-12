@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:38:53 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/06 12:37:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:46:47 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ int			verif_size_ant(char *ants)
 			return (-1);
 	}
 	return (0);
-}
-
-void		print_lst(t_stock **lst)
-{
-	t_stock	*tmp;
-
-	tmp = *lst;
-	while (tmp->next)
-	{
-		printf("[ %s, x = %d, y = %d pipe = %d] -> ", tmp->room, tmp->x,
-				tmp->y, tmp->pipe);
-		tmp = tmp->next;
-	}
-	printf("NULL ");
 }
 
 void		add_link_last(t_stock *new, t_stock **lst)
