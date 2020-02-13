@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/13 18:14:25 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/13 18:19:11 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,4 +110,4 @@ fclean: clean
 	@echo "$(red_li)$(notdir $(NAME))$(red_da) removed.$(end)"
 
 re: fclean 
-	make lemin
+	@make lemin
