@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:59:41 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:49:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:28:17 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int			block_bad_road(t_lst **lst, int i, int old, int flag)
+static int	block_bad_road(t_lst **lst, int i, int old, int flag)
 {
 	t_room	*tmp;
 
@@ -41,7 +41,7 @@ int			block_bad_road(t_lst **lst, int i, int old, int flag)
 	return (0);
 }
 
-int			check_cross_bis(t_lst **lst, t_file **file, int i, t_data *env)
+static int	check_cross_bis(t_lst **lst, t_file **file, int i, t_data *env)
 {
 	if (verif_back(lst, env->blk, i, 0) == -1)
 	{
@@ -83,7 +83,7 @@ int			check_cross(t_lst **lst, t_file **file, int i, t_data *env)
 	return (0);
 }
 
-int			check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
+static int	check_verif_back(t_lst **lst, int i, int nb, t_room *tmp)
 {
 	int		flag;
 

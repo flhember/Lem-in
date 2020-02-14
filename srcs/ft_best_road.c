@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:02:43 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:45:54 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:10:18 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int			pars_pipe(t_lst **lst, t_room *tmp, int i, size_t j)
+static int	pars_pipe(t_lst **lst, t_room *tmp, int i, size_t j)
 {
 	while (tmp)
 	{

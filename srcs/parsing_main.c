@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 14:29:25 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:23:42 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-static void	print_map_room(t_stock *cpy)
+static void		print_map_room(t_stock *cpy)
 {
 	if (cpy->next)
 		print_map_room(cpy->next);
@@ -26,7 +26,7 @@ static void	print_map_room(t_stock *cpy)
 		ft_printf("%s %d %d\n", cpy->room, cpy->x, cpy->y);
 }
 
-static int	print_map(t_stock *lst_s, int nb_ant, t_lst **lst, t_data *env)
+static int		print_map(t_stock *lst_s, int nb_ant, t_lst **lst, t_data *env)
 {
 	t_stock	*cpy;
 
@@ -41,7 +41,7 @@ static int	print_map(t_stock *lst_s, int nb_ant, t_lst **lst, t_data *env)
 	return (0);
 }
 
-t_lst		*parsing_main_bis(t_data *env, t_lst **lst, t_stock *lst_tmp)
+static t_lst	*parsing_main_bis(t_data *env, t_lst **lst, t_stock *lst_tmp)
 {
 	if (print_map(lst_tmp, env->nb_ants, lst, env) == -1)
 	{
@@ -53,7 +53,7 @@ t_lst		*parsing_main_bis(t_data *env, t_lst **lst, t_stock *lst_tmp)
 	return (*lst);
 }
 
-t_lst		*parsing_main(t_data *env)
+t_lst			*parsing_main(t_data *env)
 {
 	t_lst	*lst;
 	t_stock	*lst_tmp;

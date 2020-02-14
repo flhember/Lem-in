@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/12 13:44:57 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:31:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		check_fail_state(t_data *env, int id, int state)
+static int	check_fail_state(t_data *env, int id, int state)
 {
 	int		i;
 	t_fail	*fail;
@@ -35,9 +35,9 @@ int		check_fail_state(t_data *env, int id, int state)
 	return (1);
 }
 
-int		check_road_sol(int id, t_data *env)
+static int	check_road_sol(int id, t_data *env)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (i < env->road_sol[1][0])
@@ -49,11 +49,11 @@ int		check_road_sol(int id, t_data *env)
 	return (1);
 }
 
-int		reset_state(t_data *env)
+static int	reset_state(t_data *env)
 {
-	int i;
-	int j;
-	int state;
+	int		i;
+	int		j;
+	int		state;
 
 	i = 0;
 	j = 0;
@@ -75,10 +75,10 @@ int		reset_state(t_data *env)
 	return (state);
 }
 
-int		new_tab(t_data *env, int fl)
+static int	new_tab(t_data *env, int fl)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -104,10 +104,10 @@ int		new_tab(t_data *env, int fl)
 	return (j);
 }
 
-int		choose_road(t_data *env)
+int			choose_road(t_data *env)
 {
-	int ok;
-	int size_tab;
+	int		ok;
+	int		size_tab;
 
 	size_tab = 0;
 	ok = 0;

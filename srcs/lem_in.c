@@ -6,15 +6,15 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:50:44 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:22:46 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-void	start_to_end(t_data *env, t_lst **lst)
+static void	start_to_end(t_data *env, t_lst **lst)
 {
-	int	i;
+	int		i;
 
 	i = 1;
 	ft_putchar('\n');
@@ -32,7 +32,7 @@ void	start_to_end(t_data *env, t_lst **lst)
 		ft_printf("\n\n[1] line\n");
 }
 
-void	lem_in_next(t_data *env, t_lst **lst)
+static void	lem_in_next(t_data *env, t_lst **lst)
 {
 	if (sort_road(env, 0) == -1)
 	{
@@ -51,10 +51,10 @@ void	lem_in_next(t_data *env, t_lst **lst)
 	free_lst_adja(lst, env);
 }
 
-int		lem_in(int ac, char **av)
+int			lem_in(int ac, char **av)
 {
-	t_data		env;
-	t_lst		*lst;
+	t_data	env;
+	t_lst	*lst;
 
 	lst = NULL;
 	init_struct(&env, ac, av);

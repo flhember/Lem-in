@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 14:59:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:45 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:15:59 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
+static int	find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 {
 	env->tmp_pos = env->start;
 	while ((*lst)->tab[env->tmp_pos]->end == 0)
@@ -40,7 +40,7 @@ int			find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 	return (0);
 }
 
-int			parse_road(t_lst **lst, t_data *env, t_room *tmp)
+static int	parse_road(t_lst **lst, t_data *env, t_room *tmp)
 {
 	int		i;
 

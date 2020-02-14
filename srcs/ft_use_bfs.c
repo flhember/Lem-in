@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:04:38 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:48:24 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:19:05 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-void		change_part_road(t_lst **lst, int road, t_data *env)
+static void	change_part_road(t_lst **lst, int road, t_data *env)
 {
 	int		i;
 	t_road	*tmp;
@@ -38,7 +38,7 @@ void		change_part_road(t_lst **lst, int road, t_data *env)
 	}
 }
 
-void		change_all(t_lst **lst, int road)
+static void	change_all(t_lst **lst, int road)
 {
 	int		i;
 
@@ -51,7 +51,7 @@ void		change_all(t_lst **lst, int road)
 	}
 }
 
-int			verif_pos_blk(t_lst **lst)
+static int	verif_pos_blk(t_lst **lst)
 {
 	t_blk_lst	*tmp;
 	t_blk_lst	*new;
@@ -71,7 +71,7 @@ int			verif_pos_blk(t_lst **lst)
 	return (0);
 }
 
-int			creat_lst_blk(t_lst **lst)
+static int	creat_lst_blk(t_lst **lst)
 {
 	if (!((*lst)->blk = (t_blk_lst*)ft_memalloc(sizeof(t_blk_lst))))
 		return (-1);

@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:10 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:11:57 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-void		check_nb_road(t_lst **lst)
+static void	check_nb_road(t_lst **lst)
 {
 	int		i;
 	int		check;

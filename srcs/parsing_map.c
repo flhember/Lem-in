@@ -6,13 +6,13 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 14:51:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:34:15 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		check_start_end(char *str, t_data *env, t_stock **lst)
+static int	check_start_end(char *str, t_data *env, t_stock **lst)
 {
 	if (ft_strcmp(str + 2, "start") == 0 && add_flag(env, START)
 			== 0 && (env->se & AEND) == 0)
@@ -36,7 +36,7 @@ int		check_start_end(char *str, t_data *env, t_stock **lst)
 	return (1);
 }
 
-int		check_room(t_stock **lst, char *str, t_data *env)
+static int	check_room(t_stock **lst, char *str, t_data *env)
 {
 	if (str[0] == '#' && str[1] == '#' && (check_start_end(str, env, lst) == 1))
 		return (1);
@@ -50,7 +50,7 @@ int		check_room(t_stock **lst, char *str, t_data *env)
 	return (1);
 }
 
-int		check_tube(char *str, t_stock **lst, t_data *env)
+static int	check_tube(char *str, t_stock **lst, t_data *env)
 {
 	if (ft_count_c(str, '-') == 1 && ft_count_c(str, ' ') == 0)
 	{
@@ -65,7 +65,7 @@ int		check_tube(char *str, t_stock **lst, t_data *env)
 		return (-1);
 }
 
-int		check_line(char *str, t_data *env, t_stock **lst)
+static int	check_line(char *str, t_data *env, t_stock **lst)
 {
 	if (str[0] == '#')
 	{
@@ -92,7 +92,7 @@ int		check_line(char *str, t_data *env, t_stock **lst)
 	return (-1);
 }
 
-int		parsing_map(t_data *env, t_stock **lst)
+int			parsing_map(t_data *env, t_stock **lst)
 {
 	char *line;
 

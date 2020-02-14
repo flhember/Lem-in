@@ -6,15 +6,15 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:35 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:33:31 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-t_room		*creat_cpy(t_lst **lst, int sec_pe)
+static t_room	*creat_cpy(t_lst **lst, int sec_pe)
 {
-	t_room	*cpy;
+	t_room		*cpy;
 
 	cpy = NULL;
 	if (!(cpy = ft_memalloc(sizeof(t_room))))
@@ -29,10 +29,10 @@ t_room		*creat_cpy(t_lst **lst, int sec_pe)
 	return (cpy);
 }
 
-int			add_link_lst(t_lst **lst, int fst_pe, int sec_pe)
+static int		add_link_lst(t_lst **lst, int fst_pe, int sec_pe)
 {
-	t_room	*cpy;
-	t_room	*lst_cpy;
+	t_room		*cpy;
+	t_room		*lst_cpy;
 
 	lst_cpy = (*lst)->tab[fst_pe];
 	if (!(cpy = creat_cpy(lst, sec_pe)))
@@ -43,10 +43,10 @@ int			add_link_lst(t_lst **lst, int fst_pe, int sec_pe)
 	return (0);
 }
 
-int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe, size_t k)
+static int		find_gd_rm(t_data *env, t_lst **lst, t_stock **pipe, size_t k)
 {
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	if (ft_is_c((*pipe)->room, '-') == 1)
@@ -72,20 +72,20 @@ int			find_good_room(t_data *env, t_lst **lst, t_stock **pipe, size_t k)
 	return ((*lst)->tab[i]->pos);
 }
 
-int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
+static int		find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 {
-	int		fst_pe;
-	int		sec_pe;
-	char	*str;
+	int			fst_pe;
+	int			sec_pe;
+	char		*str;
 
 	str = pipe->room;
-	if ((fst_pe = find_good_room(env, lst, &pipe, 0)) == -1)
+	if ((fst_pe = find_gd_rm(env, lst, &pipe, 0)) == -1)
 	{
 		ft_strdel(&pipe->room1);
 		ft_strdel(&str);
 		return (-1);
 	}
-	if ((sec_pe = find_good_room(env, lst, &pipe, 0)) == -1)
+	if ((sec_pe = find_gd_rm(env, lst, &pipe, 0)) == -1)
 	{
 		ft_strdel(&pipe->room1);
 		ft_strdel(&str);
@@ -99,7 +99,7 @@ int			find_stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 	return (0);
 }
 
-int			stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
+int				stock_pipe(t_data *env, t_lst **lst, t_stock *pipe)
 {
 	while (pipe)
 	{

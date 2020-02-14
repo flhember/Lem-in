@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:14:06 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/12 13:45:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:30:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		check_fail(t_data *env, int id)
+static int	check_fail(t_data *env, int id)
 {
 	int		i;
 	t_fail	*fail;
@@ -32,10 +32,10 @@ int		check_fail(t_data *env, int id)
 	return (1);
 }
 
-int		get_ok(t_data *env)
+static int	get_ok(t_data *env)
 {
-	int i;
-	int safe;
+	int		i;
+	int		safe;
 
 	i = 0;
 	safe = 0;
@@ -53,10 +53,10 @@ int		get_ok(t_data *env)
 	return (safe);
 }
 
-int		choose_road_use(t_data *env)
+int			choose_road_use(t_data *env)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;

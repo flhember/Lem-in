@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:00:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:29:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef struct			s_lst
 	int					cross;
 	int					end;
 	int					size_file;
-	char 				pad[4];
+	char				pad[4];
 }						t_lst;
 
 typedef struct			s_stock

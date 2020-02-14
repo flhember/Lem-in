@@ -6,13 +6,13 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:12:10 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/12 13:52:15 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:27:14 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-int		solve_end(t_data *env, int *i, int *j, t_road *nex)
+static int	solve_end(t_data *env, int *i, int *j, t_road *nex)
 {
 	t_road *act;
 
@@ -41,7 +41,7 @@ int		solve_end(t_data *env, int *i, int *j, t_road *nex)
 	return (0);
 }
 
-int		solve_cross(t_data *env, int i, int j, t_road *nex)
+int			solve_cross(t_data *env, int i, int j, t_road *nex)
 {
 	while (++i < env->nb_road_f - 1)
 	{

@@ -6,13 +6,13 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:20 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:13:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-void		print_start(t_data *env)
+static void	print_start(t_data *env)
 {
 	int		i;
 	t_road	*tmp;
@@ -36,7 +36,7 @@ void		print_start(t_data *env)
 	}
 }
 
-void		print_cont_bis(t_data *env, int search, int flg, int i)
+static void	print_cont_bis(t_data *env, int search, int flg, int i)
 {
 	t_road	*tmp;
 
@@ -65,7 +65,7 @@ void		print_cont_bis(t_data *env, int search, int flg, int i)
 	}
 }
 
-void		print_cont(t_data *env)
+static void	print_cont(t_data *env)
 {
 	int		start;
 
@@ -77,7 +77,7 @@ void		print_cont(t_data *env)
 	}
 }
 
-void		reset_ant(t_data *env)
+static void	reset_ant(t_data *env)
 {
 	int		i;
 	t_road	*tmp;
