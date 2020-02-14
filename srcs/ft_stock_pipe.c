@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:03:46 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:35 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:06:54 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 t_room		*creat_cpy(t_lst **lst, int sec_pe)
 {

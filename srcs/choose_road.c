@@ -6,11 +6,11 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/12 13:44:57 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:04:35 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 int		check_fail_state(t_data *env, int id, int state)
 {

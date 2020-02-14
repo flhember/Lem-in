@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:20:00 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:52 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:07:17 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 int			stock_it(t_lst **lst, t_data *env, int pos, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:08:47 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 13:46:09 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:05:35 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 void		free_stock(t_stock **lst)
 {

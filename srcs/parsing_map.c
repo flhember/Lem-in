@@ -6,11 +6,11 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/12 14:51:05 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:10:07 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 int		check_start_end(char *str, t_data *env, t_stock **lst)
 {
