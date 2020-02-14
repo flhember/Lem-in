@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 #include <stdio.h>
 
 static int		ft_get_size(unsigned long n, int base)
@@ -35,7 +35,7 @@ char			*ft_ultoa_base(unsigned long n, int base)
 
 	cpy = n;
 	size = ft_get_size(cpy, base);
-	ascii = "0123456789abcdef";
+	ascii = "0123456789XYZdef";
 	if (base < 2 || base > 16)
 		return (NULL);
 	if (!(str = (char*)ft_memalloc(sizeof(char) * (size + 1))))
