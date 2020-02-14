@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:03:05 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:13:02 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:20:02 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	print_start(t_data *env)
 		if (env->road[env->road_sol[env->tab_choose - 1][i]]->rep_ant > 0)
 		{
 			tmp = env->road[env->road_sol[env->tab_choose - 1][i]];
-			tmp = tmp->next;
+			if (tmp->next)
+				tmp = tmp->next;
 			ft_printf("L%d-%s", env->nb_ant_go, tmp->name);
 			if (i + 1 < env->road_sol[env->tab_choose][0])
 				ft_printf(" ");

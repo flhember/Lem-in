@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 18:09:39 by flhember          #+#    #+#              #
-#    Updated: 2020/02/14 11:46:25 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/14 16:43:02 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ CC = clang
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+CFLAGS += -fsanitize=float-cast-overflow
+CFLAGS += -fsanitize=float-divide-by-zero
 
 #-------------------------------------COLOR VARIABLE----------------------------#
 

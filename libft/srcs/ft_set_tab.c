@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 15:50:29 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/04 15:43:40 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 14:51:19 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static int	nb_word(char *str, size_t i, int nb)
 				&& str[i] != 'u' && str[i] != 'x' && str[i] != 'X'
 				&& str[i] != 'f' && str[i] != 'b' && str[i] != '%')
 			i++;
-		i++;
+		if (str[i] != '\0')
+			i++;
 	}
 	return (nb);
 }

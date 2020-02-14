@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 16:10:53 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/14 12:34:42 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:18:09 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			sort_road(t_data *env, int i)
 	t_road	*tmp;
 
 	tmp = NULL;
-	env->nb_road_f--;
+	env->nb_road_f = env->nb_road_f > 1 ? env->nb_road_f - 1 : env->nb_road_f;
 	while (i < env->nb_road_f - 1)
 	{
 		env->road[i]->state = 0;

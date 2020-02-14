@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:23:42 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:49:33 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 static void		print_map_room(t_stock *cpy)
 {
-	if (cpy->next)
-		print_map_room(cpy->next);
-	if (cpy->start)
-		ft_printf("##start\n");
-	if (cpy->end)
-		ft_printf("##end\n");
-	if ((cpy->pipe == 1 || cpy->com == 1) && cpy->room)
-		ft_printf("%s\n", cpy->room);
-	if (cpy->pipe == 0 && cpy->com == 0 && cpy->room)
-		ft_printf("%s %d %d\n", cpy->room, cpy->x, cpy->y);
+	while (cpy->next)
+	{
+		if (cpy->start)
+			ft_printf("##start\n");
+		if (cpy->end)
+			ft_printf("##end\n");
+		if ((cpy->pipe == 1 || cpy->com == 1) && cpy->room)
+			ft_printf("%s\n", cpy->room);
+		if (cpy->pipe == 0 && cpy->com == 0 && cpy->room)
+			ft_printf("%s %d %d\n", cpy->room, cpy->x, cpy->y);
+		cpy = cpy->next;
+	}
 }
 
 static int		print_map(t_stock *lst_s, int nb_ant, t_lst **lst, t_data *env)
