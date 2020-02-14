@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/13 15:38:39 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:00:05 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,24 @@
 
 typedef struct			s_fail
 {
-	int					id;
 	struct s_fail		*next;
+	int					id;
+	char				pad[4];
 }						t_fail;
 
 typedef struct			s_blk_lst
 {
-	int					id;
 	struct s_blk_lst	*next;
+	int					id;
+	char				pad[4];
 }						t_blk_lst;
 
 typedef struct			s_road
 {
 	char				*name;
+	struct s_road		*next;
+	t_fail				*f_road;
+	size_t				size;
 	int					state;
 	int					col;
 	int					nb_road;
@@ -51,22 +56,21 @@ typedef struct			s_road
 	int					id_ants;
 	int					count_ants;
 	int					index;
-	size_t				size;
-	struct s_road		*next;
-	t_fail				*f_road;
+	char				pad[4];
 }						t_road;
 
 typedef struct			s_file
 {
+	struct s_file		*next;
 	int					value;
 	int					dist;
-	struct s_file		*next;
 }						t_file;
 
 typedef struct			s_room
 {
-	int					pos;
 	char				*name;
+	struct s_room		*next;
+	int					pos;
 	int					dist;
 	int					status;
 	int					x;
@@ -75,13 +79,14 @@ typedef struct			s_room
 	int					end;
 	int					road;
 	int					print;
-	struct s_room		*next;
+	char				pad[4];
 }						t_room;
 
 typedef struct			s_lst
 {
-	int					malloc_start;
+	struct s_blk_lst	*blk;
 	t_room				**tab;
+	int					malloc_start;
 	int					tmp_pos;
 	int					cmp;
 	int					pos_blk;
@@ -94,24 +99,28 @@ typedef struct			s_lst
 	int					cross;
 	int					end;
 	int					size_file;
-	struct s_blk_lst	*blk;
+	char 				pad[4];
 }						t_lst;
 
 typedef struct			s_stock
 {
 	char				*room;
 	char				*room1;
+	struct s_stock		*next;
 	int					x;
 	int					y;
 	int					start;
 	int					end;
 	int					pipe;
 	int					com;
-	struct s_stock		*next;
 }						t_stock;
 
 typedef struct			s_data
 {
+	size_t				nb_ants;
+	size_t				nb_room;
+	t_road				**road;
+	int					**road_sol;
 	int					line;
 	int					tab_choose;
 	int					print_st_ok;
@@ -127,12 +136,9 @@ typedef struct			s_data
 	int					start;
 	int					end;
 	int					nb_pos;
-	size_t				nb_ants;
-	size_t				nb_room;
-	int					**road_sol;
 	int					total_road;
 	int					total_cost;
-	t_road				**road;
+	char				pad[4];
 }						t_data;
 
 int						lem_in(int ac, char **av);

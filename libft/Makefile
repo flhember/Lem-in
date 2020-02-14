@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 18:09:39 by flhember          #+#    #+#              #
-#    Updated: 2020/02/13 18:19:41 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/14 11:46:25 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ cyn=$ \033[1;36m
 whi=$ \033[1;37m
 end=$ \033[0m
 
-#-------------------------------SRC------------------------------------------------
+#-------------------------------SRC/INC--------------------------------------------
 
 LIBFT=  ft_strlen ft_strcpy ft_strdup ft_strncpy ft_strcat ft_strncat ft_strlcat  		\
 		ft_putchar ft_putstr ft_strchr ft_strrchr ft_strstr ft_strnstr ft_strcmp  		\
@@ -53,11 +53,8 @@ PRINTF= ft_intlen ft_lltoa ft_strnewspace ft_ultoa_base ft_ultoa_base_big ft_pow
 		ft_math_str ft_util_float ft_util_float_bis ft_return_null_x ft_printf	  		\
 		ft_put_flag_size ft_check_percent
 
-SRC_FILES= $(LIBFT:%=%.c) $(PRINTF:%=%.c)
-
-#-------------------------------INC------------------------------------------------
-
-INC= ft_printf.h libft.h struct.h
+INC			= ft_printf.h libft.h struct.h
+SRC_FILES	= $(LIBFT:%=%.c) $(PRINTF:%=%.c)
 
 #-------------------------PATH/OBJ/DEP---------------------------------------------
 
@@ -67,7 +64,6 @@ INC_PATH = ./includes/
 
 INC_FILES = $(addprefix $(INC_PATH), $(INC))
 OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)%.o, $(SRC_FILES))
-##	OBJ_EXEC = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 DEPS=$(OBJ_FILES:%.o=%.d)
 
 #---------------------------RULE----------------------------------------------------

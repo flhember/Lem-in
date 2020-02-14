@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/13 18:19:11 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/14 11:46:50 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ LEM_IN_FILES =	main lem_in parsing_map init_struct ft_lst_stock creat_adja_lst		
 
 INC_FILES 	= lem_in.h
 LIB_BIN 	= libft.a
+
 #---------------------------------------PATH/FILES-------------------------------#
 
 SRC_PATH = ./srcs/
@@ -51,9 +52,8 @@ LIB_PATH = ./libft/
 SRC_FILES = $(LEM_IN_FILES:%=%.c)
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
-LIB_FILES = $(addprefix $(LIB_PATH), $(SRC_PATH))
+LIB_SRC = $(addprefix $(LIB_PATH), $(SRC_PATH))
 LIB_INC = $(addprefix $(LIB_PATH), $(INC_PATH))
-LIB_HEADER = $(addprefix $(LIB_PATH), $(LIB_BIN))
 INC = $(addprefix $(INC_PATH), $(INC_FILES))
 OBJ = $(patsubst %.c, $(OBJ_PATH)%.o, $(SRC_FILES))
 LIB = $(addprefix $(LIB_PATH), $(LIB_BIN))
@@ -81,7 +81,7 @@ lib: $(LIB)
 
 norm: $(SRC_PATH) $(INC_PATH)
 	norminette $(LIB_INC)
-	norminette $(LIB_FILES)
+	norminette $(LIB_SRC)
 	norminette $(INC)
 	norminette $(SRC_PATH)
 
@@ -89,14 +89,14 @@ $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(CFLAGS) -c -I $(INC_PATH) -I $(LIB_HEADER) $< -o $@
+	@$(CC) $(CFLAGS) -c -I $(INC_PATH) -I $(LIB) $< -o $@
 	@echo "Compilation of $(whi)$(notdir $<)$(grn_da) done.$(end)"
 
 $(LIB):
 	@make -C $(LIB_PATH)
 
 $(NAME): $(INC) $(LIB) $(OBJ_PATH) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) -I $(INC_PATH) -I $(LIB_HEADER)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME) -I $(INC_PATH)
 	@echo "$(grn_li)$(notdir $(NAME))$(grn_da) created.$(end)"
 
 clean:
