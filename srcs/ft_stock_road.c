@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 static int	find_road(t_lst **lst, t_data *env, int i, t_room *tmp)
 {

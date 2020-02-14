@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 int			stock_it(t_lst **lst, t_data *env, int pos, int i)
 {

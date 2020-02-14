@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 static int	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 {

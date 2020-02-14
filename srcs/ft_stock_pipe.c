@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 static t_room	*creat_cpy(t_lst **lst, int sec_pe)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 void		verif_if_one_pipe(t_lst **lst, t_data *env)
 {

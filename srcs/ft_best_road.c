@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include "lem_in.h"
 
 static int	pars_pipe(t_lst **lst, t_room *tmp, int i, size_t j)
 {
