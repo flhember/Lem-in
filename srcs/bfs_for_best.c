@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:05:49 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:03:08 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:49:17 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		free_file(t_file **file)
 {
-	if ((*file)->next)
+	if (*file != NULL)
 		free_file(&(*file)->next);
 	free(*file);
 }
@@ -42,9 +42,7 @@ static int	add_file_best(t_lst **lst, t_file **file, int val, int dis)
 static int	fill_file(t_file **file, t_lst **lst, int i)
 {
 	t_room	*tmp;
-	int		o;
 
-	o = 0;
 	tmp = (*lst)->tab[i];
 	if ((*lst)->tab[i]->end == 1)
 		add_file_best(lst, file, i, (*lst)->tab[i]->dist + 1);
@@ -54,10 +52,9 @@ static int	fill_file(t_file **file, t_lst **lst, int i)
 		{
 			if (tmp->pos != i)
 			{
-				if ((*lst)->tab[tmp->pos]->status != 0)
-					o = 1;
-				else if ((add_file_best(lst, file, tmp->pos,
-						(*lst)->tab[i]->dist + 1)) == -1)
+				if ((*lst)->tab[tmp->pos]->status == 0
+						&& (add_file_best(lst, file, tmp->pos,
+								(*lst)->tab[i]->dist + 1)) == -1)
 					return (-1);
 			}
 			tmp = tmp->next;

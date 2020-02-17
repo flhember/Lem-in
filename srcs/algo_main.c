@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:42:48 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:02:51 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:01:14 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int			find_nb_pos(t_lst **lst, t_data *env)
 	int		e;
 	int		s;
 
-	e = 0;
-	s = 0;
 	if ((find_start(lst, env) == -1) || (find_end(lst, env) == -1))
 		return (-1);
 	if ((e = ft_lstsize_room(&(*lst)->tab[env->end])) == 0)

@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 17:47:08 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/17 17:29:44 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:41:19 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ char		*ft_get_fd(int fd)
 	while ((res = get_next_line(fd, &line, &nu)) > 0)
 	{
 		if (line != NULL && nu == 1)
+		{
+			ft_strdel(&line);
 			return (NULL);
+		}
 		return (line);
 	}
 	return (NULL);

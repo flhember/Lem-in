@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 18:02:17 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/14 12:31:04 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:44:02 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,8 @@ static int	new_tab(t_data *env, int fl)
 
 int			choose_road(t_data *env)
 {
-	int		ok;
 	int		size_tab;
 
-	size_tab = 0;
-	ok = 0;
 	env->size_free = env->nb_road_f;
 	size_tab = env->nb_road_f;
 	if ((env->nb_road_f = choose_road_use(env)) == -1)

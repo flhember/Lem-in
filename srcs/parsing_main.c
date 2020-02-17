@@ -35,7 +35,7 @@ int			print_map(t_stock *lst_s, int nb_ant)
 	return (0);
 }
 
-t_lst			*parsing_main(t_data *env, t_stock **lst_tmp)
+t_lst		*parsing_main(t_data *env, t_stock **lst_tmp)
 {
 	t_lst	*lst;
 

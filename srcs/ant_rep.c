@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 15:20:19 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:03:50 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:42:42 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ int		treat_better(t_data *env, int limit, int id)
 {
 	int i;
 	int total;
-	int nb;
 
 	total = 0;
 	i = 0;
-	nb = 0;
 	while (i < env->road_sol[id + 1][0] && i < limit)
 	{
 		total = total + ((env->nb_ants / limit) +
 				env->road[env->road_sol[id][i]]->size);
 		i++;
 	}
+	if (total == 0)
+		return (0);
 	total = total / limit;
 	return (total);
 }

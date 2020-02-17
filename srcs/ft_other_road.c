@@ -6,26 +6,11 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:00:08 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:11:57 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:06:53 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static void	check_nb_road(t_lst **lst)
-{
-	int		i;
-	int		check;
-
-	i = 0;
-	check = 0;
-	while (i < (*lst)->nb_room)
-	{
-		if ((*lst)->tab[i]->road == -1)
-			check = 1;
-		i++;
-	}
-}
 
 static int	pars_pipe_best(t_lst **lst, t_room *tmp, int i, int j)
 {
@@ -71,17 +56,13 @@ static int	other_road_bis(t_lst **lst, int ds, int i, int j)
 int			other_road(t_lst **lst, t_data *env, int i)
 {
 	int		ds;
-	int		ret;
 
-	ds = 0;
-	ret = 0;
 	i = env->end;
 	(*lst)->end = i;
 	(*lst)->nb_road++;
 	(*lst)->ret_bfs = -1;
 	while (bfs(env, lst, NULL) >= 0)
 	{
-		check_nb_road(lst);
 		ds = (*lst)->tab[(*lst)->end]->dist;
 		if ((*lst)->ret_bfs == 0)
 		{

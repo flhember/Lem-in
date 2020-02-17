@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 18:08:57 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:20:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:40:01 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ void		clean_dist(t_lst **lst)
 void		reboot_nb_road(t_lst **lst)
 {
 	int		i;
-	int		check;
 
 	i = 0;
-	check = 0;
 	while (i < (*lst)->nb_room)
 	{
 		if ((*lst)->tab[i]->road == -1)

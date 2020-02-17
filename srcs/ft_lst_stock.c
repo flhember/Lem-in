@@ -14,10 +14,9 @@
 
 int			verif_size_ant(char *ants)
 {
-	int		res;
 	int		size_ants;
+	int		res;
 
-	res = 0;
 	size_ants = ft_strlen(ants);
 	if (size_ants > 10)
 		return (-1);
