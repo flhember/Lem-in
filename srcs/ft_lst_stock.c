@@ -37,6 +37,7 @@ int			verif_size_ant(char *ants)
 static void	add_link_last(t_stock *new, t_stock **lst)
 {
 	new->next = *lst;
+	(*lst)->prev = new;
 	*lst = new;
 }
 

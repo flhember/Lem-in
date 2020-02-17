@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 17:11:58 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:52:10 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void		print_map_room(t_stock *cpy)
 {
 	while (cpy->next)
+		cpy = cpy->next;
+	while (cpy->prev)
 	{
 		if (cpy->start)
 			ft_printf("##start\n");
@@ -24,7 +26,7 @@ static void		print_map_room(t_stock *cpy)
 			ft_printf("%s\n", cpy->room);
 		if (cpy->pipe == 0 && cpy->com == 0 && cpy->room)
 			ft_printf("%s %d %d\n", cpy->room, cpy->x, cpy->y);
-		cpy = cpy->next;
+		cpy = cpy->prev;
 	}
 }
 

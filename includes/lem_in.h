@@ -107,6 +107,7 @@ typedef struct			s_stock
 	char				*room;
 	char				*room1;
 	struct s_stock		*next;
+	struct s_stock		*prev;
 	int					x;
 	int					y;
 	int					start;
