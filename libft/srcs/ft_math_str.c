@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 14:02:54 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 11:55:46 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:16:37 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char		*ft_add_str_bis(char *s1, char *s2, char *res, int retenu)
 	int		k;
 
 	k = 0;
-	tmp = 0;
 	i = ft_strlen(s1);
 	while (--i >= 0)
 	{

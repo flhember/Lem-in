@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 12:34:11 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 14:23:20 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:13:18 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ static char		*ft_filling(char *str, char *var, t_option **list)
 
 static size_t	ft_find_good_size_bis(char *var, t_option **list, size_t size)
 {
-	size_t		i;
-
-	i = 0;
 	if ((*list)->prec > (int)(*list)->min &&
 			(*list)->prec >= (int)ft_strlen(var))
 	{
@@ -50,9 +47,6 @@ static size_t	ft_find_good_size_bis(char *var, t_option **list, size_t size)
 
 static size_t	ft_find_good_size(char *var, t_option **list, size_t size)
 {
-	size_t	i;
-
-	i = 0;
 	if (var[0] == '0' && var[1] == '\0' &&
 			(*list)->prec == -1 && (*list)->min == 0)
 	{

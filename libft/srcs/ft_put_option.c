@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:36:13 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 11:56:18 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:14:48 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char		*ft_put_signe(char *str, char *var, t_option **list, size_t size)
 {
 	int		i;
 
-	i = 0;
 	if ((*list)->minus || ((*list)->zero && !(*list)->prec))
 		i = 0;
 	else if ((ft_strlen(var) > (*list)->min && (*list)->min > 0) ||

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:12:12 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 11:45:20 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:10:45 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char			*ft_ftoa_dbl(double f, int prec, int hash)
 
 	str = NULL;
 	ieee.d = f;
-	vir = 0;
 	if (!(list = malloc(sizeof(t_ftoa))))
 		return (NULL);
 	ft_set_list_ftoadbl(&list, ieee);

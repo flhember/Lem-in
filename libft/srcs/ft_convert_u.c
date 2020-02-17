@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 12:34:49 by flhember          #+#    #+#             */
-/*   Updated: 2019/11/18 14:08:48 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:09:25 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static char	*ft_malloc_good_size(char *var, t_option **list)
 
 	len_var = ft_strlen(var);
 	str_final = NULL;
-	size_malloc = 0;
 	if (len_var > (*list)->min && (int)len_var > (*list)->prec)
 		size_malloc = len_var;
 	else if ((*list)->min > len_var && (int)(*list)->min > (*list)->prec)

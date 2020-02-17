@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:45:15 by flhember          #+#    #+#             */
-/*   Updated: 2019/01/24 15:58:20 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:07:59 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char		**remplissage(char **tab, char const *s, char c)
 	int		j;
 	int		k;
 
-	j = 0;
 	i = 0;
 	k = 0;
 	while (s[i])
@@ -62,9 +61,7 @@ char			**ft_strsplit(char const *s, char c)
 {
 	int		nbword;
 	char	**tabfinal;
-	int		i;
 
-	i = 0;
 	tabfinal = NULL;
 	if (!c || !s)
 		return (NULL);

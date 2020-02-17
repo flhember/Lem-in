@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 17:50:51 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/02 15:01:58 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:11:34 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char	*ft_get_bin(void *oct, int size)
 	if (!(str = ft_memalloc(sizeof(char) * (size * 8) + 1)))
 		return (NULL);
 	ptr = (char*)oct;
-	i = 8;
 	j = size;
 	while (j--)
 	{

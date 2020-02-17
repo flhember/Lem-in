@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:13:18 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 11:21:46 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:20:51 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char				*ft_str_rev(char *str);
 char				*ft_strnewnull(char *str, size_t size);
 char				*ft_clean_str(char *str);
 void				ft_free_tab_int(int ***tab, int size);
-int					get_next_line(const int fd, char **line);
+int					get_next_line(const int fd, char **line, int *nl);
 char				*ft_get_fd(int fd);
 int					ft_rec_c(char *str, char c);
 void				ft_free_tab_char(char **tab);

@@ -6,7 +6,7 @@
 /*   By: chcoutur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:05:18 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/11 15:16:26 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/17 17:30:04 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_list		*ft_lstcheck(t_list **save, int fd)
 	return (tmp);
 }
 
-char		*ft_save(char *save, char **line)
+char		*ft_save(char *save, char **line, int *nl)
 {
 	int		i;
 	char	*tmp;
@@ -51,12 +51,15 @@ char		*ft_save(char *save, char **line)
 			return (NULL);
 	}
 	else
+	{
+		*nl = 1;
 		save = "\0";
+	}
 	ft_strdel(&tmp);
 	return (save);
 }
 
-int			get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line, int *nl)
 {
 	static	t_list	*save;
 	char			buf[BUFF_SIZE + 1];
@@ -71,7 +74,7 @@ int			get_next_line(const int fd, char **line)
 		current->content = ft_strjoinfree(current->content, buf, 1);
 		if (ft_strchr(buf, '\n'))
 		{
-			current->content = ft_save(current->content, line);
+			current->content = ft_save(current->content, line, nl);
 			return (1);
 		}
 	}
@@ -79,7 +82,7 @@ int			get_next_line(const int fd, char **line)
 		return (-1);
 	if (((char*)current->content)[0] != '\0')
 	{
-		current->content = ft_save(current->content, line);
+		current->content = ft_save(current->content, line, nl);
 		return (1);
 	}
 	return (0);

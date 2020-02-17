@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:59:31 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 11:53:38 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:02:17 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ static char	*ft_filling(char *adr, t_option **list, char *tmp)
 
 static char	*ft_width_min(char *adr, t_option **list)
 {
-	size_t	i;
 	char	*tmp;
 
-	i = 0;
 	tmp = NULL;
 	if ((*list)->min <= ft_strlen(adr))
 		return (adr);

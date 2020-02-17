@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/02 16:56:01 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/06 15:39:31 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:19:13 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,12 @@ static char	*ft_filling(t_option **list, char *str)
 
 char		*ft_convert_percent(va_list ap, char *str)
 {
-	int			flag;
 	t_option	*list;
 
-	flag = 0;
-	list = NULL;
+	if (ap)
+		list = NULL;
 	list = ft_get_option(str);
 	ft_strdel(&str);
-	if (ap)
-		flag = 1;
 	str = ft_filling(&list, str);
 	ft_free_option(&list);
 	return (str);

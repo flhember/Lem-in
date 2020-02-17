@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 21:06:30 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 11:56:24 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:15:22 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_filling_zero_neg(char *str, t_option **list)
 	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
 	if ((*list)->minus)
 	{

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 15:50:29 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 14:51:19 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:01:52 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char		**ft_set_tab(char *str, char **tab_final)
 	size = nb_word(str, i, k);
 	if (!(tab_final = (char**)ft_memalloc(sizeof(char*) * (size + 1))))
 		return (0);
-	i = -1;
 	tab_final = ft_filling(str, tab_final, k, j);
 	tab_final[size] = NULL;
 	return (tab_final);

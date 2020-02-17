@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 12:35:04 by flhember          #+#    #+#             */
-/*   Updated: 2019/05/01 12:38:38 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:09:10 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static char	*ft_malloc_good_size(char *var_hexa, t_option **list, int nb_null)
 
 	len_var = ft_strlen(var_hexa);
 	str_final = NULL;
-	size_malloc = 0;
 	if ((*list)->hash && !nb_null)
 		len_var += 2;
 	if (len_var == 1 && !(*list)->min && !(*list)->prec)
