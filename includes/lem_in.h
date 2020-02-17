@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 12:50:03 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:58:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void					free_lst_adja(t_lst **lst, t_data *env);
 void					free_road_adja(t_data *env, int val);
 t_stock					*creat_maillon_stock(void);
 t_lst					*creat_adja_lst(t_stock **room, t_data *env, size_t i);
-t_lst					*parsing_main(t_data *env);
+t_lst					*parsing_main(t_data *env, t_stock **lst_tmp);
 size_t					ft_lstsize_stock(t_stock **room);
 size_t					ft_lstsize_room(t_room **room);
 int						ft_lstsize_road(t_road **room);
@@ -205,5 +205,6 @@ void					free_fail_road(t_data *env);
 int						solve_cross(t_data *env, int i, int j, t_road *nex);
 int						find_id(t_data *env, int i, int j);
 int						mark_fail(t_data *env, int i, int j);
+int						print_map(t_stock *lst_s, int nb_ant);
 
 #endif

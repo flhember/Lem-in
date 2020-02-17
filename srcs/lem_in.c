@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 18:08:59 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 15:29:45 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:17:06 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	start_to_end(t_data *env, t_lst **lst)
 
 static void	lem_in_next(t_data *env, t_lst **lst)
 {
+	if ((*lst)->nb_room == 2 || env->nb_con == 1)
+	{
+		start_to_end(env, lst);
+		return ;
+	}
 	if (sort_road(env, 0) == -1)
 	{
 		free_fail_road(env);
@@ -55,12 +60,16 @@ int			lem_in(int ac, char **av)
 {
 	t_data	env;
 	t_lst	*lst;
+	t_stock	*tmp_lst;
 
 	lst = NULL;
 	init_struct(&env, ac, av);
-	if (!(lst = parsing_main(&env)))
+	if (!(tmp_lst = (t_stock*)ft_memalloc(sizeof(t_stock))))
+		return (-1);
+	if (!(lst = parsing_main(&env, &tmp_lst)))
 	{
 		ft_putstr_fd("ERROR\n", 2);
+		free_stock(&tmp_lst);
 		return (-1);
 	}
 	if ((algo_main(&lst, &env) == -1))
@@ -68,11 +77,8 @@ int			lem_in(int ac, char **av)
 		free_lst_adja(&lst, &env);
 		return (-1);
 	}
-	if (lst->nb_room == 2 || env.nb_con == 1)
-	{
-		start_to_end(&env, &lst);
-		return (0);
-	}
+	print_map(tmp_lst, env.nb_ants);
+	free_stock(&tmp_lst);
 	lem_in_next(&env, &lst);
 	return (0);
 }
