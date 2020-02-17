@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/14 12:25:55 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:20:38 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,10 @@ static int	check_maillon(char **tab, char *str)
 		{
 			if (tab[1][0] == '-')
 			{
-				if (ft_atoi(tab[1] + 1) < -2147483647
-						|| ft_strisdigit(tab[1] + 1) != 1)
+				if (check_coord(tab[1]) == -1 || ft_strisdigit(tab[1] + 1) != 1)
 					return (-1);
 			}
-			else if ((ft_strisdigit(tab[1]) != 1)
-					|| (ft_atoi(tab[1]) > 2147483647))
+			else if (ft_strisdigit(tab[1]) != 1 || check_coord(tab[1]) == -1)
 				return (-1);
 		}
 		if (check_maillon_bis(tab) == -1)

@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/14 17:11:56 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/17 13:52:03 by chcoutur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ LEM_IN_FILES =	main lem_in parsing_map init_struct ft_lst_stock creat_adja_lst		
 				ft_use_bfs ft_stock_road bfs_for_best ft_verif_block_road			\
 		   		ft_print_res sort_road choose_road ft_use ft_stock_road_bis			\
 				ft_free_bis ft_use_bfs_bis ant_rep choose_road_use nb_ant_road		\
-				sort_road_use
+				sort_road_use check_coord
 
 INC_FILES 	= lem_in.h
 LIB_BIN 	= libft.a

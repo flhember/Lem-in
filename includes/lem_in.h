@@ -206,5 +206,6 @@ int						solve_cross(t_data *env, int i, int j, t_road *nex);
 int						find_id(t_data *env, int i, int j);
 int						mark_fail(t_data *env, int i, int j);
 int						print_map(t_stock *lst_s, int nb_ant);
+int						check_coord(char *str);
 
 #endif

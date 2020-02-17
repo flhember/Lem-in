@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 12:02:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:17:21 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:19:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ int			check_maillon_bis(char **tab)
 	{
 		if (tab[2][0] == '-')
 		{
-			if (ft_atoi(tab[2] + 1) < -2147483647
-					|| ft_strisdigit(tab[2] + 1) != 1)
+			if (check_coord(tab[2]) == -1 || ft_strisdigit(tab[2] + 1) != 1)
 				return (-1);
 		}
-		else if ((ft_strisdigit(tab[2]) != 1)
-				|| (ft_atoi(tab[2]) > 2147483647))
+		else if ((ft_strisdigit(tab[2]) != 1) || (check_coord(tab[2]) == -1))
 			return (-1);
 		return (0);
 	}
