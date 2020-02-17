@@ -6,7 +6,7 @@
 /*   By: chcoutur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:53:48 by chcoutur          #+#    #+#             */
-/*   Updated: 2019/11/12 16:10:33 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:21:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_free_tab_char(char **str)
 	i = 0;
 	while (str[i])
 	{
+		ft_printf("Free de [%s]\n", str[i]);
 		ft_strdel(&str[i]);
 		i++;
 	}

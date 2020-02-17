@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:29:22 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:56:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,5 +204,6 @@ void					free_fail_road(t_data *env);
 int						solve_cross(t_data *env, int i, int j, t_road *nex);
 int						find_id(t_data *env, int i, int j);
 int						mark_fail(t_data *env, int i, int j);
+int						check_coord(char *str);
 
 #endif

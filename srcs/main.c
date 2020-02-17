@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:49:14 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:22:54 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:17:00 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		main(int ac, char **av)
 {
-	if (lem_in(ac, av) == -1)
-		return (-1);
+	lem_in(ac, av);
+		while (1)
+			;
 	return (0);
 }
