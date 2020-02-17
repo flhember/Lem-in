@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:38:53 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 14:19:33 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:56:56 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int			verif_size_ant(char *ants)
 {
-	int		res;
 	int		size_ants;
+	int		res;
 
-	res = 0;
 	size_ants = ft_strlen(ants);
 	if (size_ants > 10)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:09:53 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:59:47 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ t_lst		*creat_adja_lst(t_stock **room, t_data *env, size_t i)
 {
 	size_t	size_lst;
 	t_lst	*lst;
-	t_stock *test;
 
-	test = *room;
 	size_lst = ft_lstsize_stock(room);
 	lst = NULL;
 	if (!(lst = (t_lst*)ft_memalloc(sizeof(t_lst))))

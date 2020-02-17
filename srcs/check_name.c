@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:52:49 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/14 12:03:44 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 16:00:44 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	check_tab(int *tab, t_data *env, t_lst **lst)
 
 	i = 0;
 	j = 0;
-	tmp = 0;
 	while (i < env->nb_room)
 	{
 		while (j < env->nb_room)
@@ -54,7 +53,6 @@ static void	hash(char *str, int *tab, size_t i)
 	int		c;
 
 	hash = 0;
-	c = 0;
 	while ((c = *str++))
 		hash = c + (hash << 1);
 	tab[i] = hash;
