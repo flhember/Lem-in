@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:38:53 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:11:21 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/17 12:48:59 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			verif_size_ant(char *ants)
 static void	add_link_last(t_stock *new, t_stock **lst)
 {
 	new->next = *lst;
+	(*lst)->prev = new;
 	*lst = new;
 }
 
