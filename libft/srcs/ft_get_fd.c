@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 17:47:08 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/17 17:41:19 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/18 18:08:21 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char		*ft_get_fd(int fd)
 	int		res;
 	int		nu;
 
+	nu = 0;
 	while ((res = get_next_line(fd, &line, &nu)) > 0)
 	{
 		if (line != NULL && nu == 1)

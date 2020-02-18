@@ -6,15 +6,15 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/17 13:52:03 by chcoutur         ###   ########.fr        #
+#    Updated: 2020/02/18 18:07:42 by chcoutur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 CC = gcc
-#CFLAGS += -Wall
-#CFLAGS += -Wextra
-#CFLAGS += -Werror
+CFLAGS += -Wall
+CFLAGS += -Wextra
+CFLAGS += -Werror
 
 ##########################################
 #CFLAGS += -fsanitize=address
