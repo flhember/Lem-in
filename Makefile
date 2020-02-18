@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/18 18:07:42 by chcoutur         ###   ########.fr        #
+#    Updated: 2020/02/18 18:15:25 by chcoutur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRC_FILES = $(LEM_IN_FILES:%=%.c)
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 LIB_SRC = $(addprefix $(LIB_PATH), $(SRC_PATH))
+OBJ_LIB = $(LIB_SRC:.c=.o)
 LIB_INC = $(addprefix $(LIB_PATH), $(INC_PATH))
 INC = $(addprefix $(INC_PATH), $(INC_FILES))
 OBJ = $(patsubst %.c, $(OBJ_PATH)%.o, $(SRC_FILES))
@@ -117,7 +118,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(CFLAGS) -c -I $(INC_PATH) -I $(LIB) $< -o $@
 	@echo "Compilation of $(whi)$(notdir $<)$(grn_da) done.$(end)"
 
-$(LIB):
+$(LIB): $(OBJ_LIB)
 	@make -C $(LIB_PATH)
 
 $(NAME): $(INC) $(LIB) $(OBJ_PATH) $(OBJ)
