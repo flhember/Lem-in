@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 16:50:09 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:38:16 by chcoutur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int			parsing_map(t_data *env, t_stock **lst)
 	{
 		if (check_line(line, env, lst) != 1)
 		{
-			line != NULL ? free(line) : line;
+			if (line != NULL)
+				free(line);
 			if ((env->se & PIPE) != 0)
 				break ;
 			return (-1);

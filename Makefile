@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/18 18:15:25 by chcoutur         ###   ########.fr        #
+#    Updated: 2020/02/19 17:37:30 by chcoutur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
-
+CFLAGS += -pedantic
 ##########################################
 #CFLAGS += -fsanitize=address
 CFLAGS += -fsanitize=alignment
