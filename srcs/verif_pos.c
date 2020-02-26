@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 17:04:30 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/14 12:27:25 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:37:30 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	check_this(t_stock **lst, int x, int y, int i)
 	cpy = *lst;
 	while (cpy->next)
 	{
-		if (cpy->pipe == 0 && cpy->com == 0 && j != i && cpy->x == x
-				&& cpy->y == y)
+		if (cpy->ant == 0 && cpy->pipe == 0 && cpy->com == 0 && j != i
+				&& cpy->x == x && cpy->y == y)
 			return (-1);
 		cpy = cpy->next;
 		j++;
@@ -39,10 +39,13 @@ int			verif_pos(t_stock **lst)
 	cpy = *lst;
 	while (cpy->next)
 	{
-		if (cpy->pipe == 0 && cpy->com == 0)
+		if (cpy->ant == 0 && cpy->pipe == 0 && cpy->com == 0)
 		{
 			if (check_this(lst, cpy->x, cpy->y, i) == -1)
+			{
+				printf("cpy->name %s\n", cpy->room);
 				return (-1);
+			}
 		}
 		i++;
 		cpy = cpy->next;
