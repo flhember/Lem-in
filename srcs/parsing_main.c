@@ -43,10 +43,7 @@ t_lst		*parsing_main(t_data *env, t_stock **lst_tmp)
 	lst = NULL;
 	if ((parsing_map(env, lst_tmp) == -1)
 			|| (verif_pos(lst_tmp) == -1))
-	{
-		printf("TA MEE\n");
 		return (NULL);
-	}
 	if ((!(lst = creat_adja_lst(lst_tmp, env, 0))
 				|| (check_name(env, &lst) == -1)
 				|| (stock_pipe(env, &lst, *lst_tmp)) == -1))
