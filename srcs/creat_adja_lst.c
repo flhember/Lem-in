@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:25:07 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 15:59:47 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:36:53 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static int	fill_tab_room(t_stock **room_ptr, t_lst **lst, size_t i)
 	while (j < i && room)
 	{
 		room = room->next;
-		room->pipe == 0 && room->com == 0 ? k++ : k;
+		room->ant == 0 && room->pipe == 0 && room->com == 0 ? k++ : k;
 		j++;
 	}
-	if (room->pipe == 1 || room->com == 1)
+	if (room->pipe == 1 || room->com == 1 || room->ant == 1)
 		return (-1);
 	(*lst)->tab[k]->pos = k;
 	(*lst)->tab[k]->name = ft_strdup(room->room);

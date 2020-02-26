@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 14:38:53 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 16:34:08 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:36:32 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,19 @@ int			creat_maillon(t_stock **lst, char *name, char *x, char *y)
 	new = NULL;
 	if (!(new = (t_stock*)ft_memalloc(sizeof(t_stock))))
 		return (-1);
-	if (!(new->room = ft_strdup(name)))
-		return (-1);
-	if (new->room[0] == '#')
-		new->com = 1;
-	new->x = ft_atoi(x);
-	new->y = ft_atoi(y);
-	if (verif_size(new, x, y) == -1)
-		return (-1);
+	if (!name)
+		new->ant = 1;
+	else
+	{
+		if (!(new->room = ft_strdup(name)))
+			return (-1);
+		if (new->room[0] == '#')
+			new->com = 1;
+		new->x = ft_atoi(x);
+		new->y = ft_atoi(y);
+		if (verif_size(new, x, y) == -1)
+			return (-1);
+	}
 	new->next = NULL;
 	add_link_last(new, lst);
 	return (1);

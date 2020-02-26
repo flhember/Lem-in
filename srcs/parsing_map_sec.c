@@ -6,7 +6,7 @@
 /*   By: chcoutur <chcoutur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 11:46:36 by chcoutur          #+#    #+#             */
-/*   Updated: 2020/02/17 14:20:38 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:35:40 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			add_flag(t_data *env, int flag)
 	return (env->flags & flag);
 }
 
-int			check_nb_ants(char *str, t_data *env)
+int			check_nb_ants(t_stock **lst, char *str, t_data *env)
 {
 	int i;
 
@@ -36,6 +36,7 @@ int			check_nb_ants(char *str, t_data *env)
 		if (verif_size_ant(str) == 0)
 		{
 			env->nb_ants = ft_atoi(str);
+			creat_maillon(lst, NULL, "0", "0");
 			return (1);
 		}
 		else

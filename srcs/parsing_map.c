@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:26:44 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/19 17:38:16 by chcoutur         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:37:11 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	check_line(char *str, t_data *env, t_stock **lst)
 	else if (ft_strisdigit(str) == 1
 	|| (str[0] == '-' && ft_strisdigit(str + 1) == 1))
 	{
-		if (check_nb_ants(str, env) == 1)
+		if (check_nb_ants(lst, str, env) == 1)
 			return (1);
 	}
 	else if (ft_is_c(str, '-')

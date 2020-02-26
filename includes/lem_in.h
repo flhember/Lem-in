@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 17:47:54 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 17:20:28 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:29:31 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct			s_stock
 	int					end;
 	int					pipe;
 	int					com;
+	int					ant;
+	char				pad[4];
 }						t_stock;
 
 typedef struct			s_data
@@ -148,7 +150,7 @@ int						creat_maillon(t_stock **lst, char *name, char *x,
 		char *y);
 int						stock_pipe(t_data *env, t_lst **lst, t_stock *pipe);
 int						add_flag(t_data *env, int flag);
-int						check_nb_ants(char *str, t_data *env);
+int						check_nb_ants(t_stock **lst, char *str, t_data *env);
 int						nb_split(char **tab);
 int						check_valid_room(char *str, t_data *env,
 		t_stock(**lst));

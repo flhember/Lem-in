@@ -6,7 +6,7 @@
 /*   By: flhember <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 15:08:02 by flhember          #+#    #+#             */
-/*   Updated: 2020/02/17 16:46:11 by flhember         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:37:53 by flhember         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int			print_map(t_stock *lst_s, int nb_ant)
 	t_stock	*cpy;
 
 	cpy = lst_s;
-	ft_printf("%d\n", nb_ant);
 	while (cpy->next)
 		cpy = cpy->next;
 	while (cpy)
 	{
+		if (cpy->ant)
+			ft_printf("%d\n", nb_ant);
 		if (cpy->start)
 			ft_printf("##start\n");
 		if (cpy->end)
