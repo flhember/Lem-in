@@ -42,10 +42,7 @@ int			verif_pos(t_stock **lst)
 		if (cpy->ant == 0 && cpy->pipe == 0 && cpy->com == 0)
 		{
 			if (check_this(lst, cpy->x, cpy->y, i) == -1)
-			{
-				printf("cpy->name %s\n", cpy->room);
 				return (-1);
-			}
 		}
 		i++;
 		cpy = cpy->next;
