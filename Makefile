@@ -6,7 +6,7 @@
 #    By: flhember <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 17:41:02 by flhember          #+#    #+#              #
-#    Updated: 2020/02/26 13:10:39 by flhember         ###   ########.fr        #
+#    Updated: 2020/02/26 14:40:53 by flhember         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
-CFLAGS += -g3 -fsanitize=address
+#CFLAGS += -g3 -fsanitize=address
 
 #-------------------------------------COLOR VARIABLE----------------------------#
 
